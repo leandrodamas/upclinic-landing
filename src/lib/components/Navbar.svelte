@@ -38,7 +38,7 @@
         <a href="/sobre" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Sobre</a>
         <a href="/contato" class="text-gray-700 hover:text-blue-600 font-medium transition-colors">Contato</a>
         <a 
-          href="https://upclinic-aa025.web.app/login" 
+          href="https://upclinic-aa025.web.app/" 
           class="btn btn-primary btn-sm"
         >
           Entrar
@@ -70,7 +70,7 @@
         <a href="/sobre" class="block text-gray-700 hover:text-blue-600 font-medium">Sobre</a>
         <a href="/contato" class="block text-gray-700 hover:text-blue-600 font-medium">Contato</a>
         <a 
-          href="https://upclinic-aa025.web.app/login" 
+          href="https://upclinic-aa025.web.app/" 
           class="btn btn-primary btn-sm w-full"
         >
           Entrar
