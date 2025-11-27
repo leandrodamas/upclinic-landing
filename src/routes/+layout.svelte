@@ -15,10 +15,14 @@
       });
     }
     
-    // Smooth scroll para links internos
+    // Smooth scroll para links internos (apenas links que começam com #)
     const handleAnchorClick = (e) => {
-      const anchor = e.target;
-      if (anchor && anchor.getAttribute && anchor.getAttribute('href')?.startsWith('#')) {
+      const anchor = e.target.closest('a');
+      if (anchor && anchor.getAttribute('href')?.startsWith('#')) {
+        // Não interceptar links externos ou que já têm target="_blank"
+        if (anchor.target === '_blank' || anchor.href.startsWith('http')) {
+          return;
+        }
         e.preventDefault();
         const href = anchor.getAttribute('href') || '';
         const target = document.querySelector(href);
