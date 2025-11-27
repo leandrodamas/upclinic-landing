@@ -1,0 +1,41 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2563eb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4c1d95;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="url(#grad3)"/>
+  <rect x="40" y="40" width="1200" height="80" rx="8" fill="rgba(255,255,255,0.2)"/>
+  <rect x="40" y="140" width="280" height="540" rx="8" fill="rgba(255,255,255,0.15)"/>
+  <rect x="340" y="140" width="900" height="540" rx="8" fill="rgba(255,255,255,0.15)"/>
+  <text x="640" y="95" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="white" text-anchor="middle">Prontuário Eletrônico</text>
+  <circle cx="180" cy="220" r="50" fill="rgba(255,255,255,0.3)"/>
+  <rect x="60" y="290" width="240" height="30" rx="4" fill="rgba(255,255,255,0.2)"/>
+  <rect x="60" y="340" width="240" height="30" rx="4" fill="rgba(255,255,255,0.2)"/>
+  <rect x="60" y="390" width="240" height="30" rx="4" fill="rgba(255,255,255,0.2)"/>
+  <rect x="60" y="440" width="240" height="30" rx="4" fill="rgba(255,255,255,0.2)"/>
+  <rect x="60" y="490" width="240" height="30" rx="4" fill="rgba(255,255,255,0.2)"/>
+  <rect x="60" y="540" width="240" height="30" rx="4" fill="rgba(255,255,255,0.2)"/>
+  <rect x="60" y="590" width="240" height="30" rx="4" fill="rgba(255,255,255,0.2)"/>
+  <text x="180" y="310" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">Informações do Paciente</text>
+  <rect x="380" y="180" width="840" height="50" rx="4" fill="rgba(255,255,255,0.25)"/>
+  <text x="800" y="210" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="white" text-anchor="middle">Histórico Clínico</text>
+  <rect x="380" y="250" width="840" height="100" rx="4" fill="rgba(255,255,255,0.2)"/>
+  <text x="600" y="290" font-family="Arial, sans-serif" font-size="14" fill="white">Data: 26/11/2025</text>
+  <text x="600" y="315" font-family="Arial, sans-serif" font-size="14" fill="white">Diagnóstico: Hipertensão Arterial</text>
+  <text x="600" y="340" font-family="Arial, sans-serif" font-size="14" fill="white">Tratamento: Medicamentos prescritos</text>
+  <rect x="380" y="370" width="840" height="100" rx="4" fill="rgba(255,255,255,0.2)"/>
+  <text x="600" y="410" font-family="Arial, sans-serif" font-size="14" fill="white">Data: 20/11/2025</text>
+  <text x="600" y="435" font-family="Arial, sans-serif" font-size="14" fill="white">Diagnóstico: Check-up Geral</text>
+  <text x="600" y="460" font-family="Arial, sans-serif" font-size="14" fill="white">Tratamento: Exames realizados</text>
+  <rect x="380" y="490" width="840" height="100" rx="4" fill="rgba(255,255,255,0.2)"/>
+  <text x="600" y="530" font-family="Arial, sans-serif" font-size="14" fill="white">Data: 15/11/2025</text>
+  <text x="600" y="555" font-family="Arial, sans-serif" font-size="14" fill="white">Diagnóstico: Consulta de Rotina</text>
+  <text x="600" y="580" font-family="Arial, sans-serif" font-size="14" fill="white">Tratamento: Orientações gerais</text>
+  <rect x="380" y="610" width="400" height="50" rx="4" fill="rgba(59,130,246,0.4)"/>
+  <text x="580" y="640" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">Nova Evolução</text>
+  <rect x="820" y="610" width="400" height="50" rx="4" fill="rgba(124,58,237,0.4)"/>
+  <text x="1020" y="640" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">Ver Exames</text>
+</svg>
+
