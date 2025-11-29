@@ -1,5 +1,6 @@
 <script>
   import { onMount } from 'svelte';
+  import ImageWithFallback from './ImageWithFallback.svelte';
   
   let modalOpen = false;
   let selectedIndex = 0;
@@ -151,10 +152,11 @@
           aria-label="Ver detalhes: {screenshot.title}"
         >
           <div class="aspect-video bg-gradient-to-br {screenshot.bgGradient} flex items-center justify-center relative overflow-hidden">
-            <img 
+            <ImageWithFallback 
               src={screenshot.src}
               alt={screenshot.alt}
               class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              fallback="/logo-upclinic.png"
             />
             <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             <div class="absolute bottom-4 left-4 right-4 transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
@@ -211,10 +213,11 @@
           
           <!-- Header do Modal -->
           <div class="relative h-64 bg-gradient-to-br {item.headerGradient} overflow-hidden">
-            <img 
+            <ImageWithFallback 
               src={item.src}
               alt={item.alt}
               class="w-full h-full object-cover opacity-30"
+              fallback="/logo-upclinic.png"
             />
             <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
             

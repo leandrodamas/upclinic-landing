@@ -1,5 +1,6 @@
 <script>
   import { onMount } from 'svelte';
+  import ImageWithFallback from './ImageWithFallback.svelte';
   
   let scrolled = false;
   let mobileMenuOpen = false;
@@ -22,7 +23,7 @@
     <div class="flex items-center justify-between h-20">
       <!-- Logo -->
       <a href="/" class="flex items-center group">
-        <img src="/logo-upclinic.png" alt="UpClinic Logo" class="w-auto h-12 object-contain" />
+        <ImageWithFallback src="/logo-upclinic.png" alt="UpClinic Logo" class="w-auto h-12 object-contain" loading="eager" />
       </a>
       
       <!-- Desktop Menu -->

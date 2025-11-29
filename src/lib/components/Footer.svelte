@@ -1,5 +1,6 @@
 <script>
   import { SOCIAL } from '$lib/constants';
+  import ImageWithFallback from './ImageWithFallback.svelte';
   
   const currentYear = new Date().getFullYear();
 </script>
@@ -10,7 +11,7 @@
       <!-- Coluna 1: Logo e Descrição -->
       <div class="lg:col-span-1">
         <div class="flex items-center mb-4">
-          <img src="/logo-upclinic.png" alt="UpClinic Logo" class="w-auto h-12 object-contain" />
+          <ImageWithFallback src="/logo-upclinic.png" alt="UpClinic Logo" class="w-auto h-12 object-contain" loading="eager" />
         </div>
         <p class="text-sm text-gray-400 mb-6">
           Sistema completo de gestão médica e clínica. 

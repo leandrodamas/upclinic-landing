@@ -1,0 +1,67 @@
+{
+	"version": 3,
+	"routes": [
+		{
+			"src": "/_app/immutable/.+",
+			"headers": {
+				"cache-control": "public, immutable, max-age=31536000"
+			}
+		},
+		{
+			"handle": "filesystem"
+		},
+		{
+			"src": "^/?(?:/__data.json)?$",
+			"dest": "/"
+		},
+		{
+			"src": "^/api/contact/?(?:/__data.json)?$",
+			"dest": "/api/contact"
+		},
+		{
+			"src": "^/carreiras/?(?:/__data.json)?$",
+			"dest": "/carreiras"
+		},
+		{
+			"src": "^/codigo-conduta/?(?:/__data.json)?$",
+			"dest": "/codigo-conduta"
+		},
+		{
+			"src": "^/contato/?(?:/__data.json)?$",
+			"dest": "/contato"
+		},
+		{
+			"src": "^/faq/?(?:/__data.json)?$",
+			"dest": "/faq"
+		},
+		{
+			"src": "^/lgpd/?(?:/__data.json)?$",
+			"dest": "/lgpd"
+		},
+		{
+			"src": "^/planos/?(?:/__data.json)?$",
+			"dest": "/planos"
+		},
+		{
+			"src": "^/politica-cookies/?(?:/__data.json)?$",
+			"dest": "/politica-cookies"
+		},
+		{
+			"src": "^/politica-privacidade/?(?:/__data.json)?$",
+			"dest": "/politica-privacidade"
+		},
+		{
+			"src": "^/sobre/?(?:/__data.json)?$",
+			"dest": "/sobre"
+		},
+		{
+			"src": "^/termos-servico/?(?:/__data.json)?$",
+			"dest": "/termos-servico"
+		},
+		{
+			"src": "/.*",
+			"dest": "/![-]/catchall"
+		}
+	],
+	"overrides": {}
+}
