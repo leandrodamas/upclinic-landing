@@ -155,7 +155,7 @@
             <ImageWithFallback 
               src={screenshot.src}
               alt={screenshot.alt}
-              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
               fallback="/logo-upclinic.png"
             />
             <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -216,7 +216,7 @@
             <ImageWithFallback 
               src={item.src}
               alt={item.alt}
-              className="w-full h-full object-cover opacity-30"
+              class="w-full h-full object-cover opacity-30"
               fallback="/logo-upclinic.png"
             />
             <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>

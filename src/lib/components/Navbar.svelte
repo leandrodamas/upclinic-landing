@@ -26,7 +26,7 @@
         <ImageWithFallback 
           src="/logo-upclinic.png"
           alt="UpClinic Logo"
-          className="w-auto h-12 object-contain"
+          class="h-12 w-auto object-contain"
           fallback="/logo-upclinic.png"
         />
       </a>

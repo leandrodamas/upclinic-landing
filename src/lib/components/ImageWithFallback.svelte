@@ -3,9 +3,8 @@
   export let alt: string = '';
   export let fallback: string = '';
   export let loading: 'lazy' | 'eager' | 'auto' = 'lazy';
-  export let className: string = '';
   
-  // Usar src diretamente, sem normalização (URLs importadas pelo Vite já vêm corretas)
+  // Usar src diretamente, sem normalização
   let currentSrc: string = src || fallback || '';
   let hasError = false;
   
@@ -42,7 +41,7 @@
 <img 
   src={currentSrc} 
   alt={alt} 
-  class={className}
   loading={loading}
   on:error={handleError}
+  {...$$restProps}
 />
