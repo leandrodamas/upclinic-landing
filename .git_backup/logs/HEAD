@@ -1,0 +1,44 @@
+0000000000000000000000000000000000000000 0f13fa017995e8f6c952ed87e6a8baac15b8efaa melindadamas <melindadamas@gmail.com> 1764268813 -0300	commit (initial): feat: Landing page UpClinic completa com SvelteKit + TailwindCSS
+0f13fa017995e8f6c952ed87e6a8baac15b8efaa 0000000000000000000000000000000000000000 melindadamas <melindadamas@gmail.com> 1764268813 -0300	Branch: renamed refs/heads/master to refs/heads/main
+0000000000000000000000000000000000000000 0f13fa017995e8f6c952ed87e6a8baac15b8efaa melindadamas <melindadamas@gmail.com> 1764268813 -0300	Branch: renamed refs/heads/master to refs/heads/main
+0f13fa017995e8f6c952ed87e6a8baac15b8efaa 0f13fa017995e8f6c952ed87e6a8baac15b8efaa Seu Nome <seu@email.com> 1764268941 -0300	reset: moving to HEAD
+0f13fa017995e8f6c952ed87e6a8baac15b8efaa 0f13fa017995e8f6c952ed87e6a8baac15b8efaa Seu Nome <seu@email.com> 1764268948 -0300	reset: moving to HEAD
+0f13fa017995e8f6c952ed87e6a8baac15b8efaa 0000000000000000000000000000000000000000 Seu Nome <seu@email.com> 1764269038 -0300	Branch: renamed refs/heads/main to refs/heads/main
+0f13fa017995e8f6c952ed87e6a8baac15b8efaa 0f13fa017995e8f6c952ed87e6a8baac15b8efaa Seu Nome <seu@email.com> 1764269038 -0300	Branch: renamed refs/heads/main to refs/heads/main
+0f13fa017995e8f6c952ed87e6a8baac15b8efaa 96d4b89cbe1fa3c4d3b9ef37a626d2cc3b35c1ac Seu Nome <seu@email.com> 1764270146 -0300	commit: fix: migrate to adapter-vercel
+96d4b89cbe1fa3c4d3b9ef37a626d2cc3b35c1ac bc00dd97624ab000bfed93185b3658cc1fd21986 Seu Nome <seu@email.com> 1764270536 -0300	commit: fix: remove adapter-static completely
+bc00dd97624ab000bfed93185b3658cc1fd21986 6ab9d2318d62fd0fa7b62ab1ca4148608e228e8b Seu Nome <seu@email.com> 1764271418 -0300	commit: fix: corrige links de login para evitar erro 404
+6ab9d2318d62fd0fa7b62ab1ca4148608e228e8b bb0b5a2bb87f8b4cb51c8ff78d0545ce2bfbdeb8 Seu Nome <seu@email.com> 1764272544 -0300	commit: fix: corrige link Entrar para abrir em nova aba e não ser interceptado
+bb0b5a2bb87f8b4cb51c8ff78d0545ce2bfbdeb8 9e23921f99999d7f542f356da4bbac8e54f7ca54 Seu Nome <seu@email.com> 1764456028 -0300	commit: fix: migrate to vercel adapter
+9e23921f99999d7f542f356da4bbac8e54f7ca54 e1327d358cb7699a8ea3c1ac829ac1307096e43d Seu Nome <seu@email.com> 1764456113 -0300	pull origin main --rebase (start): checkout e1327d358cb7699a8ea3c1ac829ac1307096e43d
+e1327d358cb7699a8ea3c1ac829ac1307096e43d 7d05c0270eae205255a51d2e089d14e274417d75 Seu Nome <seu@email.com> 1764456882 -0300	rebase (continue): fix: migrate to vercel adapter
+7d05c0270eae205255a51d2e089d14e274417d75 7d05c0270eae205255a51d2e089d14e274417d75 Seu Nome <seu@email.com> 1764457054 -0300	rebase (finish): returning to refs/heads/main
+7d05c0270eae205255a51d2e089d14e274417d75 b00e4d0a50d7a81b37e29f3af948537df196c24d Seu Nome <seu@email.com> 1764458943 -0300	commit: fix: update manifest and deploy settings
+b00e4d0a50d7a81b37e29f3af948537df196c24d 46742142c9372e8d1cd4b57e95561606a55fb176 Seu Nome <seu@email.com> 1764459459 -0300	commit: fix: update logo references to .png
+46742142c9372e8d1cd4b57e95561606a55fb176 3b9e4c135baba425833d3b8556875a95fe7c033b Seu Nome <seu@email.com> 1764460756 -0300	commit: deploy: promote new image fallback
+3b9e4c135baba425833d3b8556875a95fe7c033b 246a05c370ee6c198dbae06d6ab6f8c382a26dd7 Seu Nome <seu@email.com> 1764461029 -0300	commit: Fix: improve ImageWithFallback component initialization
+246a05c370ee6c198dbae06d6ab6f8c382a26dd7 ca15abcf426c1d48170e3c56d9fb283946d0f384 Seu Nome <seu@email.com> 1764462658 -0300	commit: Fix: corrigir exibição da logomarca usando SVG diretamente no Navbar e Footer
+ca15abcf426c1d48170e3c56d9fb283946d0f384 243f6d32035eba0d215cb182d2c8546ea994869f Seu Nome <seu@email.com> 1764462959 -0300	commit: Fix: corrigir exibição da logomarca usando SVG diretamente
+243f6d32035eba0d215cb182d2c8546ea994869f 04996a4dfc27f4775ee7157b2db158b6c1c961c3 Seu Nome <seu@email.com> 1764463203 -0300	commit: descrição do que alterou
+04996a4dfc27f4775ee7157b2db158b6c1c961c3 79711c37cb9a1f62cb23bd7f90aa61267c9605be Seu Nome <seu@email.com> 1764463601 -0300	commit: Fix: corrigir logo no Vercel - usar PNG e caminhos absolutos
+79711c37cb9a1f62cb23bd7f90aa61267c9605be d605c92c90fe801f4c9d847fbed19b192f53af73 Seu Nome <seu@email.com> 1764464663 -0300	commit: Fix: corrigir logo no Vercel - remover .props.class e usar className diretamente
+d605c92c90fe801f4c9d847fbed19b192f53af73 2fa695b5412f0dac13e052dc32f3b49b0d8177e8 Seu Nome <seu@email.com> 1764465490 -0300	commit: Fix: usar import direto de logos para garantir funcionamento no Vercel
+2fa695b5412f0dac13e052dc32f3b49b0d8177e8 0a4035ee7934eb31ddcdf92e311dc51fb8f00f34 Seu Nome <seu@email.com> 1764465784 -0300	commit: Fix: usar import direto de logos com Vite para garantir funcionamento no Vercel
+0a4035ee7934eb31ddcdf92e311dc51fb8f00f34 4ba5e81482e9ab2943c7354f1ff8d85038f59adf Seu Nome <seu@email.com> 1764465995 -0300	commit: Fix: usar import direto de logos com Vite para garantir funcionamento no Vercel
+4ba5e81482e9ab2943c7354f1ff8d85038f59adf 1046abe446abad14afafe8745431d8ec2ac41468 Seu Nome <seu@email.com> 1764466242 -0300	commit: Fix: remover referência ao SVG e usar apenas PNG com import direto do Vite para garantir funcionamento no Vercel
+1046abe446abad14afafe8745431d8ec2ac41468 2fce583f9f268a99ebf7262f2bb687008143ebc1 Seu Nome <seu@email.com> 1764466679 -0300	commit: Fix: simplificar ImageWithFallback para usar URLs importadas diretamente sem normalização desnecessária
+2fce583f9f268a99ebf7262f2bb687008143ebc1 17edb16e58ebd156d41e147b68d0cde3e4d8aaa0 Seu Nome <seu@email.com> 1764467976 -0300	commit: fix: correct image paths, remove incorrect imports, fix login icon and logo on Vercel
+17edb16e58ebd156d41e147b68d0cde3e4d8aaa0 0e1043bea38560256d87830784c19e5e96736c7d Seu Nome <seu@email.com> 1764468410 -0300	commit: fix: correct image paths, remove incorrect imports, fix ImageWithFallback to support class prop
+0e1043bea38560256d87830784c19e5e96736c7d c528be78fc26f6be1bd414d5254815ca77f5eab5 Seu Nome <seu@email.com> 1764469233 -0300	commit: fix: remove all logo-upclinic.png references from components and meta tags
+c528be78fc26f6be1bd414d5254815ca77f5eab5 6a86f6c3a06b104df4e7dadc60568a9ec8eb47f5 Seu Nome <seu@email.com> 1764469252 -0300	commit: fix: remove last logo-upclinic.png reference from +page.svelte
+6a86f6c3a06b104df4e7dadc60568a9ec8eb47f5 f62acbd93b6c57a27ec3b4c8e2aacd69df289d6a Seu Nome <seu@email.com> 1764469786 -0300	commit: fix: remove logo-upclinic files from git tracking
+f62acbd93b6c57a27ec3b4c8e2aacd69df289d6a aabc097c415aa8bfa89f6af65759162b30da7c42 Seu Nome <seu@email.com> 1764469914 -0300	commit: fix: replace logo-upclinic.png with favicon-64.png in manifest.json
+aabc097c415aa8bfa89f6af65759162b30da7c42 1f17273dba3ade273b855e0ee13bc938461ccb50 Seu Nome <seu@email.com> 1764470942 -0300	commit: fix: prevent ImageWithFallback from loading empty fallback and causing 404 errors
+1f17273dba3ade273b855e0ee13bc938461ccb50 4630b2e80df1299f7d734c16e275b7a92c0d4eea Seu Nome <seu@email.com> 1764471060 -0300	commit: chore: prepare for deployment - all logo references removed
+4630b2e80df1299f7d734c16e275b7a92c0d4eea 32e2b2da972999af800d8b5d230199a7a371da66 Seu Nome <seu@email.com> 1764471522 -0300	commit: fix: final deployment - remove all logo references and update components
+32e2b2da972999af800d8b5d230199a7a371da66 2d8e910b9c3a4d0d12fb367518d33d28478dde99 Seu Nome <seu@email.com> 1764471561 -0300	commit: fix: remove all logo files from repository completely
+2d8e910b9c3a4d0d12fb367518d33d28478dde99 5aadb874fb5f3289a5accbe68487d25bd967b038 Seu Nome <seu@email.com> 1764471586 -0300	commit: fix: deploy final - remove all logo files and references - 2025-11-29 23:59:46
+5aadb874fb5f3289a5accbe68487d25bd967b038 29c95ed9714a87c368e5c361b562d5c7f13f030b Seu Nome <seu@email.com> 1764471718 -0300	commit: fix: deploy final - remove all logo files and references completely
+29c95ed9714a87c368e5c361b562d5c7f13f030b 4d7273c6a21e8b185866522556d1f8c4410cdeff Seu Nome <seu@email.com> 1764471762 -0300	commit: fix: deploy final - remove all logo files and references - 2025-11-30 00:02:42
+4d7273c6a21e8b185866522556d1f8c4410cdeff 7dd6f12da2193085495e7eb50b8a7d70725669ef Seu Nome <seu@email.com> 1764473830 -0300	commit: fix: remove duplicated manifest and vercel build artifacts
+7dd6f12da2193085495e7eb50b8a7d70725669ef 43b383aaa2fea199fd4a94354b831c2beb4d589c Seu Nome <seu@email.com> 1764473866 -0300	commit: fix: remove duplicated manifest and vercel build artifacts
