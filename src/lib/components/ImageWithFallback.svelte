@@ -6,25 +6,30 @@
   
   export let className: string = '';
   
-  // Função para garantir caminho absoluto (começando com /)
-  function ensureAbsolutePath(path: string): string {
-    if (!path) return '/logo-upclinic.png';
-    // Se já começa com /, retorna como está
-    if (path.startsWith('/')) return path;
-    // Se começa com http:// ou https://, retorna como está
-    if (path.startsWith('http://') || path.startsWith('https://')) return path;
+  // Função para normalizar caminho (URLs importadas pelo Vite já vêm corretas)
+  function normalizePath(path: string): string {
+    if (!path) return fallback || '/logo-upclinic.png';
+    // URLs importadas pelo Vite podem vir como caminhos relativos ou absolutos
+    // Se já começa com /, http:// ou https://, retorna como está
+    if (path.startsWith('/') || path.startsWith('http://') || path.startsWith('https://')) {
+      return path;
+    }
+    // Se é um caminho relativo processado pelo Vite (começa com _app/immutable), usar como está
+    if (path.includes('_app/immutable') || path.includes('/assets/')) {
+      return path;
+    }
     // Caso contrário, adiciona / no início
     return '/' + path;
   }
   
-  // Inicializar currentSrc com src ou fallback, garantindo caminho absoluto
-  let currentSrc: string = src ? ensureAbsolutePath(src) : ensureAbsolutePath(fallback);
+  // Inicializar currentSrc com src ou fallback
+  let currentSrc: string = src ? normalizePath(src) : normalizePath(fallback);
   let hasError = false;
   
   function handleError(event: Event) {
-    if (!hasError && currentSrc !== ensureAbsolutePath(fallback)) {
+    if (!hasError && currentSrc !== normalizePath(fallback)) {
       hasError = true;
-      const fallbackPath = ensureAbsolutePath(fallback);
+      const fallbackPath = normalizePath(fallback);
       currentSrc = fallbackPath;
       // Prevenir loop infinito se o fallback também falhar
       if (event.target) {
@@ -36,13 +41,13 @@
   // Atualizar currentSrc quando src mudar
   $: {
     if (src && !hasError) {
-      const normalizedSrc = ensureAbsolutePath(src);
+      const normalizedSrc = normalizePath(src);
       if (normalizedSrc !== currentSrc) {
         currentSrc = normalizedSrc;
         hasError = false;
       }
     } else if (!src && !hasError) {
-      const normalizedFallback = ensureAbsolutePath(fallback);
+      const normalizedFallback = normalizePath(fallback);
       if (currentSrc !== normalizedFallback) {
         currentSrc = normalizedFallback;
         hasError = false;

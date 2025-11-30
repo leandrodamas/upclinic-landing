@@ -9,19 +9,23 @@ const SOCIAL = {
   instagram: "https://www.instagram.com/upclinicapp/",
   whatsapp: CONTACT.whatsappLink
 };
-function ensureAbsolutePath(path) {
-  if (!path) return "/logo-upclinic.png";
-  if (path.startsWith("/")) return path;
-  if (path.startsWith("http://") || path.startsWith("https://")) return path;
-  return "/" + path;
-}
 const ImageWithFallback = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { src } = $$props;
   let { alt = "" } = $$props;
   let { fallback = "/logo-upclinic.png" } = $$props;
   let { loading = "lazy" } = $$props;
   let { className = "" } = $$props;
-  let currentSrc = src ? ensureAbsolutePath(src) : ensureAbsolutePath(fallback);
+  function normalizePath(path) {
+    if (!path) return fallback || "/logo-upclinic.png";
+    if (path.startsWith("/") || path.startsWith("http://") || path.startsWith("https://")) {
+      return path;
+    }
+    if (path.includes("_app/immutable") || path.includes("/assets/")) {
+      return path;
+    }
+    return "/" + path;
+  }
+  let currentSrc = src ? normalizePath(src) : normalizePath(fallback);
   let hasError = false;
   if ($$props.src === void 0 && $$bindings.src && src !== void 0) $$bindings.src(src);
   if ($$props.alt === void 0 && $$bindings.alt && alt !== void 0) $$bindings.alt(alt);
@@ -31,13 +35,13 @@ const ImageWithFallback = create_ssr_component(($$result, $$props, $$bindings, s
   {
     {
       if (src && !hasError) {
-        const normalizedSrc = ensureAbsolutePath(src);
+        const normalizedSrc = normalizePath(src);
         if (normalizedSrc !== currentSrc) {
           currentSrc = normalizedSrc;
           hasError = false;
         }
       } else if (!src && !hasError) {
-        const normalizedFallback = ensureAbsolutePath(fallback);
+        const normalizedFallback = normalizePath(fallback);
         if (currentSrc !== normalizedFallback) {
           currentSrc = normalizedFallback;
           hasError = false;

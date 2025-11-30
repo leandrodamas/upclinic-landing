@@ -10,7 +10,7 @@ return {
 	assets: new Set(["apple-touch-icon.png","favicon-16.png","favicon-32.png","favicon-64.png","favicon.ico","logo-upclinic.png","logo-upclinic.svg","manifest.json","robots.txt","screenshots/agenda.svg","screenshots/dashboard.svg","screenshots/prontuario.svg","screenshots/telemedicina.svg","sitemap.xml"]),
 	mimeTypes: {".png":"image/png",".svg":"image/svg+xml",".json":"application/json",".txt":"text/plain",".xml":"text/xml"},
 	_: {
-		client: {start:"_app/immutable/entry/start.BMN8LF0T.js",app:"_app/immutable/entry/app.3kGkoE-h.js",imports:["_app/immutable/entry/start.BMN8LF0T.js","_app/immutable/chunks/Pg1JBnIn.js","_app/immutable/chunks/nKQ1bpcA.js","_app/immutable/entry/app.3kGkoE-h.js","_app/immutable/chunks/C1FmrZbK.js","_app/immutable/chunks/nKQ1bpcA.js","_app/immutable/chunks/D31EXCKY.js"],stylesheets:[],fonts:[],uses_env_dynamic_public:false},
+		client: {start:"_app/immutable/entry/start.CvBe1YcF.js",app:"_app/immutable/entry/app.CSRwc8ij.js",imports:["_app/immutable/entry/start.CvBe1YcF.js","_app/immutable/chunks/CCBigHkd.js","_app/immutable/chunks/nKQ1bpcA.js","_app/immutable/entry/app.CSRwc8ij.js","_app/immutable/chunks/C1FmrZbK.js","_app/immutable/chunks/nKQ1bpcA.js","_app/immutable/chunks/D31EXCKY.js"],stylesheets:[],fonts:[],uses_env_dynamic_public:false},
 		nodes: [
 			__memo(() => import('../output/server/nodes/0.js')),
 			__memo(() => import('../output/server/nodes/1.js')),
