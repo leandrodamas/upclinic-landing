@@ -7,10 +7,10 @@ function __memo(fn) {
 return {
 	appDir: "_app",
 	appPath: "_app",
-	assets: new Set(["apple-touch-icon.png","favicon-16.png","favicon-32.png","favicon-64.png","favicon.ico","logo-upclinic.png","logo-upclinic.svg","manifest.json","robots.txt","screenshots/agenda.svg","screenshots/dashboard.svg","screenshots/prontuario.svg","screenshots/telemedicina.svg","sitemap.xml"]),
-	mimeTypes: {".png":"image/png",".svg":"image/svg+xml",".json":"application/json",".txt":"text/plain",".xml":"text/xml"},
+	assets: new Set(["apple-touch-icon.png","favicon-16.png","favicon-32.png","favicon-64.png","favicon.ico","manifest.json","robots.txt","screenshots/agenda.svg","screenshots/dashboard.svg","screenshots/prontuario.svg","screenshots/telemedicina.svg","sitemap.xml"]),
+	mimeTypes: {".png":"image/png",".json":"application/json",".txt":"text/plain",".svg":"image/svg+xml",".xml":"text/xml"},
 	_: {
-		client: {start:"_app/immutable/entry/start.Cpl3_4JQ.js",app:"_app/immutable/entry/app.rBZGhs_D.js",imports:["_app/immutable/entry/start.Cpl3_4JQ.js","_app/immutable/chunks/CbsGj2C-.js","_app/immutable/chunks/2cfo0wbj.js","_app/immutable/entry/app.rBZGhs_D.js","_app/immutable/chunks/C1FmrZbK.js","_app/immutable/chunks/2cfo0wbj.js","_app/immutable/chunks/CSEmYss-.js"],stylesheets:[],fonts:[],uses_env_dynamic_public:false},
+		client: {start:"_app/immutable/entry/start.BHXN_OgX.js",app:"_app/immutable/entry/app.E6Qm6iTy.js",imports:["_app/immutable/entry/start.BHXN_OgX.js","_app/immutable/chunks/C76d-uGX.js","_app/immutable/chunks/CtICX558.js","_app/immutable/entry/app.E6Qm6iTy.js","_app/immutable/chunks/C1FmrZbK.js","_app/immutable/chunks/CtICX558.js","_app/immutable/chunks/TvkdS4Ko.js"],stylesheets:[],fonts:[],uses_env_dynamic_public:false},
 		nodes: [
 			__memo(() => import('../output/server/nodes/0.js')),
 			__memo(() => import('../output/server/nodes/1.js')),

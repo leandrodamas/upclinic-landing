@@ -135,13 +135,13 @@ const options = {
     <meta property="og:description" content="Prontuário eletrônico, agenda online, telemedicina, financeiro e IA integrados." />\r
     <meta property="og:url" content="https://clinicupapp.com/" />\r
     <meta property="og:type" content="website" />\r
-    <meta property="og:image" content="https://clinicupapp.com/logo-upclinic.png" />\r
+    <meta property="og:image" content="https://clinicupapp.com/favicon-64.png" />\r
 \r
     <!-- Twitter -->\r
     <meta name="twitter:card" content="summary_large_image" />\r
     <meta name="twitter:title" content="UpClinic – Sistema completo para clínicas" />\r
     <meta name="twitter:description" content="Plataforma moderna para gestão clínica." />\r
-    <meta name="twitter:image" content="https://clinicupapp.com/logo-upclinic.png" />\r
+    <meta name="twitter:image" content="https://clinicupapp.com/favicon-64.png" />\r
 \r
     <!-- Google Search Console -->\r
     <meta name="google-site-verification" content="ly3cp_oiRgakT1z9mUD3G4HO52mdx42M8WkZ1T_smak" />\r
@@ -158,7 +158,7 @@ const options = {
         "applicationCategory": "HealthApplication",\r
         "url": "https://clinicupapp.com/",\r
         "description": "Plataforma completa com prontuário eletrônico, agendamentos, telemedicina, financeiro e gestão para clínicas.",\r
-        "image": "https://clinicupapp.com/logo-upclinic.png",\r
+        "image": "https://clinicupapp.com/favicon-64.png",\r
         "creator": {\r
             "@type": "Organization",\r
             "name": "UpClinic"\r
@@ -248,7 +248,7 @@ const options = {
 		<div class="error">
 			<span class="status">` + status + '</span>\n			<div class="message">\n				<h1>' + message + "</h1>\n			</div>\n		</div>\n	</body>\n</html>\n"
   },
-  version_hash: "trh3ct"
+  version_hash: "1f85unt"
 };
 async function get_hooks() {
   let handle;
