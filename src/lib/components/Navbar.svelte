@@ -1,6 +1,5 @@
 <script>
   import { onMount } from 'svelte';
-  import ImageWithFallback from './ImageWithFallback.svelte';
   
   let scrolled = false;
   let mobileMenuOpen = false;
@@ -21,14 +20,9 @@
 <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 {scrolled ? 'bg-white/95 backdrop-blur-md shadow-md' : 'bg-transparent'}">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-20">
-      <!-- Logo -->
+      <!-- Logo removido -->
       <a href="/" class="flex items-center group">
-        <ImageWithFallback 
-          src="/logo-upclinic.png"
-          alt="UpClinic Logo"
-          class="h-12 w-auto object-contain"
-          fallback="/logo-upclinic.png"
-        />
+        <span class="text-xl font-bold text-gray-900">UpClinic</span>
       </a>
       
       <!-- Desktop Menu -->

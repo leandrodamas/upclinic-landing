@@ -1,4 +1,4 @@
-import { c as create_ssr_component, f as add_attribute, v as validate_component, e as escape } from "./ssr.js";
+import { c as create_ssr_component, i as compute_rest_props, j as spread, k as escape_attribute_value, l as escape_object, v as validate_component, f as add_attribute, e as escape } from "./ssr.js";
 const CONTACT = {
   whatsappLink: "https://wa.me/5562996720296",
   email: "contato@clinicupapp.com",
@@ -10,59 +10,47 @@ const SOCIAL = {
   whatsapp: CONTACT.whatsappLink
 };
 const ImageWithFallback = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let $$restProps = compute_rest_props($$props, ["src", "alt", "fallback", "loading"]);
   let { src } = $$props;
   let { alt = "" } = $$props;
-  let { fallback = "/logo-upclinic.png" } = $$props;
+  let { fallback = "" } = $$props;
   let { loading = "lazy" } = $$props;
-  let { className = "" } = $$props;
-  function normalizePath(path) {
-    if (!path) return fallback || "/logo-upclinic.png";
-    if (path.startsWith("/") || path.startsWith("http://") || path.startsWith("https://")) {
-      return path;
-    }
-    if (path.includes("_app/immutable") || path.includes("/assets/")) {
-      return path;
-    }
-    return "/" + path;
-  }
-  let currentSrc = src ? normalizePath(src) : normalizePath(fallback);
+  let currentSrc = src || fallback || "";
   let hasError = false;
   if ($$props.src === void 0 && $$bindings.src && src !== void 0) $$bindings.src(src);
   if ($$props.alt === void 0 && $$bindings.alt && alt !== void 0) $$bindings.alt(alt);
   if ($$props.fallback === void 0 && $$bindings.fallback && fallback !== void 0) $$bindings.fallback(fallback);
   if ($$props.loading === void 0 && $$bindings.loading && loading !== void 0) $$bindings.loading(loading);
-  if ($$props.className === void 0 && $$bindings.className && className !== void 0) $$bindings.className(className);
   {
     {
-      if (src && !hasError) {
-        const normalizedSrc = normalizePath(src);
-        if (normalizedSrc !== currentSrc) {
-          currentSrc = normalizedSrc;
-          hasError = false;
-        }
-      } else if (!src && !hasError) {
-        const normalizedFallback = normalizePath(fallback);
-        if (currentSrc !== normalizedFallback) {
-          currentSrc = normalizedFallback;
-          hasError = false;
-        }
+      if (src && src !== currentSrc && !hasError) {
+        currentSrc = src;
+        hasError = false;
+      } else if (!src && fallback && fallback !== currentSrc && !hasError) {
+        currentSrc = fallback;
+        hasError = false;
       }
     }
   }
-  return `<img${add_attribute("src", currentSrc, 0)}${add_attribute("alt", alt, 0)}${add_attribute("class", className, 0)}${add_attribute("loading", loading, 0)}>`;
+  return `<img${spread(
+    [
+      { src: escape_attribute_value(currentSrc) },
+      { alt: escape_attribute_value(alt) },
+      { loading: escape_attribute_value(loading) },
+      escape_object($$restProps)
+    ],
+    {}
+  )}>`;
 });
-const logoPng = "/_app/immutable/assets/logo-upclinic.Cw5HMvxU.png";
-const logoSvg = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjgwIiB2aWV3Qm94PSIwIDAgMjAwIDgwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPg0KICA8ZGVmcz4NCiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWRpZW50MSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+DQogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojM2I4MmY2O3N0b3Atb3BhY2l0eToxIiAvPg0KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMWU0MGFmO3N0b3Atb3BhY2l0eToxIiAvPg0KICAgIDwvbGluZWFyR3JhZGllbnQ+DQogICAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkaWVudDIiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPg0KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzEwYjk4MTtzdG9wLW9wYWNpdHk6MSIgLz4NCiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6IzA1OTY2OTtzdG9wLW9wYWNpdHk6MSIgLz4NCiAgICA8L2xpbmVhckdyYWRpZW50Pg0KICA8L2RlZnM+DQogIA0KICA8IS0tIEZ1bmRvIGRvIGxvZ28gLS0+DQogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjE2IiBmaWxsPSJ1cmwoI2dyYWRpZW50MSkiLz4NCiAgDQogIDwhLS0gQ3J1eiBtw6lkaWNhIGVzdGlsaXphZGEgLS0+DQogIDxyZWN0IHg9IjMwIiB5PSIyMCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjQwIiByeD0iNCIgZmlsbD0id2hpdGUiLz4NCiAgPHJlY3QgeD0iMjAiIHk9IjMwIiB3aWR0aD0iNDAiIGhlaWdodD0iMjAiIHJ4PSI0IiBmaWxsPSJ3aGl0ZSIvPg0KICANCiAgPCEtLSBQdWxzbyBjYXJkw61hY28gLS0+DQogIDxwYXRoIGQ9Ik0xNSAzNSBMMjUgMzUgTDMwIDI1IEwzNSA0NSBMNDAgMTUgTDQ1IDM1IEw1NSAzNSIgDQogICAgICAgIHN0cm9rZT0idXJsKCNncmFkaWVudDIpIiBzdHJva2Utd2lkdGg9IjMiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPg0KICANCiAgPCEtLSBUZXh0byBVcENsaW5pYyAtLT4NCiAgPHRleHQgeD0iOTAiIHk9IjM1IiBmb250LWZhbWlseT0iSW50ZXIsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjQiIGZvbnQtd2VpZ2h0PSI4MDAiIGZpbGw9InVybCgjZ3JhZGllbnQxKSI+VXA8L3RleHQ+DQogIDx0ZXh0IHg9IjkwIiB5PSI1NSIgZm9udC1mYW1pbHk9IkludGVyLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjIwIiBmb250LXdlaWdodD0iNjAwIiBmaWxsPSJ1cmwoI2dyYWRpZW50MikiPkNsaW5pYzwvdGV4dD4NCiAgDQogIDwhLS0gVGFnbGluZSAtLT4NCiAgPHRleHQgeD0iOTAiIHk9IjcwIiBmb250LWZhbWlseT0iSW50ZXIsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTAiIGZvbnQtd2VpZ2h0PSI0MDAiIGZpbGw9IiM2NDc0OGIiPlNpc3RlbWEgTcOpZGljbyBDb21wbGV0bzwvdGV4dD4NCjwvc3ZnPiA=";
 const Footer = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   const currentYear = (/* @__PURE__ */ new Date()).getFullYear();
   return `<footer class="bg-gray-900 text-gray-300"><div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12"> <div class="lg:col-span-1"><div class="flex items-center mb-4">${validate_component(ImageWithFallback, "ImageWithFallback").$$render(
     $$result,
     {
-      src: logoPng,
+      src: "/logo-upclinic.png",
       alt: "UpClinic Logo",
-      className: "h-12 w-auto object-contain",
-      loading: "eager",
-      fallback: logoSvg
+      class: "h-12 w-auto object-contain",
+      fallback: "/logo-upclinic.png"
     },
     {},
     {}
@@ -76,11 +64,10 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   )}"><div class="container mx-auto px-4 sm:px-6 lg:px-8"><div class="flex items-center justify-between h-20"> <a href="/" class="flex items-center group">${validate_component(ImageWithFallback, "ImageWithFallback").$$render(
     $$result,
     {
-      src: logoPng,
+      src: "/logo-upclinic.png",
       alt: "UpClinic Logo",
-      className: "h-12 w-auto object-contain",
-      loading: "eager",
-      fallback: logoSvg
+      class: "h-12 w-auto object-contain",
+      fallback: "/logo-upclinic.png"
     },
     {},
     {}
