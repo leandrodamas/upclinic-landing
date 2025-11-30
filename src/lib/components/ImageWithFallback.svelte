@@ -1,57 +1,40 @@
 <script lang="ts">
   export let src: string;
   export let alt: string = '';
-  export let fallback: string = '/logo-upclinic.png';
+  export let fallback: string = '';
   export let loading: 'lazy' | 'eager' | 'auto' = 'lazy';
-  
   export let className: string = '';
   
-  // Função para normalizar caminho (URLs importadas pelo Vite já vêm corretas)
-  function normalizePath(path: string): string {
-    if (!path) return fallback || '/logo-upclinic.png';
-    // URLs importadas pelo Vite podem vir como caminhos relativos ou absolutos
-    // Se já começa com /, http:// ou https://, retorna como está
-    if (path.startsWith('/') || path.startsWith('http://') || path.startsWith('https://')) {
-      return path;
-    }
-    // Se é um caminho relativo processado pelo Vite (começa com _app/immutable), usar como está
-    if (path.includes('_app/immutable') || path.includes('/assets/')) {
-      return path;
-    }
-    // Caso contrário, adiciona / no início
-    return '/' + path;
-  }
-  
-  // Inicializar currentSrc com src ou fallback
-  let currentSrc: string = src ? normalizePath(src) : normalizePath(fallback);
+  // Usar src diretamente, sem normalização (URLs importadas pelo Vite já vêm corretas)
+  let currentSrc: string = src || fallback || '';
   let hasError = false;
   
   function handleError(event: Event) {
-    if (!hasError && currentSrc !== normalizePath(fallback)) {
+    // Se houver fallback e ainda não tentamos usar ele, tentar agora
+    if (!hasError && fallback && currentSrc !== fallback) {
       hasError = true;
-      const fallbackPath = normalizePath(fallback);
-      currentSrc = fallbackPath;
+      currentSrc = fallback;
       // Prevenir loop infinito se o fallback também falhar
+      if (event.target) {
+        (event.target as HTMLImageElement).onerror = null;
+      }
+    } else {
+      // Prevenir loop infinito se o fallback também falhar ou não houver fallback
+      hasError = true;
       if (event.target) {
         (event.target as HTMLImageElement).onerror = null;
       }
     }
   }
   
-  // Atualizar currentSrc quando src mudar
+  // Atualizar currentSrc quando src ou fallback mudarem
   $: {
-    if (src && !hasError) {
-      const normalizedSrc = normalizePath(src);
-      if (normalizedSrc !== currentSrc) {
-        currentSrc = normalizedSrc;
-        hasError = false;
-      }
-    } else if (!src && !hasError) {
-      const normalizedFallback = normalizePath(fallback);
-      if (currentSrc !== normalizedFallback) {
-        currentSrc = normalizedFallback;
-        hasError = false;
-      }
+    if (src && src !== currentSrc && !hasError) {
+      currentSrc = src;
+      hasError = false;
+    } else if (!src && fallback && fallback !== currentSrc && !hasError) {
+      currentSrc = fallback;
+      hasError = false;
     }
   }
 </script>
@@ -63,4 +46,3 @@
   loading={loading}
   on:error={handleError}
 />
-
