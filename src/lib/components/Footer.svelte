@@ -1,8 +1,6 @@
 <script>
   import { SOCIAL } from '$lib/constants';
   import ImageWithFallback from './ImageWithFallback.svelte';
-  // Importar logo diretamente para garantir que funcione no Vercel
-  import logoPng from '$lib/assets/logo-upclinic.png?url';
   
   const currentYear = new Date().getFullYear();
 </script>
@@ -14,11 +12,10 @@
       <div class="lg:col-span-1">
         <div class="flex items-center mb-4">
           <ImageWithFallback 
-            src={logoPng} 
-            alt="UpClinic Logo" 
-            className="h-12 w-auto object-contain" 
-            loading="eager"
-            fallback={logoPng}
+            src="/logo-upclinic.png"
+            alt="UpClinic Logo"
+            className="w-auto h-12 object-contain"
+            fallback="/logo-upclinic.png"
           />
         </div>
         <p class="text-sm text-gray-400 mb-6">
