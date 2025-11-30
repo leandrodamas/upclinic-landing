@@ -1,5 +1,6 @@
 <script>
   import { SOCIAL } from '$lib/constants';
+  import ImageWithFallback from './ImageWithFallback.svelte';
   
   const currentYear = new Date().getFullYear();
 </script>
@@ -10,7 +11,12 @@
       <!-- Coluna 1: Logo e Descrição -->
       <div class="lg:col-span-1">
         <div class="flex items-center mb-4">
-          <span class="text-xl font-bold text-white">UpClinic</span>
+          <ImageWithFallback 
+            src="/ChatGPT Image 30 de nov. de 2025, 01_06_00.png"
+            alt="UpClinic Logo"
+            class="h-28 w-auto object-contain"
+            fallback="/ChatGPT Image 30 de nov. de 2025, 01_06_00.png"
+          />
         </div>
         <p class="text-sm text-gray-400 mb-6">
           Sistema completo de gestão médica e clínica. 

@@ -1,5 +1,6 @@
 <script>
   import { onMount } from 'svelte';
+  import ImageWithFallback from './ImageWithFallback.svelte';
   
   onMount(() => {
     // Animação suave de entrada
@@ -111,44 +112,15 @@
           <div class="relative">
             <!-- Card principal com sombra elegante -->
             <div class="relative bg-white rounded-2xl shadow-2xl shadow-gray-900/10 border border-gray-100 overflow-hidden transform hover:scale-[1.02] transition-transform duration-500">
-              <!-- Header do card -->
-              <div class="bg-gradient-to-r from-blue-600 to-indigo-700 px-6 py-4">
-                <div class="flex items-center space-x-2">
-                  <div class="w-3 h-3 rounded-full bg-white/30"></div>
-                  <div class="w-3 h-3 rounded-full bg-white/30"></div>
-                  <div class="w-3 h-3 rounded-full bg-white/30"></div>
-                </div>
-              </div>
-              
-              <!-- Conteúdo do dashboard preview -->
-              <div class="p-8 bg-gray-50">
-                <div class="space-y-4">
-                  <!-- Linha de gráfico -->
-                  <div class="flex items-end space-x-2 h-32">
-                    <div class="flex-1 bg-gradient-to-t from-blue-500 to-blue-300 rounded-t-lg" style="height: 60%"></div>
-                    <div class="flex-1 bg-gradient-to-t from-indigo-500 to-indigo-300 rounded-t-lg" style="height: 80%"></div>
-                    <div class="flex-1 bg-gradient-to-t from-purple-500 to-purple-300 rounded-t-lg" style="height: 100%"></div>
-                    <div class="flex-1 bg-gradient-to-t from-blue-500 to-blue-300 rounded-t-lg" style="height: 70%"></div>
-                    <div class="flex-1 bg-gradient-to-t from-indigo-500 to-indigo-300 rounded-t-lg" style="height: 90%"></div>
-                    <div class="flex-1 bg-gradient-to-t from-purple-500 to-purple-300 rounded-t-lg" style="height: 65%"></div>
-                  </div>
-                  
-                  <!-- Cards de métricas -->
-                  <div class="grid grid-cols-3 gap-4">
-                    <div class="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
-                      <div class="text-2xl font-bold text-blue-600 mb-1">1.2K</div>
-                      <div class="text-xs text-gray-600">Consultas</div>
-                    </div>
-                    <div class="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
-                      <div class="text-2xl font-bold text-indigo-600 mb-1">850</div>
-                      <div class="text-xs text-gray-600">Pacientes</div>
-                    </div>
-                    <div class="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
-                      <div class="text-2xl font-bold text-purple-600 mb-1">R$45K</div>
-                      <div class="text-xs text-gray-600">Receita</div>
-                    </div>
-                  </div>
-                </div>
+              <!-- Imagem do dashboard -->
+              <div class="w-full min-h-[500px] flex items-center justify-center p-4">
+                <ImageWithFallback 
+                  src="/ChatGPT Image 30 de nov. de 2025, 01_37_20.png"
+                  alt="Dashboard UpClinic"
+                  class="w-full h-auto max-h-[650px] object-contain"
+                  fallback="/ChatGPT Image 30 de nov. de 2025, 01_37_20.png"
+                  loading="eager"
+                />
               </div>
             </div>
             
