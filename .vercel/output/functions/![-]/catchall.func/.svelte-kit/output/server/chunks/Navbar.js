@@ -9,40 +9,40 @@ const SOCIAL = {
   instagram: "https://www.instagram.com/upclinicapp/",
   whatsapp: CONTACT.whatsappLink
 };
+function ensureAbsolutePath(path) {
+  if (!path) return "/logo-upclinic.png";
+  if (path.startsWith("/")) return path;
+  if (path.startsWith("http://") || path.startsWith("https://")) return path;
+  return "/" + path;
+}
 const ImageWithFallback = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { src } = $$props;
   let { alt = "" } = $$props;
   let { fallback = "/logo-upclinic.png" } = $$props;
   let { loading = "lazy" } = $$props;
-  let className = "";
-  function ensureAbsolutePath(path) {
-    if (!path) return fallback;
-    if (path.startsWith("/")) return path;
-    if (path.startsWith("http://") || path.startsWith("https://")) return path;
-    return "/" + path;
-  }
-  let currentSrc = ensureAbsolutePath(src || fallback);
+  let { className = "" } = $$props;
+  let currentSrc = src ? ensureAbsolutePath(src) : ensureAbsolutePath(fallback);
   let hasError = false;
   if ($$props.src === void 0 && $$bindings.src && src !== void 0) $$bindings.src(src);
   if ($$props.alt === void 0 && $$bindings.alt && alt !== void 0) $$bindings.alt(alt);
   if ($$props.fallback === void 0 && $$bindings.fallback && fallback !== void 0) $$bindings.fallback(fallback);
   if ($$props.loading === void 0 && $$bindings.loading && loading !== void 0) $$bindings.loading(loading);
+  if ($$props.className === void 0 && $$bindings.className && className !== void 0) $$bindings.className(className);
   {
     {
-      const normalizedSrc = ensureAbsolutePath(src || "");
-      const normalizedFallback = ensureAbsolutePath(fallback);
-      if (normalizedSrc && normalizedSrc !== currentSrc && !hasError) {
-        currentSrc = normalizedSrc;
-        hasError = false;
-      } else if (!normalizedSrc && currentSrc !== normalizedFallback) {
-        currentSrc = normalizedFallback;
-        hasError = false;
+      if (src && !hasError) {
+        const normalizedSrc = ensureAbsolutePath(src);
+        if (normalizedSrc !== currentSrc) {
+          currentSrc = normalizedSrc;
+          hasError = false;
+        }
+      } else if (!src && !hasError) {
+        const normalizedFallback = ensureAbsolutePath(fallback);
+        if (currentSrc !== normalizedFallback) {
+          currentSrc = normalizedFallback;
+          hasError = false;
+        }
       }
-    }
-  }
-  {
-    {
-      className = $$props.class || "";
     }
   }
   return `<img${add_attribute("src", currentSrc, 0)}${add_attribute("alt", alt, 0)}${add_attribute("class", className, 0)}${add_attribute("loading", loading, 0)}>`;
@@ -54,7 +54,7 @@ const Footer = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     {
       src: "/logo-upclinic.png",
       alt: "UpClinic Logo",
-      class: "h-12 w-auto object-contain",
+      className: "h-12 w-auto object-contain",
       loading: "eager",
       fallback: "/logo-upclinic.png"
     },
@@ -72,7 +72,7 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     {
       src: "/logo-upclinic.png",
       alt: "UpClinic Logo",
-      class: "h-12 w-auto object-contain",
+      className: "h-12 w-auto object-contain",
       loading: "eager",
       fallback: "/logo-upclinic.png"
     },

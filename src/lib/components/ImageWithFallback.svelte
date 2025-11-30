@@ -4,12 +4,11 @@
   export let fallback: string = '/logo-upclinic.png';
   export let loading: 'lazy' | 'eager' | 'auto' = 'lazy';
   
-  // class é uma palavra reservada, então usamos $$props para acessá-la
-  let className: string = '';
+  export let className: string = '';
   
   // Função para garantir caminho absoluto (começando com /)
   function ensureAbsolutePath(path: string): string {
-    if (!path) return fallback;
+    if (!path) return '/logo-upclinic.png';
     // Se já começa com /, retorna como está
     if (path.startsWith('/')) return path;
     // Se começa com http:// ou https://, retorna como está
@@ -19,13 +18,14 @@
   }
   
   // Inicializar currentSrc com src ou fallback, garantindo caminho absoluto
-  let currentSrc: string = ensureAbsolutePath(src || fallback);
+  let currentSrc: string = src ? ensureAbsolutePath(src) : ensureAbsolutePath(fallback);
   let hasError = false;
   
   function handleError(event: Event) {
-    if (!hasError && currentSrc !== fallback) {
+    if (!hasError && currentSrc !== ensureAbsolutePath(fallback)) {
       hasError = true;
-      currentSrc = ensureAbsolutePath(fallback);
+      const fallbackPath = ensureAbsolutePath(fallback);
+      currentSrc = fallbackPath;
       // Prevenir loop infinito se o fallback também falhar
       if (event.target) {
         (event.target as HTMLImageElement).onerror = null;
@@ -35,21 +35,19 @@
   
   // Atualizar currentSrc quando src mudar
   $: {
-    const normalizedSrc = ensureAbsolutePath(src || '');
-    const normalizedFallback = ensureAbsolutePath(fallback);
-    
-    if (normalizedSrc && normalizedSrc !== currentSrc && !hasError) {
-      currentSrc = normalizedSrc;
-      hasError = false;
-    } else if (!normalizedSrc && currentSrc !== normalizedFallback) {
-      currentSrc = normalizedFallback;
-      hasError = false;
+    if (src && !hasError) {
+      const normalizedSrc = ensureAbsolutePath(src);
+      if (normalizedSrc !== currentSrc) {
+        currentSrc = normalizedSrc;
+        hasError = false;
+      }
+    } else if (!src && !hasError) {
+      const normalizedFallback = ensureAbsolutePath(fallback);
+      if (currentSrc !== normalizedFallback) {
+        currentSrc = normalizedFallback;
+        hasError = false;
+      }
     }
-  }
-  
-  // Atualizar className quando props mudarem
-  $: {
-    className = $$props.class || '';
   }
 </script>
 
