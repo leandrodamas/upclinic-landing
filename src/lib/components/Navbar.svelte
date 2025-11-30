@@ -1,6 +1,9 @@
 <script>
   import { onMount } from 'svelte';
   import ImageWithFallback from './ImageWithFallback.svelte';
+  // Importar logo diretamente para garantir que funcione no Vercel
+  import logoPng from '$lib/assets/logo-upclinic.png?url';
+  import logoSvg from '$lib/assets/logo-upclinic.svg?url';
   
   let scrolled = false;
   let mobileMenuOpen = false;
@@ -24,11 +27,11 @@
       <!-- Logo -->
       <a href="/" class="flex items-center group">
         <ImageWithFallback 
-          src="/logo-upclinic.png" 
+          src={logoPng} 
           alt="UpClinic Logo" 
           className="h-12 w-auto object-contain" 
           loading="eager"
-          fallback="/logo-upclinic.png"
+          fallback={logoSvg}
         />
       </a>
       

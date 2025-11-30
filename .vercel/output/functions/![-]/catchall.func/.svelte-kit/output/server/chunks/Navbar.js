@@ -47,16 +47,18 @@ const ImageWithFallback = create_ssr_component(($$result, $$props, $$bindings, s
   }
   return `<img${add_attribute("src", currentSrc, 0)}${add_attribute("alt", alt, 0)}${add_attribute("class", className, 0)}${add_attribute("loading", loading, 0)}>`;
 });
+const logoPng = "/_app/immutable/assets/logo-upclinic.Cw5HMvxU.png";
+const logoSvg = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjgwIiB2aWV3Qm94PSIwIDAgMjAwIDgwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPg0KICA8ZGVmcz4NCiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWRpZW50MSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+DQogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojM2I4MmY2O3N0b3Atb3BhY2l0eToxIiAvPg0KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMWU0MGFmO3N0b3Atb3BhY2l0eToxIiAvPg0KICAgIDwvbGluZWFyR3JhZGllbnQ+DQogICAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkaWVudDIiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPg0KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzEwYjk4MTtzdG9wLW9wYWNpdHk6MSIgLz4NCiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6IzA1OTY2OTtzdG9wLW9wYWNpdHk6MSIgLz4NCiAgICA8L2xpbmVhckdyYWRpZW50Pg0KICA8L2RlZnM+DQogIA0KICA8IS0tIEZ1bmRvIGRvIGxvZ28gLS0+DQogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjE2IiBmaWxsPSJ1cmwoI2dyYWRpZW50MSkiLz4NCiAgDQogIDwhLS0gQ3J1eiBtw6lkaWNhIGVzdGlsaXphZGEgLS0+DQogIDxyZWN0IHg9IjMwIiB5PSIyMCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjQwIiByeD0iNCIgZmlsbD0id2hpdGUiLz4NCiAgPHJlY3QgeD0iMjAiIHk9IjMwIiB3aWR0aD0iNDAiIGhlaWdodD0iMjAiIHJ4PSI0IiBmaWxsPSJ3aGl0ZSIvPg0KICANCiAgPCEtLSBQdWxzbyBjYXJkw61hY28gLS0+DQogIDxwYXRoIGQ9Ik0xNSAzNSBMMjUgMzUgTDMwIDI1IEwzNSA0NSBMNDAgMTUgTDQ1IDM1IEw1NSAzNSIgDQogICAgICAgIHN0cm9rZT0idXJsKCNncmFkaWVudDIpIiBzdHJva2Utd2lkdGg9IjMiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPg0KICANCiAgPCEtLSBUZXh0byBVcENsaW5pYyAtLT4NCiAgPHRleHQgeD0iOTAiIHk9IjM1IiBmb250LWZhbWlseT0iSW50ZXIsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjQiIGZvbnQtd2VpZ2h0PSI4MDAiIGZpbGw9InVybCgjZ3JhZGllbnQxKSI+VXA8L3RleHQ+DQogIDx0ZXh0IHg9IjkwIiB5PSI1NSIgZm9udC1mYW1pbHk9IkludGVyLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjIwIiBmb250LXdlaWdodD0iNjAwIiBmaWxsPSJ1cmwoI2dyYWRpZW50MikiPkNsaW5pYzwvdGV4dD4NCiAgDQogIDwhLS0gVGFnbGluZSAtLT4NCiAgPHRleHQgeD0iOTAiIHk9IjcwIiBmb250LWZhbWlseT0iSW50ZXIsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTAiIGZvbnQtd2VpZ2h0PSI0MDAiIGZpbGw9IiM2NDc0OGIiPlNpc3RlbWEgTcOpZGljbyBDb21wbGV0bzwvdGV4dD4NCjwvc3ZnPiA=";
 const Footer = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   const currentYear = (/* @__PURE__ */ new Date()).getFullYear();
   return `<footer class="bg-gray-900 text-gray-300"><div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12"> <div class="lg:col-span-1"><div class="flex items-center mb-4">${validate_component(ImageWithFallback, "ImageWithFallback").$$render(
     $$result,
     {
-      src: "/logo-upclinic.png",
+      src: logoPng,
       alt: "UpClinic Logo",
       className: "h-12 w-auto object-contain",
       loading: "eager",
-      fallback: "/logo-upclinic.png"
+      fallback: logoSvg
     },
     {},
     {}
@@ -70,11 +72,11 @@ const Navbar = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   )}"><div class="container mx-auto px-4 sm:px-6 lg:px-8"><div class="flex items-center justify-between h-20"> <a href="/" class="flex items-center group">${validate_component(ImageWithFallback, "ImageWithFallback").$$render(
     $$result,
     {
-      src: "/logo-upclinic.png",
+      src: logoPng,
       alt: "UpClinic Logo",
       className: "h-12 w-auto object-contain",
       loading: "eager",
-      fallback: "/logo-upclinic.png"
+      fallback: logoSvg
     },
     {},
     {}
