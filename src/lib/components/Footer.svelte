@@ -11,16 +11,12 @@
       <!-- Coluna 1: Logo e Descrição -->
       <div class="lg:col-span-1">
         <div class="flex items-center mb-4">
-          <img 
-            src="/logo-upclinic.svg" 
+          <ImageWithFallback 
+            src="/logo-upclinic.png" 
             alt="UpClinic Logo" 
             class="h-12 w-auto object-contain" 
             loading="eager"
-            on:error={(e) => {
-              if (e.target.src !== '/logo-upclinic.png') {
-                e.target.src = '/logo-upclinic.png';
-              }
-            }}
+            fallback="/logo-upclinic.png"
           />
         </div>
         <p class="text-sm text-gray-400 mb-6">

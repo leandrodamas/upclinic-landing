@@ -23,16 +23,12 @@
     <div class="flex items-center justify-between h-20">
       <!-- Logo -->
       <a href="/" class="flex items-center group">
-        <img 
-          src="/logo-upclinic.svg" 
+        <ImageWithFallback 
+          src="/logo-upclinic.png" 
           alt="UpClinic Logo" 
           class="h-12 w-auto object-contain" 
           loading="eager"
-          on:error={(e) => {
-            if (e.target.src !== '/logo-upclinic.png') {
-              e.target.src = '/logo-upclinic.png';
-            }
-          }}
+          fallback="/logo-upclinic.png"
         />
       </a>
       
