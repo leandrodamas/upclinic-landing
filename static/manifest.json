@@ -9,13 +9,13 @@
   "theme_color": "#2563eb",
   "icons": [
     {
-      "src": "/logo-upclinic.png",
+      "src": "/favicon-64.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/logo-upclinic.png",
+      "src": "/favicon-64.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
