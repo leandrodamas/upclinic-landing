@@ -23,7 +23,7 @@
   <meta property="og:description" content="Transforme sua clínica com tecnologia de ponta. Sistema completo de gestão médica." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://clinicupapp.com" />
-  <meta property="og:image" content="https://clinicupapp.com/logo-upclinic.png" />
+  <meta property="og:image" content="https://clinicupapp.com/favicon-64.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="canonical" href="https://clinicupapp.com" />
   
