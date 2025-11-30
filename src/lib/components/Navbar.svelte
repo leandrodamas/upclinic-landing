@@ -23,7 +23,17 @@
     <div class="flex items-center justify-between h-20">
       <!-- Logo -->
       <a href="/" class="flex items-center group">
-        <ImageWithFallback src="/logo-upclinic.png" alt="UpClinic Logo" class="w-auto h-12 object-contain" loading="eager" />
+        <img 
+          src="/logo-upclinic.svg" 
+          alt="UpClinic Logo" 
+          class="h-12 w-auto object-contain" 
+          loading="eager"
+          on:error={(e) => {
+            if (e.target.src !== '/logo-upclinic.png') {
+              e.target.src = '/logo-upclinic.png';
+            }
+          }}
+        />
       </a>
       
       <!-- Desktop Menu -->

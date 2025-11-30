@@ -11,7 +11,17 @@
       <!-- Coluna 1: Logo e Descrição -->
       <div class="lg:col-span-1">
         <div class="flex items-center mb-4">
-          <ImageWithFallback src="/logo-upclinic.png" alt="UpClinic Logo" class="w-auto h-12 object-contain" loading="eager" />
+          <img 
+            src="/logo-upclinic.svg" 
+            alt="UpClinic Logo" 
+            class="h-12 w-auto object-contain" 
+            loading="eager"
+            on:error={(e) => {
+              if (e.target.src !== '/logo-upclinic.png') {
+                e.target.src = '/logo-upclinic.png';
+              }
+            }}
+          />
         </div>
         <p class="text-sm text-gray-400 mb-6">
           Sistema completo de gestão médica e clínica. 
