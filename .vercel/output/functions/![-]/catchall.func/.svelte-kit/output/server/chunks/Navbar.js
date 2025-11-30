@@ -15,16 +15,20 @@ const ImageWithFallback = create_ssr_component(($$result, $$props, $$bindings, s
   let { fallback = "/logo-upclinic.png" } = $$props;
   let { loading = "lazy" } = $$props;
   let className = "";
-  let currentSrc = src;
+  let currentSrc = src || fallback;
   let hasError = false;
   if ($$props.src === void 0 && $$bindings.src && src !== void 0) $$bindings.src(src);
   if ($$props.alt === void 0 && $$bindings.alt && alt !== void 0) $$bindings.alt(alt);
   if ($$props.fallback === void 0 && $$bindings.fallback && fallback !== void 0) $$bindings.fallback(fallback);
   if ($$props.loading === void 0 && $$bindings.loading && loading !== void 0) $$bindings.loading(loading);
   {
-    if (src !== currentSrc && !hasError) {
-      currentSrc = src;
-      hasError = false;
+    {
+      if (src && src !== currentSrc && !hasError) {
+        currentSrc = src;
+        hasError = false;
+      } else if (!src) {
+        currentSrc = fallback;
+      }
     }
   }
   {

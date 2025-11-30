@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
+  
   export let src: string;
   export let alt: string = '';
   export let fallback: string = '/logo-upclinic.png';
@@ -7,8 +9,15 @@
   // class é uma palavra reservada, então usamos $$props para acessá-la
   let className: string = '';
   
-  let currentSrc = src;
+  let currentSrc: string = src || fallback;
   let hasError = false;
+  
+  // Garantir que src inicial seja válido
+  onMount(() => {
+    if (!currentSrc || currentSrc === '') {
+      currentSrc = fallback;
+    }
+  });
   
   function handleError(event: Event) {
     if (!hasError && currentSrc !== fallback) {
@@ -21,10 +30,14 @@
     }
   }
   
-  // Reset quando src mudar
-  $: if (src !== currentSrc && !hasError) {
-    currentSrc = src;
-    hasError = false;
+  // Inicializar e resetar quando src mudar
+  $: {
+    if (src && src !== currentSrc && !hasError) {
+      currentSrc = src;
+      hasError = false;
+    } else if (!src) {
+      currentSrc = fallback;
+    }
   }
   
   // Atualizar className quando props mudarem
