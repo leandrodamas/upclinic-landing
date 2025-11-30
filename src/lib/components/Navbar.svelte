@@ -3,7 +3,6 @@
   import ImageWithFallback from './ImageWithFallback.svelte';
   // Importar logo diretamente para garantir que funcione no Vercel
   import logoPng from '$lib/assets/logo-upclinic.png?url';
-  import logoSvg from '$lib/assets/logo-upclinic.svg?url';
   
   let scrolled = false;
   let mobileMenuOpen = false;
@@ -31,7 +30,7 @@
           alt="UpClinic Logo" 
           className="h-12 w-auto object-contain" 
           loading="eager"
-          fallback={logoSvg}
+          fallback={logoPng}
         />
       </a>
       
