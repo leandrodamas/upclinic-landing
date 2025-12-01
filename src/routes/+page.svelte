@@ -65,7 +65,7 @@
     </p>
     <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
       <a 
-        href="https://upclinic-aa025.web.app/signup" 
+        href="https://upclinic-aa025.web.app/login" 
         class="btn bg-white text-blue-600 hover:bg-gray-100 btn-large"
       >
         Começar Agora

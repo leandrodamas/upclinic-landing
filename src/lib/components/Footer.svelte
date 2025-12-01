@@ -64,8 +64,8 @@
         <ul class="space-y-2">
           <li><a href="/#funcionalidades" class="hover:text-white transition-colors">Funcionalidades</a></li>
           <li><a href="/planos" class="hover:text-white transition-colors">Planos</a></li>
-                  <li><a href="https://upclinic-aa025.web.app/" class="hover:text-white transition-colors">Login</a></li>
-                  <li><a href="https://upclinic-aa025.web.app/signup" class="hover:text-white transition-colors">Cadastro</a></li>
+                  <li><a href="https://upclinic-aa025.web.app/login" class="hover:text-white transition-colors">Login</a></li>
+                  <li><a href="https://upclinic-aa025.web.app/login" class="hover:text-white transition-colors">Cadastro</a></li>
         </ul>
       </div>
       

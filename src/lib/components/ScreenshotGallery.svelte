@@ -285,7 +285,7 @@
             <!-- Botões de Ação -->
             <div class="flex flex-col sm:flex-row gap-4 pt-6 border-t border-gray-200">
               <a 
-                href="https://upclinic-aa025.web.app/signup"
+                href="https://upclinic-aa025.web.app/login"
                 class="flex-1 btn {item.buttonClass} text-white text-center"
               >
                 Experimentar Agora

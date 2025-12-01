@@ -215,7 +215,7 @@
       <div class="px-8 py-5 border-t border-gray-100 bg-gray-50">
         <div class="flex flex-col sm:flex-row gap-3">
           <a 
-            href="https://upclinic-aa025.web.app/signup"
+            href="https://upclinic-aa025.web.app/login"
             class="flex-1 {colors.button} text-white text-center px-6 py-3 rounded-lg font-medium text-sm hover:shadow-md transition-all"
           >
             Experimentar Agora

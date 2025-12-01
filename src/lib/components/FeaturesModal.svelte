@@ -558,7 +558,7 @@
                 <!-- CTAs -->
                 <div class="flex flex-col sm:flex-row gap-4 pt-6 border-t border-gray-200">
                   <a 
-                    href="https://upclinic-aa025.web.app/signup"
+                    href="https://upclinic-aa025.web.app/login"
                     class="flex-1 btn {selectedFeature.gradient} text-white text-center btn-large"
                   >
                     Experimentar Agora
@@ -662,7 +662,7 @@
             </p>
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a 
-                href="https://upclinic-aa025.web.app/signup"
+                href="https://upclinic-aa025.web.app/login"
                 class="btn bg-white text-blue-600 hover:bg-gray-100 btn-large"
               >
                 Começar Agora - Grátis

@@ -193,7 +193,7 @@
         </div>
         <div class="flex gap-3">
           <a 
-            href="https://upclinic-aa025.web.app/signup"
+            href="https://upclinic-aa025.web.app/login"
             class="btn bg-blue-600 hover:bg-blue-700 text-white px-6"
           >
             Teste Grátis
