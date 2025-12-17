@@ -1,12 +1,15 @@
-<script>
-  export const prerender = true;
-</script>
-
 <svelte:head>
-  <title>Planos e Preços | UpClinic</title>
-  <meta name="description" content="Conheça os planos do UpClinic e escolha a melhor opção para sua clínica ou consultório." />
-  <link rel="canonical" href="https://clinicupapp.com/planos" />
+  <title>Planos | UpClinic</title>
+  <meta
+    name="description"
+    content="Conheça os planos do UpClinic e escolha o ideal para sua clínica ou consultório."
+  />
 </svelte:head>
 
-<h1>Planos do UpClinic</h1>
-<p>Planos acessíveis para profissionais da saúde.</p>
+<section class="max-w-6xl mx-auto py-16">
+  <h1 class="text-3xl font-bold mb-6">Planos</h1>
+
+  <p>
+    Planos acessíveis para todos os profissionais da saúde.
+  </p>
+</section>

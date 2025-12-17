@@ -1,12 +1,16 @@
-<script>
-  export const prerender = true;
-</script>
-
 <svelte:head>
   <title>Telemedicina | UpClinic</title>
-  <meta name="description" content="Atenda seus pacientes online com segurança e conformidade usando a telemedicina do UpClinic." />
-  <link rel="canonical" href="https://clinicupapp.com/telemedicina" />
+  <meta
+    name="description"
+    content="Telemedicina integrada e segura para profissionais da saúde."
+  />
 </svelte:head>
 
-<h1>Telemedicina</h1>
-<p>Atendimento online seguro e integrado ao prontuário eletrônico.</p>
+<section class="max-w-6xl mx-auto py-16">
+  <h1 class="text-3xl font-bold mb-6">Telemedicina</h1>
+
+  <p>
+    Atenda seus pacientes de forma remota, segura e integrada ao prontuário.
+  </p>
+</section>
+
