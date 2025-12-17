@@ -1,24 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
-    <loc>https://www.clinicupapp.com/</loc>
+    <loc>https://clinicupapp.com/</loc>
   </url>
 
   <url>
-    <loc>https://www.clinicupapp.com/funcionalidades</loc>
+    <loc>https://clinicupapp.com/funcionalidades</loc>
   </url>
 
   <url>
-    <loc>https://www.clinicupapp.com/planos</loc>
+    <loc>https://clinicupapp.com/telemedicina</loc>
   </url>
 
   <url>
-    <loc>https://www.clinicupapp.com/telemedicina</loc>
+    <loc>https://clinicupapp.com/planos</loc>
   </url>
 
   <url>
-    <loc>https://www.clinicupapp.com/para-profissionais-da-saude</loc>
+    <loc>https://clinicupapp.com/para-profissionais-da-saude</loc>
+  </url>
+
+  <url>
+    <loc>https://clinicupapp.com/sobre</loc>
+  </url>
+
+  <url>
+    <loc>https://clinicupapp.com/contato</loc>
   </url>
 
 </urlset>
