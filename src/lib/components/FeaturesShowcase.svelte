@@ -459,7 +459,7 @@
                     target="_blank"
                     rel="noopener noreferrer"
                     class="btn bg-green-500 hover:bg-green-600 text-white text-center text-sm py-2 px-4"
-                    on:click|stopPropagation
+                    on:click|stopPropagation={() => trackWhatsAppClick('botao_whatsapp_feature_card')}
                   >
                     💬
                   </a>
@@ -507,6 +507,7 @@
               target="_blank"
               rel="noopener noreferrer"
               class="btn bg-green-500 hover:bg-green-600 text-white btn-large"
+              on:click={() => trackWhatsAppClick('botao_whatsapp_features_showcase')}
             >
               📱 Falar no WhatsApp
             </a>

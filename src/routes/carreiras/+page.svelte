@@ -203,6 +203,14 @@
             target="_blank"
             rel="noopener noreferrer"
             class="btn bg-green-500 hover:bg-green-600 text-white px-8"
+            on:click={() => {
+              if (typeof window !== 'undefined' && window.gtag) {
+                window.gtag('event', 'click_whatsapp', {
+                  event_category: 'engagement',
+                  event_label: 'botao_whatsapp_carreiras'
+                });
+              }
+            }}
           >
             Falar no WhatsApp
           </a>
@@ -212,7 +220,20 @@
             <strong>Email:</strong> <a href="mailto:contato@clinicupapp.com" class="text-blue-600 hover:underline">{CONTACT.email}</a>
           </p>
           <p class="text-gray-600">
-            <strong>WhatsApp:</strong> <a href={CONTACT.whatsappLink} target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">{CONTACT.phone}</a>
+            <strong>WhatsApp:</strong> <a 
+              href={CONTACT.whatsappLink} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="text-blue-600 hover:underline"
+              on:click={() => {
+                if (typeof window !== 'undefined' && window.gtag) {
+                  window.gtag('event', 'click_whatsapp', {
+                    event_category: 'engagement',
+                    event_label: 'botao_whatsapp_carreiras_link'
+                  });
+                }
+              }}
+            >{CONTACT.phone}</a>
           </p>
         </div>
       </div>

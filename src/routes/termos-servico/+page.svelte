@@ -3,6 +3,15 @@
   import Footer from '$lib/components/Footer.svelte';
   import LegalPageLayout from '$lib/components/LegalPageLayout.svelte';
   
+  function trackWhatsAppClick(label: string) {
+    if (typeof window !== 'undefined' && (window as any).gtag) {
+      (window as any).gtag('event', 'click_whatsapp', {
+        event_category: 'engagement',
+        event_label: label
+      });
+    }
+  }
+  
   const toc = [
     { id: 'aceitacao', title: '1. Aceitação dos Termos' },
     { id: 'uso', title: '2. Uso do Serviço' },
@@ -128,7 +137,11 @@
     </p>
     <ul class="text-gray-700 space-y-2">
       <li>Email: <a href="mailto:contato@clinicupapp.com" class="text-blue-600">contato@clinicupapp.com</a></li>
-      <li>WhatsApp: <a href="https://wa.me/5562996720296" class="text-blue-600">(62) 99672-0296</a></li>
+      <li>WhatsApp: <a 
+        href="https://wa.me/5562996720296" 
+        class="text-blue-600"
+        on:click={() => trackWhatsAppClick('botao_whatsapp_termos_servico')}
+      >(62) 99672-0296</a></li>
     </ul>
   </div>
 </LegalPageLayout>

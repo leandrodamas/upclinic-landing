@@ -3,6 +3,15 @@
   import Footer from '$lib/components/Footer.svelte';
   import LegalPageLayout from '$lib/components/LegalPageLayout.svelte';
   
+  function trackWhatsAppClick(label: string) {
+    if (typeof window !== 'undefined' && (window as any).gtag) {
+      (window as any).gtag('event', 'click_whatsapp', {
+        event_category: 'engagement',
+        event_label: label
+      });
+    }
+  }
+  
   const toc = [
     { id: 'conformidade', title: '1. Conformidade com LGPD' },
     { id: 'direitos', title: '2. Direitos dos Titulares' },
@@ -103,7 +112,10 @@
     </p>
     <ul>
       <li>Email: <a href="mailto:contato@clinicupapp.com">contato@clinicupapp.com</a></li>
-      <li>WhatsApp: <a href="https://wa.me/5562996720296">(62) 99672-0296</a></li>
+      <li>WhatsApp: <a 
+        href="https://wa.me/5562996720296"
+        on:click={() => trackWhatsAppClick('botao_whatsapp_lgpd')}
+      >(62) 99672-0296</a></li>
       <li>Formulário de contato em nosso site</li>
     </ul>
     
@@ -134,7 +146,11 @@
         <strong>Assunto:</strong> DPO / LGPD
       </p>
       <p class="text-gray-700">
-        <strong>WhatsApp:</strong> <a href="https://wa.me/5562996720296" class="text-blue-600">(62) 99672-0296</a>
+        <strong>WhatsApp:</strong> <a 
+          href="https://wa.me/5562996720296" 
+          class="text-blue-600"
+          on:click={() => trackWhatsAppClick('botao_whatsapp_lgpd_dpo')}
+        >(62) 99672-0296</a>
       </p>
     </div>
   </div>

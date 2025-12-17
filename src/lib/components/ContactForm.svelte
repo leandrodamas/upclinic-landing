@@ -3,6 +3,15 @@
   
   const dispatch = createEventDispatcher();
   
+  function trackWhatsAppClick(label: string) {
+    if (typeof window !== 'undefined' && (window as any).gtag) {
+      (window as any).gtag('event', 'click_whatsapp', {
+        event_category: 'engagement',
+        event_label: label
+      });
+    }
+  }
+  
   let formData = {
     name: '',
     email: '',
@@ -221,6 +230,7 @@
         target="_blank"
         rel="noopener noreferrer"
         class="btn btn-secondary flex-1 text-center"
+        on:click={() => trackWhatsAppClick('botao_whatsapp_formulario_contato')}
       >
         Falar no WhatsApp
       </a>

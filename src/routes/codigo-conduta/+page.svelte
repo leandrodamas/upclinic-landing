@@ -3,6 +3,15 @@
   import Footer from '$lib/components/Footer.svelte';
   import LegalPageLayout from '$lib/components/LegalPageLayout.svelte';
   
+  function trackWhatsAppClick(label: string) {
+    if (typeof window !== 'undefined' && (window as any).gtag) {
+      (window as any).gtag('event', 'click_whatsapp', {
+        event_category: 'engagement',
+        event_label: label
+      });
+    }
+  }
+  
   const toc = [
     { id: 'valores', title: '1. Valores e Princípios' },
     { id: 'comportamento', title: '2. Comportamento Esperado' },
@@ -120,7 +129,10 @@
     </p>
     <ul>
       <li>Email: <a href="mailto:contato@clinicupapp.com">contato@clinicupapp.com</a></li>
-      <li>WhatsApp: <a href="https://wa.me/5562996720296">(62) 99672-0296</a></li>
+      <li>WhatsApp: <a 
+        href="https://wa.me/5562996720296"
+        on:click={() => trackWhatsAppClick('botao_whatsapp_codigo_conduta')}
+      >(62) 99672-0296</a></li>
     </ul>
     <p>
       Todas as denúncias serão tratadas com confidencialidade e investigadas adequadamente.

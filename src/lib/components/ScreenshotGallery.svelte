@@ -301,6 +301,14 @@
                 target="_blank"
                 rel="noopener noreferrer"
                 class="flex-1 btn bg-green-500 hover:bg-green-600 text-white text-center"
+                on:click={() => {
+                  if (typeof window !== 'undefined' && window.gtag) {
+                    window.gtag('event', 'click_whatsapp', {
+                      event_category: 'engagement',
+                      event_label: 'botao_whatsapp_screenshot_gallery'
+                    });
+                  }
+                }}
               >
                 WhatsApp
               </a>

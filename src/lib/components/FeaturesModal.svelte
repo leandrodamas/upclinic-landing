@@ -1,4 +1,12 @@
 <script>
+  function trackWhatsAppClick(label) {
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'click_whatsapp', {
+        event_category: 'engagement',
+        event_label: label
+      });
+    }
+  }
   import { onMount } from 'svelte';
   
   let isOpen = false;
@@ -574,6 +582,14 @@
                     target="_blank"
                     rel="noopener noreferrer"
                     class="flex-1 btn bg-green-500 hover:bg-green-600 text-white text-center btn-large"
+                    on:click={() => {
+                      if (typeof window !== 'undefined' && window.gtag) {
+                        window.gtag('event', 'click_whatsapp', {
+                          event_category: 'engagement',
+                          event_label: 'botao_whatsapp_features_modal_detail'
+                        });
+                      }
+                    }}
                   >
                     WhatsApp
                   </a>
@@ -672,6 +688,7 @@
                 target="_blank"
                 rel="noopener noreferrer"
                 class="btn bg-green-500 hover:bg-green-600 text-white btn-large"
+                on:click={() => trackWhatsAppClick('botao_whatsapp_features_modal')}
               >
                 📱 Falar no WhatsApp
               </a>

@@ -87,6 +87,14 @@
             target="_blank"
             rel="noopener noreferrer"
             class="btn bg-green-500 hover:bg-green-600 text-white px-8"
+            on:click={() => {
+              if (typeof window !== 'undefined' && window.gtag) {
+                window.gtag('event', 'click_whatsapp', {
+                  event_category: 'engagement',
+                  event_label: 'botao_whatsapp_faq'
+                });
+              }
+            }}
           >
             Falar no WhatsApp
           </a>

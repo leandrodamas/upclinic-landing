@@ -2,6 +2,15 @@
   import Navbar from '$lib/components/Navbar.svelte';
   import Footer from '$lib/components/Footer.svelte';
   import ContactForm from '$lib/components/ContactForm.svelte';
+  
+  function trackWhatsAppClick(label: string) {
+    if (typeof window !== 'undefined' && (window as any).gtag) {
+      (window as any).gtag('event', 'click_whatsapp', {
+        event_category: 'engagement',
+        event_label: label
+      });
+    }
+  }
 </script>
 
 <svelte:head>
@@ -42,6 +51,7 @@
                 target="_blank"
                 rel="noopener noreferrer"
                 class="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium"
+                on:click={() => trackWhatsAppClick('botao_whatsapp_contato')}
               >
                 Falar no WhatsApp
                 <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

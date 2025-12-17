@@ -4,10 +4,7 @@ import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 export default {
   preprocess: vitePreprocess(),
   kit: {
-    adapter: adapter({
-      runtime: 'edge'
-    }),
-
+    adapter: adapter(),
     prerender: {
       entries: [
         '/',
@@ -21,8 +18,15 @@ export default {
         '/lgpd',
         '/termos-servico',
         '/politica-privacidade',
-        '/politica-cookies'
-      ]
+        '/politica-cookies',
+        '/documentacao'
+      ],
+      handleMissingId: ({ path, id, referrer }) => {
+        // Ignorar todos os links de âncora durante o prerender
+        // Eles funcionarão corretamente no cliente
+        console.warn(`⚠️  Link de âncora #${id} não encontrado em ${path} (referenciado de ${referrer}) - será resolvido no cliente`);
+        return;
+      }
     }
   }
 };
