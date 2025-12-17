@@ -1,13 +1,25 @@
 import adapter from '@sveltejs/adapter-vercel';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
-/** @type {import('@sveltejs/kit').Config} */
-const config = {
+export default {
   preprocess: vitePreprocess(),
-
   kit: {
     adapter: adapter(),
     prerender: {
+      entries: [
+        '/',
+        '/funcionalidades',
+        '/telemedicina',
+        '/para-profissionais-da-saude',
+        '/planos',
+        '/sobre',
+        '/contato',
+        '/faq',
+        '/lgpd',
+        '/termos-servico',
+        '/politica-privacidade',
+        '/politica-cookies'
+      ],
       handleMissingId: ({ path, id, referrer }) => {
         // Ignorar todos os links de âncora durante o prerender
         // Eles funcionarão corretamente no cliente
@@ -17,5 +29,3 @@ const config = {
     }
   }
 };
-
-export default config;

@@ -1,6 +1,4 @@
-<script lang="ts">
-  // Página de funcionalidades
-</script>
+<script lang="ts"></script>
 
 <svelte:head>
   <title>Funcionalidades | UpClinic</title>
@@ -11,11 +9,8 @@
 </svelte:head>
 
 <section class="container mx-auto px-6 py-16">
-  <h1 class="text-4xl font-bold mb-6">
-    Funcionalidades do UpClinic
-  </h1>
-
+  <h1 class="text-4xl font-bold mb-6">Funcionalidades</h1>
   <p class="text-lg text-gray-600">
-    Prontuário eletrônico, telemedicina, financeiro, agenda e muito mais.
+    Conteúdo da página de funcionalidades.
   </p>
 </section>
