@@ -1,3 +1,7 @@
+<script lang="ts">
+  // Página de telemedicina
+</script>
+
 <svelte:head>
   <title>Telemedicina | UpClinic</title>
   <meta
@@ -13,4 +17,3 @@
     Atenda seus pacientes de forma remota, segura e integrada ao prontuário.
   </p>
 </section>
-

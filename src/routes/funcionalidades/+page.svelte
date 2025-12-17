@@ -1,3 +1,7 @@
+<script lang="ts">
+  // Página de funcionalidades
+</script>
+
 <svelte:head>
   <title>Funcionalidades | UpClinic</title>
   <meta
@@ -6,14 +10,12 @@
   />
 </svelte:head>
 
-<section class="max-w-6xl mx-auto py-16">
-  <h1 class="text-3xl font-bold mb-6">Funcionalidades</h1>
+<section class="container mx-auto px-6 py-16">
+  <h1 class="text-4xl font-bold mb-6">
+    Funcionalidades do UpClinic
+  </h1>
 
-  <ul class="space-y-4">
-    <li>✔️ Prontuário eletrônico</li>
-    <li>✔️ Agenda inteligente</li>
-    <li>✔️ Telemedicina integrada</li>
-    <li>✔️ Financeiro e faturamento</li>
-    <li>✔️ Relatórios e indicadores</li>
-  </ul>
+  <p class="text-lg text-gray-600">
+    Prontuário eletrônico, telemedicina, financeiro, agenda e muito mais.
+  </p>
 </section>
