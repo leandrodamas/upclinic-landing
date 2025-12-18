@@ -1,66 +1,10 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import Navbar from '$lib/components/Navbar.svelte';
   import Footer from '$lib/components/Footer.svelte';
   
-  let customerEmail = '';
-  let showEmailInput = true;
-  let emailError = '';
-  
-  // Verificar se há email na URL ou localStorage
-  onMount(() => {
-    // Verificar query params
-    const urlParams = new URLSearchParams(window.location.search);
-    const emailFromUrl = urlParams.get('email');
-    
-    if (emailFromUrl) {
-      customerEmail = emailFromUrl;
-      showEmailInput = false;
-    } else {
-      // Tentar recuperar do localStorage (se usuário já usou o sistema)
-      const savedEmail = localStorage.getItem('upclinic_user_email');
-      if (savedEmail) {
-        customerEmail = savedEmail;
-        showEmailInput = false;
-      }
-    }
-    
-    // Aguardar o script do Stripe carregar
-    const checkStripe = setInterval(() => {
-      if (window.StripePricingTable || document.querySelector('stripe-pricing-table')) {
-        clearInterval(checkStripe);
-      }
-    }, 100);
-    
-    setTimeout(() => clearInterval(checkStripe), 5000);
-  });
-  
-  function validateEmail(email: string): boolean {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  }
-  
-  function handleEmailSubmit() {
-    emailError = '';
-    
-    if (!customerEmail.trim()) {
-      emailError = 'Por favor, insira seu email';
-      return;
-    }
-    
-    if (!validateEmail(customerEmail)) {
-      emailError = 'Por favor, insira um email válido';
-      return;
-    }
-    
-    // Salvar email no localStorage para futuras visitas
-    localStorage.setItem('upclinic_user_email', customerEmail);
-    showEmailInput = false;
-  }
-  
-  function handleChangeEmail() {
-    showEmailInput = true;
-    emailError = '';
+  function handleAccessPlans() {
+    // Redirecionar para o sistema principal onde o usuário fará login
+    window.location.href = 'https://upclinic-aa025.web.app/pricing';
   }
 </script>
 
@@ -71,7 +15,6 @@
     content="Conheça os planos do UpClinic e escolha o ideal para sua clínica ou consultório."
   />
   <link rel="canonical" href="https://clinicupapp.com/planos" />
-  <script async src="https://js.stripe.com/v3/pricing-table.js"></script>
 </svelte:head>
 
 <Navbar />
@@ -86,89 +29,53 @@
       <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
         Escolha o Plano Ideal
       </h1>
-      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
         Planos acessíveis para todos os profissionais da saúde. Todos incluem período de teste gratuito.
       </p>
-    </div>
-    
-    <!-- Email Input Section -->
-    {#if showEmailInput}
-      <div class="max-w-md mx-auto mb-12">
-        <div class="bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
-          <div class="text-center mb-6">
-            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
-            </div>
-            <h2 class="text-2xl font-bold text-gray-900 mb-2">Insira seu email</h2>
-            <p class="text-gray-600">Para vincular sua assinatura ao sistema UpClinic</p>
-          </div>
-          
-          <form on:submit|preventDefault={handleEmailSubmit} class="space-y-4">
-            <div>
-              <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
-                Email profissional
-              </label>
-              <input
-                type="email"
-                id="email"
-                bind:value={customerEmail}
-                placeholder="seu@email.com"
-                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
-                required
-              />
-              {#if emailError}
-                <p class="mt-2 text-sm text-red-600">{emailError}</p>
-              {/if}
-            </div>
-            
-            <button
-              type="submit"
-              class="w-full bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-3 px-6 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105"
-            >
-              Continuar para Planos
-            </button>
-          </form>
-          
-          <p class="mt-4 text-xs text-gray-500 text-center">
-            🔒 Seu email será usado apenas para vincular sua assinatura
-          </p>
-        </div>
-      </div>
-    {:else}
-      <!-- Email Confirmado -->
-      <div class="max-w-md mx-auto mb-8">
-        <div class="bg-green-50 border border-green-200 rounded-lg p-4 flex items-center justify-between">
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-              <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      
+      <!-- CTA para acessar planos no sistema -->
+      <div class="max-w-2xl mx-auto mt-12">
+        <div class="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-3xl shadow-2xl p-12 text-white">
+          <div class="flex items-center justify-center mb-6">
+            <div class="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+              <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
-            <div>
-              <p class="text-sm font-medium text-gray-900">Email confirmado</p>
-              <p class="text-sm text-gray-600">{customerEmail}</p>
+          </div>
+          
+          <h2 class="text-3xl font-bold mb-4 text-center">
+            Pronto para começar?
+          </h2>
+          
+          <p class="text-xl text-blue-100 mb-8 text-center">
+            Faça login ou crie sua conta para ver todos os planos disponíveis
+          </p>
+          
+          <button
+            on:click={handleAccessPlans}
+            class="w-full bg-white text-blue-600 py-4 px-8 rounded-xl font-bold text-lg hover:bg-blue-50 transition-all duration-300 hover:scale-105 shadow-xl"
+          >
+            Ver Planos e Preços →
+          </button>
+          
+          <div class="grid grid-cols-3 gap-4 mt-8 pt-8 border-t border-white/20">
+            <div class="text-center">
+              <div class="text-2xl font-bold mb-1">30 dias</div>
+              <div class="text-sm text-blue-100">Teste Grátis</div>
+            </div>
+            <div class="text-center">
+              <div class="text-2xl font-bold mb-1">R$ 0</div>
+              <div class="text-sm text-blue-100">Taxa de Setup</div>
+            </div>
+            <div class="text-center">
+              <div class="text-2xl font-bold mb-1">100%</div>
+              <div class="text-sm text-blue-100">Satisfação</div>
             </div>
           </div>
-          <button
-            on:click={handleChangeEmail}
-            class="text-sm text-blue-600 hover:text-blue-700 font-medium"
-          >
-            Alterar
-          </button>
         </div>
       </div>
-      
-      <!-- Stripe Pricing Table com email vinculado -->
-      <div class="max-w-6xl mx-auto">
-        <stripe-pricing-table 
-          pricing-table-id="prctbl_1SGjR4JgDiwrjPsttCMjYT0l"
-          publishable-key="pk_live_51RJcEcJgDiwrjPst442rbfublOeAi2EpTli6wtnASS5Trbm3fln4ggIJXyqtq2aRV1bBKI5UMF9Qwq3L8HSD8xtr00h5KIKhGd"
-          customer-email={customerEmail}>
-        </stripe-pricing-table>
-      </div>
-    {/if}
+    </div>
     
     <!-- Informações Adicionais -->
     <div class="mt-16 max-w-4xl mx-auto">
