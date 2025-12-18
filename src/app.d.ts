@@ -13,6 +13,16 @@ declare global {
 	interface Window {
 		StripePricingTable?: any;
 	}
+	
+	// Declaração do elemento customizado do Stripe
+	namespace JSX {
+		interface IntrinsicElements {
+			'stripe-pricing-table': {
+				'pricing-table-id': string;
+				'publishable-key': string;
+			};
+		}
+	}
 }
 
 export {};
