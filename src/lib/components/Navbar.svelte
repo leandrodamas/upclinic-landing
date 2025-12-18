@@ -26,7 +26,7 @@
         <ImageWithFallback 
           src="/ChatGPT Image 30 de nov. de 2025, 01_06_00.png"
           alt="UpClinic Logo"
-          class="h-28 w-auto object-contain mt-4"
+          className="h-16 w-auto object-contain"
           fallback="/ChatGPT Image 30 de nov. de 2025, 01_06_00.png"
         />
       </a>

@@ -29,6 +29,10 @@
     @apply px-8 py-4 text-lg;
   }
   
+  .btn-lg {
+    @apply px-8 py-4 text-lg;
+  }
+  
   .btn-primary {
     @apply bg-gradient-to-r from-blue-600 to-indigo-700 text-white;
     @apply hover:scale-105 hover:shadow-lg;

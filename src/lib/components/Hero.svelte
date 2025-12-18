@@ -44,10 +44,10 @@
   
   <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
     <div class="max-w-7xl mx-auto">
-      <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <div class="grid lg:grid-cols-2 gap-12 items-start lg:items-center">
         
         <!-- Conteúdo Principal -->
-        <div class="hero-animate text-center lg:text-left">
+        <div class="hero-animate text-center lg:text-left order-2 lg:order-1">
           <!-- Badge profissional -->
           <div class="inline-flex items-center space-x-2 bg-blue-50 border border-blue-100 px-4 py-2 rounded-full mb-8">
             <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -108,18 +108,17 @@
         </div>
         
         <!-- Visual/Dashboard Preview -->
-        <div class="hero-animate relative hidden lg:block">
-          <div class="relative">
+        <div class="hero-animate relative hidden lg:block order-1 lg:order-2">
+          <div class="relative flex items-center justify-center">
             <!-- Card principal com sombra elegante -->
-            <div class="relative bg-white rounded-2xl shadow-2xl shadow-gray-900/10 border border-gray-100 overflow-hidden transform hover:scale-[1.02] transition-transform duration-500">
+            <div class="relative bg-white rounded-2xl shadow-2xl shadow-gray-900/10 border border-gray-100 overflow-hidden transform hover:scale-[1.02] transition-transform duration-500 w-full max-w-lg">
               <!-- Imagem do dashboard -->
-              <div class="w-full min-h-[500px] flex items-center justify-center p-4">
+              <div class="w-full aspect-[4/3] flex items-center justify-center p-4">
                 <ImageWithFallback 
                   src="/ChatGPT Image 30 de nov. de 2025, 01_37_20.png"
                   alt="Dashboard UpClinic"
-                  class="w-full h-auto max-h-[650px] object-contain"
+                  className="w-full h-full object-contain"
                   fallback="/ChatGPT Image 30 de nov. de 2025, 01_37_20.png"
-                  loading="eager"
                 />
               </div>
             </div>
