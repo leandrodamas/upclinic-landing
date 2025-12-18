@@ -111,13 +111,13 @@
         <div class="hero-animate relative hidden lg:block order-1 lg:order-2">
           <div class="relative flex items-center justify-center">
             <!-- Card principal com sombra elegante -->
-            <div class="relative bg-white rounded-2xl shadow-2xl shadow-gray-900/10 border border-gray-100 overflow-hidden transform hover:scale-[1.02] transition-transform duration-500 w-full max-w-lg">
-              <!-- Imagem do dashboard -->
-              <div class="w-full aspect-[4/3] flex items-center justify-center p-4">
+            <div class="relative bg-white rounded-2xl shadow-2xl shadow-gray-900/10 border border-gray-100 overflow-hidden transform hover:scale-[1.02] transition-transform duration-500 w-full max-w-5xl">
+              <!-- Imagem do dashboard - Mantém proporção original sem distorção -->
+              <div class="w-full flex items-center justify-center p-4">
                 <ImageWithFallback 
                   src="/ChatGPT Image 30 de nov. de 2025, 01_37_20.png"
                   alt="Dashboard UpClinic"
-                  className="w-full h-full object-contain"
+                  className="w-full h-auto max-h-[700px] object-contain"
                   fallback="/ChatGPT Image 30 de nov. de 2025, 01_37_20.png"
                 />
               </div>
