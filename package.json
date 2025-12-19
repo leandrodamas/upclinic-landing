@@ -26,6 +26,8 @@
   },
   "dependencies": {
     "@sveltejs/adapter-auto": "^3.0.0",
-    "firebase": "^10.7.1"
+    "@types/nodemailer": "^7.0.4",
+    "firebase": "^10.7.1",
+    "nodemailer": "^7.0.11"
   }
 }

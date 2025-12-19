@@ -39,13 +39,13 @@
       name: 'Dr. Carlos Silva',
       role: 'Clínica Médica São Paulo',
       quote: 'O UpClinic transformou completamente nossa gestão. Reduzimos o tempo administrativo em 70% e aumentamos a satisfação dos pacientes.',
-      avatar: '👨‍⚕️'
+      avatar: '/ChatGPT Image 18 de dez. de 2025, 21_59_49.png'
     },
     {
       name: 'Dra. Ana Costa',
       role: 'Clínica de Especialidades',
       quote: 'A agenda inteligente eliminou praticamente todas as faltas. Os lembretes automáticos são um diferencial incrível.',
-      avatar: '👩‍⚕️'
+      avatar: '/ChatGPT Image 18 de dez. de 2025, 21_51_34.png'
     },
     {
       name: 'Dr. Roberto Santos',
@@ -121,8 +121,23 @@
         <div class="relative">
           <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8 md:p-10 border border-blue-100">
             <div class="flex items-start gap-6 mb-6">
-              <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center text-3xl flex-shrink-0">
-                {testimonials[currentTestimonial].avatar}
+              <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden border-2 border-white shadow-lg">
+                {#if typeof testimonials[currentTestimonial].avatar === 'string' && testimonials[currentTestimonial].avatar.startsWith('/')}
+                  {@const imageSrc = testimonials[currentTestimonial].avatar.includes(' ') 
+                    ? encodeURI(testimonials[currentTestimonial].avatar) 
+                    : testimonials[currentTestimonial].avatar}
+                  <img 
+                    src={imageSrc} 
+                    alt={testimonials[currentTestimonial].name}
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                    on:error={(e) => {
+                      e.target.src = 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Ccircle fill=%22%23667eea%22 cx=%2250%22 cy=%2250%22 r=%2250%22/%3E%3Ctext fill=%22white%22 font-size=%2240%22 x=%2250%22 y=%2265%22 text-anchor=%22middle%22%3E👨‍⚕️%3C/text%3E%3C/svg%3E';
+                    }}
+                  />
+                {:else}
+                  <span class="text-3xl">{testimonials[currentTestimonial].avatar}</span>
+                {/if}
               </div>
               <div class="flex-1">
                 <div class="flex items-center gap-2 mb-2">

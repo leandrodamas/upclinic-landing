@@ -80,9 +80,23 @@
         `Mensagem:\n${formData.message}`
       );
       
-      // Tentar usar a API primeiro (se disponível em desenvolvimento)
+      // Converter arquivo de currículo para base64 se existir
+      let resumeBase64 = null;
+      if (formData.resume) {
+        resumeBase64 = await new Promise((resolve) => {
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            const base64String = reader.result?.toString().split(',')[1];
+            resolve(base64String || null);
+          };
+          reader.onerror = () => resolve(null);
+          reader.readAsDataURL(formData.resume);
+        });
+      }
+      
+      // Tentar usar a API de candidaturas
       try {
-        const response = await fetch('/api/contact', {
+        const response = await fetch('/api/job-application', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -91,12 +105,15 @@
             name: formData.name,
             email: formData.email,
             phone: formData.phone,
-            subject: `Candidatura - ${formData.position}`,
-            message: `Candidatura para a vaga: ${formData.position}\n\n${formData.message}\n\nTelefone: ${formData.phone}\nEmail: ${formData.email}`
+            position: formData.position,
+            message: formData.message,
+            resume: resumeBase64
           })
         });
         
-        if (response.ok) {
+        const result = await response.json();
+        
+        if (response.ok && result.success) {
           success = true;
           setTimeout(() => {
             onClose();
@@ -112,29 +129,29 @@
           }, 2000);
           loading = false;
           return;
+        } else {
+          throw new Error(result.error || 'Erro ao enviar candidatura');
         }
       } catch (apiError) {
-        // Se a API não estiver disponível, usar mailto como fallback
-        console.log('API não disponível, usando mailto como fallback');
+        console.error('Erro ao enviar via API:', apiError);
+        // Fallback: usar mailto
+        window.location.href = `mailto:contato@clinicupapp.com?subject=${subject}&body=${body}`;
+        
+        // Mostrar mensagem de sucesso mesmo usando mailto
+        success = true;
+        setTimeout(() => {
+          onClose();
+          formData = {
+            name: '',
+            email: '',
+            phone: '',
+            position: positionName,
+            resume: null,
+            message: ''
+          };
+          success = false;
+        }, 2000);
       }
-      
-      // Fallback: usar mailto
-      window.location.href = `mailto:contato@clinicupapp.com?subject=${subject}&body=${body}`;
-      
-      // Mostrar mensagem de sucesso mesmo usando mailto
-      success = true;
-      setTimeout(() => {
-        onClose();
-        formData = {
-          name: '',
-          email: '',
-          phone: '',
-          position: positionName,
-          resume: null,
-          message: ''
-        };
-        success = false;
-      }, 2000);
       
     } catch (error) {
       errors.submit = 'Erro ao enviar candidatura. Por favor, tente novamente ou entre em contato via WhatsApp.';

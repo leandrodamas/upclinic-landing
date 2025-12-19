@@ -1,5 +1,6 @@
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
+import { sendContactEmail, sendContactConfirmationEmail, isEmailConfigured } from '$lib/services/emailService';
 
 export const POST: RequestHandler = async ({ request }) => {
   try {
@@ -22,33 +23,69 @@ export const POST: RequestHandler = async ({ request }) => {
       );
     }
     
-    // Aqui você pode adicionar lógica para:
-    // - Enviar email usando um serviço como SendGrid, Resend, etc.
-    // - Salvar no banco de dados
-    // - Enviar notificação para o time
-    
-    // Por enquanto, apenas retornamos sucesso
-    // TODO: Implementar envio de email
-    // TODO: Salvar no Firestore ou outro banco de dados
-    
-    console.log('Formulário de contato recebido:', {
+    // Log do formulário recebido
+    console.log('📧 [API-CONTACT] Formulário de contato recebido:', {
       name: data.name,
       email: data.email,
       phone: data.phone,
       subject: data.subject,
-      message: data.message,
       timestamp: new Date().toISOString()
     });
     
-    return json(
-      { 
-        success: true,
-        message: 'Mensagem enviada com sucesso! Entraremos em contato em breve.'
-      },
-      { status: 200 }
-    );
+    // Verificar se o email está configurado
+    if (!isEmailConfigured()) {
+      console.warn('⚠️ [API-CONTACT] SMTP não configurado. Verifique as variáveis de ambiente.');
+      // Retornar sucesso mesmo sem enviar email (para não quebrar o formulário)
+      return json(
+        { 
+          success: true,
+          message: 'Mensagem recebida! Entraremos em contato em breve.',
+          warning: 'Email não configurado. Mensagem apenas registrada no log.'
+        },
+        { status: 200 }
+      );
+    }
+    
+    // Enviar email para contato@clinicupapp.com
+    try {
+      await sendContactEmail({
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        subject: data.subject,
+        message: data.message
+      });
+      
+      // Enviar email de confirmação para o remetente (opcional, não bloqueia se falhar)
+      try {
+        await sendContactConfirmationEmail(data.email, data.name);
+      } catch (confirmationError) {
+        console.warn('⚠️ [API-CONTACT] Erro ao enviar email de confirmação (não crítico):', confirmationError);
+      }
+      
+      console.log('✅ [API-CONTACT] Email enviado com sucesso');
+      
+      return json(
+        { 
+          success: true,
+          message: 'Mensagem enviada com sucesso! Entraremos em contato em breve.'
+        },
+        { status: 200 }
+      );
+    } catch (emailError) {
+      console.error('❌ [API-CONTACT] Erro ao enviar email:', emailError);
+      
+      // Retornar erro específico do email
+      return json(
+        { 
+          error: 'Erro ao enviar email. Por favor, tente novamente ou entre em contato via WhatsApp.',
+          details: emailError instanceof Error ? emailError.message : 'Erro desconhecido'
+        },
+        { status: 500 }
+      );
+    }
   } catch (error) {
-    console.error('Erro ao processar formulário de contato:', error);
+    console.error('❌ [API-CONTACT] Erro ao processar formulário de contato:', error);
     return json(
       { error: 'Erro ao processar sua mensagem. Por favor, tente novamente.' },
       { status: 500 }
