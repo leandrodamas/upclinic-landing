@@ -99,7 +99,6 @@
         <ul class="space-y-2">
           <li><a href="/#duvidas-frequentes" class="hover:text-white transition-colors">Dúvidas Frequentes</a></li>
           <li><a href="/faq" class="hover:text-white transition-colors">Central de Ajuda</a></li>
-          <li><a href="/documentacao" class="hover:text-white transition-colors">Documentação</a></li>
           <li><a href="/contato" class="hover:text-white transition-colors">Fale Conosco</a></li>
         </ul>
       </div>
