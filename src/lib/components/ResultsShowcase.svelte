@@ -51,7 +51,7 @@
       name: 'Dr. Roberto Santos',
       role: 'Consultório Particular',
       quote: 'O prontuário eletrônico é completo e seguro. Conseguimos acessar o histórico de qualquer paciente em segundos.',
-      avatar: '👨‍⚕️'
+      avatar: '/retrato-de-homem.png'
     }
   ];
   

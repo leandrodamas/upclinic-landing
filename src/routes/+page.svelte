@@ -6,6 +6,7 @@
   import Footer from '$lib/components/Footer.svelte';
   import Navbar from '$lib/components/Navbar.svelte';
   import FeatureDemoModal from '$lib/components/FeatureDemoModal.svelte';
+  import PartnersCarousel from '$lib/components/PartnersCarousel.svelte';
   
   let demoModal: FeatureDemoModal;
   
@@ -62,6 +63,8 @@
 <FeatureGrid />
 <ResultsShowcase />
 <FAQ />
+
+<PartnersCarousel />
 
 <!-- CTA Section -->
 <section class="py-24 bg-gradient-to-r from-blue-600 to-indigo-700">
