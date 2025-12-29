@@ -27,105 +27,77 @@
   });
 </script>
 
-<section id="inicio" class="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-20 bg-white">
-  <!-- Background sutil e profissional -->
-  <div class="absolute inset-0 bg-gradient-to-b from-gray-50 via-white to-white"></div>
-  
-  <!-- Padrão geométrico sutil -->
-  <div class="absolute inset-0 opacity-[0.03]">
-    <div class="absolute top-0 left-0 w-full h-full" style="background-image: radial-gradient(circle at 2px 2px, #1e40af 1px, transparent 0); background-size: 40px 40px;"></div>
-  </div>
-  
-  <!-- Elementos decorativos sutis -->
-  <div class="absolute inset-0 overflow-hidden pointer-events-none">
-    <div class="absolute top-20 right-10 w-96 h-96 bg-blue-50 rounded-full blur-3xl opacity-40"></div>
-    <div class="absolute bottom-20 left-10 w-96 h-96 bg-indigo-50 rounded-full blur-3xl opacity-40"></div>
-  </div>
-  
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+<section id="inicio" class="relative w-full overflow-hidden bg-white pt-12 sm:pt-16 md:pt-20 lg:pt-24">
+  <div class="container mx-auto px-2 sm:px-3 md:px-4 lg:px-6 relative z-10 w-full">
     <div class="max-w-7xl mx-auto">
-      <div class="grid lg:grid-cols-2 gap-12 items-start lg:items-center">
+      <!-- Layout limpo e organizado -->
+      <div class="flex flex-col items-center w-full">
         
-        <!-- Conteúdo Principal -->
-        <div class="hero-animate text-center lg:text-left order-2 lg:order-1">
-          <!-- Badge profissional -->
-          <div class="inline-flex items-center space-x-2 bg-blue-50 border border-blue-100 px-4 py-2 rounded-full mb-8">
-            <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <span class="text-sm font-semibold text-blue-700">Sistema Certificado e Seguro</span>
-          </div>
-          
-          <!-- Título Principal -->
-          <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold text-gray-900 mb-6 leading-[1.1] tracking-tight">
-            O futuro da
-            <span class="block bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
-              gestão médica
-            </span>
-            é digital
-          </h1>
-          
-          <!-- Descrição -->
-          <p class="text-xl md:text-2xl text-gray-600 mb-10 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-            Plataforma completa com prontuário eletrônico, telemedicina, gestão financeira e IA médica integrada. 
-            <span class="font-semibold text-gray-900">Tudo em um só lugar.</span>
-          </p>
-          
-          <!-- CTAs -->
-          <div class="flex flex-col sm:flex-row items-center lg:items-start gap-4 mb-12">
-            <a 
-              href="https://upclinic-aa025.web.app/login" 
-              class="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-700 rounded-xl shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-500/50"
-            >
-              <span>Começar Agora</span>
-              <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </a>
-            <a 
-              href="#funcionalidades" 
-              class="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-gray-700 bg-white border-2 border-gray-200 rounded-xl hover:border-blue-500 hover:text-blue-600 transition-all duration-300 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-500/20"
-            >
-              Ver Demonstração
-            </a>
-          </div>
-          
-          <!-- Estatísticas Profissionais -->
-          <div class="grid grid-cols-3 gap-6 max-w-xl mx-auto lg:mx-0">
-            <div class="text-center lg:text-left">
-              <div class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-1">3.2K+</div>
-              <div class="text-sm text-gray-600 font-medium">Clínicas Ativas</div>
-            </div>
-            <div class="text-center lg:text-left">
-              <div class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-1">98.5%</div>
-              <div class="text-sm text-gray-600 font-medium">Satisfação</div>
-            </div>
-            <div class="text-center lg:text-left">
-              <div class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-1">24/7</div>
-              <div class="text-sm text-gray-600 font-medium">Suporte</div>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Visual/Dashboard Preview -->
-        <div class="hero-animate relative hidden lg:block order-1 lg:order-2">
-          <div class="relative flex items-center justify-center">
-            <!-- Card principal com sombra elegante -->
-            <div class="relative bg-white rounded-2xl shadow-2xl shadow-gray-900/10 border border-gray-100 overflow-hidden transform hover:scale-[1.02] transition-transform duration-500 w-full max-w-5xl">
-              <!-- Imagem do dashboard - Mantém proporção original sem distorção -->
-              <div class="w-full flex items-center justify-center p-4">
-                <ImageWithFallback 
-                  src="/ChatGPT Image 30 de nov. de 2025, 01_37_20.png"
-                  alt="Dashboard UpClinic"
-                  className="w-full h-auto max-h-[700px] object-contain"
-                  fallback="/ChatGPT Image 30 de nov. de 2025, 01_37_20.png"
-                />
+        <!-- Imagem Principal com Overlay de CTAs e Estatísticas -->
+        <div class="hero-animate relative w-full">
+          <div class="relative w-full overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl">
+            <ImageWithFallback 
+              src="/ChatGPT Image 29 de dez. de 2025, 17_47_52.png"
+              alt="UpClinic - Tecnologia que impulsiona sua clínica"
+              className="w-full h-auto object-contain sm:object-cover"
+              fallback="/ChatGPT Image 29 de dez. de 2025, 17_47_52.png"
+            />
+            
+            <!-- Overlay com posicionamento inteligente -->
+            <div class="absolute inset-0 flex flex-col">
+              
+              <!-- Topo: Badge - apenas em desktop para não sobrepor conteúdo -->
+              <div class="hidden sm:flex justify-start pt-3 md:pt-4 lg:pt-6 px-3 md:px-4 lg:px-6">
+                <div class="inline-flex items-center space-x-1.5 bg-white/95 backdrop-blur-sm border border-blue-100 px-2.5 py-1 rounded-full shadow-md">
+                  <svg class="w-3.5 h-3.5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span class="text-xs font-semibold text-blue-700">Sistema Certificado</span>
+                </div>
+              </div>
+              
+              <!-- Espaço flexível no meio para não sobrepor conteúdo importante da imagem -->
+              <div class="flex-1"></div>
+              
+              <!-- Rodapé: CTAs e Estatísticas - posicionados na parte inferior -->
+              <div class="flex flex-col gap-2 sm:gap-2.5 md:gap-3 pb-6 sm:pb-8 md:pb-10 lg:pb-12 px-2 sm:px-3 md:px-4 lg:px-6">
+                
+                <!-- CTAs - Compactos e responsivos -->
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-center sm:justify-start gap-2 sm:gap-2.5">
+                  <a 
+                    href="https://upclinic-aa025.web.app/login" 
+                    class="group relative inline-flex items-center justify-center w-full sm:w-auto px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 text-sm sm:text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-700 rounded-lg shadow-lg shadow-blue-500/50 hover:shadow-xl hover:shadow-blue-500/60 transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500/50 backdrop-blur-sm bg-opacity-95 whitespace-nowrap"
+                  >
+                    <span>Começar Agora</span>
+                    <svg class="w-4 h-4 sm:w-5 sm:h-5 ml-1.5 sm:ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                  </a>
+                  <a 
+                    href="#funcionalidades" 
+                    class="inline-flex items-center justify-center w-full sm:w-auto px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 text-sm sm:text-base font-semibold text-gray-800 bg-white/95 backdrop-blur-sm border-2 border-white/50 rounded-lg hover:border-blue-500 hover:text-blue-600 transition-all duration-300 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 whitespace-nowrap"
+                  >
+                    Ver Demonstração
+                  </a>
+                </div>
+                
+                <!-- Estatísticas - Compactas e legíveis -->
+                <div class="grid grid-cols-3 gap-1.5 sm:gap-2 md:gap-2.5 max-w-sm sm:max-w-md mx-auto w-full">
+                  <div class="text-center bg-white/95 backdrop-blur-sm rounded-lg p-2 sm:p-2.5 md:p-3 shadow-md">
+                    <div class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-0.5 sm:mb-1">3.2K+</div>
+                    <div class="text-[10px] sm:text-xs md:text-sm text-gray-700 font-medium leading-tight">Clínicas Ativas</div>
+                  </div>
+                  <div class="text-center bg-white/95 backdrop-blur-sm rounded-lg p-2 sm:p-2.5 md:p-3 shadow-md">
+                    <div class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-0.5 sm:mb-1">98.5%</div>
+                    <div class="text-[10px] sm:text-xs md:text-sm text-gray-700 font-medium leading-tight">Satisfação</div>
+                  </div>
+                  <div class="text-center bg-white/95 backdrop-blur-sm rounded-lg p-2 sm:p-2.5 md:p-3 shadow-md">
+                    <div class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-0.5 sm:mb-1">24/7</div>
+                    <div class="text-[10px] sm:text-xs md:text-sm text-gray-700 font-medium leading-tight">Suporte</div>
+                  </div>
+                </div>
               </div>
             </div>
-            
-            <!-- Elementos decorativos flutuantes -->
-            <div class="absolute -top-4 -right-4 w-24 h-24 bg-blue-100 rounded-2xl rotate-12 opacity-60 blur-xl"></div>
-            <div class="absolute -bottom-4 -left-4 w-32 h-32 bg-indigo-100 rounded-2xl -rotate-12 opacity-60 blur-xl"></div>
           </div>
         </div>
         

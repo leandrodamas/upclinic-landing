@@ -429,9 +429,9 @@
   ];
 </script>
 
-<section id="funcionalidades" class="py-24 bg-white">
+<section id="funcionalidades" class="pt-8 sm:pt-12 md:pt-16 pb-16 sm:pb-20 md:pb-24 bg-white">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-16">
+    <div class="text-center mb-12 sm:mb-14 md:mb-16">
       <span class="inline-block px-4 py-2 bg-blue-100 text-blue-600 rounded-full text-sm font-semibold mb-4">
         Funcionalidades
       </span>
