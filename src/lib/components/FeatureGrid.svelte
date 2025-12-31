@@ -1,510 +1,397 @@
 <script>
+  import { onMount } from 'svelte';
   import FeatureDemoModal from './FeatureDemoModal.svelte';
   import FeatureDetailModal from './FeatureDetailModal.svelte';
   
   let demoModal;
   let detailModal;
-  
+  let selectedItem = null;
+  let expandedItems = [];
+  let sidebarCollapsed = false;
+
+  // Estrutura do menu lateral oficial do UpClinic (copiada do ResponsiveSidebar.tsx)
+  const menuItems = [
+    {
+      id: 'dashboard',
+      label: 'Início',
+      icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6',
+      path: '/dashboard',
+      sectionTitle: null,
+      description: 'Dashboard principal com visão geral da clínica, métricas em tempo real, gráficos de atendimentos e acesso rápido às principais funcionalidades.',
+      priority: 'high'
+    },
+    {
+      id: 'patients',
+      label: 'Pacientes',
+      icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z',
+      path: '/patients',
+      sectionTitle: 'ATENDIMENTO',
+      description: 'Gestão completa de pacientes com prontuário eletrônico, histórico médico, exames, prescrições, busca avançada e integração com outros módulos.',
+      priority: 'high'
+    },
+    {
+      id: 'appointments',
+      label: 'Agendamentos',
+      icon: 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z',
+      path: '/appointments',
+      description: 'Sistema de agendamento inteligente com lembretes automáticos por WhatsApp e email, otimização de horários, bloqueios e gestão completa da agenda.',
+      priority: 'high'
+    },
+    {
+      id: 'telemedicine',
+      label: 'Telemedicina',
+      icon: 'M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z',
+      path: '/telemedicine',
+      description: 'Consultas online integradas com videoconferência de alta qualidade, prescrição digital, prontuário sincronizado e histórico completo.',
+      priority: 'medium'
+    },
+    {
+      id: 'reminders',
+      label: 'Lembretes',
+      icon: 'M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9',
+      path: '/reminders',
+      description: 'Sistema de lembretes e notificações automáticas por WhatsApp, SMS e email para pacientes e profissionais, com agendamento inteligente.',
+      priority: 'medium'
+    },
+    {
+      id: 'laboratory',
+      label: 'Laboratório',
+      icon: 'M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z',
+      path: '/laboratory',
+      sectionTitle: 'SERVIÇOS CLÍNICOS',
+      description: 'Gestão completa de exames laboratoriais e de imagem, laudos digitais, integração com laboratórios parceiros e histórico de exames.',
+      priority: 'medium'
+    },
+    {
+      id: 'pharmacy',
+      label: 'Farmácia',
+      icon: 'M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10',
+      path: '/pharmacy',
+      description: 'Gestão de medicamentos, controle de estoque, prescrições digitais, integração com farmácias parceiras e validação de medicamentos.',
+      priority: 'medium'
+    },
+    {
+      id: 'financial',
+      label: 'Financeiro',
+      icon: 'M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+      path: '/financial',
+      sectionTitle: 'GESTÃO FINANCEIRA',
+      description: 'Controle completo de receitas, despesas, pagamentos, relatórios financeiros detalhados, conciliação bancária e cobrança recorrente.',
+      priority: 'high',
+      children: [
+        {
+          id: 'financial-dashboard',
+          label: 'Visão Geral',
+          icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6',
+          description: 'Dashboard financeiro com métricas em tempo real, gráficos de receita e despesa, e indicadores de performance.'
+        },
+        {
+          id: 'financial-accounts',
+          label: 'Contas a Receber',
+          icon: 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6',
+          description: 'Gestão de recebimentos pendentes, controle de inadimplência e acompanhamento de pagamentos.'
+        },
+        {
+          id: 'financial-billing',
+          label: 'Cobrança Recorrente',
+          icon: 'M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15',
+          description: 'Sistema de assinaturas e planos com cobrança automática mensal, sem necessidade de cobrar manualmente todo mês.'
+        }
+      ]
+    },
+    {
+      id: 'professionals',
+      label: 'Profissionais',
+      icon: 'M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
+      path: '/professionals',
+      sectionTitle: 'ADMINISTRAÇÃO',
+      description: 'Controle completo da equipe médica, especialidades, escalas, disponibilidade, permissões de acesso e gestão de profissionais.',
+      priority: 'medium'
+    },
+    {
+      id: 'reports',
+      label: 'Relatórios',
+      icon: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z',
+      path: '/reports',
+      description: 'Dashboards interativos, relatórios personalizados, métricas de performance e análises detalhadas do seu negócio.',
+      priority: 'medium'
+    },
+    {
+      id: 'ai',
+      label: 'IA Médica',
+      icon: 'M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z',
+      path: '/ai',
+      sectionTitle: 'INTELIGÊNCIA & AUTOMAÇÃO',
+      description: 'Assistente de IA para diagnósticos, análise de exames, sugestões de tratamento baseadas em evidências científicas e automações inteligentes.',
+      priority: 'medium'
+    },
+    {
+      id: 'settings',
+      label: 'Configurações',
+      icon: 'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z',
+      path: '/settings',
+      description: 'Configurações gerais do sistema, permissões, integrações, personalização e gestão de usuários.',
+      priority: 'low'
+    }
+  ];
+
+  function toggleExpand(itemId) {
+    if (expandedItems.includes(itemId)) {
+      expandedItems = expandedItems.filter(id => id !== itemId);
+    } else {
+      expandedItems = [...expandedItems, itemId];
+    }
+  }
+
+  function handleItemClick(item) {
+    selectedItem = item;
+    if (item.children && item.children.length > 0) {
+      toggleExpand(item.id);
+    }
+    
+    // Scroll para a área de conteúdo no mobile
+    setTimeout(() => {
+      const contentArea = document.getElementById('feature-content-area');
+      if (contentArea) {
+        contentArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 100);
+  }
+
   function openDemo() {
     if (demoModal) {
       demoModal.open();
     }
   }
-  
+
   function openFeatureDetail(feature) {
     if (detailModal) {
       detailModal.open(feature);
     }
   }
-  
-  const features = [
-    {
-      icon: 'M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2 M12 7a4 4 0 1 0 0 8 4 4 0 0 0 0-8z',
-      title: 'Prontuário Eletrônico',
-      description: 'Sistema completo de prontuários digitais com segurança LGPD, histórico completo e acesso rápido a todas as informações do paciente.',
-      color: 'blue',
-      fullDescription: 'Gerencie todo o histórico médico dos seus pacientes de forma digital e segura. O prontuário eletrônico do UpClinic permite registrar consultas, exames, prescrições e evoluções clínicas com total conformidade à LGPD. Acesso rápido, busca inteligente e backup automático garantem que todas as informações estejam sempre disponíveis quando você precisar.',
-      benefits: [
-        'Histórico médico completo e organizado',
-        'Conformidade total com LGPD e normas do CFM',
-        'Busca inteligente por sintomas, diagnósticos ou medicamentos',
-        'Anexos de exames e documentos',
-        'Assinatura digital de prescrições',
-        'Backup automático na nuvem'
-      ],
-      features: [
-        'Registro de consultas e evoluções',
-        'Histórico de medicações',
-        'Anexo de exames e imagens',
-        'Busca avançada por múltiplos critérios',
-        'Timeline cronológica de atendimentos',
-        'Exportação de relatórios'
-      ],
-      example: 'Um paciente retorna após 6 meses. Com um clique, você acessa todo o histórico, exames anteriores, medicações prescritas e evoluções, permitindo um atendimento mais eficiente e preciso.'
-    },
-    {
-      icon: 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2z',
-      title: 'Agenda Inteligente',
-      description: 'Agendamento automático com lembretes por WhatsApp e email, otimização de horários e gestão completa da sua agenda.',
-      color: 'purple',
-      fullDescription: 'Transforme a gestão da sua agenda com inteligência artificial. O sistema sugere os melhores horários, envia lembretes automáticos por WhatsApp e email, e otimiza sua agenda para maximizar a produtividade. Reduza faltas em até 80% com lembretes inteligentes e confirmações automáticas.',
-      benefits: [
-        'Agendamento online 24/7 para pacientes',
-        'Lembretes automáticos por WhatsApp, SMS e email',
-        'Otimização automática de horários',
-        'Gestão de múltiplos profissionais e especialidades',
-        'Bloqueio de horários e feriados',
-        'Relatórios de ocupação e produtividade'
-      ],
-      features: [
-        'Calendário visual interativo',
-        'Agendamento por especialidade',
-        'Confirmação automática de consultas',
-        'Gestão de lista de espera',
-        'Reagendamento rápido',
-        'Integração com Google Calendar'
-      ],
-      example: 'Um paciente agenda uma consulta pelo site às 23h. O sistema confirma automaticamente, envia lembretes 48h e 24h antes, e 2h antes da consulta. Resultado: zero esquecimentos!'
-    },
-    {
-      icon: 'M15 10l4.553-2.276A1 1 0 0 1 21 8.618v6.764a1 1 0 0 1-1.447.894L15 14M5 18h8a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2z',
-      title: 'Telemedicina',
-      description: 'Consultas online integradas com prescrição digital, videoconferência de alta qualidade e prontuário sincronizado.',
-      color: 'indigo',
-      fullDescription: 'Realize consultas remotas com qualidade profissional. Videoconferência HD, chat integrado, compartilhamento de tela para exames e prescrições digitais assinadas eletronicamente. Tudo integrado ao prontuário eletrônico para um atendimento completo e documentado.',
-      benefits: [
-        'Videoconferência HD com qualidade profissional',
-        'Chat em tempo real durante a consulta',
-        'Compartilhamento de tela para análise de exames',
-        'Gravação de consultas (com consentimento do paciente)',
-        'Prescrições digitais com assinatura eletrônica',
-        'Integração completa com prontuário eletrônico'
-      ],
-      features: [
-        'Sala de espera virtual',
-        'Compartilhamento de arquivos',
-        'Gravação de consultas',
-        'Prescrições digitais integradas',
-        'Agendamento específico para telemedicina',
-        'Relatórios de teleconsultas'
-      ],
-      example: 'Paciente em outra cidade precisa de retorno. Você agenda uma teleconsulta, analisa exames compartilhando a tela, prescreve digitalmente e tudo fica registrado automaticamente no prontuário.'
-    },
-    {
-      icon: 'M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z',
-      title: 'Gestão Financeira',
-      description: 'Controle completo de receitas, despesas, pagamentos e relatórios financeiros detalhados para sua clínica.',
-      color: 'green',
-      fullDescription: 'Tenha controle total das finanças da sua clínica. Receitas de consultas, despesas operacionais, controle de inadimplência, relatórios detalhados e integração com sistemas de pagamento. Tudo em um só lugar para você tomar decisões financeiras inteligentes.',
-      benefits: [
-        'Controle de receitas e despesas em tempo real',
-        'Relatórios financeiros detalhados e personalizados',
-        'Gestão de inadimplência e cobranças',
-        'Integração com gateways de pagamento',
-        'Análise de lucratividade por profissional',
-        'Previsão de fluxo de caixa'
-      ],
-      features: [
-        'Dashboard financeiro em tempo real',
-        'Controle de contas a pagar e receber',
-        'Relatórios de faturamento',
-        'Integração com bancos',
-        'Gestão de planos de saúde',
-        'Análise de rentabilidade'
-      ],
-      example: 'No final do mês, você acessa um dashboard completo mostrando receitas por especialidade, despesas categorizadas, taxa de inadimplência e projeções para o próximo mês - tudo em gráficos visuais.'
-    },
-    {
-      icon: 'M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 1 1 7.072 0l-.548.547A3.374 3.374 0 0 1 14 18.469V19a2 2 0 1 1-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z',
-      title: 'IA Médica',
-      description: 'Assistente de IA para diagnósticos, análise de exames e sugestões de tratamento baseadas em evidências científicas.',
-      color: 'pink',
-      fullDescription: 'Conte com inteligência artificial como seu assistente médico. O sistema analisa sintomas, sugere diagnósticos baseados em evidências científicas, identifica padrões em exames e oferece suporte à decisão clínica. Sempre como ferramenta de apoio, nunca substituindo o julgamento médico.',
-      benefits: [
-        'Análise inteligente de sintomas e sinais',
-        'Sugestões de diagnósticos baseadas em evidências',
-        'Identificação de padrões em exames laboratoriais',
-        'Alertas para interações medicamentosas',
-        'Suporte à decisão clínica baseado em guidelines',
-        'Aprendizado contínuo com casos similares'
-      ],
-      features: [
-        'Análise de sintomas',
-        'Sugestões de exames complementares',
-        'Alertas de interações medicamentosas',
-        'Base de conhecimento médico',
-        'Análise de padrões em exames',
-        'Histórico de casos similares'
-      ],
-      example: 'Você digita os sintomas do paciente. A IA sugere possíveis diagnósticos com base em evidências, alerta sobre interações medicamentosas e mostra casos similares já tratados na sua clínica.'
-    },
-    {
-      icon: 'M12 18h.01M8 21h8a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2z',
-      title: 'Mobile & Cloud',
-      description: 'Acesso em qualquer lugar via web ou mobile, sincronização em tempo real e backup automático na nuvem.',
-      color: 'cyan',
-      fullDescription: 'Acesse seu sistema de qualquer lugar, a qualquer hora. Versão mobile otimizada, sincronização em tempo real entre dispositivos e backup automático na nuvem. Sua clínica sempre com você, no consultório, em casa ou em viagem.',
-      benefits: [
-        'Aplicativo mobile nativo para iOS e Android',
-        'Sincronização em tempo real entre dispositivos',
-        'Backup automático na nuvem',
-        'Acesso offline com sincronização automática',
-        'Notificações push no celular',
-        'Interface responsiva para tablets'
-      ],
-      features: [
-        'App iOS e Android',
-        'Sincronização em tempo real',
-        'Modo offline',
-        'Backup automático',
-        'Notificações push',
-        'Acesso via navegador'
-      ],
-      example: 'Você está em casa e precisa verificar um agendamento urgente. Abre o app no celular, acessa todas as informações, faz alterações e tudo sincroniza automaticamente com o sistema principal.'
-    },
-    {
-      icon: 'M17 20h5v-2a3 3 0 0 0-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 0 1 5.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 0 1 9.288 0M15 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm6 3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM7 10a2 2 0 1 1-4 0 2 2 0 0 1 4 0z',
-      title: 'Gestão de Pacientes',
-      description: 'Cadastro completo, histórico médico detalhado, busca avançada e acompanhamento personalizado de cada paciente.',
-      color: 'blue',
-      fullDescription: 'Sistema completo de gestão de pacientes com busca avançada e acompanhamento personalizado. Cadastre informações completas, histórico médico detalhado, múltiplos contatos e dados de emergência sempre acessíveis.',
-      benefits: [
-        'Busca instantânea por qualquer critério',
-        'Histórico completo do paciente',
-        'Alertas automáticos de retornos',
-        'Gestão de múltiplos contatos',
-        'Dados de emergência sempre acessíveis',
-        'Integração com exames e prescrições'
-      ],
-      features: [
-        'Cadastro completo de pacientes',
-        'Busca avançada multi-critério',
-        'Histórico médico integrado',
-        'Gestão de contatos',
-        'Alertas de retorno',
-        'Fichas personalizadas'
-      ],
-      example: 'Busque um paciente por nome, CPF, telefone ou sintoma. Em segundos, você tem acesso a todo o histórico, exames, prescrições e informações de contato.'
-    },
-    {
-      icon: 'M21 13.255A23.931 23.931 0 0 1 12 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2m4 6h.01M5 20h14a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2z',
-      title: 'Gestão de Profissionais',
-      description: 'Controle completo da equipe médica, especialidades, escalas, disponibilidade e permissões de acesso.',
-      color: 'purple',
-      fullDescription: 'Gerencie toda sua equipe médica de forma eficiente. Controle especialidades, escalas de trabalho, disponibilidade e permissões de acesso personalizadas para cada profissional.',
-      benefits: [
-        'Gestão de múltiplas especialidades',
-        'Controle de escalas e disponibilidade',
-        'Relatórios de performance individual',
-        'Permissões de acesso personalizadas',
-        'Integração com agenda e prontuário',
-        'Histórico de atividades por profissional'
-      ],
-      features: [
-        'Cadastro de profissionais',
-        'Gestão de especialidades',
-        'Controle de escalas',
-        'Permissões personalizadas',
-        'Relatórios de performance',
-        'Integração com agenda'
-      ],
-      example: 'Configure diferentes níveis de acesso: recepcionistas veem apenas agenda, médicos acessam prontuários completos, e administradores têm acesso total ao sistema.'
-    },
-    {
-      icon: 'M9 12h6m-6 4h6m2 5H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5.586a1 1 0 0 1 .707.293l5.414 5.414a1 1 0 0 1 .293.707V19a2 2 0 0 1-2 2z',
-      title: 'Exames e Laudos',
-      description: 'Gestão completa de exames laboratoriais e de imagem, laudos digitais e integração com laboratórios parceiros.',
-      color: 'green',
-      fullDescription: 'Organize todos os exames laboratoriais e de imagem com laudos digitais e integração com laboratórios parceiros. Histórico completo, comparação de exames ao longo do tempo e alertas de exames pendentes.',
-      benefits: [
-        'Integração com laboratórios parceiros',
-        'Laudos digitais organizados',
-        'Histórico completo de exames',
-        'Alertas de exames pendentes',
-        'Visualização de imagens integrada',
-        'Comparação de exames ao longo do tempo'
-      ],
-      features: [
-        'Upload de exames',
-        'Integração com laboratórios',
-        'Visualização de imagens',
-        'Laudos digitais',
-        'Histórico de exames',
-        'Alertas automáticos'
-      ],
-      example: 'Um exame de sangue chega do laboratório parceiro. O sistema notifica automaticamente, anexa ao prontuário do paciente e você pode comparar com exames anteriores em segundos.'
-    },
-    {
-      icon: 'M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01',
-      title: 'Prescrições Digitais',
-      description: 'Prescrições médicas digitais com assinatura eletrônica, validação de medicamentos e integração com farmácias.',
-      color: 'red',
-      fullDescription: 'Prescrições médicas digitais válidas legalmente com assinatura eletrônica e integração com farmácias. Validação automática de medicamentos, alertas de interações e histórico completo de prescrições.',
-      benefits: [
-        'Assinatura eletrônica válida legalmente',
-        'Integração com farmácias parceiras',
-        'Histórico de prescrições completo',
-        'Validação automática de medicamentos',
-        'Alertas de interações medicamentosas',
-        'Prescrições padronizadas por especialidade'
-      ],
-      features: [
-        'Prescrições digitais',
-        'Assinatura eletrônica',
-        'Validação de medicamentos',
-        'Integração com farmácias',
-        'Histórico de prescrições',
-        'Templates por especialidade'
-      ],
-      example: 'Você prescreve um medicamento e o sistema alerta sobre uma possível interação com outro remédio que o paciente já usa. A prescrição é assinada digitalmente e enviada automaticamente para a farmácia parceira.'
-    },
-    {
-      icon: 'M9 19v-6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2zm0 0V9a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v10m-6 0a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2m0 0V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2z',
-      title: 'Relatórios e Analytics',
-      description: 'Dashboards interativos, relatórios personalizados, métricas de performance e análises detalhadas do seu negócio.',
-      color: 'orange',
-      fullDescription: 'Tome decisões baseadas em dados com dashboards interativos e relatórios personalizados. Métricas de performance, análises detalhadas do seu negócio e comparação de períodos para identificar tendências.',
-      benefits: [
-        'Dashboards em tempo real',
-        'Relatórios personalizados',
-        'Análise de performance',
-        'Métricas de produtividade',
-        'Gráficos interativos',
-        'Exportação de relatórios em PDF/Excel'
-      ],
-      features: [
-        'Dashboard personalizado',
-        'Relatórios financeiros',
-        'Análise de produtividade',
-        'Gráficos interativos',
-        'Exportação de dados',
-        'Comparação de períodos'
-      ],
-      example: 'Visualize em um dashboard completo: número de consultas por mês, receita por especialidade, taxa de ocupação da agenda e satisfação dos pacientes - tudo em gráficos visuais e interativos.'
-    },
-    {
-      icon: 'M15 17h5l-1.405-1.405A2.032 2.032 0 0 1 13 13.158V11a6.002 6.002 0 0 0-4-5.659V5a2 2 0 1 0-4 0v.341C7.67 6.165 6 8.388 6 11v2.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 1 1-6 0v-1m6 0H9',
-      title: 'Notificações Inteligentes',
-      description: 'Sistema de alertas e lembretes automáticos por WhatsApp, SMS e email para pacientes e profissionais.',
-      color: 'yellow',
-      fullDescription: 'Sistema de lembretes automáticos que reduz faltas e melhora a comunicação com pacientes. Lembretes por WhatsApp, SMS e email, templates personalizáveis e relatórios de entrega e leitura.',
-      benefits: [
-        'Redução de 80% nas faltas',
-        'Lembretes automáticos multi-canal',
-        'Comunicação personalizada',
-        'Templates de mensagens',
-        'Agendamento de notificações',
-        'Relatórios de entrega e leitura'
-      ],
-      features: [
-        'Lembretes automáticos',
-        'WhatsApp, SMS e Email',
-        'Templates personalizáveis',
-        'Agendamento de notificações',
-        'Relatórios de entrega',
-        'Confirmação de consultas'
-      ],
-      example: 'O sistema envia automaticamente lembretes 48h, 24h e 2h antes da consulta. O paciente confirma pelo WhatsApp e você recebe uma notificação. Resultado: 80% menos faltas!'
-    },
-    {
-      icon: 'M19 11H5m14 0a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-6a2 2 0 0 1 2-2m14 0V9a2 2 0 0 0-2-2M5 11V9a2 2 0 0 1 2-2m0 0V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2M7 7h10',
-      title: 'Farmácia Integrada',
-      description: 'Gestão de medicamentos, controle de estoque, prescrições digitais e integração com farmácias parceiras.',
-      color: 'teal',
-      fullDescription: 'Controle completo de medicamentos, estoque e integração com farmácias parceiras. Gestão de medicamentos, alertas de estoque baixo, histórico de medicamentos e validação de prescrições.',
-      benefits: [
-        'Controle de estoque automático',
-        'Integração com farmácias',
-        'Gestão de medicamentos',
-        'Alertas de estoque baixo',
-        'Histórico de medicamentos',
-        'Validação de prescrições'
-      ],
-      features: [
-        'Controle de estoque',
-        'Integração com farmácias',
-        'Gestão de medicamentos',
-        'Alertas automáticos',
-        'Histórico de medicamentos',
-        'Validação de prescrições'
-      ],
-      example: 'Você prescreve um medicamento e o sistema verifica automaticamente se está disponível na farmácia parceira. Se não estiver, sugere alternativas disponíveis.'
-    },
-    {
-      icon: 'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0z',
-      title: 'Integrações',
-      description: 'Conecte-se com laboratórios, farmácias, sistemas de pagamento e outras plataformas de saúde.',
-      color: 'indigo',
-      fullDescription: 'Integre com laboratórios, farmácias, sistemas de pagamento e outras plataformas de saúde. API completa disponível, webhooks em tempo real e integração com os principais sistemas do mercado.',
-      benefits: [
-        'API completa disponível',
-        'Integração com principais sistemas',
-        'Webhooks em tempo real',
-        'Integração com laboratórios',
-        'Integração com farmácias',
-        'Integração com sistemas de pagamento'
-      ],
-      features: [
-        'API REST completa',
-        'Webhooks em tempo real',
-        'Integração com laboratórios',
-        'Integração com farmácias',
-        'Gateways de pagamento',
-        'Sistemas de terceiros'
-      ],
-      example: 'Conecte seu sistema com o laboratório parceiro. Quando um exame fica pronto, ele é automaticamente importado para o prontuário do paciente, sem necessidade de upload manual.'
-    },
-    {
-      icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0 1 12 2.944a11.955 11.955 0 0 1-8.618 3.04A12.02 12.02 0 0 0 3 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
-      title: 'Segurança e LGPD',
-      description: 'Criptografia de dados, backup automático, conformidade com LGPD e auditoria completa de acessos.',
-      color: 'red',
-      fullDescription: 'Criptografia de dados, backup automático e conformidade total com LGPD e normas do CFM. Auditoria completa de acessos, controle de permissões e logs de todas as ações para garantir a segurança e privacidade dos dados.',
-      benefits: [
-        'Criptografia end-to-end',
-        'Conformidade LGPD',
-        'Auditoria completa de acessos',
-        'Backup automático',
-        'Controle de permissões',
-        'Logs de todas as ações'
-      ],
-      features: [
-        'Criptografia de dados',
-        'Conformidade LGPD',
-        'Auditoria de acessos',
-        'Controle de permissões',
-        'Backup automático',
-        'Logs de atividades'
-      ],
-      example: 'Todos os dados são criptografados e armazenados com segurança. Você pode auditar quem acessou qual informação e quando, garantindo total conformidade com a LGPD.'
-    },
-    {
-      icon: 'M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4',
-      title: 'Backup Automático',
-      description: 'Backup contínuo na nuvem, recuperação de dados e proteção contra perda de informações.',
-      color: 'blue',
-      fullDescription: 'Backup contínuo na nuvem com recuperação instantânea e proteção contra perda de dados. Múltiplos pontos de restauração, backup em servidores redundantes e testes de recuperação regulares.',
-      benefits: [
-        'Backup automático diário',
-        'Recuperação instantânea',
-        'Zero perda de dados',
-        'Múltiplos pontos de restauração',
-        'Backup em servidores redundantes',
-        'Testes de recuperação regulares'
-      ],
-      features: [
-        'Backup automático diário',
-        'Múltiplos pontos de restauração',
-        'Recuperação instantânea',
-        'Servidores redundantes',
-        'Testes automáticos',
-        'Histórico de backups'
-      ],
-      example: 'Seu servidor local falha? Sem problemas! Todos os dados estão seguros na nuvem e podem ser recuperados instantaneamente, sem perda de informações.'
-    },
-    {
-      icon: 'M13 10V3L4 14h7v7l9-11h-7z',
-      title: 'Dashboard Analytics',
-      description: 'Visão geral completa com métricas em tempo real, gráficos interativos e KPIs personalizados.',
-      color: 'purple',
-      fullDescription: 'Visão completa do seu negócio com métricas em tempo real, gráficos interativos e KPIs personalizados. Análise de performance, comparação de períodos e alertas de métricas para tomar decisões baseadas em dados.',
-      benefits: [
-        'Métricas em tempo real',
-        'Gráficos interativos',
-        'KPIs personalizados',
-        'Comparação de períodos',
-        'Alertas de métricas',
-        'Exportação de dados'
-      ],
-      features: [
-        'Dashboard personalizado',
-        'Métricas em tempo real',
-        'Gráficos interativos',
-        'KPIs configuráveis',
-        'Comparação de períodos',
-        'Exportação de dados'
-      ],
-      example: 'Acesse um dashboard completo mostrando consultas do dia, receita do mês, taxa de ocupação, satisfação dos pacientes e muito mais - tudo atualizado em tempo real.'
-    }
-  ];
 </script>
 
-<section id="funcionalidades" class="pt-8 sm:pt-12 md:pt-16 pb-16 sm:pb-20 md:pb-24 bg-white">
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-12 sm:mb-14 md:mb-16">
-      <span class="inline-block px-4 py-2 bg-blue-100 text-blue-600 rounded-full text-sm font-semibold mb-4">
+<section id="funcionalidades" class="pt-4 sm:pt-6 md:pt-8 pb-12 sm:pb-16 md:pb-24 bg-gradient-to-b from-gray-50 via-white to-gray-50 relative overflow-hidden">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="text-center mb-8 sm:mb-10 md:mb-12 lg:mb-16">
+      <span class="inline-block px-3 py-1.5 md:px-4 md:py-2 bg-blue-100 text-blue-600 rounded-full text-xs md:text-sm font-semibold mb-3 md:mb-4">
         Funcionalidades
       </span>
-      <h2 class="section-title">Tudo que sua clínica precisa</h2>
-      <p class="section-description">
+      <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-2 md:mb-3">Tudo que sua clínica precisa</h2>
+      <p class="text-sm md:text-base text-gray-600 max-w-2xl mx-auto">
         Um sistema completo e integrado com mais de 18 funcionalidades para gerenciar todos os aspectos da sua prática médica
       </p>
     </div>
-    
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {#each features as feature}
-        {@const gradientClass = feature.color === 'blue' ? 'from-blue-500 to-blue-600' : 
-          feature.color === 'purple' ? 'from-purple-500 to-purple-600' : 
-          feature.color === 'indigo' ? 'from-indigo-500 to-indigo-600' : 
-          feature.color === 'green' ? 'from-green-500 to-green-600' : 
-          feature.color === 'pink' ? 'from-pink-500 to-pink-600' : 
-          feature.color === 'cyan' ? 'from-cyan-500 to-cyan-600' : 
-          feature.color === 'red' ? 'from-red-500 to-red-600' : 
-          feature.color === 'orange' ? 'from-orange-500 to-orange-600' : 
-          feature.color === 'yellow' ? 'from-yellow-500 to-yellow-600' : 
-          feature.color === 'teal' ? 'from-teal-500 to-teal-600' : 
-          'from-blue-500 to-blue-600'}
-        <div 
-          class="card group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer"
-          on:click={() => openFeatureDetail(feature)}
-          role="button"
-          tabindex="0"
-          on:keydown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              e.preventDefault();
-              openFeatureDetail(feature);
-            }
-          }}
-        >
-          <div class="w-16 h-16 bg-gradient-to-br {gradientClass} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={feature.icon} />
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold text-gray-900 mb-3">{feature.title}</h3>
-          <p class="text-gray-600 leading-relaxed mb-4">{feature.description}</p>
-          <div class="flex items-center text-blue-600 font-medium text-sm opacity-0 group-hover:opacity-100 transition-opacity">
-            <span>Ver detalhes</span>
-            <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
+
+    <!-- Container com tela de desktop/mobile -->
+    <div class="relative max-w-6xl mx-auto">
+      <!-- Desktop Screen -->
+      <div class="bg-gray-900 rounded-t-xl md:rounded-t-2xl p-2 md:p-3 shadow-xl md:shadow-2xl mb-6 md:mb-8">
+        <!-- Barra de título do desktop -->
+        <div class="flex items-center gap-1.5 md:gap-2 mb-1.5 md:mb-2">
+          <div class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-red-500"></div>
+          <div class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-yellow-500"></div>
+          <div class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-green-500"></div>
+          <div class="ml-2 md:ml-4 text-gray-400 text-xs md:text-sm font-medium truncate">UpClinic - Sistema de Gestão Médica</div>
+        </div>
+        
+        <!-- Tela do desktop com menu lateral -->
+        <div class="bg-white rounded-lg overflow-hidden shadow-inner h-[400px] md:h-[500px] lg:h-[600px] min-h-[400px] md:min-h-[500px] lg:min-h-[600px]">
+          <div class="flex h-full flex-col md:flex-row">
+            <!-- Sidebar (Menu Lateral Oficial) -->
+            <div class="w-full md:w-48 lg:w-64 bg-gradient-to-b from-blue-50 to-white border-b md:border-b-0 md:border-r border-gray-200 flex flex-col h-[200px] md:h-full flex-shrink-0">
+              <!-- Header do Sidebar -->
+              <div class="p-2 md:p-3 lg:p-4 border-b border-gray-200 flex items-center gap-2 md:gap-3 flex-shrink-0">
+                <div class="w-8 h-8 md:w-10 md:h-10 rounded-lg flex items-center justify-center shadow-md overflow-hidden bg-white flex-shrink-0">
+                  <img 
+                    src="/1-615ef95f.png" 
+                    alt="UpClinic Logo" 
+                    class="w-full h-full object-contain"
+                  />
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="font-bold text-gray-800 text-sm md:text-base lg:text-lg truncate">UpClinic</div>
+                  <div class="text-[10px] md:text-xs text-gray-500 truncate">Sistema Médico</div>
+                </div>
+              </div>
+
+              <!-- Menu Items -->
+              <div class="flex-1 overflow-y-auto py-1 md:py-2 min-h-0">
+                {#each menuItems as item (item.id)}
+                  {@const isSelected = selectedItem?.id === item.id}
+                  {@const isExpanded = expandedItems.includes(item.id)}
+                  {@const hasChildren = item.children && item.children.length > 0}
+                  
+                  <!-- Divisor de seção -->
+                  {#if item.sectionTitle}
+                    <div class="px-2 md:px-3 lg:px-4 py-1 md:py-2">
+                      <div class="text-[10px] md:text-xs font-bold text-gray-400 uppercase tracking-wider">{item.sectionTitle}</div>
+                    </div>
+                  {/if}
+
+                  <!-- Item do menu -->
+                  <div
+                    class="px-1 md:px-2 mx-1 md:mx-2 mb-0.5 md:mb-1"
+                  >
+                    <button
+                      class="w-full flex items-center gap-2 md:gap-3 px-2 md:px-3 py-1.5 md:py-2 lg:py-2.5 rounded-md md:rounded-lg transition-all duration-200 {isSelected ? 'bg-blue-600 text-white shadow-md' : 'text-gray-700 hover:bg-blue-50 hover:text-blue-600'}"
+                      on:click={() => handleItemClick(item)}
+                      on:keydown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          handleItemClick(item);
+                        }
+                      }}
+                    >
+                      <svg class="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={item.icon} />
+                      </svg>
+                      <span class="flex-1 text-left font-medium text-xs md:text-sm truncate">{item.label}</span>
+                      {#if hasChildren}
+                        <svg class="w-3 h-3 md:w-4 md:h-4 transition-transform duration-200 {isExpanded ? 'rotate-180' : ''}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                      {/if}
+                    </button>
+
+                    <!-- Subitens -->
+                    {#if hasChildren && isExpanded}
+                      <div class="ml-2 md:ml-4 mt-0.5 md:mt-1 space-y-0.5 md:space-y-1">
+                        {#each item.children as child (child.id)}
+                          {@const isChildSelected = selectedItem?.id === child.id}
+                          <button
+                            class="w-full flex items-center gap-2 md:gap-3 px-2 md:px-3 py-1 md:py-2 rounded-md md:rounded-lg text-xs md:text-sm transition-all duration-200 {isChildSelected ? 'bg-blue-100 text-blue-700 font-medium' : 'text-gray-600 hover:bg-gray-100'}"
+                            on:click={() => handleItemClick(child)}
+                          >
+                            <svg class="w-3 h-3 md:w-4 md:h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={child.icon} />
+                            </svg>
+                            <span class="flex-1 text-left truncate">{child.label}</span>
+                          </button>
+                        {/each}
+                      </div>
+                    {/if}
+                  </div>
+                {/each}
+              </div>
+
+              <!-- Footer do Sidebar -->
+              <div class="p-2 md:p-3 lg:p-4 border-t border-gray-200 flex-shrink-0">
+                <div class="flex items-center gap-1.5 md:gap-2 text-[10px] md:text-xs text-gray-500">
+                  <svg class="w-3 h-3 md:w-4 md:h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span>Sistema Online</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Área de conteúdo (lado direito) -->
+            <div class="flex-1 bg-gray-50 p-4 md:p-6 lg:p-8 overflow-y-auto min-h-[200px] md:min-h-0" id="feature-content-area">
+              {#if selectedItem}
+                <!-- Card de informações da funcionalidade -->
+                <div class="bg-white rounded-lg md:rounded-xl shadow-md md:shadow-lg p-4 md:p-6 lg:p-8 max-w-3xl animate-fade-in">
+                  <div class="flex items-start gap-3 md:gap-4 mb-4 md:mb-6">
+                    <div class="w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg md:rounded-xl flex items-center justify-center shadow-md md:shadow-lg flex-shrink-0">
+                      <svg class="w-6 h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={selectedItem.icon} />
+                      </svg>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                      <h3 class="text-lg md:text-xl lg:text-2xl font-bold text-gray-900 mb-1.5 md:mb-2">{selectedItem.label}</h3>
+                      <div class="flex flex-wrap items-center gap-1.5 md:gap-2">
+                        <span class="px-2 py-0.5 md:px-3 md:py-1 bg-blue-100 text-blue-700 rounded-full text-[10px] md:text-xs font-semibold">
+                          {selectedItem.priority === 'high' ? 'Alta Prioridade' : selectedItem.priority === 'medium' ? 'Média Prioridade' : 'Baixa Prioridade'}
+                        </span>
+                        {#if selectedItem.path}
+                          <span class="text-[10px] md:text-xs text-gray-500 truncate">Rota: {selectedItem.path}</span>
+                        {/if}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="prose max-w-none">
+                    <p class="text-gray-700 leading-relaxed text-sm md:text-base lg:text-lg mb-4 md:mb-6">
+                      {selectedItem.description}
+                    </p>
+
+                    <!-- Funcionalidades principais -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 md:gap-3 lg:gap-4 mt-4 md:mt-6">
+                      <div class="bg-blue-50 rounded-md md:rounded-lg p-3 md:p-4">
+                        <div class="font-semibold text-blue-900 mb-1 md:mb-2 text-xs md:text-sm">✓ Integração Completa</div>
+                        <div class="text-xs md:text-sm text-blue-700">Conectado com todos os módulos do sistema</div>
+                      </div>
+                      <div class="bg-green-50 rounded-md md:rounded-lg p-3 md:p-4">
+                        <div class="font-semibold text-green-900 mb-1 md:mb-2 text-xs md:text-sm">✓ Segurança LGPD</div>
+                        <div class="text-xs md:text-sm text-green-700">Dados protegidos e criptografados</div>
+                      </div>
+                      <div class="bg-purple-50 rounded-md md:rounded-lg p-3 md:p-4">
+                        <div class="font-semibold text-purple-900 mb-1 md:mb-2 text-xs md:text-sm">✓ Acesso Mobile</div>
+                        <div class="text-xs md:text-sm text-purple-700">Disponível em qualquer dispositivo</div>
+                      </div>
+                      <div class="bg-yellow-50 rounded-md md:rounded-lg p-3 md:p-4">
+                        <div class="font-semibold text-yellow-900 mb-1 md:mb-2 text-xs md:text-sm">✓ Suporte 24/7</div>
+                        <div class="text-xs md:text-sm text-yellow-700">Atendimento sempre disponível</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {:else}
+                <!-- Estado inicial -->
+                <div class="flex flex-col items-center justify-center h-full text-center px-2">
+                  <div class="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center mb-4 md:mb-6">
+                    <svg class="w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                  </div>
+                  <h3 class="text-base md:text-lg lg:text-xl font-bold text-gray-800 mb-1.5 md:mb-2">Explore as Funcionalidades</h3>
+                  <p class="text-xs md:text-sm text-gray-600 max-w-md">
+                    Clique em qualquer item do menu lateral para ver detalhes sobre cada funcionalidade do UpClinic
+                  </p>
+                </div>
+              {/if}
+            </div>
           </div>
         </div>
-      {/each}
+      </div>
     </div>
-    
-    <div class="text-center mt-12">
-      <p class="text-gray-600 mb-6">
+
+    <!-- Botão CTA -->
+    <div class="text-center mt-8 md:mt-10 lg:mt-12">
+      <p class="text-gray-600 mb-4 md:mb-6 text-sm md:text-base">
         E muito mais funcionalidades para transformar a gestão da sua clínica
       </p>
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 md:gap-4">
         <a 
           href="https://upclinic-aa025.web.app/login" 
-          class="btn btn-primary btn-large"
+          class="btn btn-primary text-xs md:text-sm px-4 py-2 md:px-6 md:py-3 w-full sm:w-auto text-center"
         >
           Ver Todas as Funcionalidades
         </a>
-        <button 
-          type="button"
-          on:click={openDemo}
-          class="btn btn-outline border-blue-600 text-blue-600 hover:bg-blue-50 btn-large"
-        >
+        <button class="btn btn-secondary text-xs md:text-sm px-4 py-2 md:px-6 md:py-3 w-full sm:w-auto text-center" on:click={openDemo}>
           Solicitar Demonstração
         </button>
       </div>
     </div>
   </div>
-  
+
   <FeatureDemoModal bind:this={demoModal} />
   <FeatureDetailModal bind:this={detailModal} />
 </section>
+
+<style>
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.3s ease-out;
+  }
+</style>

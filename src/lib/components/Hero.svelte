@@ -27,7 +27,7 @@
   });
 </script>
 
-<section id="inicio" class="relative w-full overflow-hidden bg-white pt-12 sm:pt-16 md:pt-20 lg:pt-24">
+<section id="inicio" class="relative w-full overflow-hidden bg-white pt-12 sm:pt-16 md:pt-20 lg:pt-24 pb-8 sm:pb-12 md:pb-16 lg:pb-20">
   <div class="container mx-auto px-2 sm:px-3 md:px-4 lg:px-6 relative z-10 w-full">
     <div class="max-w-7xl mx-auto">
       <!-- Layout limpo e organizado -->
@@ -57,10 +57,10 @@
               </div>
               
               <!-- Espaço flexível no meio para não sobrepor conteúdo importante da imagem -->
-              <div class="flex-1"></div>
+              <div class="flex-1 min-h-[45%] sm:min-h-[40%] md:min-h-0"></div>
               
               <!-- Rodapé: CTAs e Estatísticas - posicionados na parte inferior -->
-              <div class="flex flex-col gap-2 sm:gap-2.5 md:gap-3 pb-6 sm:pb-8 md:pb-10 lg:pb-12 px-2 sm:px-3 md:px-4 lg:px-6">
+              <div class="flex flex-col gap-2 sm:gap-2.5 md:gap-3 pb-4 sm:pb-6 md:pb-8 lg:pb-10 xl:pb-12 px-2 sm:px-3 md:px-4 lg:px-6">
                 
                 <!-- CTAs - Compactos e responsivos -->
                 <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-center sm:justify-start gap-2 sm:gap-2.5">

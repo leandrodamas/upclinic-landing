@@ -6,19 +6,19 @@
 </script>
 
 <footer class="bg-gray-900 text-gray-300">
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 lg:py-16">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 md:gap-8 mb-8 md:mb-12">
       <!-- Coluna 1: Logo e Descrição -->
       <div class="lg:col-span-1">
-        <div class="flex items-center mb-4">
+        <div class="flex items-center mb-3 md:mb-4">
           <ImageWithFallback 
             src="/ChatGPT Image 30 de nov. de 2025, 01_06_00.png"
             alt="UpClinic Logo"
-            class="h-28 w-auto object-contain"
+            class="h-20 md:h-24 lg:h-28 w-auto object-contain"
             fallback="/ChatGPT Image 30 de nov. de 2025, 01_06_00.png"
           />
         </div>
-        <p class="text-sm text-gray-400 mb-6">
+        <p class="text-xs md:text-sm text-gray-400 mb-4 md:mb-6">
           Sistema completo de gestão médica e clínica. 
           Transformando a saúde com tecnologia.
         </p>
@@ -74,62 +74,62 @@
       
       <!-- Coluna 2: Produto -->
       <div>
-        <h4 class="text-white font-bold mb-4">Produto</h4>
-        <ul class="space-y-2">
-          <li><a href="/#funcionalidades" class="hover:text-white transition-colors">Funcionalidades</a></li>
-          <li><a href="/planos" class="hover:text-white transition-colors">Planos</a></li>
-                  <li><a href="https://upclinic-aa025.web.app/login" class="hover:text-white transition-colors">Login</a></li>
-                  <li><a href="https://upclinic-aa025.web.app/login" class="hover:text-white transition-colors">Cadastro</a></li>
+        <h4 class="text-white font-bold mb-3 md:mb-4 text-sm md:text-base">Produto</h4>
+        <ul class="space-y-1.5 md:space-y-2">
+          <li><a href="/#funcionalidades" class="hover:text-white transition-colors text-xs md:text-sm">Funcionalidades</a></li>
+          <li><a href="/planos" class="hover:text-white transition-colors text-xs md:text-sm">Planos</a></li>
+          <li><a href="https://upclinic-aa025.web.app/login" class="hover:text-white transition-colors text-xs md:text-sm">Login</a></li>
+          <li><a href="https://upclinic-aa025.web.app/login" class="hover:text-white transition-colors text-xs md:text-sm">Cadastro</a></li>
         </ul>
       </div>
       
       <!-- Coluna 3: Empresa -->
       <div>
-        <h4 class="text-white font-bold mb-4">Empresa</h4>
-        <ul class="space-y-2">
-          <li><a href="/sobre" class="hover:text-white transition-colors">Sobre Nós</a></li>
-          <li><a href="/contato" class="hover:text-white transition-colors">Contato</a></li>
-          <li><a href="/carreiras" class="hover:text-white transition-colors">Carreiras</a></li>
+        <h4 class="text-white font-bold mb-3 md:mb-4 text-sm md:text-base">Empresa</h4>
+        <ul class="space-y-1.5 md:space-y-2">
+          <li><a href="/sobre" class="hover:text-white transition-colors text-xs md:text-sm">Sobre Nós</a></li>
+          <li><a href="/contato" class="hover:text-white transition-colors text-xs md:text-sm">Contato</a></li>
+          <li><a href="/carreiras" class="hover:text-white transition-colors text-xs md:text-sm">Carreiras</a></li>
         </ul>
       </div>
       
       <!-- Coluna 4: Suporte -->
       <div>
-        <h4 class="text-white font-bold mb-4">Suporte</h4>
-        <ul class="space-y-2">
-          <li><a href="/#duvidas-frequentes" class="hover:text-white transition-colors">Dúvidas Frequentes</a></li>
-          <li><a href="/faq" class="hover:text-white transition-colors">Central de Ajuda</a></li>
-          <li><a href="/contato" class="hover:text-white transition-colors">Fale Conosco</a></li>
+        <h4 class="text-white font-bold mb-3 md:mb-4 text-sm md:text-base">Suporte</h4>
+        <ul class="space-y-1.5 md:space-y-2">
+          <li><a href="/#duvidas-frequentes" class="hover:text-white transition-colors text-xs md:text-sm">Dúvidas Frequentes</a></li>
+          <li><a href="/faq" class="hover:text-white transition-colors text-xs md:text-sm">Central de Ajuda</a></li>
+          <li><a href="/contato" class="hover:text-white transition-colors text-xs md:text-sm">Fale Conosco</a></li>
         </ul>
       </div>
       
       <!-- Coluna 5: Legal -->
       <div>
-        <h4 class="text-white font-bold mb-4">Legal</h4>
-        <ul class="space-y-2">
-          <li><a href="/politica-privacidade" class="hover:text-white transition-colors">Política de Privacidade</a></li>
-          <li><a href="/termos-servico" class="hover:text-white transition-colors">Termos de Uso</a></li>
-          <li><a href="/lgpd" class="hover:text-white transition-colors">LGPD</a></li>
-          <li><a href="/politica-cookies" class="hover:text-white transition-colors">Política de Cookies</a></li>
-          <li><a href="/codigo-conduta" class="hover:text-white transition-colors">Código de Conduta</a></li>
+        <h4 class="text-white font-bold mb-3 md:mb-4 text-sm md:text-base">Legal</h4>
+        <ul class="space-y-1.5 md:space-y-2">
+          <li><a href="/politica-privacidade" class="hover:text-white transition-colors text-xs md:text-sm">Política de Privacidade</a></li>
+          <li><a href="/termos-servico" class="hover:text-white transition-colors text-xs md:text-sm">Termos de Uso</a></li>
+          <li><a href="/lgpd" class="hover:text-white transition-colors text-xs md:text-sm">LGPD</a></li>
+          <li><a href="/politica-cookies" class="hover:text-white transition-colors text-xs md:text-sm">Política de Cookies</a></li>
+          <li><a href="/codigo-conduta" class="hover:text-white transition-colors text-xs md:text-sm">Código de Conduta</a></li>
         </ul>
       </div>
     </div>
     
     <!-- Informações de Contato -->
-    <div class="border-t border-gray-800 pt-8">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <div class="flex items-center space-x-3">
-          <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <div class="border-t border-gray-800 pt-6 md:pt-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+        <div class="flex items-center space-x-2 md:space-x-3">
+          <svg class="w-5 h-5 md:w-6 md:h-6 text-blue-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
           </svg>
-          <div>
-            <div class="text-sm text-gray-400">Telefone / WhatsApp</div>
+          <div class="min-w-0">
+            <div class="text-xs md:text-sm text-gray-400">Telefone / WhatsApp</div>
             <a 
               href="https://wa.me/5562996720296" 
               target="_blank" 
               rel="noopener noreferrer" 
-              class="text-white hover:text-blue-400 transition-colors"
+              class="text-white hover:text-blue-400 transition-colors text-xs md:text-sm break-all"
               on:click={() => {
                 if (typeof window !== 'undefined' && window.gtag) {
                   window.gtag('event', 'click_whatsapp', {
@@ -143,32 +143,32 @@
             </a>
           </div>
         </div>
-        <div class="flex items-center space-x-3">
-          <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="flex items-center space-x-2 md:space-x-3">
+          <svg class="w-5 h-5 md:w-6 md:h-6 text-blue-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
           </svg>
-          <div>
-            <div class="text-sm text-gray-400">Email</div>
-            <a href="mailto:contato@clinicupapp.com" class="text-white hover:text-blue-400 transition-colors">
+          <div class="min-w-0">
+            <div class="text-xs md:text-sm text-gray-400">Email</div>
+            <a href="mailto:contato@clinicupapp.com" class="text-white hover:text-blue-400 transition-colors text-xs md:text-sm break-all">
               contato@clinicupapp.com
             </a>
           </div>
         </div>
-        <div class="flex items-center space-x-3">
-          <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="flex items-center space-x-2 md:space-x-3 sm:col-span-2 lg:col-span-1">
+          <svg class="w-5 h-5 md:w-6 md:h-6 text-blue-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-          <div>
-            <div class="text-sm text-gray-400">Horário de Atendimento</div>
-            <div class="text-white">Segunda a Sexta: 8h às 18h</div>
+          <div class="min-w-0">
+            <div class="text-xs md:text-sm text-gray-400">Horário de Atendimento</div>
+            <div class="text-white text-xs md:text-sm">Segunda a Sexta: 8h às 18h</div>
           </div>
         </div>
       </div>
     </div>
     
     <!-- Copyright -->
-    <div class="border-t border-gray-800 pt-8 text-center">
-      <p class="text-sm text-gray-400">
+    <div class="border-t border-gray-800 pt-6 md:pt-8 text-center">
+      <p class="text-xs md:text-sm text-gray-400">
         &copy; {currentYear} UpClinic. Todos os direitos reservados.
       </p>
     </div>
