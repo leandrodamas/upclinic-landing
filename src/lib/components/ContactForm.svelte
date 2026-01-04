@@ -93,6 +93,13 @@
           message: ''
         };
         dispatch('success');
+        
+        // Disparar evento de conversão do Google Ads
+        if (typeof window !== 'undefined' && (window as any).gtag) {
+          (window as any).gtag('event', 'conversion', {
+            'send_to': 'AW-17367062285/_tuZCJCnrNYbEI2uodlA'
+          });
+        }
       } else {
         throw new Error('Erro ao enviar mensagem');
       }
