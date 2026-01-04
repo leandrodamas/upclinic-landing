@@ -18,7 +18,7 @@
   }
 </script>
 
-<nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 {scrolled ? 'bg-white/95 backdrop-blur-md shadow-md' : 'bg-transparent'}">
+<nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 {scrolled || mobileMenuOpen ? 'bg-white/95 backdrop-blur-md shadow-md' : 'bg-transparent'}">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16 sm:h-18 md:h-20">
       <!-- Logo -->
@@ -66,20 +66,23 @@
     
     <!-- Mobile Menu -->
     {#if mobileMenuOpen}
-      <div class="md:hidden py-4 space-y-4 animate-fade-in">
-        <a href="/#inicio" class="block text-gray-700 hover:text-blue-600 font-medium">Início</a>
-        <a href="/#funcionalidades" class="block text-gray-700 hover:text-blue-600 font-medium" on:click={() => mobileMenuOpen = false}>Funcionalidades</a>
-        <a href="/planos" class="block text-gray-700 hover:text-blue-600 font-medium" on:click={() => mobileMenuOpen = false}>Planos</a>
-        <a href="/sobre" class="block text-gray-700 hover:text-blue-600 font-medium">Sobre</a>
-        <a href="/contato" class="block text-gray-700 hover:text-blue-600 font-medium">Contato</a>
-        <a 
-          href="https://upclinic-aa025.web.app/login" 
-          target="_blank"
-          rel="noopener noreferrer"
-          class="btn btn-primary btn-sm w-full"
-        >
-          Entrar
-        </a>
+      <div class="md:hidden py-4 space-y-4 animate-fade-in bg-white rounded-lg mt-2 shadow-lg border border-gray-100">
+        <a href="/#inicio" class="block text-gray-700 hover:text-blue-600 font-medium px-2 py-2 rounded-md hover:bg-gray-50 transition-colors" on:click={() => mobileMenuOpen = false}>Início</a>
+        <a href="/#funcionalidades" class="block text-gray-700 hover:text-blue-600 font-medium px-2 py-2 rounded-md hover:bg-gray-50 transition-colors" on:click={() => mobileMenuOpen = false}>Funcionalidades</a>
+        <a href="/planos" class="block text-gray-700 hover:text-blue-600 font-medium px-2 py-2 rounded-md hover:bg-gray-50 transition-colors" on:click={() => mobileMenuOpen = false}>Planos</a>
+        <a href="/sobre" class="block text-gray-700 hover:text-blue-600 font-medium px-2 py-2 rounded-md hover:bg-gray-50 transition-colors" on:click={() => mobileMenuOpen = false}>Sobre</a>
+        <a href="/contato" class="block text-gray-700 hover:text-blue-600 font-medium px-2 py-2 rounded-md hover:bg-gray-50 transition-colors" on:click={() => mobileMenuOpen = false}>Contato</a>
+        <div class="pt-2 px-2">
+          <a 
+            href="https://upclinic-aa025.web.app/login" 
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-primary btn-sm w-full"
+            on:click={() => mobileMenuOpen = false}
+          >
+            Entrar
+          </a>
+        </div>
       </div>
     {/if}
   </div>
