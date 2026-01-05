@@ -61,78 +61,78 @@
             <span class="relative z-10">FICOU ALGUMA DÚVIDA?</span>
             <!-- Destaque decorativo atrás do título -->
             <span class="absolute -left-1 -top-0.5 md:-left-2 md:-top-1 w-12 h-12 md:w-16 md:h-16 bg-blue-200/30 rounded-full blur-2xl -z-0"></span>
-          </h2>
+      </h2>
           <p class="text-xs md:text-sm text-gray-600 relative z-10">
-            Confira nossas perguntas frequentes
-          </p>
-        </div>
-        
+        Confira nossas perguntas frequentes
+      </p>
+    </div>
+    
         <div class="space-y-2 relative z-10">
-          {#each faqs as faq, index}
+        {#each faqs as faq, index}
             <div class="border border-gray-200 rounded-lg overflow-hidden hover:border-blue-400 hover:shadow-md transition-all duration-300 bg-white/90 backdrop-blur-sm group">
-              <button
-                type="button"
+            <button
+              type="button"
                 class="w-full px-4 py-3 text-left flex items-center justify-between gap-3 hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 transition-all duration-300 relative"
-                on:click={() => toggleFAQ(index)}
-                aria-expanded={openIndex === index}
-                aria-controls="faq-answer-{index}"
-              >
+              on:click={() => toggleFAQ(index)}
+              aria-expanded={openIndex === index}
+              aria-controls="faq-answer-{index}"
+            >
                 <!-- Ícone decorativo no hover -->
                 <div class="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-500 to-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 
                 <span class="font-semibold text-gray-900 text-sm flex-1 group-hover:text-blue-700 transition-colors">{faq.question}</span>
                 <div class="flex items-center gap-2">
-                  <svg 
+              <svg 
                     class="w-4 h-4 text-gray-500 group-hover:text-blue-600 flex-shrink-0 transition-all duration-200 {openIndex === index ? 'rotate-180' : ''}"
-                    fill="none" 
-                    stroke="currentColor" 
-                    viewBox="0 0 24 24"
-                  >
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                  </svg>
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
                 </div>
-              </button>
-              
-              {#if openIndex === index}
-                <div 
-                  id="faq-answer-{index}"
+            </button>
+            
+            {#if openIndex === index}
+              <div 
+                id="faq-answer-{index}"
                   class="px-4 pb-3 text-gray-700 text-sm leading-relaxed animate-fade-in bg-gradient-to-br from-blue-50/50 to-transparent"
-                >
-                  {faq.answer}
-                </div>
-              {/if}
-            </div>
-          {/each}
-        </div>
-        
-        <!-- CTA -->
+              >
+                {faq.answer}
+              </div>
+            {/if}
+          </div>
+        {/each}
+      </div>
+      
+      <!-- CTA -->
         <div class="mt-6 md:mt-8 relative z-10">
           <p class="text-gray-700 mb-3 md:mb-4 text-xs md:text-sm font-medium">
-            Não encontrou a resposta que procurava?
-          </p>
+          Não encontrou a resposta que procurava?
+        </p>
           <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 md:gap-3">
-            <a 
-              href="/contato"
+          <a 
+            href="/contato"
               class="btn bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-4 py-2 md:px-6 md:py-2 text-xs md:text-sm shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 text-center"
-            >
-              Entre em Contato
-            </a>
-            <a 
-              href="https://wa.me/5562996720296?text=Olá!%20Tenho%20uma%20dúvida%20sobre%20o%20UpClinic"
-              target="_blank"
-              rel="noopener noreferrer"
+          >
+            Entre em Contato
+          </a>
+          <a 
+            href="https://wa.me/5562996720296?text=Olá!%20Tenho%20uma%20dúvida%20sobre%20o%20UpClinic"
+            target="_blank"
+            rel="noopener noreferrer"
               class="btn bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white px-4 py-2 md:px-6 md:py-2 text-xs md:text-sm shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 text-center"
-              on:click={() => {
-                if (typeof window !== 'undefined' && window.gtag) {
-                  window.gtag('event', 'click_whatsapp', {
-                    event_category: 'engagement',
-                    event_label: 'botao_whatsapp_faq'
-                  });
-                }
-              }}
-            >
-              Falar no WhatsApp
-            </a>
+            on:click={() => {
+              if (typeof window !== 'undefined' && window.gtag) {
+                window.gtag('event', 'click_whatsapp', {
+                  event_category: 'engagement',
+                  event_label: 'botao_whatsapp_faq'
+                });
+              }
+            }}
+          >
+            Falar no WhatsApp
+          </a>
           </div>
         </div>
       </div>
