@@ -12,6 +12,7 @@ declare global {
 	
 	interface Window {
 		StripePricingTable?: any;
+		fbq?: (action: string, event: string, params?: any) => void;
 	}
 	
 	// Declaração do elemento customizado do Stripe

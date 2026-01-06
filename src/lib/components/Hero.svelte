@@ -2,6 +2,13 @@
   import { onMount } from 'svelte';
   import ImageWithFallback from './ImageWithFallback.svelte';
   
+  function trackLead() {
+    if (typeof window !== 'undefined' && window.fbq) {
+      window.fbq('track', 'Lead');
+      console.log('🔥 Meta Pixel Lead disparado');
+    }
+  }
+  
   onMount(() => {
     // Animação suave de entrada
     setTimeout(() => {
@@ -66,6 +73,7 @@
                 <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-center sm:justify-start gap-2 sm:gap-2.5">
                   <a 
                     href="https://upclinic-aa025.web.app/login" 
+                    on:click={trackLead}
                     class="group relative inline-flex items-center justify-center w-full sm:w-auto px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 text-sm sm:text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-700 rounded-lg shadow-lg shadow-blue-500/50 hover:shadow-xl hover:shadow-blue-500/60 transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500/50 backdrop-blur-sm bg-opacity-95 whitespace-nowrap"
                   >
                     <span>Começar Agora</span>

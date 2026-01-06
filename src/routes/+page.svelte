@@ -24,6 +24,13 @@
       });
     }
   }
+
+  function trackLead() {
+    if (typeof window !== 'undefined' && window.fbq) {
+      window.fbq('track', 'Lead');
+      console.log('🔥 Meta Pixel Lead disparado');
+    }
+  }
 </script>
 
 <svelte:head>
@@ -78,6 +85,7 @@
     <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
       <a 
         href="https://upclinic-aa025.web.app/login" 
+        on:click={trackLead}
         class="btn bg-white text-blue-600 hover:bg-gray-100 btn-large"
       >
         Começar Agora
