@@ -174,7 +174,7 @@
             </div>
             
             <img 
-              src="/ChatGPT Image 30 de dez. de 2025, 15_06_52.png" 
+              src="/faq-image.png" 
               alt="UpClinic - Tire suas dúvidas"
               class="w-full h-auto rounded-xl object-cover relative z-10 shadow-inner"
             />

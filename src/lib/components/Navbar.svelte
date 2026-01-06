@@ -24,10 +24,10 @@
       <!-- Logo -->
       <a href="/" class="flex items-center group">
         <ImageWithFallback 
-          src="/ChatGPT Image 30 de nov. de 2025, 01_06_00.png"
+          src="/logo-upclinic-white.png"
           alt="UpClinic Logo"
           className="h-10 sm:h-12 md:h-14 lg:h-16 w-auto object-contain"
-          fallback="/ChatGPT Image 30 de nov. de 2025, 01_06_00.png"
+          fallback="/logo-upclinic-white.png"
         />
       </a>
       

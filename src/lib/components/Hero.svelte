@@ -37,10 +37,10 @@
         <div class="hero-animate relative w-full">
           <div class="relative w-full overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl">
             <ImageWithFallback 
-              src="/ChatGPT Image 29 de dez. de 2025, 17_47_52.png"
+              src="/hero-image.png"
               alt="UpClinic - Tecnologia que impulsiona sua clínica"
               className="w-full h-auto object-contain sm:object-cover"
-              fallback="/ChatGPT Image 29 de dez. de 2025, 17_47_52.png"
+              fallback="/hero-image.png"
             />
             
             <!-- Overlay com posicionamento inteligente -->

@@ -3,12 +3,12 @@
   const partners = [
     {
       name: 'Clínica Vida+',
-      logo: encodeURI('/ChatGPT Image 18 de dez. de 2025, 22_42_15.png'),
+      logo: '/partner-logo-1.png',
       url: '#'
     },
     {
       name: 'Saúde Prime',
-      logo: encodeURI('/ChatGPT Image 18 de dez. de 2025, 22_52_03.png'),
+      logo: '/partner-logo-2.png',
       url: '#'
     },
     {

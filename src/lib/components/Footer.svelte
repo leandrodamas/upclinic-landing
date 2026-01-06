@@ -12,10 +12,10 @@
       <div class="lg:col-span-1">
         <div class="flex items-center mb-3 md:mb-4">
           <ImageWithFallback 
-            src="/ChatGPT Image 30 de nov. de 2025, 01_06_00.png"
+            src="/logo-upclinic-white.png"
             alt="UpClinic Logo"
             class="h-20 md:h-24 lg:h-28 w-auto object-contain"
-            fallback="/ChatGPT Image 30 de nov. de 2025, 01_06_00.png"
+            fallback="/logo-upclinic-white.png"
           />
         </div>
         <p class="text-xs md:text-sm text-gray-400 mb-4 md:mb-6">

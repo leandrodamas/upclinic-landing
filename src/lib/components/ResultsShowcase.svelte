@@ -39,13 +39,13 @@
       name: 'Dr. Carlos Silva',
       role: 'Clínica Médica São Paulo',
       quote: 'O UpClinic transformou completamente nossa gestão. Reduzimos o tempo administrativo em 70% e aumentamos a satisfação dos pacientes.',
-      avatar: '/ChatGPT Image 18 de dez. de 2025, 21_59_49.png'
+      avatar: '/avatar-1.png'
     },
     {
       name: 'Dra. Ana Costa',
       role: 'Clínica de Especialidades',
       quote: 'A agenda inteligente eliminou praticamente todas as faltas. Os lembretes automáticos são um diferencial incrível.',
-      avatar: '/ChatGPT Image 18 de dez. de 2025, 21_51_34.png'
+      avatar: '/avatar-2.png'
     },
     {
       name: 'Dr. Roberto Santos',
