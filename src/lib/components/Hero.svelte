@@ -4,8 +4,20 @@
   
   function trackLead() {
     if (typeof window !== 'undefined' && window.fbq) {
-      window.fbq('track', 'Lead');
-      console.log('🔥 Meta Pixel Lead disparado');
+      // Gerar event_id único para deduplicação
+      const eventId = crypto.randomUUID();
+      window.fbq('track', 'Lead', {}, { eventID: eventId });
+      console.log('🔥 Meta Pixel Lead disparado - Event ID:', eventId);
+      
+      // Enviar para backend para deduplicação via CAPI
+      fetch('/api/meta-event', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          event_name: 'Lead',
+          event_id: eventId
+        })
+      }).catch(err => console.warn('Erro ao enviar evento para CAPI:', err));
     }
   }
   

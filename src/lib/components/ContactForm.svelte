@@ -11,6 +11,25 @@
       });
     }
   }
+
+  function trackLeadForm() {
+    if (typeof window !== 'undefined' && window.fbq) {
+      // Gerar event_id único para deduplicação
+      const eventId = crypto.randomUUID();
+      window.fbq('track', 'Lead', {}, { eventID: eventId });
+      console.log('🔥 Meta Pixel Lead (Formulário) - Event ID:', eventId);
+      
+      // Enviar para backend para deduplicação via CAPI
+      fetch('/api/meta-event', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          event_name: 'Lead',
+          event_id: eventId
+        })
+      }).catch(err => console.warn('Erro ao enviar evento para CAPI:', err));
+    }
+  }
   
   let formData = {
     name: '',
@@ -93,6 +112,9 @@
           message: ''
         };
         dispatch('success');
+        
+        // Disparar evento Meta Pixel Lead após envio bem-sucedido
+        trackLeadForm();
         
         // Disparar evento de conversão do Google Ads
         if (typeof window !== 'undefined' && (window as any).gtag) {
