@@ -32,8 +32,8 @@
   <meta property="og:title" content="UpClinic - Sistema de Gestão Médica Profissional" />
   <meta property="og:description" content="Transforme sua clínica com tecnologia de ponta. Sistema completo de gestão médica." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://clinicupapp.com" />
-  <meta property="og:image" content="https://clinicupapp.com/og-image.png" />
+  <meta property="og:url" content="https://www.clinicupapp.com" />
+  <!-- og:image removido - já está definido em app.html para evitar duplicação -->
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="canonical" href="https://clinicupapp.com" />
   
