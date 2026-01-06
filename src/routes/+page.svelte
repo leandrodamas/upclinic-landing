@@ -25,12 +25,16 @@
     }
   }
 
-  function trackLead() {
+  function trackLead(contentName = 'CTA Principal', source = 'Landing Page') {
     if (typeof window !== 'undefined' && window.fbq) {
       // Gerar event_id único para deduplicação
       const eventId = crypto.randomUUID();
-      window.fbq('track', 'Lead', {}, { eventID: eventId });
-      console.log('🔥 Meta Pixel Lead disparado - Event ID:', eventId);
+      window.fbq('track', 'Lead', {
+        content_name: contentName,
+        content_category: 'SaaS',
+        source: source
+      }, { eventID: eventId });
+      console.log('🔥 Meta Pixel Lead disparado - Event ID:', eventId, 'Content:', contentName);
       
       // Enviar para backend para deduplicação via CAPI
       fetch('/api/meta-event', {
@@ -38,7 +42,12 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           event_name: 'Lead',
-          event_id: eventId
+          event_id: eventId,
+          event_data: {
+            content_name: contentName,
+            content_category: 'SaaS',
+            source: source
+          }
         })
       }).catch(err => console.warn('Erro ao enviar evento para CAPI:', err));
     }
@@ -97,7 +106,10 @@
     <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
       <a 
         href="https://upclinic-aa025.web.app/login" 
-        on:click={trackLead}
+        on:click|preventDefault={() => {
+          trackLead('CTA Principal', 'CTA Section');
+          window.location.href = 'https://upclinic-aa025.web.app/login';
+        }}
         class="btn bg-white text-blue-600 hover:bg-gray-100 btn-large"
       >
         Começar Agora

@@ -16,6 +16,34 @@
   function toggleMobileMenu() {
     mobileMenuOpen = !mobileMenuOpen;
   }
+
+  function trackLeadEnter() {
+    if (typeof window !== 'undefined' && window.fbq) {
+      // Gerar event_id único para deduplicação
+      const eventId = crypto.randomUUID();
+      window.fbq('track', 'Lead', {
+        content_name: 'CTA Entrar',
+        content_category: 'SaaS',
+        source: 'Navbar'
+      }, { eventID: eventId });
+      console.log('🔥 Meta Pixel Lead (Entrar) - Event ID:', eventId);
+      
+      // Enviar para backend para deduplicação via CAPI
+      fetch('/api/meta-event', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          event_name: 'Lead',
+          event_id: eventId,
+          event_data: {
+            content_name: 'CTA Entrar',
+            content_category: 'SaaS',
+            source: 'Navbar'
+          }
+        })
+      }).catch(err => console.warn('Erro ao enviar evento para CAPI:', err));
+    }
+  }
 </script>
 
 <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 {scrolled || mobileMenuOpen ? 'bg-white/95 backdrop-blur-md shadow-md' : 'bg-transparent'}">
@@ -43,6 +71,10 @@
           target="_blank"
           rel="noopener noreferrer"
           class="btn btn-primary btn-sm"
+          on:click|preventDefault={() => {
+            trackLeadEnter();
+            window.location.href = 'https://upclinic-aa025.web.app/login';
+          }}
         >
           Entrar
         </a>
@@ -78,7 +110,11 @@
             target="_blank"
             rel="noopener noreferrer"
             class="btn btn-primary btn-sm w-full"
-            on:click={() => mobileMenuOpen = false}
+            on:click|preventDefault={() => {
+              trackLeadEnter();
+              mobileMenuOpen = false;
+              window.location.href = 'https://upclinic-aa025.web.app/login';
+            }}
           >
             Entrar
           </a>
