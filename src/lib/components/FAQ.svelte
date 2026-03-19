@@ -174,8 +174,8 @@
             </div>
             
             <img 
-              src="/faq-image.png" 
-              alt="UpClinic - Tire suas dúvidas"
+              src="/equipess.png" 
+              alt="UpClinic - Equipe pronta para ajudar"
               class="w-full h-auto rounded-xl object-cover relative z-10 shadow-inner"
             />
             
