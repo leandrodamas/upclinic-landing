@@ -48,7 +48,7 @@ Configure as seguintes variáveis no Vercel ou arquivo `.env`:
 ```env
 SMTP_HOST=sh00122.hostgator.com.br
 SMTP_PORT=465
-SMTP_USER=contato@clinicupapp.com
+SMTP_USER=upclinic8@gmail.com
 SMTP_PASSWORD=sua_senha_aqui
 ```
 
@@ -65,13 +65,13 @@ SMTP_PASSWORD=sua_senha_aqui
 
 ### Formulário de Contato (`/contato`)
 - Usuário preenche: Nome, Email, Telefone, Assunto, Mensagem
-- Sistema envia email para: `contato@clinicupapp.com`
+- Sistema envia email para: `upclinic8@gmail.com`
 - Sistema envia confirmação para: Email do usuário
 - Email inclui: Todos os dados formatados em HTML
 
 ### Formulário de Candidatura (`/carreiras`)
 - Usuário preenche: Nome, Email, Telefone, Vaga, Mensagem, Currículo (opcional)
-- Sistema envia email para: `contato@clinicupapp.com`
+- Sistema envia email para: `upclinic8@gmail.com`
 - Email inclui: Todos os dados + anexo do currículo (se fornecido)
 
 ## 🧪 Como Testar
@@ -81,7 +81,7 @@ SMTP_PASSWORD=sua_senha_aqui
 ```bash
 SMTP_HOST=sh00122.hostgator.com.br
 SMTP_PORT=465
-SMTP_USER=contato@clinicupapp.com
+SMTP_USER=upclinic8@gmail.com
 SMTP_PASSWORD=sua_senha_real
 ```
 
@@ -98,7 +98,7 @@ npm run dev
 1. Configure variáveis no Vercel
 2. Faça deploy
 3. Teste o formulário em produção
-4. Verifique se o email chegou em `contato@clinicupapp.com`
+4. Verifique se o email chegou em `upclinic8@gmail.com`
 
 ## 📁 Arquivos Criados/Modificados
 

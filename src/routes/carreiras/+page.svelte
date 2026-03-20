@@ -217,7 +217,7 @@
         </div>
         <div class="mt-8 pt-8 border-t border-gray-200">
           <p class="text-gray-600 mb-2">
-            <strong>Email:</strong> <a href="mailto:contato@clinicupapp.com" class="text-blue-600 hover:underline">{CONTACT.email}</a>
+            <strong>Email:</strong> <a href="mailto:upclinic8@gmail.com" class="text-blue-600 hover:underline">{CONTACT.email}</a>
           </p>
           <p class="text-gray-600">
             <strong>WhatsApp:</strong> <a 

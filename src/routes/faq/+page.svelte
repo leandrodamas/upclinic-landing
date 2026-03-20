@@ -65,7 +65,7 @@
       questions: [
         {
           q: 'Como posso entrar em contato com o suporte?',
-          a: 'Você pode entrar em contato através do WhatsApp (62) 99672-0296, email contato@clinicupapp.com ou através do formulário de contato em nosso site.'
+          a: 'Você pode entrar em contato através do WhatsApp (62) 99672-0296, email upclinic8@gmail.com ou através do formulário de contato em nosso site.'
         },
         {
           q: 'Qual o horário de atendimento?',

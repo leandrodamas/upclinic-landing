@@ -70,7 +70,7 @@ O site estará disponível em:
 ## 📝 Informações de Contato
 
 - **WhatsApp:** (62) 99672-0296
-- **Email:** contato@clinicupapp.com
+- **Email:** upclinic8@gmail.com
 
 ## 🎨 Design
 

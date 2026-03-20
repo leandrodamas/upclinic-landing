@@ -10,7 +10,7 @@
 ```
 SMTP_HOST = sh00122.hostgator.com.br
 SMTP_PORT = 465
-SMTP_USER = contato@clinicupapp.com
+SMTP_USER = upclinic8@gmail.com
 SMTP_PASSWORD = [sua_senha_do_email]
 ```
 

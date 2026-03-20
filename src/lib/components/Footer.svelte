@@ -149,8 +149,8 @@
           </svg>
           <div class="min-w-0">
             <div class="text-xs md:text-sm text-gray-400">Email</div>
-            <a href="mailto:contato@clinicupapp.com" class="text-white hover:text-blue-400 transition-colors text-xs md:text-sm break-all">
-              contato@clinicupapp.com
+            <a href="mailto:upclinic8@gmail.com" class="text-white hover:text-blue-400 transition-colors text-xs md:text-sm break-all">
+              upclinic8@gmail.com
             </a>
           </div>
         </div>

@@ -16,7 +16,7 @@ Write-Host "✅ Logado como: $whoami`n" -ForegroundColor Green
 # Valores padrão
 $host = "sh00122.hostgator.com.br"
 $port = "465"
-$user = "contato@clinicupapp.com"
+$user = "upclinic8@gmail.com"
 
 Write-Host "Valores padrão:" -ForegroundColor Yellow
 Write-Host "  SMTP_HOST: $host"

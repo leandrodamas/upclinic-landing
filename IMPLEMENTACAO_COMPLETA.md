@@ -85,7 +85,7 @@ Landing page completa e profissional criada com SvelteKit + TailwindCSS, incluin
 
 - ✅ WhatsApp: (62) 99672-0296
 - ✅ Link WhatsApp: https://wa.me/5562996720296
-- ✅ Email: contato@clinicupapp.com
+- ✅ Email: upclinic8@gmail.com
 - ✅ Links funcionais em Footer e páginas de contato
 
 ## 🌐 Domínio

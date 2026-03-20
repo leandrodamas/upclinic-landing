@@ -37,9 +37,9 @@ if ([string]::IsNullOrWhiteSpace($smtpPort)) {
     $smtpPort = "465"
 }
 
-$smtpUser = Read-Host "SMTP User [contato@clinicupapp.com]"
+$smtpUser = Read-Host "SMTP User [upclinic8@gmail.com]"
 if ([string]::IsNullOrWhiteSpace($smtpUser)) {
-    $smtpUser = "contato@clinicupapp.com"
+    $smtpUser = "upclinic8@gmail.com"
 }
 
 $smtpPassword = Read-Host "SMTP Password" -AsSecureString

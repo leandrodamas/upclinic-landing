@@ -128,7 +128,7 @@
       por favor, entre em contato conosco imediatamente através de:
     </p>
     <ul>
-      <li>Email: <a href="mailto:contato@clinicupapp.com">contato@clinicupapp.com</a></li>
+      <li>Email: <a href="mailto:upclinic8@gmail.com">upclinic8@gmail.com</a></li>
       <li>WhatsApp: <a 
         href="https://wa.me/5562996720296"
         on:click={() => trackWhatsAppClick('botao_whatsapp_codigo_conduta')}

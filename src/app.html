@@ -107,7 +107,7 @@
   <!-- END GTM -->
 
   <!-- =====================================================
-       GOOGLE ADS (gtag)
+       GOOGLE ADS (gtag) - Conta Principal
        ===================================================== -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17367062285"></script>
   <script>
@@ -115,6 +115,28 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'AW-17367062285');
+  </script>
+
+  <!-- =====================================================
+       GOOGLE ADS (gtag) - Conta Secundária
+       ===================================================== -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17840348694"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-17840348694');
+    
+    // Função helper para disparar evento de conversão de compra
+    // Pode ser chamada de qualquer lugar: window.trackPurchaseConversion(transactionId)
+    window.trackPurchaseConversion = function(transactionId) {
+      if (typeof window !== 'undefined' && window.gtag) {
+        window.gtag('event', 'conversion', {
+          'send_to': 'AW-17840348694/D3kyCKr5p9obEJa8-LpC',
+          'transaction_id': transactionId || ''
+        });
+      }
+    };
   </script>
 
   <!-- =====================================================

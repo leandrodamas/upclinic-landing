@@ -40,7 +40,7 @@ Adicione as seguintes variáveis **uma por uma**:
 
 #### Variável 3: SMTP_USER
 - **Name:** `SMTP_USER`
-- **Value:** `contato@clinicupapp.com`
+- **Value:** `upclinic8@gmail.com`
 - **Environments:** ✅ Production, ✅ Preview, ✅ Development
 - Clique em **Save**
 
@@ -123,7 +123,7 @@ vercel env add SMTP_PORT production
 # Quando solicitado, digite: 465
 
 vercel env add SMTP_USER production
-# Quando solicitado, digite: contato@clinicupapp.com
+# Quando solicitado, digite: upclinic8@gmail.com
 
 vercel env add SMTP_PASSWORD production
 # Quando solicitado, digite: sua_senha_do_email
@@ -168,7 +168,7 @@ Após configurar e fazer deploy, teste o envio de emails:
 1. Acesse: https://clinicupapp.com/contato
 2. Preencha o formulário de contato
 3. Envie a mensagem
-4. Verifique se o email chegou em `contato@clinicupapp.com`
+4. Verifique se o email chegou em `upclinic8@gmail.com`
 5. Verifique os logs no Vercel: **Settings** > **Functions** > **Logs**
 
 ---
@@ -209,7 +209,7 @@ Após configurar e fazer deploy, teste o envio de emails:
 |----------|-------|-----------|
 | `SMTP_HOST` | `sh00122.hostgator.com.br` | Servidor SMTP |
 | `SMTP_PORT` | `465` | Porta SMTP (SSL/TLS) |
-| `SMTP_USER` | `contato@clinicupapp.com` | Email de autenticação |
+| `SMTP_USER` | `upclinic8@gmail.com` | Email de autenticação |
 | `SMTP_PASSWORD` | `[sua_senha]` | Senha do email |
 
 ---

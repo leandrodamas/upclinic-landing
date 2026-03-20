@@ -4,7 +4,7 @@ Este documento descreve como configurar o envio de emails através do SMTP do Ho
 
 ## 📋 Pré-requisitos
 
-- Conta de email `contato@clinicupapp.com` criada no cPanel
+- Conta de email `upclinic8@gmail.com` criada no cPanel
 - Senha da conta de email
 - Acesso ao cPanel HostGator
 
@@ -32,7 +32,7 @@ Crie um arquivo `.env` na raiz do projeto (ou configure no Vercel) com as seguin
 ```env
 SMTP_HOST=sh00122.hostgator.com.br
 SMTP_PORT=465
-SMTP_USER=contato@clinicupapp.com
+SMTP_USER=upclinic8@gmail.com
 SMTP_PASSWORD=sua_senha_aqui
 ```
 
@@ -44,7 +44,7 @@ SMTP_PASSWORD=sua_senha_aqui
 4. Adicione as seguintes variáveis:
    - `SMTP_HOST` = `sh00122.hostgator.com.br`
    - `SMTP_PORT` = `465`
-   - `SMTP_USER` = `contato@clinicupapp.com`
+   - `SMTP_USER` = `upclinic8@gmail.com`
    - `SMTP_PASSWORD` = (senha do email)
 5. Selecione os ambientes: **Production**, **Preview**, **Development**
 6. Clique em **Save**
@@ -54,13 +54,13 @@ SMTP_PASSWORD=sua_senha_aqui
 ### 1. Formulário de Contato (`/contato`)
 
 - **Endpoint:** `POST /api/contact`
-- **Funcionalidade:** Envia email para `contato@clinicupapp.com` com os dados do formulário
+- **Funcionalidade:** Envia email para `upclinic8@gmail.com` com os dados do formulário
 - **Confirmação:** Envia email de confirmação automático para o remetente
 
 ### 2. Formulário de Candidatura (`/carreiras`)
 
 - **Endpoint:** `POST /api/job-application`
-- **Funcionalidade:** Envia email para `contato@clinicupapp.com` com dados da candidatura
+- **Funcionalidade:** Envia email para `upclinic8@gmail.com` com dados da candidatura
 - **Suporte:** Suporta anexo de currículo (base64)
 
 ## 🧪 Testando a Configuração
@@ -91,7 +91,7 @@ npm run dev
 1. Configure as variáveis de ambiente no Vercel
 2. Faça deploy da aplicação
 3. Teste o formulário de contato em produção
-4. Verifique se o email chegou em `contato@clinicupapp.com`
+4. Verifique se o email chegou em `upclinic8@gmail.com`
 
 ## 🔍 Troubleshooting
 

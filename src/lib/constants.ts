@@ -7,7 +7,7 @@ export const SYSTEM_URL = 'https://upclinic-aa025.web.app';
 export const CONTACT = {
   whatsapp: '62996720296',
   whatsappLink: 'https://wa.me/5562996720296',
-  email: 'contato@clinicupapp.com',
+  email: 'upclinic8@gmail.com',
   phone: '(62) 99672-0296'
 };
 

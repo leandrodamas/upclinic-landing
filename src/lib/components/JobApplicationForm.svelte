@@ -158,7 +158,7 @@
       } catch (apiError) {
         console.error('Erro ao enviar via API:', apiError);
         // Fallback: usar mailto
-        window.location.href = `mailto:contato@clinicupapp.com?subject=${subject}&body=${body}`;
+        window.location.href = `mailto:upclinic8@gmail.com?subject=${subject}&body=${body}`;
         
         // Mostrar mensagem de sucesso mesmo usando mailto
         success = true;
@@ -298,7 +298,7 @@
         <p class="text-red-500 text-sm mt-1">{errors.message}</p>
       {/if}
       <p class="text-sm text-gray-500 mt-2">
-        💡 Dica: Você pode anexar seu currículo enviando por email para contato@clinicupapp.com após enviar este formulário.
+        💡 Dica: Você pode anexar seu currículo enviando por email para upclinic8@gmail.com após enviar este formulário.
       </p>
     </div>
     

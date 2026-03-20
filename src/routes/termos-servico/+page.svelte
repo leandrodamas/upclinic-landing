@@ -136,7 +136,7 @@
       Se você tiver dúvidas sobre estes Termos de Serviço, entre em contato:
     </p>
     <ul class="text-gray-700 space-y-2">
-      <li>Email: <a href="mailto:contato@clinicupapp.com" class="text-blue-600">contato@clinicupapp.com</a></li>
+      <li>Email: <a href="mailto:upclinic8@gmail.com" class="text-blue-600">upclinic8@gmail.com</a></li>
       <li>WhatsApp: <a 
         href="https://wa.me/5562996720296" 
         class="text-blue-600"

@@ -116,10 +116,16 @@
         // Disparar evento Meta Pixel Lead após envio bem-sucedido
         trackLeadForm();
         
-        // Disparar evento de conversão do Google Ads
+        // Disparar evento de conversão do Google Ads - Conta Principal
         if (typeof window !== 'undefined' && (window as any).gtag) {
           (window as any).gtag('event', 'conversion', {
             'send_to': 'AW-17367062285/_tuZCJCnrNYbEI2uodlA'
+          });
+          
+          // Disparar evento de conversão do Google Ads - Conta Secundária
+          (window as any).gtag('event', 'conversion', {
+            'send_to': 'AW-17840348694/D3kyCKr5p9obEJa8-LpC',
+            'transaction_id': ''
           });
         }
       } else {

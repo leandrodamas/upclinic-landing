@@ -15,7 +15,7 @@
 
 <svelte:head>
   <title>Contato - UpClinic | clinicupapp.com</title>
-  <meta name="description" content="Entre em contato com a UpClinic. WhatsApp: (62) 99672-0296 | Email: contato@clinicupapp.com" />
+  <meta name="description" content="Entre em contato com a UpClinic. WhatsApp: (62) 99672-0296 | Email: upclinic8@gmail.com" />
   <link rel="canonical" href="https://clinicupapp.com/contato" />
 </svelte:head>
 
@@ -71,9 +71,9 @@
             </div>
             <div>
               <h3 class="text-xl font-bold text-gray-900 mb-2">Email</h3>
-              <p class="text-gray-600 mb-3">contato@clinicupapp.com</p>
+              <p class="text-gray-600 mb-3">upclinic8@gmail.com</p>
               <a 
-                href="mailto:contato@clinicupapp.com"
+                href="mailto:upclinic8@gmail.com"
                 class="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium"
               >
                 Enviar email

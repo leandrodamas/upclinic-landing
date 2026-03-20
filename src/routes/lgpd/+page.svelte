@@ -111,7 +111,7 @@
       Para exercer qualquer um dos direitos acima, você pode entrar em contato conosco através de:
     </p>
     <ul>
-      <li>Email: <a href="mailto:contato@clinicupapp.com">contato@clinicupapp.com</a></li>
+      <li>Email: <a href="mailto:upclinic8@gmail.com">upclinic8@gmail.com</a></li>
       <li>WhatsApp: <a 
         href="https://wa.me/5562996720296"
         on:click={() => trackWhatsAppClick('botao_whatsapp_lgpd')}
@@ -140,7 +140,7 @@
     </p>
     <div class="bg-blue-50 p-6 rounded-lg mt-6">
       <p class="text-gray-700 mb-2">
-        <strong>Email:</strong> <a href="mailto:contato@clinicupapp.com" class="text-blue-600">contato@clinicupapp.com</a>
+        <strong>Email:</strong> <a href="mailto:upclinic8@gmail.com" class="text-blue-600">upclinic8@gmail.com</a>
       </p>
       <p class="text-gray-700 mb-2">
         <strong>Assunto:</strong> DPO / LGPD
