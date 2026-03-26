@@ -100,6 +100,7 @@
           <li><a href="/#duvidas-frequentes" class="hover:text-white transition-colors text-xs md:text-sm">Dúvidas Frequentes</a></li>
           <li><a href="/faq" class="hover:text-white transition-colors text-xs md:text-sm">Central de Ajuda</a></li>
           <li><a href="/contato" class="hover:text-white transition-colors text-xs md:text-sm">Fale Conosco</a></li>
+          <li class="text-gray-400 text-xs mt-2 leading-snug">Atendimento:<br>Seg–Sex 8h–18h<br>Sáb 8h–12h</li>
         </ul>
       </div>
       

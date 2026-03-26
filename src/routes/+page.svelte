@@ -97,31 +97,41 @@
 <!-- CTA Section -->
 <section class="py-24 bg-gradient-to-r from-blue-600 to-indigo-700">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
-      Pronto para transformar sua clínica?
+    <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">
+      Sua clínica merece um sistema<br class="hidden md:block"> que funciona de verdade
     </h2>
-    <p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-      Comece hoje mesmo e veja como o UpClinic pode revolucionar a gestão da sua clínica
+    <p class="text-xl text-blue-100 mb-3 max-w-2xl mx-auto">
+      30 dias grátis, sem cartão de crédito, sem taxa de setup. Configure em minutos e veja a diferença no primeiro dia.
     </p>
+    <p class="text-blue-200 text-sm mb-10">Mais de 3.200 clínicas já usam o UpClinic em todo o Brasil</p>
     <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-      <a 
-        href="https://upclinic-aa025.web.app/login" 
+      <a
+        href="https://upclinic-aa025.web.app/register"
+        target="_blank"
+        rel="noopener noreferrer"
         on:click|preventDefault={() => {
-          trackLead('CTA Principal', 'CTA Section');
-          window.location.href = 'https://upclinic-aa025.web.app/login';
+          trackLead('CTA Final Registro', 'CTA Section');
+          window.open('https://upclinic-aa025.web.app/register', '_blank');
         }}
-        class="btn bg-white text-blue-600 hover:bg-gray-100 btn-large"
+        class="inline-flex items-center gap-2 px-8 py-4 text-lg font-bold text-blue-700 bg-white rounded-xl hover:bg-blue-50 hover:scale-105 transition-all shadow-lg"
       >
-        Começar Agora
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        Iniciar Teste Grátis — 30 dias
       </a>
-      <button 
-        type="button"
-        on:click={openDemo}
-        class="btn btn-outline border-white text-white hover:bg-white/10 btn-large"
+      <a
+        href="https://upclinic-aa025.web.app/login"
+        target="_blank"
+        rel="noopener noreferrer"
+        on:click|preventDefault={() => {
+          trackLead('CTA Final Login', 'CTA Section');
+          window.open('https://upclinic-aa025.web.app/login', '_blank');
+        }}
+        class="inline-flex items-center px-8 py-4 text-lg font-semibold text-white border-2 border-white/50 rounded-xl hover:border-white hover:bg-white/10 transition-all"
       >
-        Falar com Vendas
-      </button>
+        Entrar no UpClinic
+      </a>
     </div>
+    <p class="text-blue-200 text-sm mt-6">Sem cartão · Sem contrato mínimo · Suporte Seg–Sáb</p>
   </div>
 </section>
 

@@ -1,20 +1,15 @@
 <script lang="ts">
-  // Lista de parceiros (você pode adicionar mais logos aqui)
+  // Tecnologias e infraestrutura que sustentam o UpClinic
   const partners = [
-    {
-      name: 'Clínica Vida+',
-      logo: '/partner-logo-1.png',
-      url: '#'
-    },
-    {
-      name: 'Saúde Prime',
-      logo: '/partner-logo-2.png',
-      url: '#'
-    },
     {
       name: 'STRIPE',
       logo: '/Stripe-Emblem.png',
       url: 'https://stripe.com'
+    },
+    {
+      name: 'Google Firebase',
+      logo: '/logo-vertical.png',
+      url: 'https://firebase.google.com'
     },
     {
       name: 'DigitalOcean',
@@ -22,17 +17,12 @@
       url: 'https://www.digitalocean.com'
     },
     {
-      name: 'Firebase',
-      logo: '/logo-vertical.png',
-      url: 'https://firebase.google.com'
-    },
-    {
       name: 'SendGrid',
       logo: encodeURI('/download (1).png'),
       url: 'https://sendgrid.com'
     },
     {
-      name: 'AWS (Amazon Web Services)',
+      name: 'Amazon Web Services',
       logo: '/images.png',
       url: 'https://aws.amazon.com'
     }
@@ -47,10 +37,10 @@
     <!-- Título -->
     <div class="text-center mb-4 md:mb-6">
       <h2 class="text-lg md:text-xl lg:text-2xl font-bold text-gray-900 mb-1">
-        Nossos Parceiros
+        Infraestrutura de Classe Mundial
       </h2>
       <p class="text-gray-600 text-xs md:text-sm">
-        Empresas que confiam no UpClinic
+        Tecnologias líderes do mercado que garantem segurança e disponibilidade
       </p>
     </div>
     

@@ -36,22 +36,28 @@
   
   const testimonials = [
     {
-      name: 'Dr. Carlos Silva',
-      role: 'Clínica Médica São Paulo',
-      quote: 'O UpClinic transformou completamente nossa gestão. Reduzimos o tempo administrativo em 70% e aumentamos a satisfação dos pacientes.',
-      avatar: '/avatar-1.png'
+      name: 'Dr. Carlos M.',
+      role: 'Clínica de Clínica Geral · Goiânia, GO',
+      specialty: 'Clínico Geral',
+      quote: 'Antes usávamos 3 sistemas diferentes e planilhas. Hoje tudo está no UpClinic — agenda, prontuário e financeiro. A recepção ganha pelo menos 2 horas por dia.',
+      avatar: '/avatar-1.png',
+      result: 'Reduziu 70% do tempo administrativo'
     },
     {
-      name: 'Dra. Ana Costa',
-      role: 'Clínica de Especialidades',
-      quote: 'A agenda inteligente eliminou praticamente todas as faltas. Os lembretes automáticos são um diferencial incrível.',
-      avatar: '/avatar-2.png'
+      name: 'Dra. Ana L.',
+      role: 'Consultório de Dermatologia · São Paulo, SP',
+      specialty: 'Dermatologista',
+      quote: 'Os lembretes automáticos por WhatsApp foram um divisor de águas. As faltas caíram de 20% para menos de 5% em dois meses. Resultado que eu não esperava tão rápido.',
+      avatar: '/avatar-2.png',
+      result: 'De 20% para menos de 5% de faltas'
     },
     {
-      name: 'Dr. Roberto Santos',
-      role: 'Consultório Particular',
-      quote: 'O prontuário eletrônico é completo e seguro. Conseguimos acessar o histórico de qualquer paciente em segundos.',
-      avatar: '/retrato-de-homem.png'
+      name: 'Dr. Roberto S.',
+      role: 'Clínica de Fisioterapia · Belo Horizonte, MG',
+      specialty: 'Fisioterapeuta',
+      quote: 'O prontuário eletrônico é completo e muito fácil de usar. Acesso o histórico de qualquer paciente em segundos, mesmo no celular entre uma sessão e outra.',
+      avatar: '/retrato-de-homem.png',
+      result: 'Acesso total ao histórico em qualquer lugar'
     }
   ];
   
@@ -150,12 +156,17 @@
                 <h4 class="text-sm md:text-base font-bold text-gray-900 mb-0.5 truncate">
                   {testimonials[currentTestimonial].name}
                 </h4>
+                <p class="text-gray-500 text-[10px] md:text-xs truncate">{testimonials[currentTestimonial].specialty}</p>
                 <p class="text-gray-600 text-[10px] md:text-xs mb-2 md:mb-3 truncate">
                   {testimonials[currentTestimonial].role}
                 </p>
-                <p class="text-gray-700 text-xs md:text-sm leading-relaxed italic">
+                <p class="text-gray-700 text-xs md:text-sm leading-relaxed italic mb-2">
                   "{testimonials[currentTestimonial].quote}"
                 </p>
+                <div class="inline-flex items-center gap-1 bg-green-50 text-green-700 px-2 py-0.5 rounded-full text-[10px] md:text-xs font-semibold">
+                  <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                  {testimonials[currentTestimonial].result}
+                </div>
               </div>
             </div>
           </div>
@@ -207,11 +218,13 @@
           <p class="text-gray-600 text-xs md:text-sm">Comece sua transformação digital hoje mesmo</p>
         </div>
         <div class="flex flex-col sm:flex-row gap-2 md:gap-3 w-full sm:w-auto">
-          <a 
-            href="https://upclinic-aa025.web.app/login"
-            class="btn bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 md:px-6 text-xs md:text-sm w-full sm:w-auto text-center"
+          <a
+            href="https://upclinic-aa025.web.app/register"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 text-xs md:text-sm font-bold text-white bg-gradient-to-r from-green-500 to-emerald-600 rounded-lg shadow-md hover:scale-105 transition-all w-full sm:w-auto"
           >
-            Teste Grátis
+            Iniciar Teste Grátis — 30 dias
           </a>
           <a 
             href="https://wa.me/5562996720296?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20os%20resultados%20do%20UpClinic"

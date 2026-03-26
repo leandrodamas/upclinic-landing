@@ -85,9 +85,9 @@
             <svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
             </svg>
-            <h3 class="text-xl font-bold text-gray-900">Suporte Especializado 24/7</h3>
+            <h3 class="text-xl font-bold text-gray-900">Suporte Especializado</h3>
           </div>
-          <p class="text-gray-600">Equipe técnica disponível para ajudar quando você precisar.</p>
+          <p class="text-gray-600">Equipe técnica disponível de Seg–Sex 8h–18h e Sáb 8h–12h para ajudar quando você precisar.</p>
         </div>
         
         <div class="card">
