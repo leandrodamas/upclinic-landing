@@ -1,6 +1,5 @@
 <script>
   import { onMount } from 'svelte';
-  import ImageWithFallback from './ImageWithFallback.svelte';
   import { LOGIN_URL, REGISTER_URL } from '$lib/constants';
 
   function trackLead(contentName = 'CTA Principal', source = 'Hero') {
@@ -19,117 +18,147 @@
 
   let visible = false;
   onMount(() => {
-    requestAnimationFrame(() => setTimeout(() => { visible = true; }, 80));
+    requestAnimationFrame(() => setTimeout(() => { visible = true; }, 100));
   });
 </script>
 
-<section id="inicio" class="relative w-full overflow-hidden bg-gradient-to-br from-blue-50 via-white to-indigo-50 pt-20 md:pt-24">
+<section id="inicio" class="relative w-full overflow-hidden" style="min-height: 100vh;">
 
-  <!-- Círculos decorativos de fundo -->
-  <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-100 rounded-full opacity-40 blur-3xl -translate-y-1/3 translate-x-1/3 pointer-events-none"></div>
-  <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-indigo-100 rounded-full opacity-30 blur-3xl translate-y-1/3 -translate-x-1/3 pointer-events-none"></div>
+  <!-- ══════════════════════════════════
+       VÍDEO DE FUNDO
+       ══════════════════════════════════ -->
+  <video
+    autoplay
+    muted
+    loop
+    playsinline
+    class="absolute inset-0 w-full h-full object-cover"
+    style="z-index: 0;"
+    aria-hidden="true"
+  >
+    <source src="/video%20site1.mp4" type="video/mp4" />
+  </video>
 
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-4 items-center py-12 lg:py-16">
+  <!-- Overlay gradiente — harmoniza com azul da marca e garante legibilidade -->
+  <div
+    class="absolute inset-0"
+    style="
+      z-index: 1;
+      background: linear-gradient(
+        135deg,
+        rgba(10, 22, 60, 0.88) 0%,
+        rgba(17, 45, 110, 0.80) 40%,
+        rgba(29, 78, 216, 0.55) 70%,
+        rgba(17, 45, 110, 0.70) 100%
+      );
+    "
+  ></div>
 
-      <!-- Coluna Esquerda: Texto + CTAs -->
-      <div class:visible>
+  <!-- ══════════════════════════════════
+       CONTEÚDO PRINCIPAL
+       ══════════════════════════════════ -->
+  <div class="relative container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center"
+       style="z-index: 2; min-height: 100vh; padding-top: 5rem; padding-bottom: 5rem;">
 
-        <!-- Badge -->
-        <div class="inline-flex items-center gap-2 bg-blue-100 border border-blue-200 text-blue-700 px-4 py-1.5 rounded-full text-sm font-semibold mb-6">
-          <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-          Sistema para Clínicas · 30 dias grátis, sem cartão
-        </div>
+    <div class="max-w-3xl" class:visible>
 
-        <!-- H1 -->
-        <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900 leading-[1.1] mb-5 tracking-tight">
-          Gerencie sua clínica<br>
-          do agendamento<br>
-          <span class="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">ao financeiro</span>
-        </h1>
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-2 mb-6"
+           style="background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25);
+                  backdrop-filter: blur(8px); padding: 6px 16px; border-radius: 999px;">
+        <span style="width:8px;height:8px;background:#34d399;border-radius:50%;flex-shrink:0;
+                     animation: pulse 2s cubic-bezier(0.4,0,0.6,1) infinite;"></span>
+        <span style="color:#e0f2fe; font-size:0.875rem; font-weight:600;">
+          Sistema de Gestão Médica · 30 dias grátis, sem cartão
+        </span>
+      </div>
 
-        <!-- Subheadline -->
-        <p class="text-lg text-gray-600 mb-2 leading-relaxed max-w-md">
-          Sem planilhas, sem papel. Prontuário eletrônico, agenda inteligente, telemedicina e cobrança — integrados numa plataforma feita para a saúde brasileira.
-        </p>
-        <p class="text-sm text-gray-400 mb-8">
-          Para consultórios, clínicas e grupos médicos de qualquer especialidade.
-        </p>
+      <!-- H1 -->
+      <h1 style="font-size: clamp(2.2rem, 5vw, 3.75rem); font-weight: 900; line-height: 1.1;
+                 color: #ffffff; margin-bottom: 1.25rem; letter-spacing: -0.02em;">
+        Gerencie sua clínica<br>
+        do agendamento<br>
+        <span style="background: linear-gradient(90deg, #60c8ff 0%, #a5b4fc 100%);
+                     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+                     background-clip: text;">
+          ao financeiro
+        </span>
+        — tudo em um lugar
+      </h1>
 
-        <!-- CTAs -->
-        <div class="flex flex-col sm:flex-row gap-3 mb-8">
-          <!-- Primário: verde sólido bem visível -->
-          <a
-            href={REGISTER_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center justify-center gap-2 px-7 py-4 text-base font-bold text-white bg-green-500 hover:bg-green-600 rounded-xl shadow-lg shadow-green-500/30 hover:shadow-green-500/50 hover:scale-105 transition-all duration-200"
-            on:click|preventDefault={() => { trackLead('CTA Iniciar Teste', 'Hero'); window.open(REGISTER_URL, '_blank'); }}
-          >
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+      <!-- Subheadline -->
+      <p style="font-size: 1.125rem; color: rgba(219,234,254,0.90); max-width: 560px;
+                line-height: 1.7; margin-bottom: 0.75rem;">
+        Sem planilhas, sem papel. Prontuário eletrônico, agenda inteligente,
+        telemedicina e cobrança integrados numa plataforma feita para a saúde brasileira.
+      </p>
+      <p style="font-size: 0.875rem; color: rgba(147,197,253,0.70); margin-bottom: 2.5rem;">
+        Para consultórios, clínicas e grupos médicos de qualquer especialidade.
+      </p>
+
+      <!-- CTAs -->
+      <div class="flex flex-wrap gap-3 mb-8">
+        <!-- Botão primário: verde sólido bem visível -->
+        <a
+          href={REGISTER_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-hero-primary"
+          on:click|preventDefault={() => { trackLead('CTA Iniciar Teste', 'Hero'); window.open(REGISTER_URL, '_blank'); }}
+        >
+          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="flex-shrink:0;">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+          Iniciar Teste Grátis — 30 dias
+        </a>
+
+        <!-- Botão secundário: contorno branco bem visível -->
+        <a
+          href={LOGIN_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-hero-secondary"
+          on:click|preventDefault={() => { trackLead('CTA Entrar', 'Hero'); window.open(LOGIN_URL, '_blank'); }}
+        >
+          Entrar no UpClinic
+        </a>
+      </div>
+
+      <!-- Trust badges -->
+      <div style="display:flex; flex-wrap:wrap; gap: 1.25rem;">
+        {#each ['Sem cartão de crédito', 'Sem taxa de setup', 'Cancele quando quiser', '100% LGPD'] as item}
+          <span style="display:inline-flex; align-items:center; gap:0.375rem;
+                       color:rgba(167,210,255,0.80); font-size:0.8125rem;">
+            <svg width="16" height="16" fill="#34d399" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
             </svg>
-            Iniciar Teste Grátis — 30 dias
-          </a>
-
-          <!-- Secundário: azul com contorno claro -->
-          <a
-            href={LOGIN_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center justify-center px-7 py-4 text-base font-semibold text-blue-700 bg-white border-2 border-blue-300 rounded-xl hover:border-blue-500 hover:bg-blue-50 transition-all duration-200 shadow-sm"
-            on:click|preventDefault={() => { trackLead('CTA Entrar', 'Hero'); window.open(LOGIN_URL, '_blank'); }}
-          >
-            Entrar no UpClinic
-          </a>
-        </div>
-
-        <!-- Trust badges -->
-        <div class="flex flex-wrap gap-x-5 gap-y-2 text-sm text-gray-500">
-          {#each ['Sem cartão de crédito', 'Sem taxa de setup', 'Cancele quando quiser', '100% LGPD'] as item}
-            <span class="flex items-center gap-1.5">
-              <svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-              </svg>
-              {item}
-            </span>
-          {/each}
-        </div>
+            {item}
+          </span>
+        {/each}
       </div>
-
-      <!-- Coluna Direita: Imagem -->
-      <div class="relative flex items-center justify-center lg:justify-end" class:visible-delayed={visible}>
-        <ImageWithFallback
-          src="/hero-image.png"
-          alt="UpClinic — sistema de gestão médica com agenda, prontuário e telemedicina integrados"
-          className="w-full max-w-xl lg:max-w-full h-auto object-contain"
-          fallback="/hero-image.png"
-        />
-      </div>
-
     </div>
   </div>
 
-  <!-- Faixa de estatísticas -->
-  <div class="bg-blue-600 mt-4">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center text-white">
-        <div>
-          <div class="text-2xl font-extrabold">3.2K+</div>
-          <div class="text-xs text-blue-200 mt-0.5">Clínicas ativas</div>
-        </div>
-        <div>
-          <div class="text-2xl font-extrabold">80%</div>
-          <div class="text-xs text-blue-200 mt-0.5">Redução de faltas</div>
-        </div>
-        <div>
-          <div class="text-2xl font-extrabold">18+</div>
-          <div class="text-xs text-blue-200 mt-0.5">Módulos integrados</div>
-        </div>
-        <div>
-          <div class="text-2xl font-extrabold">Seg–Sáb</div>
-          <div class="text-xs text-blue-200 mt-0.5">Suporte 8h–18h</div>
-        </div>
+  <!-- ══════════════════════════════════
+       FAIXA DE ESTATÍSTICAS NA BASE
+       ══════════════════════════════════ -->
+  <div class="relative w-full" style="z-index: 2;
+       background: linear-gradient(90deg, rgba(10,22,60,0.95) 0%, rgba(29,78,216,0.90) 50%, rgba(10,22,60,0.95) 100%);
+       border-top: 1px solid rgba(255,255,255,0.10);
+       backdrop-filter: blur(12px);">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-5">
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; text-align: center;">
+        {#each [
+          { value: '3.2K+', label: 'Clínicas ativas' },
+          { value: '80%',   label: 'Menos faltas com lembretes' },
+          { value: '18+',   label: 'Módulos integrados' },
+          { value: 'Seg–Sáb', label: 'Suporte 8h–18h' }
+        ] as stat}
+          <div>
+            <div style="font-size: 1.625rem; font-weight: 900; color: #fff; line-height:1;">{stat.value}</div>
+            <div style="font-size: 0.75rem; color: rgba(147,197,253,0.75); margin-top: 0.25rem;">{stat.label}</div>
+          </div>
+        {/each}
       </div>
     </div>
   </div>
@@ -137,14 +166,65 @@
 </section>
 
 <style>
+  /* ── Animação de entrada ── */
   .visible {
-    animation: fadeUp 0.6s ease-out both;
+    animation: heroFade 0.9s ease-out both;
   }
-  .visible-delayed {
-    animation: fadeUp 0.6s ease-out 0.12s both;
-  }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
+  @keyframes heroFade {
+    from { opacity: 0; transform: translateY(28px); }
     to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.4; }
+  }
+
+  /* ── Botão primário: verde esmeralda ── */
+  :global(.btn-hero-primary) {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    padding: 1rem 2rem !important;
+    font-size: 1.0625rem !important;
+    font-weight: 800 !important;
+    color: #ffffff !important;
+    background: #10b981 !important;
+    border: none !important;
+    border-radius: 0.875rem !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.50) !important;
+    transition: transform 0.18s ease, box-shadow 0.18s ease !important;
+    white-space: nowrap !important;
+  }
+  :global(.btn-hero-primary:hover) {
+    transform: scale(1.05) !important;
+    background: #059669 !important;
+    box-shadow: 0 10px 30px rgba(16, 185, 129, 0.65) !important;
+    color: #ffffff !important;
+  }
+
+  /* ── Botão secundário: contorno branco ── */
+  :global(.btn-hero-secondary) {
+    display: inline-flex !important;
+    align-items: center !important;
+    padding: 1rem 2rem !important;
+    font-size: 1.0625rem !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+    border: 2.5px solid rgba(255, 255, 255, 0.75) !important;
+    border-radius: 0.875rem !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+    backdrop-filter: blur(8px) !important;
+    transition: all 0.18s ease !important;
+    white-space: nowrap !important;
+  }
+  :global(.btn-hero-secondary:hover) {
+    background: rgba(255, 255, 255, 0.28) !important;
+    border-color: #ffffff !important;
+    color: #ffffff !important;
+    transform: scale(1.03) !important;
   }
 </style>

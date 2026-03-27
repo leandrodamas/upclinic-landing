@@ -337,16 +337,99 @@
                   </div>
                 </div>
               {:else}
-                <!-- Estado inicial -->
-                <div class="flex flex-col items-center justify-center h-full text-center px-2">
-                  <div class="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center mb-4 md:mb-6">
-                    <svg class="w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
+                <!-- Mini-dashboard de demonstração -->
+                <div class="space-y-3 md:space-y-4 animate-fade-in">
+
+                  <!-- Header -->
+                  <div class="flex items-center justify-between">
+                    <div>
+                      <h3 class="text-sm md:text-base font-bold text-gray-800">Bom dia, Dr. Silva 👋</h3>
+                      <p class="text-[10px] md:text-xs text-gray-500">Quinta-feira, 27 de março de 2026</p>
+                    </div>
+                    <span class="text-[10px] md:text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-semibold">● Online</span>
                   </div>
-                  <h3 class="text-base md:text-lg lg:text-xl font-bold text-gray-800 mb-1.5 md:mb-2">Explore as Funcionalidades</h3>
-                  <p class="text-xs md:text-sm text-gray-600 max-w-md">
-                    Clique em qualquer item do menu lateral para ver detalhes sobre cada funcionalidade do UpClinic
+
+                  <!-- KPI Cards -->
+                  <div class="grid grid-cols-2 lg:grid-cols-4 gap-2">
+                    {#each [
+                      { label: 'Pacientes', value: '1.247', sub: '+12 este mês', bg: 'from-blue-600 to-blue-500', icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z' },
+                      { label: 'Consultas Hoje', value: '8', sub: '3 pendentes', bg: 'from-purple-600 to-purple-500', icon: 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z' },
+                      { label: 'Profissionais', value: '7', sub: 'Equipe ativa', bg: 'from-green-600 to-green-500', icon: 'M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z' },
+                      { label: 'Receita / Mês', value: 'R$ 48k', sub: '+18% vs anterior', bg: 'from-amber-500 to-orange-500', icon: 'M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z' }
+                    ] as kpi}
+                      <div class="bg-gradient-to-br {kpi.bg} rounded-lg p-2 md:p-3 text-white">
+                        <div class="flex items-center gap-1.5 mb-1">
+                          <svg class="w-3 h-3 md:w-4 md:h-4 opacity-80 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={kpi.icon} />
+                          </svg>
+                        </div>
+                        <div class="text-base md:text-xl font-bold leading-none mb-0.5">{kpi.value}</div>
+                        <div class="text-[9px] md:text-[10px] opacity-90 font-medium">{kpi.label}</div>
+                        <div class="text-[9px] md:text-[10px] opacity-70">{kpi.sub}</div>
+                      </div>
+                    {/each}
+                  </div>
+
+                  <!-- Agenda do dia -->
+                  <div class="bg-white rounded-lg border border-gray-100 shadow-sm p-2 md:p-3">
+                    <div class="flex items-center justify-between mb-2">
+                      <span class="text-[11px] md:text-xs font-bold text-gray-700">📅 Agenda de Hoje</span>
+                      <span class="text-[10px] text-blue-600 font-semibold">8 consultas</span>
+                    </div>
+                    <div class="space-y-1.5">
+                      {#each [
+                        { time: '08:00', name: 'Maria Oliveira', type: 'Clínica Geral', status: 'concluida' },
+                        { time: '09:30', name: 'João Pereira', type: 'Cardiologia', status: 'confirmada' },
+                        { time: '10:00', name: 'Ana Souza', type: 'Pediatria', status: 'agendada' },
+                      ] as apt}
+                        <div class="flex items-center gap-2 text-[10px] md:text-xs">
+                          <span class="bg-blue-600 text-white rounded px-1.5 py-0.5 font-bold tabular-nums flex-shrink-0">{apt.time}</span>
+                          <span class="font-medium text-gray-800 truncate flex-1">{apt.name}</span>
+                          <span class="text-gray-400 hidden md:block truncate">{apt.type}</span>
+                          <span class="px-1.5 py-0.5 rounded-full font-semibold flex-shrink-0
+                            {apt.status === 'concluida' ? 'bg-green-100 text-green-700' :
+                             apt.status === 'confirmada' ? 'bg-blue-100 text-blue-700' :
+                             'bg-gray-100 text-gray-600'}">
+                            {apt.status === 'concluida' ? '✓ Concluída' : apt.status === 'confirmada' ? 'Confirmada' : 'Agendada'}
+                          </span>
+                        </div>
+                      {/each}
+                    </div>
+                  </div>
+
+                  <!-- Ações rápidas + alertas -->
+                  <div class="grid grid-cols-2 gap-2">
+                    <div class="bg-white rounded-lg border border-gray-100 shadow-sm p-2 md:p-3">
+                      <div class="text-[11px] md:text-xs font-bold text-gray-700 mb-2">⚡ Ações Rápidas</div>
+                      <div class="grid grid-cols-2 gap-1">
+                        {#each ['Nova Consulta', 'Novo Paciente', 'Prontuário', 'Financeiro'] as action}
+                          <div class="bg-blue-50 hover:bg-blue-100 rounded text-center py-1 px-1 text-[9px] md:text-[10px] text-blue-700 font-medium cursor-pointer transition-colors truncate">
+                            {action}
+                          </div>
+                        {/each}
+                      </div>
+                    </div>
+                    <div class="bg-white rounded-lg border border-gray-100 shadow-sm p-2 md:p-3">
+                      <div class="text-[11px] md:text-xs font-bold text-gray-700 mb-2">🔔 Alertas</div>
+                      <div class="space-y-1">
+                        <div class="flex items-center gap-1.5 text-[9px] md:text-[10px]">
+                          <span class="w-1.5 h-1.5 rounded-full bg-amber-400 flex-shrink-0"></span>
+                          <span class="text-gray-600">3 estoque abaixo do mínimo</span>
+                        </div>
+                        <div class="flex items-center gap-1.5 text-[9px] md:text-[10px]">
+                          <span class="w-1.5 h-1.5 rounded-full bg-blue-400 flex-shrink-0"></span>
+                          <span class="text-gray-600">2 aniversariantes hoje</span>
+                        </div>
+                        <div class="flex items-center gap-1.5 text-[9px] md:text-[10px]">
+                          <span class="w-1.5 h-1.5 rounded-full bg-green-400 flex-shrink-0"></span>
+                          <span class="text-gray-600">Sistema atualizado v2.0</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <p class="text-[10px] text-gray-400 text-center">
+                    ← Clique em um item do menu para explorar cada funcionalidade
                   </p>
                 </div>
               {/if}

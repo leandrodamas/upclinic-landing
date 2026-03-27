@@ -11,11 +11,10 @@
       <!-- Coluna 1: Logo e Descrição -->
       <div class="lg:col-span-1">
         <div class="flex items-center mb-3 md:mb-4">
-          <ImageWithFallback 
-            src="/logo-upclinic-white.png"
-            alt="UpClinic Logo"
-            class="h-20 md:h-24 lg:h-28 w-auto object-contain"
-            fallback="/logo-upclinic-white.png"
+          <img
+            src="/logo-upclinic-navbar.png"
+            alt="UpClinic"
+            style="height: 120px; width: auto; max-width: 280px; object-fit: contain; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));"
           />
         </div>
         <p class="text-xs md:text-sm text-gray-400 mb-4 md:mb-6">
