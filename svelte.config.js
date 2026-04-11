@@ -18,7 +18,9 @@ export default {
         '/lgpd',
         '/termos-servico',
         '/politica-privacidade',
-        '/politica-cookies'
+        '/politica-cookies',
+        '/comece',
+        '/conversao'
       ],
       handleMissingId: ({ path, id, referrer }) => {
         // Ignorar todos os links de âncora durante o prerender

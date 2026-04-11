@@ -7,6 +7,11 @@ declare global {
     // interface Platform {}
   }
 
+  interface Window {
+    fbq?: (...args: unknown[]) => void;
+    gtag?: (...args: unknown[]) => void;
+  }
+
   // Stripe custom elements
   namespace svelteHTML {
     interface IntrinsicElements {

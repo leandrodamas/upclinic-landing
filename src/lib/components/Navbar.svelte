@@ -60,6 +60,9 @@
         {#each [
           { href: '/#funcionalidades', label: 'Funcionalidades' },
           { href: '/planos',           label: 'Planos' },
+          /* CONVERSAO-LINK-INICIO — apague esta linha e o bloco no mobile para remover /comece do menu */
+          { href: '/comece',           label: 'Encher a agenda' },
+          /* CONVERSAO-LINK-FIM */
           { href: '/sobre',            label: 'Sobre' },
           { href: '/contato',          label: 'Contato' },
         ] as item}
@@ -128,6 +131,9 @@
       <div class="md:hidden py-4 space-y-2 bg-white rounded-xl mt-2 shadow-xl border border-gray-100 px-2">
         <a href="/#funcionalidades" class="block text-gray-700 hover:text-blue-600 font-medium px-3 py-2 rounded-md hover:bg-gray-50 transition-colors" on:click={() => mobileMenuOpen = false}>Funcionalidades</a>
         <a href="/planos" class="block text-gray-700 hover:text-blue-600 font-medium px-3 py-2 rounded-md hover:bg-gray-50 transition-colors" on:click={() => mobileMenuOpen = false}>Planos</a>
+        <!-- CONVERSAO-LINK-INICIO -->
+        <a href="/comece" class="block text-gray-700 hover:text-blue-600 font-medium px-3 py-2 rounded-md hover:bg-gray-50 transition-colors" on:click={() => mobileMenuOpen = false}>Encher a agenda</a>
+        <!-- CONVERSAO-LINK-FIM -->
         <a href="/sobre" class="block text-gray-700 hover:text-blue-600 font-medium px-3 py-2 rounded-md hover:bg-gray-50 transition-colors" on:click={() => mobileMenuOpen = false}>Sobre</a>
         <a href="/contato" class="block text-gray-700 hover:text-blue-600 font-medium px-3 py-2 rounded-md hover:bg-gray-50 transition-colors" on:click={() => mobileMenuOpen = false}>Contato</a>
         <div class="pt-2 space-y-2 border-t border-gray-100 mt-2">

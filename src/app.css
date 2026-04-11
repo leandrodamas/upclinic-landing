@@ -85,5 +85,42 @@
   .animate-scale-in {
     animation: scaleIn 0.3s ease-out;
   }
+
+  /* Landing /comece — tech grid + glow (Tailwind @apply-friendly) */
+  @keyframes comece-pulse-soft {
+    0%,
+    100% {
+      opacity: 0.55;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  .animate-comece-pulse {
+    animation: comece-pulse-soft 2.2s ease-in-out infinite;
+  }
+
+  @keyframes comece-shimmer {
+    0% {
+      background-position: 200% center;
+    }
+    100% {
+      background-position: -200% center;
+    }
+  }
+
+  .comece-cta-shimmer {
+    background: linear-gradient(
+      110deg,
+      #059669 0%,
+      #10b981 25%,
+      #34d399 45%,
+      #10b981 55%,
+      #059669 100%
+    );
+    background-size: 200% auto;
+    animation: comece-shimmer 4s ease-in-out infinite;
+  }
 }
 
