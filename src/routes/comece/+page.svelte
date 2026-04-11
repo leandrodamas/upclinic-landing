@@ -182,7 +182,7 @@
             in:fly={{ y: 12, duration: 420, delay: 80 }}
           >
             Veja o <strong class="font-semibold text-slate-200">UpClinic em ação</strong> nos vídeos abaixo (com som e
-            controles). O link pequeno no canto abre o canal no YouTube. Em seguida, os
+            controles). O link pequeno no canto inferior direito abre o canal no YouTube. Em seguida, os
             <strong class="font-semibold text-slate-200">6 passos</strong> para fidelizar quem já confia em você — com o que o
             sistema faz em cada etapa.
           </p>
@@ -282,7 +282,7 @@
           <p class="text-sm font-bold text-slate-900" style="font-family: 'Plus Jakarta Sans', system-ui, sans-serif;">
             Vídeo na página
           </p>
-          <p class="mt-0.5 text-xs text-slate-600">Play e volume nos controles; canto → canal no YouTube.</p>
+          <p class="mt-0.5 text-xs text-slate-600">Play e volume nos controles; canto inferior direito → canal no YouTube.</p>
         </div>
       </div>
       <div class="flex gap-3 rounded-xl bg-slate-50/80 p-4 ring-1 ring-slate-100">
@@ -330,7 +330,7 @@
         Veja o UpClinic por dentro
       </h2>
       <p class="mx-auto mt-2 max-w-xl text-center text-slate-600">
-        Agenda, pacientes e fluxo do dia a dia — assista abaixo; link discreto no canto inferior para o canal no YouTube.
+        Agenda, pacientes e fluxo do dia a dia — assista abaixo; link discreto no canto inferior direito para o canal no YouTube.
       </p>
 
       <div class="mx-auto mt-8 max-w-4xl" in:fade={{ duration: 450 }}>
@@ -364,7 +364,7 @@
         </div>
         <p class="mt-3 text-center text-xs text-slate-500 sm:text-sm">
           Use <strong class="font-semibold text-slate-700">play, pausa e o volume</strong> nos controles do vídeo. No canto
-          inferior esquerdo, o link pequeno abre o canal <strong class="font-semibold text-slate-700">@drcarloseurico</strong>.
+          inferior direito, o link pequeno abre o canal <strong class="font-semibold text-slate-700">@drcarloseurico</strong>.
         </p>
       </div>
 
@@ -503,7 +503,7 @@
         </div>
         <p class="mt-3 text-center text-xs text-slate-500 sm:text-sm">
           Controles para <strong class="font-semibold text-slate-700">play, pausa e som</strong>. Link minúsculo no canto
-          inferior esquerdo → canal <strong class="font-semibold text-slate-700">@drcarloseurico</strong>.
+          inferior direito → canal <strong class="font-semibold text-slate-700">@drcarloseurico</strong>.
         </p>
       </div>
       <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-6">
