@@ -20,7 +20,8 @@ export default {
         '/politica-privacidade',
         '/politica-cookies',
         '/comece',
-        '/conversao'
+        '/conversao',
+        '/obrigado-compra'
       ],
       handleMissingId: ({ path, id, referrer }) => {
         // Ignorar todos os links de âncora durante o prerender

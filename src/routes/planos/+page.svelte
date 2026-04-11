@@ -31,7 +31,10 @@
       </p>
     </div>
 
-    <!-- Stripe Pricing Table -->
+    <!--
+      URL de sucesso no Stripe (Pricing Table / Checkout):
+      https://www.clinicupapp.com/obrigado-compra?session_id={CHECKOUT_SESSION_ID}
+    -->
     <div class="max-w-6xl mx-auto mb-14">
       <stripe-pricing-table
         pricing-table-id="prctbl_1SGjR4JgDiwrjPsttCMjYT0l"

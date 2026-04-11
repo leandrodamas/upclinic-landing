@@ -10,6 +10,8 @@ declare global {
   interface Window {
     fbq?: (...args: unknown[]) => void;
     gtag?: (...args: unknown[]) => void;
+    /** Definido em app.html — conversão Google Ads “Compra” */
+    trackPurchaseConversion?: (transactionId?: string) => void;
   }
 
   // Stripe custom elements

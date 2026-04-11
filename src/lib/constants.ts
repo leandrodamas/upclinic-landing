@@ -9,6 +9,10 @@ export const REGISTER_URL = 'https://upclinic-aa025.web.app/login?trial=true';
 export const GOOGLE_ADS_CONVERSION_PAGE_VIEW_SEND_TO =
   'AW-17367062285/fUu0CKCPwZocEI2uodlA';
 
+/** Google Ads — conversão “Compra” (conta AW-17840348694); disparar só após pagamento confirmado. */
+export const GOOGLE_ADS_PURCHASE_CONVERSION_SEND_TO =
+  'AW-17840348694/D3kyCKr5p9obEJa8-LpC';
+
 /** Canal oficial do criador dos vídeos (clique no preview abre o YouTube). */
 export const YOUTUBE_DRCARLOS_CHANNEL_URL =
   'https://www.youtube.com/@drcarloseurico-novo1998/featured';
