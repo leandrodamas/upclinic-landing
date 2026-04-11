@@ -5,9 +5,13 @@ export const SYSTEM_URL = 'https://upclinic-aa025.web.app';
 export const LOGIN_URL = 'https://upclinic-aa025.web.app/login?tab=entrar';
 export const REGISTER_URL = 'https://upclinic-aa025.web.app/login?trial=true';
 
-/** Canal oficial do criador dos vídeos (direitos autorais — reprodução no site via link). */
+/** Canal oficial do criador dos vídeos (clique no preview abre o YouTube). */
 export const YOUTUBE_DRCARLOS_CHANNEL_URL =
   'https://www.youtube.com/@drcarloseurico-novo1998/featured';
+
+/** Prévia local (sem som); clique redireciona ao YouTube. */
+export const COMECE_DEMO_VIDEO_URL = '/videoplayback.mp4';
+export const COMECE_FIDELIZACAO_VIDEO_URL = '/videoplayback-fidelizacao.mp4';
 
 // Horário de suporte real
 export const SUPPORT_HOURS = 'Seg–Sex 8h–18h | Sáb 8h–12h';
