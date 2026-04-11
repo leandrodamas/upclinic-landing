@@ -27,7 +27,7 @@
     href={YOUTUBE_DRCARLOS_CHANNEL_URL}
     target="_blank"
     rel="noopener noreferrer"
-    class="absolute bottom-11 right-1.5 z-20 flex max-w-[min(11rem,calc(100%-0.75rem))] items-center gap-1 rounded-md border border-white/20 bg-black/75 px-1 py-0.5 pl-1 pr-1.5 text-[9px] font-medium leading-tight text-white/90 shadow-md backdrop-blur-sm transition hover:border-white/35 hover:bg-black/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:ring-offset-1 focus-visible:ring-offset-slate-900 sm:bottom-12 sm:right-2 sm:text-[10px]"
+    class="absolute bottom-[4.75rem] right-1.5 z-20 flex max-w-[min(11rem,calc(100%-0.75rem))] items-center gap-1 rounded-md border border-white/20 bg-black/75 px-1 py-0.5 pl-1 pr-1.5 text-[9px] font-medium leading-tight text-white/90 shadow-md backdrop-blur-sm transition hover:border-white/35 hover:bg-black/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:ring-offset-1 focus-visible:ring-offset-slate-900 sm:bottom-[5.25rem] sm:right-2 sm:text-[10px]"
     title={ariaLabel}
     aria-label={ariaLabel}
   >
