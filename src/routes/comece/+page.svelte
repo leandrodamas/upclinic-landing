@@ -6,12 +6,8 @@
   import { fade, fly } from 'svelte/transition';
   import Navbar from '$lib/components/Navbar.svelte';
   import Footer from '$lib/components/Footer.svelte';
-  import {
-    REGISTER_URL,
-    CONTACT,
-    COMECE_DEMO_VIDEO_URL,
-    COMECE_FIDELIZACAO_VIDEO_URL
-  } from '$lib/constants';
+  import YoutubeChannelVideoTeaser from '$lib/components/YoutubeChannelVideoTeaser.svelte';
+  import { REGISTER_URL, CONTACT } from '$lib/constants';
 
   const waText = encodeURIComponent(
     'Olá! Quero conhecer o UpClinic e começar o teste grátis.'
@@ -100,7 +96,7 @@
   <title>UpClinic — Agenda, prontuário e pacientes em um só sistema | Teste grátis</title>
   <meta
     name="description"
-    content="Veja o sistema em vídeo. Depois, 6 passos para fidelizar pacientes. UpClinic: agenda, prontuário e financeiro na nuvem. 30 dias grátis."
+    content="Conheça o UpClinic e assista aos vídeos no YouTube (canal @drcarloseurico). 6 passos para fidelizar pacientes. Agenda, prontuário e financeiro na nuvem. 30 dias grátis."
   />
   <link rel="canonical" href="https://www.clinicupapp.com/comece" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -180,7 +176,7 @@
             class="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-slate-400 sm:text-lg"
             in:fly={{ y: 12, duration: 420, delay: 80 }}
           >
-            Veja o <strong class="font-semibold text-slate-200">UpClinic em ação</strong> no vídeo abaixo. Em seguida, os
+            Veja o <strong class="font-semibold text-slate-200">UpClinic em ação</strong> no YouTube (link abaixo). Em seguida, os
             <strong class="font-semibold text-slate-200">6 passos</strong> para fidelizar quem já confia em você — com o que o
             sistema faz em cada etapa.
           </p>
@@ -224,7 +220,7 @@
                   clip-rule="evenodd"
                 />
               </svg>
-              Ver como funciona (vídeo)
+              Ver no YouTube
             </a>
           </div>
 
@@ -278,9 +274,9 @@
         >
         <div>
           <p class="text-sm font-bold text-slate-900" style="font-family: 'Plus Jakarta Sans', system-ui, sans-serif;">
-            Demo em vídeo
+            Demo no YouTube
           </p>
-          <p class="mt-0.5 text-xs text-slate-600">Telas reais do sistema — play abaixo.</p>
+          <p class="mt-0.5 text-xs text-slate-600">Abre o canal do criador — assista por lá.</p>
         </div>
       </div>
       <div class="flex gap-3 rounded-xl bg-slate-50/80 p-4 ring-1 ring-slate-100">
@@ -293,7 +289,7 @@
           <p class="text-sm font-bold text-slate-900" style="font-family: 'Plus Jakarta Sans', system-ui, sans-serif;">
             6 passos + conteúdo
           </p>
-          <p class="mt-0.5 text-xs text-slate-600">Cards e vídeo sobre fidelização.</p>
+          <p class="mt-0.5 text-xs text-slate-600">Cards e link ao vídeo sobre fidelização.</p>
         </div>
       </div>
       <div class="flex gap-3 rounded-xl bg-slate-50/80 p-4 ring-1 ring-slate-100">
@@ -328,7 +324,7 @@
         Veja o UpClinic por dentro
       </h2>
       <p class="mx-auto mt-2 max-w-xl text-center text-slate-600">
-        Agenda, pacientes e fluxo do dia a dia — é isso que você usa no consultório.
+        Agenda, pacientes e fluxo do dia a dia — assista à demonstração no canal do criador no YouTube.
       </p>
 
       <div class="mx-auto mt-8 max-w-4xl" in:fade={{ duration: 450 }}>
@@ -350,24 +346,17 @@
               <svg class="h-3.5 w-3.5 shrink-0 text-emerald-500/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
               </svg>
-              <span class="truncate">app.clinicupapp.com</span>
+              <span class="truncate">youtube.com · @drcarloseurico</span>
             </div>
           </div>
-          <video
-            src={COMECE_DEMO_VIDEO_URL}
-            controls
-            controlslist="nodownload"
-            loop
-            playsinline
-            preload="metadata"
-            class="aspect-video w-full object-cover"
-            aria-label="Demonstração do sistema UpClinic: agenda e prontuário"
-          >
-            <track kind="captions" srclang="pt" label="Português" />
-          </video>
+          <YoutubeChannelVideoTeaser
+            ariaLabel="Abrir o canal @drcarloseurico no YouTube para assistir à demonstração do UpClinic"
+            teaserLine="Demonstração do sistema — assista no YouTube"
+          />
         </div>
-        <p class="mt-3 text-center text-sm text-slate-500">
-          Toque em <strong class="font-semibold text-slate-700">play</strong> — áudio e volume nos controles do vídeo.
+        <p class="mt-3 text-center text-xs text-slate-500 sm:text-sm">
+          <span class="text-slate-600">Clique na área do vídeo</span> para abrir o canal no YouTube. Conteúdo de
+          <strong class="font-semibold text-slate-700">@drcarloseurico</strong>.
         </p>
       </div>
 
@@ -473,7 +462,7 @@
           Assista aos 6 passos no vídeo
         </h2>
         <p class="mt-2 text-sm text-slate-600 sm:text-base">
-          Fidelização, reputação e indicações — ideal depois de ler os cards acima.
+          Fidelização, reputação e indicações — assista ao vídeo completo no YouTube (canal @drcarloseurico).
         </p>
       </div>
       <div class="mx-auto mt-6 max-w-4xl" in:fade={{ duration: 450 }}>
@@ -494,22 +483,18 @@
                   d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"
                 />
               </svg>
-              <span class="truncate">upclinic · vídeo educativo</span>
+              <span class="truncate">youtube.com · @drcarloseurico</span>
             </div>
           </div>
-          <video
-            src={COMECE_FIDELIZACAO_VIDEO_URL}
-            controls
-            controlslist="nodownload"
-            loop
-            playsinline
-            preload="metadata"
-            class="aspect-video w-full object-cover"
-            aria-label="Vídeo: seis passos para fidelizar pacientes"
-          >
-            <track kind="captions" srclang="pt" label="Português" />
-          </video>
+          <YoutubeChannelVideoTeaser
+            ariaLabel="Abrir o canal @drcarloseurico no YouTube para assistir ao vídeo dos 6 passos"
+            teaserLine="Os 6 passos para fidelizar pacientes — no YouTube"
+          />
         </div>
+        <p class="mt-3 text-center text-xs text-slate-500 sm:text-sm">
+          O conteúdo em vídeo pertence ao canal <strong class="font-semibold text-slate-700">@drcarloseurico</strong>. Clique
+          acima para assistir no YouTube.
+        </p>
       </div>
       <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-6">
         <a

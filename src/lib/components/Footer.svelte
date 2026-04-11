@@ -1,5 +1,5 @@
 <script>
-  import { SOCIAL } from '$lib/constants';
+  import { SOCIAL, YOUTUBE_DRCARLOS_CHANNEL_URL } from '$lib/constants';
   import ImageWithFallback from './ImageWithFallback.svelte';
   
   const currentYear = new Date().getFullYear();
@@ -170,6 +170,19 @@
     <div class="border-t border-gray-800 pt-6 md:pt-8 text-center">
       <p class="text-xs md:text-sm text-gray-400">
         &copy; {currentYear} UpClinic. Todos os direitos reservados.
+      </p>
+      <p
+        class="mx-auto mt-2 max-w-xl text-[10px] leading-snug text-gray-500 md:text-[11px]"
+      >
+        Vídeos exibidos neste site: todos os direitos reservados ao canal
+        <a
+          href={YOUTUBE_DRCARLOS_CHANNEL_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-gray-400 underline decoration-gray-600 underline-offset-2 hover:text-gray-300"
+          >@drcarloseurico</a
+        >
+        no YouTube.
       </p>
     </div>
   </div>

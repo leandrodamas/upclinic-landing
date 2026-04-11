@@ -5,17 +5,9 @@ export const SYSTEM_URL = 'https://upclinic-aa025.web.app';
 export const LOGIN_URL = 'https://upclinic-aa025.web.app/login?tab=entrar';
 export const REGISTER_URL = 'https://upclinic-aa025.web.app/login?trial=true';
 
-/**
- * Vídeo demonstração do sistema (UpClinic em uso).
- * static/videoplayback.mp4 → /videoplayback.mp4
- */
-export const COMECE_DEMO_VIDEO_URL = '/videoplayback.mp4';
-
-/**
- * Vídeo “6 passos para fidelizar pacientes” (conteúdo para médico empreendedor).
- * Origem: static/videoplayback (1).mp4 — cópia sem espaços: static/videoplayback-fidelizacao.mp4
- */
-export const COMECE_FIDELIZACAO_VIDEO_URL = '/videoplayback-fidelizacao.mp4';
+/** Canal oficial do criador dos vídeos (direitos autorais — reprodução no site via link). */
+export const YOUTUBE_DRCARLOS_CHANNEL_URL =
+  'https://www.youtube.com/@drcarloseurico-novo1998/featured';
 
 // Horário de suporte real
 export const SUPPORT_HOURS = 'Seg–Sex 8h–18h | Sáb 8h–12h';
