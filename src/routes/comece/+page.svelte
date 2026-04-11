@@ -11,8 +11,7 @@
     REGISTER_URL,
     CONTACT,
     COMECE_DEMO_VIDEO_URL,
-    COMECE_FIDELIZACAO_VIDEO_URL,
-    GOOGLE_ADS_CONVERSION_COMECE_SEND_TO
+    COMECE_FIDELIZACAO_VIDEO_URL
   } from '$lib/constants';
 
   const waText = encodeURIComponent(
@@ -95,20 +94,6 @@
   let mounted = false;
   onMount(() => {
     mounted = true;
-    // Google Ads — event snippet “Visualização de página (2)” (após gtag do app.html)
-    const fire = () => {
-      if (typeof window !== 'undefined' && window.gtag) {
-        window.gtag('event', 'conversion', { send_to: GOOGLE_ADS_CONVERSION_COMECE_SEND_TO });
-        return true;
-      }
-      return false;
-    };
-    if (!fire()) {
-      const id = window.setInterval(() => {
-        if (fire()) window.clearInterval(id);
-      }, 150);
-      window.setTimeout(() => window.clearInterval(id), 8000);
-    }
   });
 </script>
 
