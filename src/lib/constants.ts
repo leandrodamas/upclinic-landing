@@ -5,6 +5,10 @@ export const SYSTEM_URL = 'https://upclinic-aa025.web.app';
 export const LOGIN_URL = 'https://upclinic-aa025.web.app/login?tab=entrar';
 export const REGISTER_URL = 'https://upclinic-aa025.web.app/login?trial=true';
 
+/** Google Ads — conversão “Visualização de página (2)” (página /comece). */
+export const GOOGLE_ADS_CONVERSION_COMECE_SEND_TO =
+  'AW-17367062285/fUu0CKCPwZocEI2uodlA';
+
 /** Canal oficial do criador dos vídeos (clique no preview abre o YouTube). */
 export const YOUTUBE_DRCARLOS_CHANNEL_URL =
   'https://www.youtube.com/@drcarloseurico-novo1998/featured';
