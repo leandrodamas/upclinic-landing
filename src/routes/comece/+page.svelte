@@ -101,7 +101,7 @@
   <title>UpClinic — Agenda, prontuário e pacientes em um só sistema | Teste grátis</title>
   <meta
     name="description"
-    content="Prévia em vídeo do UpClinic; conteúdo completo no YouTube (@drcarloseurico). 6 passos para fidelizar pacientes. Agenda, prontuário e financeiro na nuvem. 30 dias grátis."
+    content="Vídeos do UpClinic com controles; canal @drcarloseurico no YouTube. 6 passos para fidelizar pacientes. Agenda, prontuário e financeiro na nuvem. 30 dias grátis."
   />
   <link rel="canonical" href="https://www.clinicupapp.com/comece" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -181,8 +181,8 @@
             class="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-slate-400 sm:text-lg"
             in:fly={{ y: 12, duration: 420, delay: 80 }}
           >
-            Veja o <strong class="font-semibold text-slate-200">UpClinic em ação</strong> na prévia abaixo; ao clicar, você abre o
-            canal no YouTube. Em seguida, os
+            Veja o <strong class="font-semibold text-slate-200">UpClinic em ação</strong> nos vídeos abaixo (com som e
+            controles). O link pequeno no canto abre o canal no YouTube. Em seguida, os
             <strong class="font-semibold text-slate-200">6 passos</strong> para fidelizar quem já confia em você — com o que o
             sistema faz em cada etapa.
           </p>
@@ -226,7 +226,7 @@
                   clip-rule="evenodd"
                 />
               </svg>
-              Ver prévia (vídeo)
+              Ver vídeos
             </a>
           </div>
 
@@ -280,9 +280,9 @@
         >
         <div>
           <p class="text-sm font-bold text-slate-900" style="font-family: 'Plus Jakarta Sans', system-ui, sans-serif;">
-            Prévia em vídeo
+            Vídeo na página
           </p>
-          <p class="mt-0.5 text-xs text-slate-600">Trecho em loop — clique para o canal no YouTube.</p>
+          <p class="mt-0.5 text-xs text-slate-600">Play e volume nos controles; canto → canal no YouTube.</p>
         </div>
       </div>
       <div class="flex gap-3 rounded-xl bg-slate-50/80 p-4 ring-1 ring-slate-100">
@@ -295,7 +295,7 @@
           <p class="text-sm font-bold text-slate-900" style="font-family: 'Plus Jakarta Sans', system-ui, sans-serif;">
             6 passos + conteúdo
           </p>
-          <p class="mt-0.5 text-xs text-slate-600">Cards e prévia do vídeo sobre fidelização.</p>
+          <p class="mt-0.5 text-xs text-slate-600">Cards e vídeo sobre fidelização.</p>
         </div>
       </div>
       <div class="flex gap-3 rounded-xl bg-slate-50/80 p-4 ring-1 ring-slate-100">
@@ -330,7 +330,7 @@
         Veja o UpClinic por dentro
       </h2>
       <p class="mx-auto mt-2 max-w-xl text-center text-slate-600">
-        Agenda, pacientes e fluxo do dia a dia — prévia abaixo; clique no vídeo para o canal completo no YouTube.
+        Agenda, pacientes e fluxo do dia a dia — assista abaixo; link discreto no canto inferior para o canal no YouTube.
       </p>
 
       <div class="mx-auto mt-8 max-w-4xl" in:fade={{ duration: 450 }}>
@@ -357,13 +357,14 @@
           </div>
           <YoutubeChannelVideoTeaser
             videoSrc={COMECE_DEMO_VIDEO_URL}
-            ariaLabel="Abrir o canal @drcarloseurico no YouTube (demonstração completa do UpClinic)"
-            teaserLine="Demonstração do sistema — versão completa no YouTube"
+            videoAriaLabel="Demonstração do sistema UpClinic: agenda e prontuário"
+            ariaLabel="Abrir o canal @drcarloseurico no YouTube"
+            teaserLine="@drcarloseurico · YouTube"
           />
         </div>
         <p class="mt-3 text-center text-xs text-slate-500 sm:text-sm">
-          Prévia em loop (sem som). <span class="text-slate-600">Clique no vídeo</span> para o canal
-          <strong class="font-semibold text-slate-700">@drcarloseurico</strong> no YouTube.
+          Use <strong class="font-semibold text-slate-700">play, pausa e o volume</strong> nos controles do vídeo. No canto
+          inferior esquerdo, o link pequeno abre o canal <strong class="font-semibold text-slate-700">@drcarloseurico</strong>.
         </p>
       </div>
 
@@ -495,13 +496,14 @@
           </div>
           <YoutubeChannelVideoTeaser
             videoSrc={COMECE_FIDELIZACAO_VIDEO_URL}
-            ariaLabel="Abrir o canal @drcarloseurico no YouTube (vídeo completo dos 6 passos)"
-            teaserLine="Os 6 passos para fidelizar pacientes — versão completa no YouTube"
+            videoAriaLabel="Vídeo: seis passos para fidelizar pacientes"
+            ariaLabel="Abrir o canal @drcarloseurico no YouTube"
+            teaserLine="@drcarloseurico · YouTube"
           />
         </div>
         <p class="mt-3 text-center text-xs text-slate-500 sm:text-sm">
-          Prévia em loop (sem som). Clique no vídeo para o canal
-          <strong class="font-semibold text-slate-700">@drcarloseurico</strong>.
+          Controles para <strong class="font-semibold text-slate-700">play, pausa e som</strong>. Link minúsculo no canto
+          inferior esquerdo → canal <strong class="font-semibold text-slate-700">@drcarloseurico</strong>.
         </p>
       </div>
       <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-6">
