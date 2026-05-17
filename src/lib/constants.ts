@@ -26,10 +26,10 @@ export const SUPPORT_HOURS = 'Seg–Sex 8h–18h | Sáb 8h–12h';
 
 // Informações de contato
 export const CONTACT = {
-  whatsapp: '62996720296',
-  whatsappLink: 'https://wa.me/5562996720296',
+  whatsapp: '62997016149',
+  whatsappLink: 'https://wa.me/5562997016149',
   email: 'upclinic8@gmail.com',
-  phone: '(62) 99672-0296'
+  phone: '(62) 99701-6149'
 };
 
 // Redes sociais

@@ -227,7 +227,7 @@
             Iniciar Teste Grátis — 30 dias
           </a>
           <a 
-            href="https://wa.me/5562996720296?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20os%20resultados%20do%20UpClinic"
+            href="https://wa.me/5562997016149?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20os%20resultados%20do%20UpClinic"
             target="_blank"
             rel="noopener noreferrer"
             class="btn bg-green-500 hover:bg-green-600 text-white px-4 py-2 md:px-6 text-xs md:text-sm w-full sm:w-auto text-center"

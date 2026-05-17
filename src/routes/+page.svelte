@@ -139,7 +139,7 @@
 
 <!-- WhatsApp Floating Button -->
 <a 
-  href="https://wa.me/5562996720296?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20UpClinic"
+  href="https://wa.me/5562997016149?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20UpClinic"
   target="_blank"
   rel="noopener noreferrer"
   class="fixed bottom-6 right-6 w-16 h-16 bg-green-500 hover:bg-green-600 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all z-50 group"

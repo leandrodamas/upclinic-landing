@@ -126,7 +126,7 @@
           <div class="min-w-0">
             <div class="text-xs md:text-sm text-gray-400">Telefone / WhatsApp</div>
             <a 
-              href="https://wa.me/5562996720296" 
+              href="https://wa.me/5562997016149" 
               target="_blank" 
               rel="noopener noreferrer" 
               class="text-white hover:text-blue-400 transition-colors text-xs md:text-sm break-all"
@@ -139,7 +139,7 @@
                 }
               }}
             >
-              (62) 99672-0296
+              (62) 99701-6149
             </a>
           </div>
         </div>

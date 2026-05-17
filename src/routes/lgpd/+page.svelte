@@ -113,9 +113,9 @@
     <ul>
       <li>Email: <a href="mailto:upclinic8@gmail.com">upclinic8@gmail.com</a></li>
       <li>WhatsApp: <a 
-        href="https://wa.me/5562996720296"
+        href="https://wa.me/5562997016149"
         on:click={() => trackWhatsAppClick('botao_whatsapp_lgpd')}
-      >(62) 99672-0296</a></li>
+      >(62) 99701-6149</a></li>
       <li>Formulário de contato em nosso site</li>
     </ul>
     
@@ -147,10 +147,10 @@
       </p>
       <p class="text-gray-700">
         <strong>WhatsApp:</strong> <a 
-          href="https://wa.me/5562996720296" 
+          href="https://wa.me/5562997016149" 
           class="text-blue-600"
           on:click={() => trackWhatsAppClick('botao_whatsapp_lgpd_dpo')}
-        >(62) 99672-0296</a>
+        >(62) 99701-6149</a>
       </p>
     </div>
   </div>

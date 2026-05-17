@@ -455,7 +455,7 @@
                     Testar Agora
                   </a>
                   <a
-                    href="https://wa.me/5562996720296?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20{feature.title}"
+                    href="https://wa.me/5562997016149?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20{feature.title}"
                     target="_blank"
                     rel="noopener noreferrer"
                     class="btn bg-green-500 hover:bg-green-600 text-white text-center text-sm py-2 px-4"
@@ -503,7 +503,7 @@
               Começar Agora - Grátis
             </a>
             <a 
-              href="https://wa.me/5562996720296?text=Olá!%20Gostaria%20de%20agendar%20uma%20demonstração%20do%20UpClinic"
+              href="https://wa.me/5562997016149?text=Olá!%20Gostaria%20de%20agendar%20uma%20demonstração%20do%20UpClinic"
               target="_blank"
               rel="noopener noreferrer"
               class="btn bg-green-500 hover:bg-green-600 text-white btn-large"

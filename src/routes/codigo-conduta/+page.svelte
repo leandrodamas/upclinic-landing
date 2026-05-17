@@ -130,9 +130,9 @@
     <ul>
       <li>Email: <a href="mailto:upclinic8@gmail.com">upclinic8@gmail.com</a></li>
       <li>WhatsApp: <a 
-        href="https://wa.me/5562996720296"
+        href="https://wa.me/5562997016149"
         on:click={() => trackWhatsAppClick('botao_whatsapp_codigo_conduta')}
-      >(62) 99672-0296</a></li>
+      >(62) 99701-6149</a></li>
     </ul>
     <p>
       Todas as denúncias serão tratadas com confidencialidade e investigadas adequadamente.

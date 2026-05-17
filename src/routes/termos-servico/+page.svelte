@@ -138,10 +138,10 @@
     <ul class="text-gray-700 space-y-2">
       <li>Email: <a href="mailto:upclinic8@gmail.com" class="text-blue-600">upclinic8@gmail.com</a></li>
       <li>WhatsApp: <a 
-        href="https://wa.me/5562996720296" 
+        href="https://wa.me/5562997016149" 
         class="text-blue-600"
         on:click={() => trackWhatsAppClick('botao_whatsapp_termos_servico')}
-      >(62) 99672-0296</a></li>
+      >(62) 99701-6149</a></li>
     </ul>
   </div>
 </LegalPageLayout>

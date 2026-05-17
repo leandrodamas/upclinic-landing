@@ -63,7 +63,7 @@
       <p class="text-gray-500 text-sm mb-6">Nosso time responde em até 1 hora útil.</p>
       <div class="flex flex-col sm:flex-row gap-3 justify-center">
         <a
-          href="https://wa.me/5562996720296?text=Quero%20saber%20mais%20sobre%20os%20planos%20do%20UpClinic"
+          href="https://wa.me/5562997016149?text=Quero%20saber%20mais%20sobre%20os%20planos%20do%20UpClinic"
           target="_blank"
           rel="noopener noreferrer"
           class="inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold text-white bg-green-500 hover:bg-green-600 rounded-xl transition-all"

@@ -261,7 +261,7 @@
       </button>
       
       <a
-        href="https://wa.me/5562996720296?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20UpClinic"
+        href="https://wa.me/5562997016149?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20UpClinic"
         target="_blank"
         rel="noopener noreferrer"
         class="btn btn-secondary flex-1 text-center"

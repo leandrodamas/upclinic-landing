@@ -77,5 +77,5 @@ O `firebase.json` na raiz do projeto já está configurado com o target `site-up
 
 Para dúvidas sobre o deploy:
 - Email: upclinic8@gmail.com
-- WhatsApp: (62) 99672-0296
+- WhatsApp: (62) 99701-6149
 

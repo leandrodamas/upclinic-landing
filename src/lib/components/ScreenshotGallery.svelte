@@ -297,7 +297,7 @@
                 Falar com Especialista
               </a>
               <a 
-                href="https://wa.me/5562996720296?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20{item.title}"
+                href="https://wa.me/5562997016149?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20{item.title}"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="flex-1 btn bg-green-500 hover:bg-green-600 text-white text-center"

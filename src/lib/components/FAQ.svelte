@@ -118,7 +118,7 @@
             Entre em Contato
           </a>
           <a 
-            href="https://wa.me/5562996720296?text=Olá!%20Tenho%20uma%20dúvida%20sobre%20o%20UpClinic"
+            href="https://wa.me/5562997016149?text=Olá!%20Tenho%20uma%20dúvida%20sobre%20o%20UpClinic"
             target="_blank"
             rel="noopener noreferrer"
               class="btn bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white px-4 py-2 md:px-6 md:py-2 text-xs md:text-sm shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 text-center"

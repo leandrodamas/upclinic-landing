@@ -270,7 +270,7 @@
               
               <div class="space-y-3">
                 <a 
-                  href="https://wa.me/5562996720296?text=Olá!%20Gostaria%20de%20agendar%20uma%20demonstração%20do%20UpClinic"
+                  href="https://wa.me/5562997016149?text=Olá!%20Gostaria%20de%20agendar%20uma%20demonstração%20do%20UpClinic"
                   target="_blank"
                   rel="noopener noreferrer"
                   class="block w-full btn bg-green-500 hover:bg-green-600 text-white text-center"

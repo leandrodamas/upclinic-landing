@@ -177,7 +177,7 @@ export async function sendContactConfirmationEmail(to: string, name: string): Pr
             </div>
             <div class="footer">
               <p>UpClinic - Sistema de Gestão Médica</p>
-              <p>WhatsApp: (62) 99672-0296 | Email: upclinic8@gmail.com</p>
+              <p>WhatsApp: (62) 99701-6149 | Email: upclinic8@gmail.com</p>
             </div>
           </div>
         </body>

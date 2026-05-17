@@ -69,7 +69,7 @@ O site estará disponível em:
 
 ## 📝 Informações de Contato
 
-- **WhatsApp:** (62) 99672-0296
+- **WhatsApp:** (62) 99701-6149
 - **Email:** upclinic8@gmail.com
 
 ## 🎨 Design
