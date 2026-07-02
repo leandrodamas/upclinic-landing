@@ -65,7 +65,7 @@
       </p>
       <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer"
         class="inline-flex items-center justify-center gap-2 px-8 py-4 text-lg font-bold text-white bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl shadow-lg hover:scale-105 transition-all">
-        Criar conta grátis — 30 dias, sem cartão
+        Criar conta grátis — 7 dias, sem cartão
       </a>
     </div>
 
@@ -115,7 +115,7 @@
     <div class="bg-gradient-to-r from-teal-600 to-blue-700 rounded-3xl p-10 text-center text-white">
       <h2 class="text-3xl font-bold mb-4">Feito para profissionais de saúde brasileiros</h2>
       <p class="text-teal-100 text-lg mb-8 max-w-2xl mx-auto">
-        Interface em português, suporte local, conformidade com CFM e LGPD, e preço justo. Experimente 30 dias grátis.
+        Interface em português, suporte local, conformidade com CFM e LGPD, e preço justo. Experimente 7 dias grátis.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer"

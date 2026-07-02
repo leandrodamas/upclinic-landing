@@ -14,7 +14,7 @@
         },
         {
           q: 'Como posso começar a usar o UpClinic?',
-          a: 'Você pode criar uma conta gratuita através do nosso site. Oferecemos 30 dias de teste gratuito para você conhecer todas as funcionalidades.'
+          a: 'Você pode criar uma conta gratuita através do nosso site. Oferecemos 7 dias de teste gratuito para você conhecer todas as funcionalidades.'
         },
         {
           q: 'O UpClinic é seguro?',
@@ -48,7 +48,7 @@
         },
         {
           q: 'Há período de teste?',
-          a: 'Sim! Oferecemos 30 dias de teste gratuito para você conhecer todas as funcionalidades sem compromisso.'
+          a: 'Sim! Oferecemos 7 dias de teste gratuito para você conhecer todas as funcionalidades sem compromisso.'
         },
         {
           q: 'Posso mudar de plano depois?',

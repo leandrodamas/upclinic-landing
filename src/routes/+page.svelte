@@ -101,7 +101,7 @@
       Sua clínica merece um sistema<br class="hidden md:block"> que funciona de verdade
     </h2>
     <p class="text-xl text-blue-100 mb-3 max-w-2xl mx-auto">
-      30 dias grátis, sem cartão de crédito, sem taxa de setup. Configure em minutos e veja a diferença no primeiro dia.
+      7 dias grátis, sem cartão de crédito, sem taxa de setup. Configure em minutos e veja a diferença no primeiro dia.
     </p>
     <p class="text-blue-200 text-sm mb-10">Mais de 3.200 clínicas já usam o UpClinic em todo o Brasil</p>
     <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -116,7 +116,7 @@
         class="inline-flex items-center gap-2 px-8 py-4 text-lg font-bold text-blue-700 bg-white rounded-xl hover:bg-blue-50 hover:scale-105 transition-all shadow-lg"
       >
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-        Iniciar Teste Grátis — 30 dias
+        Iniciar Teste Grátis — 7 dias
       </a>
       <a
         href="https://upclinic-aa025.web.app/login"

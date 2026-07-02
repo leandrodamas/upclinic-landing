@@ -69,7 +69,7 @@
         <span style="width:8px;height:8px;background:#34d399;border-radius:50%;flex-shrink:0;
                      animation: pulse 2s cubic-bezier(0.4,0,0.6,1) infinite;"></span>
         <span style="color:#e0f2fe; font-size:0.875rem; font-weight:600;">
-          Sistema de Gestão Médica · 30 dias grátis, sem cartão
+          Sistema de Gestão Médica · 7 dias grátis, sem cartão
         </span>
       </div>
 
@@ -109,7 +109,7 @@
           <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="flex-shrink:0;">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/>
           </svg>
-          Iniciar Teste Grátis — 30 dias
+          Iniciar Teste Grátis — 7 dias
         </a>
 
         <!-- Botão secundário: contorno branco bem visível -->

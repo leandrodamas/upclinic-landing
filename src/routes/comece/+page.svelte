@@ -101,7 +101,7 @@
   <title>UpClinic — Agenda, prontuário e pacientes em um só sistema | Teste grátis</title>
   <meta
     name="description"
-    content="Vídeos do UpClinic com controles; canal @drcarloseurico no YouTube. 6 passos para fidelizar pacientes. Agenda, prontuário e financeiro na nuvem. 30 dias grátis."
+    content="Vídeos do UpClinic com controles; canal @drcarloseurico no YouTube. 6 passos para fidelizar pacientes. Agenda, prontuário e financeiro na nuvem. 7 dias grátis."
   />
   <link rel="canonical" href="https://www.clinicupapp.com/comece" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -124,7 +124,7 @@
         <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-40"></span>
         <span class="relative inline-flex h-2 w-2 rounded-full bg-white"></span>
       </span>
-      30 dias grátis · sem cartão — organize agenda, prontuário e finanças hoje
+      7 dias grátis · sem cartão — organize agenda, prontuário e finanças hoje
     </span>
   </div>
 
@@ -424,7 +424,7 @@
       >
         Os 6 passos — e o UpClinic em cada um
       </h2>
-      <p class="mx-auto mt-2 text-center text-sm font-semibold text-emerald-700">30 dias grátis · sem cartão</p>
+      <p class="mx-auto mt-2 text-center text-sm font-semibold text-emerald-700">7 dias grátis · sem cartão</p>
       <ol class="mt-10 grid gap-5 sm:grid-cols-2">
         {#each passos as p}
           <li

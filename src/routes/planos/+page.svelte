@@ -5,8 +5,8 @@
 </script>
 
 <svelte:head>
-  <title>Planos e Preços | UpClinic — 30 dias grátis, sem cartão</title>
-  <meta name="description" content="Escolha o plano ideal para sua clínica. UpClinic para consultórios, clínicas e grupos médicos. Teste grátis por 30 dias, sem cartão de crédito." />
+  <title>Planos e Preços | UpClinic — 7 dias grátis, sem cartão</title>
+  <meta name="description" content="Escolha o plano ideal para sua clínica. UpClinic para consultórios, clínicas e grupos médicos. Teste grátis por 7 dias, sem cartão de crédito." />
   <link rel="canonical" href="https://www.clinicupapp.com/planos" />
 
   <!-- Stripe Pricing Table -->
@@ -27,7 +27,7 @@
         Simples, transparente,<br class="hidden md:block"> sem surpresas
       </h1>
       <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-        Comece grátis por 30 dias. Depois, escolha o plano que faz sentido para o tamanho da sua clínica.
+        Comece grátis por 7 dias. Depois, escolha o plano que faz sentido para o tamanho da sua clínica.
       </p>
     </div>
 
@@ -37,7 +37,7 @@
     -->
     <div class="max-w-6xl mx-auto mb-14">
       <stripe-pricing-table
-        pricing-table-id="prctbl_1SGjR4JgDiwrjPsttCMjYT0l"
+        pricing-table-id="prctbl_1RnVCDJgDiwrjPstX8vBmSfx"
         publishable-key="pk_live_51RJcEcJgDiwrjPst442rbfublOeAi2EpTli6wtnASS5Trbm3fln4ggIJXyqtq2aRV1bBKI5UMF9Qwq3L8HSD8xtr00h5KIKhGd"
       ></stripe-pricing-table>
     </div>
@@ -45,7 +45,7 @@
     <!-- Garantias -->
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto mb-14">
       {#each [
-        { icon: '🎁', title: '30 dias grátis', desc: 'Teste completo sem cartão de crédito' },
+        { icon: '🎁', title: '7 dias grátis', desc: 'Teste completo sem cartão de crédito' },
         { icon: '💸', title: 'Sem taxa de setup', desc: 'Nenhum custo de implantação ou configuração' },
         { icon: '🔓', title: 'Cancele quando quiser', desc: 'Sem multa, sem burocracia, sem prazo mínimo' }
       ] as g}

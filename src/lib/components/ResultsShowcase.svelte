@@ -224,7 +224,7 @@
             rel="noopener noreferrer"
             class="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 text-xs md:text-sm font-bold text-white bg-gradient-to-r from-green-500 to-emerald-600 rounded-lg shadow-md hover:scale-105 transition-all w-full sm:w-auto"
           >
-            Iniciar Teste Grátis — 30 dias
+            Iniciar Teste Grátis — 7 dias
           </a>
           <a 
             href="https://wa.me/5562997016149?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20os%20resultados%20do%20UpClinic"

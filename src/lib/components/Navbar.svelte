@@ -153,7 +153,7 @@
             class="flex items-center justify-center gap-2 w-full px-4 py-2.5 text-sm font-bold text-white bg-green-500 hover:bg-green-600 rounded-lg shadow-md transition-all"
             on:click={() => { trackEvent('CTA Registro', 'Navbar Mobile'); mobileMenuOpen = false; }}
           >
-            Iniciar Teste Grátis — 30 dias
+            Iniciar Teste Grátis — 7 dias
           </a>
         </div>
       </div>
