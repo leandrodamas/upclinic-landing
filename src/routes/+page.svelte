@@ -1,5 +1,8 @@
 <script lang="ts">
-  import Hero from '$lib/components/Hero.svelte';
+  import HeroPro from '$lib/components/HeroPro.svelte';
+  import WhatsAppFreeSection from '$lib/components/WhatsAppFreeSection.svelte';
+  import BentoFeatures from '$lib/components/BentoFeatures.svelte';
+  import ImpactBand from '$lib/components/ImpactBand.svelte';
   import FeatureGrid from '$lib/components/FeatureGrid.svelte';
   import FAQ from '$lib/components/FAQ.svelte';
   import ResultsShowcase from '$lib/components/ResultsShowcase.svelte';
@@ -7,6 +10,7 @@
   import Navbar from '$lib/components/Navbar.svelte';
   import FeatureDemoModal from '$lib/components/FeatureDemoModal.svelte';
   import PartnersCarousel from '$lib/components/PartnersCarousel.svelte';
+  import { reveal } from '$lib/actions/motion';
   
   let demoModal: FeatureDemoModal;
   
@@ -87,24 +91,36 @@
 </svelte:head>
 
 <Navbar />
-<Hero />
+<HeroPro />
+<WhatsAppFreeSection />
+<BentoFeatures />
+<ImpactBand />
 <FeatureGrid />
 <ResultsShowcase />
 <FAQ />
 
 <PartnersCarousel />
 
-<!-- CTA Section -->
-<section class="py-24 bg-gradient-to-r from-blue-600 to-indigo-700">
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">
-      Sua clínica merece um sistema<br class="hidden md:block"> que funciona de verdade
+<!-- CTA Section — imersiva -->
+<section class="relative overflow-hidden" style="background: linear-gradient(135deg,#050b23 0%,#0a1a44 45%,#1d4ed8 100%); padding-top:6rem; padding-bottom:6rem;">
+  <div class="up-aurora" style="opacity:0.6;"></div>
+  <div class="up-grid-overlay" style="opacity:0.35;"></div>
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative" style="z-index:2;">
+    <div use:reveal class="inline-flex items-center gap-2 mb-6 up-glass" style="padding:7px 16px; border-radius:999px;">
+      <span class="up-pulse-dot" style="width:9px;height:9px;background:#34d399;border-radius:50%;"></span>
+      <span style="color:#e0f2fe; font-size:0.8rem; font-weight:700;">Comece hoje · sem cartão · sem risco</span>
+    </div>
+    <h2 use:reveal={{ delay: 60 }} style="font-size:clamp(2.2rem,5vw,3.5rem); font-weight:900; color:#fff; line-height:1.08; letter-spacing:-0.02em; margin-bottom:1.25rem;">
+      Sua clínica inteira funcionando<br class="hidden md:block">
+      <span class="up-gradient-text">de verdade — a partir de hoje</span>
     </h2>
-    <p class="text-xl text-blue-100 mb-3 max-w-2xl mx-auto">
-      7 dias grátis, sem cartão de crédito, sem taxa de setup. Configure em minutos e veja a diferença no primeiro dia.
+    <p use:reveal={{ delay: 120 }} class="text-xl mb-3 max-w-2xl mx-auto" style="color:rgba(219,234,254,0.9);">
+      7 dias grátis, sem cartão de crédito e sem taxa de setup. Configure em minutos e veja a diferença já no primeiro dia.
     </p>
-    <p class="text-blue-200 text-sm mb-10">Mais de 3.200 clínicas já usam o UpClinic em todo o Brasil</p>
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+    <p use:reveal={{ delay: 160 }} style="color:rgba(147,197,253,0.75); font-size:0.9rem; margin-bottom:2.5rem;">
+      Mais de 3.200 clínicas já usam o UpClinic em todo o Brasil
+    </p>
+    <div use:reveal={{ delay: 200 }} class="flex flex-col sm:flex-row items-center justify-center gap-4">
       <a
         href="https://upclinic-aa025.web.app/register"
         target="_blank"
@@ -113,7 +129,7 @@
           trackLead('CTA Final Registro', 'CTA Section');
           window.open('https://upclinic-aa025.web.app/register', '_blank');
         }}
-        class="inline-flex items-center gap-2 px-8 py-4 text-lg font-bold text-blue-700 bg-white rounded-xl hover:bg-blue-50 hover:scale-105 transition-all shadow-lg"
+        class="up-btn-primary"
       >
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
         Iniciar Teste Grátis — 7 dias
@@ -126,12 +142,12 @@
           trackLead('CTA Final Login', 'CTA Section');
           window.open('https://upclinic-aa025.web.app/login', '_blank');
         }}
-        class="inline-flex items-center px-8 py-4 text-lg font-semibold text-white border-2 border-white/50 rounded-xl hover:border-white hover:bg-white/10 transition-all"
+        class="up-btn-ghost"
       >
         Entrar no UpClinic
       </a>
     </div>
-    <p class="text-blue-200 text-sm mt-6">Sem cartão · Sem contrato mínimo · Suporte Seg–Sáb</p>
+    <p use:reveal={{ delay: 240 }} style="color:rgba(147,197,253,0.7); font-size:0.82rem; margin-top:1.5rem;">Sem cartão · Sem contrato mínimo · Suporte Seg–Sáb</p>
   </div>
 </section>
 

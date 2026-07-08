@@ -124,3 +124,227 @@
   }
 }
 
+/* ══════════════════════════════════════════════════════════════
+   CAMADA PREMIUM — landing 2026 (aurora, glow, glass, motion)
+   ══════════════════════════════════════════════════════════════ */
+
+:root {
+  --up-blue: #2563eb;
+  --up-blue-deep: #0a163c;
+  --up-cyan: #38bdf8;
+  --up-emerald: #10b981;
+  --up-violet: #8b5cf6;
+}
+
+/* ── Texto com gradiente animado ── */
+.up-gradient-text {
+  background: linear-gradient(100deg, #60c8ff 0%, #a5b4fc 30%, #34d399 60%, #60c8ff 100%);
+  background-size: 260% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: up-text-shift 7s ease-in-out infinite;
+}
+@keyframes up-text-shift {
+  0%, 100% { background-position: 0% center; }
+  50% { background-position: 100% center; }
+}
+
+/* ── Aurora / mesh de fundo em movimento ── */
+.up-aurora {
+  position: absolute;
+  inset: -20%;
+  z-index: 0;
+  pointer-events: none;
+  filter: blur(60px);
+  opacity: 0.9;
+}
+.up-aurora::before,
+.up-aurora::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  mix-blend-mode: screen;
+}
+.up-aurora::before {
+  width: 55vw; height: 55vw;
+  top: -10%; left: -5%;
+  background: radial-gradient(circle at 30% 30%, rgba(56,189,248,0.55), transparent 60%);
+  animation: up-float-a 18s ease-in-out infinite;
+}
+.up-aurora::after {
+  width: 50vw; height: 50vw;
+  bottom: -15%; right: -10%;
+  background: radial-gradient(circle at 70% 70%, rgba(139,92,246,0.5), transparent 60%);
+  animation: up-float-b 22s ease-in-out infinite;
+}
+@keyframes up-float-a {
+  0%, 100% { transform: translate(0,0) scale(1); }
+  33% { transform: translate(6vw, 4vh) scale(1.12); }
+  66% { transform: translate(-4vw, -3vh) scale(0.95); }
+}
+@keyframes up-float-b {
+  0%, 100% { transform: translate(0,0) scale(1); }
+  33% { transform: translate(-5vw, -4vh) scale(1.08); }
+  66% { transform: translate(4vw, 3vh) scale(0.96); }
+}
+
+/* ── Grid tecnológico sutil ── */
+.up-grid-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 46px 46px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 40%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 40%, transparent 100%);
+}
+
+/* ── Cartão de vidro (glassmorphism) ── */
+.up-glass {
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 20px 50px rgba(2, 8, 40, 0.35);
+}
+
+/* ── Flutuação suave (cards live no hero) ── */
+.up-float { animation: up-bob 6s ease-in-out infinite; }
+.up-float-slow { animation: up-bob 8s ease-in-out infinite; }
+.up-float-delayed { animation: up-bob 7s ease-in-out infinite; animation-delay: -2.5s; }
+@keyframes up-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+
+/* ── Brilho pulsante (badges, dots) ── */
+.up-pulse-dot {
+  position: relative;
+}
+.up-pulse-dot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.6);
+  animation: up-ring 2s ease-out infinite;
+}
+@keyframes up-ring {
+  0% { box-shadow: 0 0 0 0 rgba(52,211,153,0.6); }
+  70% { box-shadow: 0 0 0 12px rgba(52,211,153,0); }
+  100% { box-shadow: 0 0 0 0 rgba(52,211,153,0); }
+}
+
+/* ── Botão premium com brilho deslizante ── */
+.up-btn-primary {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  font-weight: 800;
+  font-size: 1.0625rem;
+  color: #05221a;
+  border-radius: 1rem;
+  background: linear-gradient(100deg, #34d399, #10b981 55%, #059669);
+  box-shadow: 0 10px 30px rgba(16,185,129,0.45), inset 0 1px 0 rgba(255,255,255,0.4);
+  overflow: hidden;
+  transition: transform 0.2s cubic-bezier(0.16,1,0.3,1), box-shadow 0.2s;
+}
+.up-btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -120%;
+  width: 60%; height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,0.55), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.6s ease;
+}
+.up-btn-primary:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 16px 40px rgba(16,185,129,0.6); }
+.up-btn-primary:hover::before { left: 130%; }
+
+.up-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 1.75rem;
+  font-weight: 700;
+  font-size: 1.0625rem;
+  color: #fff;
+  border-radius: 1rem;
+  background: rgba(255,255,255,0.08);
+  border: 1.5px solid rgba(255,255,255,0.4);
+  backdrop-filter: blur(8px);
+  transition: all 0.2s cubic-bezier(0.16,1,0.3,1);
+}
+.up-btn-ghost:hover { background: rgba(255,255,255,0.18); border-color: #fff; transform: translateY(-2px); }
+
+/* ── Marquee (faixa deslizante infinita) ── */
+.up-marquee {
+  display: flex;
+  gap: 3rem;
+  width: max-content;
+  animation: up-marquee 32s linear infinite;
+}
+.up-marquee-wrap:hover .up-marquee { animation-play-state: paused; }
+@keyframes up-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ── Borda com brilho gradiente (conic) ── */
+.up-glow-border {
+  position: relative;
+  border-radius: 1.5rem;
+  background: #0b1020;
+}
+.up-glow-border::before {
+  content: '';
+  position: absolute;
+  inset: -1.5px;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(from var(--a, 0deg), #38bdf8, #8b5cf6, #34d399, #38bdf8);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: up-spin 6s linear infinite;
+}
+@property --a { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+@keyframes up-spin { to { --a: 360deg; } }
+
+/* ── Aparição sequencial de mensagens (mockup WhatsApp) ── */
+@keyframes up-msg-in {
+  from { opacity: 0; transform: translateY(12px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.up-msg { opacity: 0; animation: up-msg-in 0.5s cubic-bezier(0.16,1,0.3,1) forwards; }
+
+/* ── Bento hover ── */
+.up-bento-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s;
+}
+.up-bento-card:hover { transform: translateY(-6px); }
+.up-bento-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(400px circle at var(--mx, 50%) var(--my, 0%), rgba(56,189,248,0.16), transparent 45%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.up-bento-card:hover::after { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .up-gradient-text, .up-aurora::before, .up-aurora::after,
+  .up-float, .up-float-slow, .up-float-delayed, .up-marquee,
+  .up-glow-border::before, .up-pulse-dot::after { animation: none !important; }
+}
+
