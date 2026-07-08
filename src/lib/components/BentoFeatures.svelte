@@ -1,6 +1,7 @@
 <script>
   import { reveal } from '$lib/actions/motion';
   import { REGISTER_URL } from '$lib/constants';
+  import { t } from '$lib/i18n';
 
   // Segue o mouse para o brilho interno de cada card
   function glow(e) {
@@ -18,13 +19,13 @@
     <div class="text-center max-w-3xl mx-auto mb-12" use:reveal>
       <span class="inline-block px-4 py-1.5 rounded-full text-xs font-bold mb-4"
         style="background:rgba(56,189,248,0.12); border:1px solid rgba(56,189,248,0.35); color:#7dd3fc; text-transform:uppercase; letter-spacing:0.06em;">
-        Muito além do prontuário
+        {$t('bento.badge')}
       </span>
       <h2 style="font-size:clamp(2rem,4vw,3rem); font-weight:900; color:#fff; line-height:1.1; letter-spacing:-0.02em; margin-bottom:1rem;">
-        Funcionalidades que <span class="up-gradient-text">poucos sabem que existem</span>
+        {$t('bento.title')}<span class="up-gradient-text">{$t('bento.titleHi')}</span>
       </h2>
       <p style="color:rgba(191,219,254,0.8); font-size:1.05rem; line-height:1.6;">
-        Tudo criado para a realidade da saúde brasileira — e tudo dentro do mesmo sistema.
+        {$t('bento.sub')}
       </p>
     </div>
 
@@ -37,8 +38,8 @@
           <div class="up-icon" style="background:linear-gradient(135deg,#22c55e,#15803d);">
             <svg width="22" height="22" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><circle cx="12" cy="11" r="3"/></svg>
           </div>
-          <h3 class="up-cell-title">Atendimento domiciliar com GPS</h3>
-          <p class="up-cell-desc">Home Care com rota otimizada, mapa em tempo real, check-in por localização e trânsito ao vivo. Sua equipe na rua, você acompanhando pela tela.</p>
+          <h3 class="up-cell-title">{$t('bento.c1t')}</h3>
+          <p class="up-cell-desc">{$t('bento.c1d')}</p>
           <!-- mini mapa -->
           <div class="up-map">
             <div class="up-route"></div>
@@ -55,8 +56,8 @@
           <div class="up-icon" style="background:linear-gradient(135deg,#f472b6,#db2777);">
             <svg width="20" height="20" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2a3 3 0 013 3v2a3 3 0 01-6 0V5a3 3 0 013-3zM6 22v-6a6 6 0 0112 0v6"/></svg>
           </div>
-          <h3 class="up-cell-title">Injetáveis & mapa corporal</h3>
-          <p class="up-cell-desc">Marque no corpo e na face onde cada aplicação foi feita, com histórico visual por paciente.</p>
+          <h3 class="up-cell-title">{$t('bento.c2t')}</h3>
+          <p class="up-cell-desc">{$t('bento.c2d')}</p>
         </div>
       </div>
 
@@ -66,8 +67,8 @@
           <div class="up-icon" style="background:linear-gradient(135deg,#a78bfa,#7c3aed);">
             <svg width="20" height="20" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
           </div>
-          <h3 class="up-cell-title">IA médica com seus dados</h3>
-          <p class="up-cell-desc">Assistente que entende o prontuário do paciente e sugere condutas com base em evidências.</p>
+          <h3 class="up-cell-title">{$t('bento.c3t')}</h3>
+          <p class="up-cell-desc">{$t('bento.c3d')}</p>
         </div>
       </div>
 
@@ -77,8 +78,8 @@
           <div class="up-icon" style="background:linear-gradient(135deg,#60a5fa,#2563eb);">
             <svg width="20" height="20" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
           </div>
-          <h3 class="up-cell-title">Telemedicina integrada</h3>
-          <p class="up-cell-desc">Vídeo HD com prontuário sincronizado e prescrição digital assinada, sem instalar nada.</p>
+          <h3 class="up-cell-title">{$t('bento.c4t')}</h3>
+          <p class="up-cell-desc">{$t('bento.c4d')}</p>
         </div>
       </div>
 
@@ -88,12 +89,12 @@
           <div class="up-icon" style="background:linear-gradient(135deg,#fbbf24,#f59e0b);">
             <svg width="20" height="20" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
           </div>
-          <h3 class="up-cell-title">Cobrança recorrente automática</h3>
-          <p class="up-cell-desc">Planos e assinaturas com cartão via Stripe. O sistema cobra todo mês sozinho e reduz a inadimplência — você não corre mais atrás de pagamento.</p>
+          <h3 class="up-cell-title">{$t('bento.c5t')}</h3>
+          <p class="up-cell-desc">{$t('bento.c5d')}</p>
           <div class="up-chip-row">
-            <span class="up-chip">💳 Cartão recorrente</span>
-            <span class="up-chip">📉 -60% inadimplência</span>
-            <span class="up-chip">🔁 Renovação automática</span>
+            <span class="up-chip">{$t('bento.chip1')}</span>
+            <span class="up-chip">{$t('bento.chip2')}</span>
+            <span class="up-chip">{$t('bento.chip3')}</span>
           </div>
         </div>
       </div>
@@ -104,8 +105,8 @@
           <div class="up-icon" style="background:linear-gradient(135deg,#2dd4bf,#0d9488);">
             <svg width="20" height="20" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
           </div>
-          <h3 class="up-cell-title">Convênios & TISS/ANS</h3>
-          <p class="up-cell-desc">Guias no padrão TISS e faturamento de convênios sem retrabalho.</p>
+          <h3 class="up-cell-title">{$t('bento.c6t')}</h3>
+          <p class="up-cell-desc">{$t('bento.c6d')}</p>
         </div>
       </div>
 
@@ -115,8 +116,8 @@
           <div class="up-icon" style="background:linear-gradient(135deg,#f87171,#dc2626);">
             <svg width="20" height="20" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
           </div>
-          <h3 class="up-cell-title">SNGPC & controle sanitário</h3>
-          <p class="up-cell-desc">Controle de medicamentos e escrituração alinhados às exigências da ANVISA.</p>
+          <h3 class="up-cell-title">{$t('bento.c7t')}</h3>
+          <p class="up-cell-desc">{$t('bento.c7d')}</p>
         </div>
       </div>
 
@@ -126,8 +127,8 @@
           <div class="up-icon" style="background:linear-gradient(135deg,#34d399,#059669);">
             <svg width="20" height="20" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
           </div>
-          <h3 class="up-cell-title">Fidelização automática</h3>
-          <p class="up-cell-desc">Aniversários, retornos e campanhas por WhatsApp que trazem o paciente de volta.</p>
+          <h3 class="up-cell-title">{$t('bento.c8t')}</h3>
+          <p class="up-cell-desc">{$t('bento.c8d')}</p>
         </div>
       </div>
 
@@ -135,7 +136,7 @@
 
     <div class="text-center mt-12" use:reveal>
       <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" class="up-btn-primary">
-        Explorar tudo grátis por 7 dias
+        {$t('bento.cta')}
       </a>
     </div>
   </div>

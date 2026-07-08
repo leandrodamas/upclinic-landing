@@ -8,6 +8,7 @@
   import Footer from '$lib/components/Footer.svelte';
   import YoutubeChannelVideoTeaser from '$lib/components/YoutubeChannelVideoTeaser.svelte';
   import { reveal, countUp } from '$lib/actions/motion';
+  import { t } from '$lib/i18n';
   import {
     REGISTER_URL,
     CONTACT,
@@ -20,52 +21,15 @@
   );
   const whatsappHref = `${CONTACT.whatsappLink}?text=${waText}`;
 
-  const passos = [
-    {
-      n: 1,
-      icon: 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z',
-      titulo: 'Agendamento facilitado',
-      texto: 'Resposta ágil e agendamento online: o paciente marca sem burocracia.',
-      up: 'No UpClinic: agenda integrada e links de agendamento — menos tempo perdido e menos faltas.'
-    },
-    {
-      n: 2,
-      icon: 'M4 6h16M4 10h16M4 14h10M4 18h6',
-      titulo: 'Agenda organizada e lista de espera',
-      texto: 'Quando alguém desmarca, você repreenche o horário na hora, sem buracos.',
-      up: 'No UpClinic: visão da agenda, encaixes e fila de espera para ocupar cancelamentos.'
-    },
-    {
-      n: 3,
-      icon: 'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z',
-      titulo: 'Experiência do paciente',
-      texto: 'Conforto e clareza da marcação ao pós-consulta.',
-      up: 'No UpClinic: lembretes e comunicação alinhadas à sua marca — sem cobrança por mensagem.'
-    },
-    {
-      n: 4,
-      icon: 'M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z',
-      titulo: 'Formas de pagamento',
-      texto: 'Quanto mais opções na recepção, mais facilidade para fechar o atendimento.',
-      up: 'No UpClinic: financeiro e cobrança recorrente para registrar e receber sem planilha solta.'
-    },
-    {
-      n: 5,
-      icon: 'M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z',
-      titulo: 'Peça feedback',
-      texto: 'Saiba como foi a consulta e a jornada — decida com base no que o paciente sentiu.',
-      up: 'No UpClinic: prontuário e histórico centralizados para melhorar com consistência.'
-    },
-    {
-      n: 6,
-      icon: 'M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z',
-      titulo: 'Marketing para quem já é seu paciente',
-      texto: 'Invista em quem já confia em você: retornos e relacionamento contínuo.',
-      up: 'No UpClinic: confirmações e comunicação recorrente para fortalecer vínculos e indicações.'
-    }
+  // Ícones dos 6 passos (a ordem casa com comece.steps no i18n). Textos vêm do dicionário.
+  const stepIcons = [
+    'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z',
+    'M4 6h16M4 10h16M4 14h10M4 18h6',
+    'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z',
+    'M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z',
+    'M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z',
+    'M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z'
   ];
-
-  const featureChips = ['Agenda inteligente', 'Prontuário', 'Financeiro', 'WhatsApp sem cobrança', 'Nuvem · sem instalar'];
 
   function trackLead(name: string, source: string) {
     if (typeof window === 'undefined') return;
@@ -121,7 +85,7 @@
        style="background:linear-gradient(90deg,#059669,#0d9488,#0891b2);">
     <span class="inline-flex items-center justify-center gap-2">
       <span class="up-pulse-dot" style="width:8px;height:8px;background:#fff;border-radius:50%;"></span>
-      7 dias grátis · sem cartão — organize agenda, prontuário e finanças hoje
+      {$t('comece.urgency')}
     </span>
   </div>
 
@@ -136,35 +100,33 @@
            style="padding:7px 16px; border-radius:999px; font-family:'Plus Jakarta Sans',system-ui,sans-serif;">
           <span class="up-pulse-dot" style="width:8px;height:8px;background:#34d399;border-radius:50%;"></span>
           <span style="color:#6ee7b7; font-size:0.72rem; font-weight:800; text-transform:uppercase; letter-spacing:0.18em;">
-            Plataforma em nuvem para clínicas
+            {$t('comece.badge')}
           </span>
         </p>
 
         <h1 style="font-family:'Plus Jakarta Sans',system-ui,sans-serif; font-size:clamp(2rem,4.6vw,3.1rem); font-weight:800; line-height:1.1; letter-spacing:-0.02em; color:#fff;">
-          Agenda, <span class="up-gradient-text">prontuário</span> e pacientes —<br class="hidden sm:block">
-          um sistema que roda seu consultório
+          {$t('comece.titlePre')}<span class="up-gradient-text">{$t('comece.titleHi')}</span>{$t('comece.titleMid')}<br class="hidden sm:block">
+          {$t('comece.titleEnd')}
         </h1>
 
         <p class="mx-auto mt-5 max-w-2xl" style="font-size:1.08rem; line-height:1.7; color:rgba(191,219,254,0.85);">
-          Veja o <strong style="color:#fff;">UpClinic em ação</strong> nos vídeos abaixo (com som e controles).
-          Depois, os <strong style="color:#fff;">6 passos</strong> para fidelizar quem já confia em você —
-          e o que o sistema faz em cada etapa. Inclui <strong style="color:#6ee7b7;">WhatsApp sem cobrança por mensagem</strong>.
+          {$t('comece.subA')}<strong style="color:#fff;">{$t('comece.subUpclinic')}</strong>{$t('comece.subB')}<strong style="color:#fff;">{$t('comece.sub6')}</strong>{$t('comece.subC')}<strong style="color:#6ee7b7;">{$t('comece.subWa')}</strong>{$t('comece.subD')}
         </p>
 
         <div class="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:flex-wrap sm:justify-center">
           <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" class="up-btn-primary"
              on:click|preventDefault={() => { trackLead('CTA Teste grátis', '/comece hero'); window.open(REGISTER_URL, '_blank'); }}>
-            Começar grátis agora
+            {$t('comece.ctaStart')}
             <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
           </a>
           <a href="#demo-sistema" on:click={(e) => scrollToId(e, 'demo-sistema')} class="up-btn-ghost cursor-pointer">
             <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/></svg>
-            Ver vídeos
+            {$t('comece.ctaVideos')}
           </a>
         </div>
 
         <ul class="mx-auto mt-8 flex flex-wrap justify-center gap-2 sm:gap-3">
-          {#each featureChips as chip}
+          {#each $t('comece.chips') as chip}
             <li class="up-glass" style="padding:7px 14px; border-radius:10px; font-size:0.8rem; font-weight:600; color:#dbeafe;">{chip}</li>
           {/each}
         </ul>
@@ -172,11 +134,11 @@
         <p class="mx-auto mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2" style="font-size:0.82rem; color:rgba(167,210,255,0.75);">
           <span class="flex items-center gap-1.5">
             <svg width="16" height="16" fill="#34d399" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-            Sem cartão de crédito
+            {$t('comece.trustNoCard')}
           </span>
           <span class="flex items-center gap-1.5">
             <svg width="16" height="16" fill="#34d399" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-            Cancele quando quiser
+            {$t('comece.trustCancel')}
           </span>
         </p>
       </div>
@@ -186,11 +148,11 @@
   <div class="relative z-[2] mx-auto max-w-5xl space-y-16 px-4 pb-16 sm:px-6 lg:space-y-24 lg:pb-24">
 
     <!-- Fluxo em 3 passos -->
-    <nav class="grid gap-4 sm:grid-cols-3" aria-label="Como conhecer o UpClinic">
+    <nav class="grid gap-4 sm:grid-cols-3" aria-label="UpClinic">
       {#each [
-        { n: '1', c: 'linear-gradient(135deg,#34d399,#0d9488)', t: 'Vídeo na página', d: 'Play e volume nos controles; canto inferior direito → canal no YouTube.' },
-        { n: '2', c: 'linear-gradient(135deg,#60a5fa,#2563eb)', t: '6 passos + conteúdo', d: 'Cards e vídeo sobre fidelização de pacientes.' },
-        { n: '3', c: 'linear-gradient(135deg,#fbbf24,#f59e0b)', t: 'Teste grátis', d: 'Abra a conta e use na prática, sem cartão.' }
+        { n: '1', c: 'linear-gradient(135deg,#34d399,#0d9488)', t: $t('comece.flow1t'), d: $t('comece.flow1d') },
+        { n: '2', c: 'linear-gradient(135deg,#60a5fa,#2563eb)', t: $t('comece.flow2t'), d: $t('comece.flow2d') },
+        { n: '3', c: 'linear-gradient(135deg,#fbbf24,#f59e0b)', t: $t('comece.flow3t'), d: $t('comece.flow3d') }
       ] as s, i}
         <div use:reveal={{ delay: i * 80 }} class="up-glass flex gap-3" style="padding:18px; border-radius:18px;">
           <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-sm font-black text-white"
@@ -209,13 +171,13 @@
         <span class="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider"
               style="background:rgba(52,211,153,0.12); border:1px solid rgba(52,211,153,0.35); color:#6ee7b7;">
           <span class="up-pulse-dot" style="width:6px;height:6px;background:#34d399;border-radius:50%;"></span>
-          Tour do produto
+          {$t('comece.tourBadge')}
         </span>
         <h2 class="mt-3 text-2xl font-extrabold tracking-tight text-white sm:text-3xl" style="font-family:'Plus Jakarta Sans',system-ui,sans-serif;">
-          Veja o UpClinic por dentro
+          {$t('comece.tourTitle')}
         </h2>
         <p class="mx-auto mt-2 max-w-xl" style="color:rgba(191,219,254,0.8);">
-          Agenda, pacientes e fluxo do dia a dia — assista abaixo; link discreto no canto inferior direito para o canal no YouTube.
+          {$t('comece.tourSub')}
         </p>
       </div>
 
@@ -248,12 +210,12 @@
       <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
         <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" class="up-btn-primary"
            on:click|preventDefault={() => { trackLead('CTA Teste grátis', '/comece após vídeo sistema'); window.open(REGISTER_URL, '_blank'); }}>
-          Quero testar grátis
+          {$t('comece.ctaTest')}
           <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
         </a>
         <a href="#passos-heading" on:click={(e) => scrollToId(e, 'passos-heading')}
            class="text-sm font-bold underline decoration-white/30 underline-offset-4 hover:decoration-emerald-400" style="color:rgba(191,219,254,0.85);">
-          Ver os 6 passos abaixo
+          {$t('comece.see6')}
         </a>
       </div>
     </section>
@@ -262,10 +224,10 @@
     <section use:reveal class="relative overflow-hidden up-glass text-center" style="border-radius:1.5rem; padding:2rem 1.5rem; border-color:rgba(251,191,36,0.3);">
       <div class="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full" style="background:rgba(251,146,60,0.25); filter:blur(60px);" aria-hidden="true"></div>
       <p class="relative text-lg font-bold sm:text-xl" style="font-family:'Plus Jakarta Sans',system-ui,sans-serif; color:#fff;">
-        Atrair paciente novo pode custar até <span style="color:#fbbf24;">7 vezes mais</span> do que fortalecer quem já passa por você.
+        {$t('comece.insightPre')}<span style="color:#fbbf24;">{$t('comece.insightHi')}</span>{$t('comece.insightPost')}
       </p>
       <p class="relative mx-auto mt-2 max-w-2xl text-sm sm:text-base" style="color:rgba(191,219,254,0.8);">
-        O UpClinic organiza a operação. Abaixo: os 6 passos da fidelização — e o que o sistema faz em cada etapa.
+        {$t('comece.insightSub')}
       </p>
     </section>
 
@@ -273,19 +235,19 @@
     <section aria-labelledby="passos-heading">
       <div use:reveal class="text-center">
         <h2 id="passos-heading" class="text-2xl font-extrabold tracking-tight text-white sm:text-3xl" style="font-family:'Plus Jakarta Sans',system-ui,sans-serif;">
-          Os 6 passos — e o <span class="up-gradient-text">UpClinic em cada um</span>
+          {$t('comece.stepsTitlePre')}<span class="up-gradient-text">{$t('comece.stepsTitleHi')}</span>
         </h2>
-        <p class="mx-auto mt-2 text-center text-sm font-semibold" style="color:#6ee7b7;">7 dias grátis · sem cartão</p>
+        <p class="mx-auto mt-2 text-center text-sm font-semibold" style="color:#6ee7b7;">{$t('comece.stepsSub')}</p>
       </div>
       <ol class="mt-10 grid gap-5 sm:grid-cols-2">
-        {#each passos as p, i}
+        {#each $t('comece.steps') as p, i}
           <li use:reveal={{ delay: (i % 2) * 90 }} class="up-bento-card up-glass flex flex-col" role="presentation"
               on:mousemove={(e) => { const r = e.currentTarget.getBoundingClientRect(); e.currentTarget.style.setProperty('--mx', `${e.clientX - r.left}px`); e.currentTarget.style.setProperty('--my', `${e.clientY - r.top}px`); }}
               style="border-radius:1.25rem; padding:1.35rem;">
             <div class="flex items-center gap-3">
               <span class="flex h-11 w-11 items-center justify-center rounded-xl text-sm font-black text-white shadow-lg"
-                    style="background:linear-gradient(135deg,#34d399,#0d9488); font-family:'Plus Jakarta Sans',system-ui,sans-serif;">{p.n}</span>
-              <svg class="h-6 w-6" style="color:#7dd3fc;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d={p.icon}/></svg>
+                    style="background:linear-gradient(135deg,#34d399,#0d9488); font-family:'Plus Jakarta Sans',system-ui,sans-serif;">{i + 1}</span>
+              <svg class="h-6 w-6" style="color:#7dd3fc;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d={stepIcons[i]}/></svg>
             </div>
             <h3 class="mt-3 text-lg font-bold text-white" style="font-family:'Plus Jakarta Sans',system-ui,sans-serif;">{p.titulo}</h3>
             <p class="mt-2 flex-1 text-sm leading-relaxed" style="color:rgba(191,219,254,0.78);">{p.texto}</p>
@@ -300,13 +262,13 @@
       <div class="mx-auto max-w-3xl text-center">
         <span class="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider"
               style="background:rgba(251,146,60,0.12); border:1px solid rgba(251,146,60,0.35); color:#fdba74;">
-          Conteúdo completo
+          {$t('comece.video2Badge')}
         </span>
         <h2 class="mt-3 text-xl font-extrabold text-white sm:text-2xl" style="font-family:'Plus Jakarta Sans',system-ui,sans-serif;">
-          Assista aos 6 passos no vídeo
+          {$t('comece.video2Title')}
         </h2>
         <p class="mt-2 text-sm sm:text-base" style="color:rgba(191,219,254,0.8);">
-          Fidelização, reputação e indicações — prévia abaixo; clique para assistir no canal @drcarloseurico.
+          {$t('comece.video2Sub')}
         </p>
       </div>
       <div class="mx-auto mt-6 max-w-4xl">
@@ -334,13 +296,13 @@
       <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-6">
         <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" class="up-btn-primary"
            on:click|preventDefault={() => { trackLead('CTA Teste grátis', '/comece após vídeo 6 passos'); window.open(REGISTER_URL, '_blank'); }}>
-          Começar grátis
+          {$t('comece.ctaStart2')}
         </a>
         <a href={whatsappHref} target="_blank" rel="noopener noreferrer"
            class="inline-flex items-center gap-2 text-sm font-bold hover:text-white" style="color:rgba(191,219,254,0.85);"
            on:click={() => trackLead('WhatsApp', '/comece após vídeo 6 passos')}>
           <svg class="h-5 w-5" style="color:#34d399;" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.883 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          Falar no WhatsApp
+          {$t('comece.ctaTalk')}
         </a>
       </div>
     </section>
@@ -348,23 +310,23 @@
     <!-- Métricas com count-up -->
     <section aria-labelledby="metricas-heading">
       <h2 id="metricas-heading" use:reveal class="text-center text-xl font-extrabold text-white sm:text-2xl" style="font-family:'Plus Jakarta Sans',system-ui,sans-serif;">
-        Números que importam para a <span class="up-gradient-text">sua agenda</span>
+        {$t('comece.metricsTitlePre')}<span class="up-gradient-text">{$t('comece.metricsTitleHi')}</span>
       </h2>
       <div class="mt-8 grid gap-4 sm:grid-cols-3">
         <div use:reveal class="up-glass" style="padding:1.4rem; border-radius:1.25rem;">
           <p class="text-4xl font-black" style="color:#fbbf24; font-family:'Plus Jakarta Sans',system-ui,sans-serif;"><span use:countUp={{ to: 7, suffix: '×' }}>0</span></p>
-          <p class="mt-1 text-sm font-bold text-white">custo de aquisição</p>
-          <p class="mt-2 text-xs leading-relaxed" style="color:rgba(191,219,254,0.72);">Atrair novo paciente costuma ser bem mais caro do que reter quem já confia em você.</p>
+          <p class="mt-1 text-sm font-bold text-white">{$t('comece.m1label')}</p>
+          <p class="mt-2 text-xs leading-relaxed" style="color:rgba(191,219,254,0.72);">{$t('comece.m1desc')}</p>
         </div>
         <div use:reveal={{ delay: 80 }} class="up-glass" style="padding:1.4rem; border-radius:1.25rem;">
           <p class="text-4xl font-black" style="color:#34d399; font-family:'Plus Jakarta Sans',system-ui,sans-serif;"><span use:countUp={{ to: 37, prefix: '+', suffix: '%' }}>0</span></p>
-          <p class="mt-1 text-sm font-bold text-white">faturamento médio</p>
-          <p class="mt-2 text-xs leading-relaxed" style="color:rgba(191,219,254,0.72);">Relatado em operações com agenda ativa. Resultados variam.</p>
+          <p class="mt-1 text-sm font-bold text-white">{$t('comece.m2label')}</p>
+          <p class="mt-2 text-xs leading-relaxed" style="color:rgba(191,219,254,0.72);">{$t('comece.m2desc')}</p>
         </div>
         <div use:reveal={{ delay: 160 }} class="up-glass" style="padding:1.4rem; border-radius:1.25rem;">
           <p class="text-4xl font-black" style="color:#34d399; font-family:'Plus Jakarta Sans',system-ui,sans-serif;"><span use:countUp={{ to: 42, prefix: '−', suffix: '%' }}>0</span></p>
-          <p class="mt-1 text-sm font-bold text-white">faltas</p>
-          <p class="mt-2 text-xs leading-relaxed" style="color:rgba(191,219,254,0.72);">Com confirmação e lista de espera organizadas.</p>
+          <p class="mt-1 text-sm font-bold text-white">{$t('comece.m3label')}</p>
+          <p class="mt-2 text-xs leading-relaxed" style="color:rgba(191,219,254,0.72);">{$t('comece.m3desc')}</p>
         </div>
       </div>
     </section>
@@ -372,19 +334,19 @@
     <!-- FAQ + CTA -->
     <section class="grid gap-8 lg:grid-cols-5 lg:gap-10">
       <div use:reveal class="up-glass lg:col-span-2" style="padding:1.5rem; border-radius:1.25rem;">
-        <h2 class="font-bold text-white" style="font-family:'Plus Jakarta Sans',system-ui,sans-serif;">Dúvidas</h2>
+        <h2 class="font-bold text-white" style="font-family:'Plus Jakarta Sans',system-ui,sans-serif;">{$t('comece.faqTitle')}</h2>
         <dl class="mt-4 space-y-4 text-sm" style="color:rgba(191,219,254,0.8);">
           <div>
-            <dt class="font-semibold text-white">O UpClinic substitui minha estratégia?</dt>
-            <dd class="mt-1">Não. Ele organiza agenda, comunicação, prontuário e finanças para você colocar a estratégia em prática.</dd>
+            <dt class="font-semibold text-white">{$t('comece.faqQ1')}</dt>
+            <dd class="mt-1">{$t('comece.faqA1')}</dd>
           </div>
           <div>
-            <dt class="font-semibold text-white">Preciso instalar?</dt>
-            <dd class="mt-1">Não. Tudo pelo navegador, na nuvem.</dd>
+            <dt class="font-semibold text-white">{$t('comece.faqQ2')}</dt>
+            <dd class="mt-1">{$t('comece.faqA2')}</dd>
           </div>
           <div>
-            <dt class="font-semibold text-white">E se eu não gostar?</dt>
-            <dd class="mt-1">Teste sem cartão. Cancele quando quiser.</dd>
+            <dt class="font-semibold text-white">{$t('comece.faqQ3')}</dt>
+            <dd class="mt-1">{$t('comece.faqA3')}</dd>
           </div>
         </dl>
       </div>
@@ -392,20 +354,20 @@
         <div class="relative flex h-full flex-col justify-center overflow-hidden text-center text-white" style="border-radius:1.5rem; background:linear-gradient(135deg,#071233,#0a1a44 55%,#064e3b); padding:2rem;">
           <div class="up-aurora" style="opacity:0.5;"></div>
           <div class="relative z-[1]">
-            <p class="text-xs font-bold uppercase tracking-[0.2em]" style="color:#6ee7b7; font-family:'Plus Jakarta Sans',system-ui,sans-serif;">Próximo passo</p>
+            <p class="text-xs font-bold uppercase tracking-[0.2em]" style="color:#6ee7b7; font-family:'Plus Jakarta Sans',system-ui,sans-serif;">{$t('comece.nextStep')}</p>
             <p class="mt-2 text-2xl font-extrabold leading-snug sm:text-[1.65rem]" style="font-family:'Plus Jakarta Sans',system-ui,sans-serif;">
-              Abra sua conta em poucos minutos e teste na prática.
+              {$t('comece.finalTitle')}
             </p>
             <div class="mt-6 flex flex-col items-center gap-4">
               <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" class="up-btn-primary"
                  on:click|preventDefault={() => { trackLead('CTA Teste grátis', '/comece card final'); window.open(REGISTER_URL, '_blank'); }}>
-                Começar teste grátis
+                {$t('comece.ctaFinal')}
                 <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
               </a>
               <a href={whatsappHref} target="_blank" rel="noopener noreferrer"
                  class="text-sm font-semibold underline decoration-white/30 underline-offset-4 hover:text-white" style="color:rgba(191,219,254,0.85);"
                  on:click={() => trackLead('WhatsApp', '/comece card final')}>
-                WhatsApp
+                {$t('comece.waShort')}
               </a>
             </div>
           </div>
@@ -421,14 +383,14 @@
      role="region" aria-label="Ação principal">
   <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" class="up-btn-primary" style="width:100%; justify-content:center;"
      on:click|preventDefault={() => { trackLead('CTA Teste grátis', '/comece barra mobile'); window.open(REGISTER_URL, '_blank'); }}>
-    Começar grátis agora
+    {$t('comece.ctaStart')}
     <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
   </a>
   <a href={whatsappHref} target="_blank" rel="noopener noreferrer"
      class="mt-2 flex w-full items-center justify-center gap-1.5 py-2 text-sm font-bold" style="color:rgba(191,219,254,0.85);"
      on:click={() => trackLead('WhatsApp', '/comece barra mobile')}>
     <svg class="h-4 w-4" style="color:#34d399;" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.883 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-    WhatsApp
+    {$t('comece.waShort')}
   </a>
 </div>
 

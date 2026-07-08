@@ -2,7 +2,13 @@
   import '../app.css';
   import { browser } from '$app/environment';
   import { afterNavigate } from '$app/navigation';
+  import { onMount } from 'svelte';
+  import { initLocale } from '$lib/i18n';
   import { GOOGLE_ADS_CONVERSION_PAGE_VIEW_SEND_TO } from '$lib/constants';
+
+  onMount(() => {
+    initLocale();
+  });
 
   function fireAdsPageViewConversion() {
     const tryFire = (): boolean => {

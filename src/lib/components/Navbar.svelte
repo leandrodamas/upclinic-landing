@@ -2,9 +2,19 @@
   import { onMount } from 'svelte';
   import { page } from '$app/stores';
   import { LOGIN_URL, REGISTER_URL } from '$lib/constants';
+  import { t, locale, setLocale, LANGS } from '$lib/i18n';
 
   let scrolled = false;
   let mobileMenuOpen = false;
+  let langOpen = false;
+
+  $: currentLang = LANGS.find((l) => l.code === $locale) ?? LANGS[0];
+
+  function chooseLang(code) {
+    setLocale(code);
+    langOpen = false;
+    mobileMenuOpen = false;
+  }
 
   // Só usa fundo transparente com texto branco na home page (que tem o vídeo escuro)
   $: isHomePage = $page.url.pathname === '/';
@@ -58,13 +68,13 @@
 
         <!-- Links: brancos no hero (fundo escuro), cinza escuro após scroll -->
         {#each [
-          { href: '/#funcionalidades', label: 'Funcionalidades' },
-          { href: '/planos',           label: 'Planos' },
+          { href: '/#funcionalidades', label: $t('nav.features') },
+          { href: '/planos',           label: $t('nav.plans') },
           /* CONVERSAO-LINK-INICIO — apague esta linha e o bloco no mobile para remover /comece do menu */
-          { href: '/comece',           label: 'Encher a agenda' },
+          { href: '/comece',           label: $t('nav.fill') },
           /* CONVERSAO-LINK-FIM */
-          { href: '/sobre',            label: 'Sobre' },
-          { href: '/contato',          label: 'Contato' },
+          { href: '/sobre',            label: $t('nav.about') },
+          { href: '/contato',          label: $t('nav.contact') },
         ] as item}
           <a
             href={item.href}
@@ -89,7 +99,7 @@
               : 'text-white border-white/70 hover:border-white hover:bg-white/10'}"
           on:click|preventDefault={() => { trackEvent('CTA Login', 'Navbar'); window.open(LOGIN_URL, '_blank'); }}
         >
-          Entrar no UpClinic
+          {$t('nav.login')}
         </a>
 
         <!-- Iniciar Teste Grátis: sempre verde, sempre visível -->
@@ -102,11 +112,41 @@
                  hover:scale-105 transition-all duration-200 whitespace-nowrap"
           on:click|preventDefault={() => { trackEvent('CTA Registro', 'Navbar'); window.open(REGISTER_URL, '_blank'); }}
         >
-          Iniciar Teste Grátis
+          {$t('nav.trial')}
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
           </svg>
         </a>
+
+        <!-- Seletor de idioma -->
+        <div class="relative">
+          <button
+            type="button"
+            class="inline-flex items-center gap-1.5 px-2.5 py-2 text-sm font-semibold rounded-lg transition-colors
+              {darkNav ? 'text-gray-700 hover:bg-gray-100' : 'text-white/90 hover:bg-white/10'}"
+            on:click={() => (langOpen = !langOpen)}
+            aria-label="Language"
+            aria-expanded={langOpen}
+          >
+            <span class="text-base leading-none">{currentLang.flag}</span>
+            <span class="uppercase">{currentLang.code}</span>
+            <svg class="w-3.5 h-3.5 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+          </button>
+          {#if langOpen}
+            <div class="absolute right-0 mt-2 w-44 rounded-xl bg-white shadow-xl border border-gray-100 py-1 z-50">
+              {#each LANGS as l}
+                <button
+                  type="button"
+                  class="flex items-center gap-2.5 w-full px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors {l.code === $locale ? 'font-bold text-blue-600' : ''}"
+                  on:click={() => chooseLang(l.code)}
+                >
+                  <span class="text-base leading-none">{l.flag}</span>
+                  <span>{l.label}</span>
+                </button>
+              {/each}
+            </div>
+          {/if}
+        </div>
       </div>
 
       <!-- Mobile Menu Button: ícone branco no hero, cinza após scroll -->
@@ -129,13 +169,25 @@
     <!-- Mobile Menu: sempre fundo branco (aparece sobre qualquer seção) -->
     {#if mobileMenuOpen}
       <div class="md:hidden py-4 space-y-2 bg-white rounded-xl mt-2 shadow-xl border border-gray-100 px-2">
-        <a href="/#funcionalidades" class="block text-gray-700 hover:text-blue-600 font-medium px-3 py-2 rounded-md hover:bg-gray-50 transition-colors" on:click={() => mobileMenuOpen = false}>Funcionalidades</a>
-        <a href="/planos" class="block text-gray-700 hover:text-blue-600 font-medium px-3 py-2 rounded-md hover:bg-gray-50 transition-colors" on:click={() => mobileMenuOpen = false}>Planos</a>
+        <a href="/#funcionalidades" class="block text-gray-700 hover:text-blue-600 font-medium px-3 py-2 rounded-md hover:bg-gray-50 transition-colors" on:click={() => mobileMenuOpen = false}>{$t('nav.features')}</a>
+        <a href="/planos" class="block text-gray-700 hover:text-blue-600 font-medium px-3 py-2 rounded-md hover:bg-gray-50 transition-colors" on:click={() => mobileMenuOpen = false}>{$t('nav.plans')}</a>
         <!-- CONVERSAO-LINK-INICIO -->
-        <a href="/comece" class="block text-gray-700 hover:text-blue-600 font-medium px-3 py-2 rounded-md hover:bg-gray-50 transition-colors" on:click={() => mobileMenuOpen = false}>Encher a agenda</a>
+        <a href="/comece" class="block text-gray-700 hover:text-blue-600 font-medium px-3 py-2 rounded-md hover:bg-gray-50 transition-colors" on:click={() => mobileMenuOpen = false}>{$t('nav.fill')}</a>
         <!-- CONVERSAO-LINK-FIM -->
-        <a href="/sobre" class="block text-gray-700 hover:text-blue-600 font-medium px-3 py-2 rounded-md hover:bg-gray-50 transition-colors" on:click={() => mobileMenuOpen = false}>Sobre</a>
-        <a href="/contato" class="block text-gray-700 hover:text-blue-600 font-medium px-3 py-2 rounded-md hover:bg-gray-50 transition-colors" on:click={() => mobileMenuOpen = false}>Contato</a>
+        <a href="/sobre" class="block text-gray-700 hover:text-blue-600 font-medium px-3 py-2 rounded-md hover:bg-gray-50 transition-colors" on:click={() => mobileMenuOpen = false}>{$t('nav.about')}</a>
+        <a href="/contato" class="block text-gray-700 hover:text-blue-600 font-medium px-3 py-2 rounded-md hover:bg-gray-50 transition-colors" on:click={() => mobileMenuOpen = false}>{$t('nav.contact')}</a>
+        <div class="flex items-center gap-2 px-3 py-2">
+          {#each LANGS as l}
+            <button
+              type="button"
+              class="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-sm rounded-lg border transition-colors {l.code === $locale ? 'border-blue-600 text-blue-600 font-bold bg-blue-50' : 'border-gray-200 text-gray-600'}"
+              on:click={() => chooseLang(l.code)}
+            >
+              <span class="text-base leading-none">{l.flag}</span>
+              <span class="uppercase">{l.code}</span>
+            </button>
+          {/each}
+        </div>
         <div class="pt-2 space-y-2 border-t border-gray-100 mt-2">
           <a
             href={LOGIN_URL}
@@ -144,7 +196,7 @@
             class="flex items-center justify-center w-full px-4 py-2.5 text-sm font-semibold text-blue-600 border-2 border-blue-600 rounded-lg hover:bg-blue-50 transition-all"
             on:click={() => { trackEvent('CTA Login', 'Navbar Mobile'); mobileMenuOpen = false; }}
           >
-            Entrar no UpClinic
+            {$t('nav.login')}
           </a>
           <a
             href={REGISTER_URL}
@@ -153,7 +205,7 @@
             class="flex items-center justify-center gap-2 w-full px-4 py-2.5 text-sm font-bold text-white bg-green-500 hover:bg-green-600 rounded-lg shadow-md transition-all"
             on:click={() => { trackEvent('CTA Registro', 'Navbar Mobile'); mobileMenuOpen = false; }}
           >
-            Iniciar Teste Grátis — 7 dias
+            {$t('nav.trial7')}
           </a>
         </div>
       </div>

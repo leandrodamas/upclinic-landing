@@ -2,13 +2,14 @@
   import { onMount } from 'svelte';
   import { reveal } from '$lib/actions/motion';
   import { REGISTER_URL, CONTACT } from '$lib/constants';
+  import { t } from '$lib/i18n';
 
   // Mensagens que aparecem em sequência no mockup do celular
   const chat = [
-    { from: 'clinic', text: 'Olá, Maria! 👋 Aqui é da Clínica UpVida. Confirmando sua consulta amanhã (Ter) às 08:00 com Dr. Silva.', t: '08:41' },
-    { from: 'clinic', text: 'Responda: 1️⃣ Confirmar · 2️⃣ Remarcar', t: '08:41' },
-    { from: 'patient', text: '1 ✅', t: '08:43' },
-    { from: 'clinic', text: 'Perfeito! Consulta confirmada. Te esperamos 💙 Enviamos a localização e o preparo por aqui.', t: '08:43' },
+    { from: 'clinic', key: 'wa.chat1', t: '08:41' },
+    { from: 'clinic', key: 'wa.chat2', t: '08:41' },
+    { from: 'patient', key: 'wa.chat3', t: '08:43' },
+    { from: 'clinic', key: 'wa.chat4', t: '08:43' },
   ];
 
   let mounted = false;
@@ -36,46 +37,43 @@
       <div>
         <div use:reveal class="inline-flex items-center gap-2 mb-5" style="background:rgba(37,211,102,0.12); border:1px solid rgba(37,211,102,0.35); padding:6px 14px; border-radius:999px;">
           <span style="font-size:0.95rem;">💬</span>
-          <span style="color:#6ee7b7; font-size:0.8rem; font-weight:800; text-transform:uppercase; letter-spacing:0.05em;">O diferencial que ninguém te conta</span>
+          <span style="color:#6ee7b7; font-size:0.8rem; font-weight:800; text-transform:uppercase; letter-spacing:0.05em;">{$t('wa.badge')}</span>
         </div>
 
         <h2 use:reveal={{ delay: 60 }} style="font-size:clamp(2rem,4vw,3rem); font-weight:900; color:#fff; line-height:1.08; letter-spacing:-0.02em; margin-bottom:1.25rem;">
-          WhatsApp integrado.<br>
-          <span class="up-gradient-text">Sem pagar por mensagem.</span>
+          {$t('wa.titleA')}<br>
+          <span class="up-gradient-text">{$t('wa.titleB')}</span>
         </h2>
 
         <p use:reveal={{ delay: 120 }} style="color:rgba(219,234,254,0.9); font-size:1.1rem; line-height:1.7; margin-bottom:1.75rem; max-width:520px;">
-          A maioria dos sistemas cobra por SMS ou por mensagem de WhatsApp — e isso vira uma
-          conta que só cresce. No UpClinic, os lembretes, confirmações e avisos saem
-          direto do seu número, <strong style="color:#6ee7b7;">sem tarifa por envio</strong>.
-          Menos faltas, mais consultas, zero custo variável.
+          {$t('wa.p1')}<strong style="color:#6ee7b7;">{$t('wa.pStrong')}</strong>{$t('wa.p2')}
         </p>
 
         <!-- Comparativo de custo -->
         <div use:reveal={{ delay: 180 }} class="grid grid-cols-2 gap-3 mb-8" style="max-width:520px;">
           <div style="background:rgba(239,68,68,0.08); border:1px solid rgba(239,68,68,0.28); border-radius:16px; padding:16px;">
-            <div style="color:#fca5a5; font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:6px;">Outros sistemas</div>
-            <div style="color:#fff; font-size:1.5rem; font-weight:900; line-height:1;">R$ 0,10–0,45</div>
-            <div style="color:rgba(252,165,165,0.85); font-size:0.72rem; margin-top:4px;">por mensagem · some no fim do mês</div>
+            <div style="color:#fca5a5; font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:6px;">{$t('wa.otherLabel')}</div>
+            <div style="color:#fff; font-size:1.5rem; font-weight:900; line-height:1;">{$t('wa.otherPrice')}</div>
+            <div style="color:rgba(252,165,165,0.85); font-size:0.72rem; margin-top:4px;">{$t('wa.otherDesc')}</div>
           </div>
           <div style="background:rgba(37,211,102,0.1); border:1px solid rgba(37,211,102,0.4); border-radius:16px; padding:16px;">
-            <div style="color:#6ee7b7; font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:6px;">UpClinic</div>
-            <div style="color:#fff; font-size:1.5rem; font-weight:900; line-height:1;">R$ 0,00</div>
-            <div style="color:rgba(167,243,208,0.9); font-size:0.72rem; margin-top:4px;">incluído no plano · ilimitado*</div>
+            <div style="color:#6ee7b7; font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:6px;">{$t('wa.upLabel')}</div>
+            <div style="color:#fff; font-size:1.5rem; font-weight:900; line-height:1;">{$t('wa.upPrice')}</div>
+            <div style="color:rgba(167,243,208,0.9); font-size:0.72rem; margin-top:4px;">{$t('wa.upDesc')}</div>
           </div>
         </div>
 
         <div use:reveal={{ delay: 240 }} class="flex flex-wrap gap-3">
           <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" class="up-btn-primary">
-            Ativar meu WhatsApp grátis
+            {$t('wa.ctaActivate')}
           </a>
           <a href={`${CONTACT.whatsappLink}?text=Quero%20saber%20do%20WhatsApp%20sem%20cobran%C3%A7a%20do%20UpClinic`}
              target="_blank" rel="noopener noreferrer" class="up-btn-ghost" on:click={trackWhats}>
-            Falar no WhatsApp
+            {$t('wa.ctaTalk')}
           </a>
         </div>
         <p use:reveal={{ delay: 300 }} style="color:rgba(147,197,253,0.6); font-size:0.72rem; margin-top:0.9rem;">
-          *Uso justo dentro das políticas oficiais do WhatsApp/Meta, a partir do seu próprio número.
+          {$t('wa.disclaimer')}
         </p>
       </div>
 
@@ -89,8 +87,8 @@
               <svg width="20" height="20" fill="#fff" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.683-1.448L.057 24z"/></svg>
             </div>
             <div style="flex:1; min-width:0;">
-              <div style="color:#fff; font-weight:700; font-size:0.85rem;">Clínica UpVida</div>
-              <div style="color:#a7f3d0; font-size:0.68rem;">online · resposta automática</div>
+              <div style="color:#fff; font-weight:700; font-size:0.85rem;">{$t('wa.phoneName')}</div>
+              <div style="color:#a7f3d0; font-size:0.68rem;">{$t('wa.phoneStatus')}</div>
             </div>
             <div style="display:flex; gap:14px; color:rgba(255,255,255,0.7);">
               <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M17 10.5V7a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h12a1 1 0 001-1v-3.5l4 4v-11l-4 4z"/></svg>
@@ -105,14 +103,14 @@
                 {#each chat as m, i}
                   <div class="up-msg" style="animation-delay:{i * 1.1 + 0.3}s; display:flex; justify-content:{m.from === 'patient' ? 'flex-end' : 'flex-start'};">
                     <div class="up-bubble {m.from === 'patient' ? 'up-bubble-out' : 'up-bubble-in'}">
-                      <span>{m.text}</span>
+                      <span>{$t(m.key)}</span>
                       <span class="up-bubble-time">{m.t} {m.from === 'patient' ? '✓✓' : ''}</span>
                     </div>
                   </div>
                 {/each}
                 <div class="up-msg" style="animation-delay:{chat.length * 1.1 + 0.5}s; display:flex; justify-content:center;">
                   <span style="background:rgba(37,211,102,0.16); color:#6ee7b7; font-size:0.66rem; font-weight:700; padding:4px 12px; border-radius:999px;">
-                    💚 Falta evitada · custo R$ 0,00
+                    {$t('wa.avoided')}
                   </span>
                 </div>
               {/if}

@@ -1,5 +1,6 @@
 <script lang="ts">
   import { reveal } from '$lib/actions/motion';
+  import { t } from '$lib/i18n';
 
   /**
    * Checkout de subscription DIRETO no Stripe (sem passar por /auth).
@@ -26,58 +27,11 @@
   const brl = (v: number) =>
     v.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
+  // Nome/tagline/features vêm do i18n (keys em plans.*). Valores numéricos e cor permanecem aqui.
   const plans = [
-    {
-      id: 'starter' as const,
-      name: 'Starter',
-      tagline: 'Ideal para consultórios pequenos',
-      monthly: 29.9,
-      annual: 299.0,
-      accent: '#34d399',
-      popular: false,
-      features: [
-        'Até 10 pacientes',
-        'Agenda para 1 profissional',
-        'Prontuário eletrônico completo',
-        'Telemedicina básica (50/mês)',
-        'WhatsApp sem cobrança por mensagem',
-        'Suporte por email'
-      ]
-    },
-    {
-      id: 'professional' as const,
-      name: 'Professional',
-      tagline: 'Para clínicas em crescimento',
-      monthly: 59.9,
-      annual: 599.0,
-      accent: '#60a5fa',
-      popular: true,
-      features: [
-        'Pacientes ilimitados',
-        'Até 5 profissionais',
-        'Telemedicina avançada',
-        'IA médica integrada',
-        'WhatsApp sem cobrança por mensagem',
-        'Cobrança recorrente + suporte prioritário'
-      ]
-    },
-    {
-      id: 'enterprise' as const,
-      name: 'Enterprise',
-      tagline: 'Para grandes clínicas e grupos',
-      monthly: 129.9,
-      annual: 1299.0,
-      accent: '#c4b5fd',
-      popular: false,
-      features: [
-        'Pacientes e profissionais ilimitados',
-        'Home Care com GPS',
-        'IA médica completa',
-        'TISS/Convênios + SNGPC',
-        'WhatsApp sem cobrança por mensagem',
-        'Suporte 24/7 + gestor dedicado'
-      ]
-    }
+    { id: 'starter' as const, nameKey: 'plans.starterName', tagKey: 'plans.starterTag', featKey: 'plans.starterFeatures', monthly: 29.9, annual: 299.0, accent: '#34d399', popular: false },
+    { id: 'professional' as const, nameKey: 'plans.proName', tagKey: 'plans.proTag', featKey: 'plans.proFeatures', monthly: 59.9, annual: 599.0, accent: '#60a5fa', popular: true },
+    { id: 'enterprise' as const, nameKey: 'plans.entName', tagKey: 'plans.entTag', featKey: 'plans.entFeatures', monthly: 129.9, annual: 1299.0, accent: '#c4b5fd', popular: false }
   ];
 
   function linkFor(id: 'starter' | 'professional' | 'enterprise') {
@@ -99,10 +53,10 @@
 <div use:reveal class="flex justify-center mb-10">
   <div class="up-glass inline-flex items-center gap-1" style="padding:5px; border-radius:999px;">
     <button type="button" on:click={() => (annual = false)}
-      class="up-toggle" class:up-toggle-on={!annual} aria-pressed={!annual}>Mensal</button>
+      class="up-toggle" class:up-toggle-on={!annual} aria-pressed={!annual}>{$t('plans.monthly')}</button>
     <button type="button" on:click={() => (annual = true)}
       class="up-toggle" class:up-toggle-on={annual} aria-pressed={annual}>
-      Anual <span style="color:#6ee7b7; font-weight:800;">-17%</span>
+      {$t('plans.annual')} <span style="color:#6ee7b7; font-weight:800;">{$t('plans.save')}</span>
     </button>
   </div>
 </div>
@@ -117,25 +71,25 @@
 
       {#if plan.popular}
         <span class="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full px-4 py-1 text-xs font-bold text-white"
-              style="background:linear-gradient(90deg,#2563eb,#7c3aed);">Mais popular</span>
+              style="background:linear-gradient(90deg,#2563eb,#7c3aed);">{$t('plans.popular')}</span>
       {/if}
 
-      <h3 class="text-xl font-bold text-white" style="font-family:'Plus Jakarta Sans',system-ui,sans-serif;">{plan.name}</h3>
-      <p class="mt-1 text-sm" style="color:rgba(191,219,254,0.72);">{plan.tagline}</p>
+      <h3 class="text-xl font-bold text-white" style="font-family:'Plus Jakarta Sans',system-ui,sans-serif;">{$t(plan.nameKey)}</h3>
+      <p class="mt-1 text-sm" style="color:rgba(191,219,254,0.72);">{$t(plan.tagKey)}</p>
 
       <div class="mt-5 flex items-end gap-1">
         <span class="text-sm font-semibold" style="color:{plan.accent};">R$</span>
         <span class="text-4xl font-black text-white" style="line-height:1;">{brl(price)}</span>
-        <span class="text-sm mb-1" style="color:rgba(191,219,254,0.6);">/mês</span>
+        <span class="text-sm mb-1" style="color:rgba(191,219,254,0.6);">{$t('plans.perMonth')}</span>
       </div>
       {#if annual}
-        <p class="mt-1 text-xs" style="color:rgba(167,243,208,0.85);">R$ {brl(plan.annual)} cobrado anualmente</p>
+        <p class="mt-1 text-xs" style="color:rgba(167,243,208,0.85);">R$ {brl(plan.annual)} {$t('plans.billedAnnually')}</p>
       {:else}
-        <p class="mt-1 text-xs" style="color:rgba(191,219,254,0.5);">cobrado mensalmente</p>
+        <p class="mt-1 text-xs" style="color:rgba(191,219,254,0.5);">{$t('plans.billedMonthly')}</p>
       {/if}
 
       <ul class="mt-6 space-y-2.5 flex-1">
-        {#each plan.features as f}
+        {#each $t(plan.featKey) as f}
           <li class="flex items-start gap-2 text-sm" style="color:rgba(219,234,254,0.88);">
             <svg width="18" height="18" fill="none" stroke={plan.accent} stroke-width="2.5" viewBox="0 0 24 24" style="flex-shrink:0; margin-top:1px;"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
             {f}
@@ -147,14 +101,14 @@
          class="mt-7 {plan.popular ? 'up-btn-primary' : 'up-btn-ghost'}"
          style="width:100%; justify-content:center;"
          on:click={() => trackSubscribe(plan.id)}>
-        Assinar {plan.name}
+        {$t('plans.subscribe')} {$t(plan.nameKey)}
       </a>
     </div>
   {/each}
 </div>
 
 <p use:reveal class="text-center text-xs mt-6" style="color:rgba(147,197,253,0.6);">
-  7 dias grátis · sem cartão para testar · cancele quando quiser · WhatsApp incluído sem cobrança por mensagem
+  {$t('plans.footnote')}
 </p>
 
 <style>

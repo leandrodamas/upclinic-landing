@@ -1,7 +1,8 @@
 <script>
   import { SOCIAL, YOUTUBE_DRCARLOS_CHANNEL_URL } from '$lib/constants';
   import ImageWithFallback from './ImageWithFallback.svelte';
-  
+  import { t } from '$lib/i18n';
+
   const currentYear = new Date().getFullYear();
 </script>
 
@@ -18,8 +19,7 @@
           />
         </div>
         <p class="text-xs md:text-sm text-gray-400 mb-4 md:mb-6">
-          Sistema completo de gestão médica e clínica. 
-          Transformando a saúde com tecnologia.
+          {$t('footer.desc')}
         </p>
         <div class="flex space-x-4">
           {#if SOCIAL.facebook && SOCIAL.facebook !== '#'}
@@ -73,45 +73,45 @@
       
       <!-- Coluna 2: Produto -->
       <div>
-        <h4 class="text-white font-bold mb-3 md:mb-4 text-sm md:text-base">Produto</h4>
+        <h4 class="text-white font-bold mb-3 md:mb-4 text-sm md:text-base">{$t('footer.colProduct')}</h4>
         <ul class="space-y-1.5 md:space-y-2">
-          <li><a href="/#funcionalidades" class="hover:text-white transition-colors text-xs md:text-sm">Funcionalidades</a></li>
-          <li><a href="/planos" class="hover:text-white transition-colors text-xs md:text-sm">Planos</a></li>
-          <li><a href="https://upclinic-aa025.web.app/login" class="hover:text-white transition-colors text-xs md:text-sm">Login</a></li>
-          <li><a href="https://upclinic-aa025.web.app/login" class="hover:text-white transition-colors text-xs md:text-sm">Cadastro</a></li>
+          <li><a href="/#funcionalidades" class="hover:text-white transition-colors text-xs md:text-sm">{$t('footer.features')}</a></li>
+          <li><a href="/planos" class="hover:text-white transition-colors text-xs md:text-sm">{$t('footer.plans')}</a></li>
+          <li><a href="https://upclinic-aa025.web.app/login" class="hover:text-white transition-colors text-xs md:text-sm">{$t('footer.login')}</a></li>
+          <li><a href="https://upclinic-aa025.web.app/login" class="hover:text-white transition-colors text-xs md:text-sm">{$t('footer.register')}</a></li>
         </ul>
       </div>
       
       <!-- Coluna 3: Empresa -->
       <div>
-        <h4 class="text-white font-bold mb-3 md:mb-4 text-sm md:text-base">Empresa</h4>
+        <h4 class="text-white font-bold mb-3 md:mb-4 text-sm md:text-base">{$t('footer.colCompany')}</h4>
         <ul class="space-y-1.5 md:space-y-2">
-          <li><a href="/sobre" class="hover:text-white transition-colors text-xs md:text-sm">Sobre Nós</a></li>
-          <li><a href="/contato" class="hover:text-white transition-colors text-xs md:text-sm">Contato</a></li>
-          <li><a href="/carreiras" class="hover:text-white transition-colors text-xs md:text-sm">Carreiras</a></li>
+          <li><a href="/sobre" class="hover:text-white transition-colors text-xs md:text-sm">{$t('footer.about')}</a></li>
+          <li><a href="/contato" class="hover:text-white transition-colors text-xs md:text-sm">{$t('footer.contact')}</a></li>
+          <li><a href="/carreiras" class="hover:text-white transition-colors text-xs md:text-sm">{$t('footer.careers')}</a></li>
         </ul>
       </div>
       
       <!-- Coluna 4: Suporte -->
       <div>
-        <h4 class="text-white font-bold mb-3 md:mb-4 text-sm md:text-base">Suporte</h4>
+        <h4 class="text-white font-bold mb-3 md:mb-4 text-sm md:text-base">{$t('footer.colSupport')}</h4>
         <ul class="space-y-1.5 md:space-y-2">
-          <li><a href="/#duvidas-frequentes" class="hover:text-white transition-colors text-xs md:text-sm">Dúvidas Frequentes</a></li>
-          <li><a href="/faq" class="hover:text-white transition-colors text-xs md:text-sm">Central de Ajuda</a></li>
-          <li><a href="/contato" class="hover:text-white transition-colors text-xs md:text-sm">Fale Conosco</a></li>
-          <li class="text-gray-400 text-xs mt-2 leading-snug">Atendimento:<br>Seg–Sex 8h–18h<br>Sáb 8h–12h</li>
+          <li><a href="/#duvidas-frequentes" class="hover:text-white transition-colors text-xs md:text-sm">{$t('footer.faq')}</a></li>
+          <li><a href="/faq" class="hover:text-white transition-colors text-xs md:text-sm">{$t('footer.helpCenter')}</a></li>
+          <li><a href="/contato" class="hover:text-white transition-colors text-xs md:text-sm">{$t('footer.contactUs')}</a></li>
+          <li class="text-gray-400 text-xs mt-2 leading-snug">{$t('footer.supportHoursLabel')}<br>{$t('footer.supportHours1')}<br>{$t('footer.supportHours2')}</li>
         </ul>
       </div>
       
       <!-- Coluna 5: Legal -->
       <div>
-        <h4 class="text-white font-bold mb-3 md:mb-4 text-sm md:text-base">Legal</h4>
+        <h4 class="text-white font-bold mb-3 md:mb-4 text-sm md:text-base">{$t('footer.colLegal')}</h4>
         <ul class="space-y-1.5 md:space-y-2">
-          <li><a href="/politica-privacidade" class="hover:text-white transition-colors text-xs md:text-sm">Política de Privacidade</a></li>
-          <li><a href="/termos-servico" class="hover:text-white transition-colors text-xs md:text-sm">Termos de Uso</a></li>
-          <li><a href="/lgpd" class="hover:text-white transition-colors text-xs md:text-sm">LGPD</a></li>
-          <li><a href="/politica-cookies" class="hover:text-white transition-colors text-xs md:text-sm">Política de Cookies</a></li>
-          <li><a href="/codigo-conduta" class="hover:text-white transition-colors text-xs md:text-sm">Código de Conduta</a></li>
+          <li><a href="/politica-privacidade" class="hover:text-white transition-colors text-xs md:text-sm">{$t('footer.privacy')}</a></li>
+          <li><a href="/termos-servico" class="hover:text-white transition-colors text-xs md:text-sm">{$t('footer.terms')}</a></li>
+          <li><a href="/lgpd" class="hover:text-white transition-colors text-xs md:text-sm">{$t('footer.lgpd')}</a></li>
+          <li><a href="/politica-cookies" class="hover:text-white transition-colors text-xs md:text-sm">{$t('footer.cookies')}</a></li>
+          <li><a href="/codigo-conduta" class="hover:text-white transition-colors text-xs md:text-sm">{$t('footer.conduct')}</a></li>
         </ul>
       </div>
     </div>
@@ -124,7 +124,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
           </svg>
           <div class="min-w-0">
-            <div class="text-xs md:text-sm text-gray-400">Telefone / WhatsApp</div>
+            <div class="text-xs md:text-sm text-gray-400">{$t('footer.phoneLabel')}</div>
             <a 
               href="https://wa.me/5562997016149" 
               target="_blank" 
@@ -148,7 +148,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
           </svg>
           <div class="min-w-0">
-            <div class="text-xs md:text-sm text-gray-400">Email</div>
+            <div class="text-xs md:text-sm text-gray-400">{$t('footer.emailLabel')}</div>
             <a href="mailto:upclinic8@gmail.com" class="text-white hover:text-blue-400 transition-colors text-xs md:text-sm break-all">
               upclinic8@gmail.com
             </a>
@@ -159,8 +159,8 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
           <div class="min-w-0">
-            <div class="text-xs md:text-sm text-gray-400">Horário de Atendimento</div>
-            <div class="text-white text-xs md:text-sm">Segunda a Sexta: 8h às 18h</div>
+            <div class="text-xs md:text-sm text-gray-400">{$t('footer.hoursLabel')}</div>
+            <div class="text-white text-xs md:text-sm">{$t('footer.hoursValue')}</div>
           </div>
         </div>
       </div>
@@ -169,12 +169,12 @@
     <!-- Copyright -->
     <div class="border-t border-gray-800 pt-6 md:pt-8 text-center">
       <p class="text-xs md:text-sm text-gray-400">
-        &copy; {currentYear} UpClinic. Todos os direitos reservados.
+        &copy; {currentYear} UpClinic. {$t('footer.copyright')}
       </p>
       <p
         class="mx-auto mt-2 max-w-xl text-[10px] leading-snug text-gray-500 md:text-[11px]"
       >
-        Vídeos exibidos neste site: todos os direitos reservados ao canal
+        {$t('footer.videosNotePre')}
         <a
           href={YOUTUBE_DRCARLOS_CHANNEL_URL}
           target="_blank"
@@ -182,7 +182,7 @@
           class="text-gray-400 underline decoration-gray-600 underline-offset-2 hover:text-gray-300"
           >@drcarloseurico</a
         >
-        no YouTube.
+        {$t('footer.videosNotePost')}
       </p>
     </div>
   </div>
