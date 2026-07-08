@@ -1,19 +1,34 @@
 <script lang="ts">
   import Navbar from '$lib/components/Navbar.svelte';
   import Footer from '$lib/components/Footer.svelte';
+  import PricingPlans from '$lib/components/PricingPlans.svelte';
   import { reveal } from '$lib/actions/motion';
   import { CONTACT } from '$lib/constants';
 
   const whatsappHref = `${CONTACT.whatsappLink}?text=Quero%20saber%20mais%20sobre%20os%20planos%20do%20UpClinic`;
+
+  // Stripe Payment Links (modo subscription, Live) — checkout direto sem passar por /auth.
+  // Trial de 7 dias, sem exigir cartão, cupons habilitados. Gerados via Stripe MCP.
+  const paymentLinks = {
+    starter: {
+      monthly: 'https://buy.stripe.com/eVq7sM2iad8Qe9U6URdnW00',
+      annual: 'https://buy.stripe.com/fZucN66yq4Ck8PA92ZdnW01'
+    },
+    professional: {
+      monthly: 'https://buy.stripe.com/4gM7sMf4W8SAfdYbb7dnW02',
+      annual: 'https://buy.stripe.com/8x25kE5um7Ow1n8frndnW03'
+    },
+    enterprise: {
+      monthly: 'https://buy.stripe.com/eVqfZi6yq5Go7LwgvrdnW04',
+      annual: 'https://buy.stripe.com/4gMcN6e0SfgYaXIgvrdnW05'
+    }
+  };
 </script>
 
 <svelte:head>
   <title>Planos e Preços | UpClinic — 7 dias grátis, sem cartão</title>
   <meta name="description" content="Escolha o plano ideal para sua clínica. UpClinic para consultórios, clínicas e grupos médicos. Teste grátis por 7 dias, sem cartão de crédito." />
   <link rel="canonical" href="https://www.clinicupapp.com/planos" />
-
-  <!-- Stripe Pricing Table (NÃO ALTERAR — integração de checkout) -->
-  <script async src="https://js.stripe.com/v3/pricing-table.js"></script>
 </svelte:head>
 
 <Navbar />
@@ -42,18 +57,9 @@
 
   <div class="relative z-[2] mx-auto max-w-6xl px-4 pb-20 sm:px-6">
 
-    <!-- Painel do Stripe Pricing Table (tabela clara sobre painel claro) -->
-    <!--
-      URL de sucesso no Stripe (Pricing Table / Checkout):
-      https://www.clinicupapp.com/obrigado-compra?session_id={CHECKOUT_SESSION_ID}
-    -->
-    <div use:reveal class="up-glow-border mx-auto mb-14 max-w-5xl">
-      <div class="rounded-[1.5rem] bg-white p-4 sm:p-8" style="box-shadow:0 30px 70px rgba(2,8,40,0.5);">
-        <stripe-pricing-table
-          pricing-table-id="prctbl_1RnVCDJgDiwrjPstX8vBmSfx"
-          publishable-key="pk_live_51RJcEcJgDiwrjPst442rbfublOeAi2EpTli6wtnASS5Trbm3fln4ggIJXyqtq2aRV1bBKI5UMF9Qwq3L8HSD8xtr00h5KIKhGd"
-        ></stripe-pricing-table>
-      </div>
+    <!-- Planos com checkout de subscription direto no Stripe (sem passar por /auth) -->
+    <div class="mb-14">
+      <PricingPlans {paymentLinks} whatsappFallback={whatsappHref} />
     </div>
 
     <!-- Garantias -->
@@ -89,10 +95,3 @@
 
 <Footer />
 
-<style>
-  /* Garante que a tabela do Stripe ocupe bem o painel claro */
-  :global(.planos-page stripe-pricing-table) {
-    display: block;
-    width: 100%;
-  }
-</style>
