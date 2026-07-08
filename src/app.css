@@ -313,6 +313,15 @@
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   animation: up-spin 6s linear infinite;
+  /* O anel é apenas decorativo: nunca deve capturar cliques
+     (senão bloqueia o iframe do Stripe, vídeos, etc.). */
+  pointer-events: none;
+  z-index: 0;
+}
+/* Conteúdo interno sempre acima do anel decorativo e clicável. */
+.up-glow-border > * {
+  position: relative;
+  z-index: 1;
 }
 @property --a { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
 @keyframes up-spin { to { --a: 360deg; } }
