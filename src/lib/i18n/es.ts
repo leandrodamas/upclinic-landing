@@ -146,6 +146,16 @@ export const es = {
     footnote: 'Sin tarjeta · Sin contrato mínimo · Soporte Lun–Sáb',
     waTooltip: 'Habla con nosotros por WhatsApp'
   },
+  infra: {
+    badge: 'Stack de producción',
+    title: 'Infraestructura en la que tu clínica',
+    titleHi: ' puede confiar',
+    sub: 'Pagos, nube y datos en plataformas usadas por millones — con seguridad y disponibilidad de nivel enterprise.',
+    t1: '99,9% uptime',
+    t2: 'Cifrado en tránsito',
+    t3: 'Privacidad by design',
+    t4: 'Backups automáticos',
+  },
   footer: {
     desc: 'Sistema completo de gestión médica y de clínicas. Transformando la salud con tecnología.',
     colProduct: 'Producto',

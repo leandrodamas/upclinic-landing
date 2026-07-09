@@ -146,6 +146,16 @@ export const pt = {
     footnote: 'Sem cartão · Sem contrato mínimo · Suporte Seg–Sáb',
     waTooltip: 'Fale conosco no WhatsApp'
   },
+  infra: {
+    badge: 'Stack de produção',
+    title: 'Infraestrutura que a clínica',
+    titleHi: ' pode confiar',
+    sub: 'Pagamentos, nuvem e dados em plataformas usadas por milhões — com segurança e disponibilidade de nível enterprise.',
+    t1: '99,9% uptime',
+    t2: 'Criptografia em trânsito',
+    t3: 'LGPD by design',
+    t4: 'Backups automáticos',
+  },
   footer: {
     desc: 'Sistema completo de gestão médica e clínica. Transformando a saúde com tecnologia.',
     colProduct: 'Produto',

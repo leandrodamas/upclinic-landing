@@ -146,6 +146,16 @@ export const en = {
     footnote: 'No card · No minimum contract · Support Mon–Sat',
     waTooltip: 'Chat with us on WhatsApp'
   },
+  infra: {
+    badge: 'Production stack',
+    title: 'Infrastructure your clinic',
+    titleHi: ' can trust',
+    sub: 'Payments, cloud, and data on platforms used by millions — with enterprise-grade security and availability.',
+    t1: '99.9% uptime',
+    t2: 'Encryption in transit',
+    t3: 'Privacy by design',
+    t4: 'Automatic backups',
+  },
   footer: {
     desc: 'Complete medical and clinic management system. Transforming healthcare with technology.',
     colProduct: 'Product',
