@@ -53,13 +53,15 @@
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16 sm:h-18 md:h-20">
 
-      <!-- Logo -->
-      <a href="/" class="flex items-center group">
+      <!-- Logo compacta na barra (altura da nav) — sem favicon gigante / logo vertical estourada -->
+      <a href="/" class="flex items-center shrink-0" aria-label="UpClinic">
         <img
-          src={darkNav ? '/favicon-64.png' : '/logo-upclinic-navbar.png'}
+          src={darkNav || mobileMenuOpen ? '/favicon-64.png' : '/logo-upclinic-white.png'}
           alt="UpClinic"
           class="logo-img"
-          class:logo-scrolled={darkNav}
+          class:logo-on-light={darkNav || mobileMenuOpen}
+          width="48"
+          height="48"
         />
       </a>
 
@@ -214,23 +216,26 @@
 </nav>
 
 <style>
-  /* Sobre fundo escuro (hero) — logo grande e bem visível */
+  /* Antes: 80–110px — estourava a barra e o menu sanduíche */
   .logo-img {
-    height: 110px;
+    display: block;
+    height: 44px;
     width: auto;
+    max-height: 44px;
     object-fit: contain;
-    filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.6));
-    transition: filter 0.3s ease, height 0.3s ease;
+    object-position: left center;
+    filter: drop-shadow(0 1px 8px rgba(0, 0, 0, 0.5));
+    transition: height 0.2s ease, filter 0.2s ease;
   }
 
-  /* Sobre fundo branco (páginas internas / após scroll) — favicon colorido, levemente menor */
-  .logo-scrolled {
-    height: 64px;
+  .logo-on-light {
     filter: none;
   }
 
-  @media (max-width: 768px) {
-    .logo-img { height: 80px; }
-    .logo-scrolled { height: 52px; }
+  @media (min-width: 768px) {
+    .logo-img {
+      height: 52px;
+      max-height: 52px;
+    }
   }
 </style>
