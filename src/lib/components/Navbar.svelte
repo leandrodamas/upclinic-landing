@@ -102,11 +102,11 @@
       <!-- Brand: ícone com fundo transparente + wordmark -->
       <a href="/" class="brand group flex items-center gap-2.5 shrink-0" aria-label="UpClinic" on:click={closeMobile}>
         <img
-          src="/brand-mark.png"
+          src="/brand-mark.png?v=2"
           alt=""
           class="brand-mark"
-          width="128"
-          height="128"
+          width="512"
+          height="512"
           decoding="async"
         />
         <span
@@ -254,11 +254,11 @@
       <div class="flex items-center justify-between px-5 h-16 border-b border-slate-100">
         <a href="/" class="flex items-center gap-2.5" on:click={closeMobile}>
           <img
-            src="/brand-mark.png"
+            src="/brand-mark.png?v=2"
             alt=""
             class="brand-mark brand-mark--drawer"
-            width="128"
-            height="128"
+            width="512"
+            height="512"
             decoding="async"
           />
           <span class="text-lg font-bold text-slate-900 tracking-tight">UpClinic</span>
@@ -341,33 +341,41 @@
 {/if}
 
 <style>
-  /* PNG com alpha real — sem caixa branca no hero escuro */
+  /* Ícone completo (coração + circuito) com fundo transparente */
   .brand-mark {
     display: block;
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
     object-fit: contain;
+    object-position: center;
     flex-shrink: 0;
   }
 
   .brand-mark--drawer {
-    width: 38px;
-    height: 38px;
+    width: 48px;
+    height: 48px;
   }
 
   .brand-name {
-    font-size: 1.125rem;
+    font-size: 1.2rem;
     line-height: 1;
     letter-spacing: -0.03em;
   }
 
+  @media (min-width: 640px) {
+    .brand-mark {
+      width: 48px;
+      height: 48px;
+    }
+  }
+
   @media (min-width: 1024px) {
     .brand-mark {
-      width: 40px;
-      height: 40px;
+      width: 52px;
+      height: 52px;
     }
     .brand-name {
-      font-size: 1.2rem;
+      font-size: 1.3rem;
     }
   }
 
