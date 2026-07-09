@@ -356,5 +356,53 @@ export const pt = {
         signal: 'sinal · conformidade'
       }
     }
+  },
+  faq: {
+    badge: 'Respostas claras',
+    titleA: 'Ainda tem ',
+    titleHi: 'alguma dúvida?',
+    sub: 'As perguntas que mais travam a decisão — respondidas sem enrolação. Se faltar algo, o time responde no WhatsApp.',
+    online: 'online',
+    panelBadge: 'Pronto para começar',
+    panelTitle: '7 dias grátis. Sem cartão. Sem risco.',
+    panelSub: 'Abra a conta, explore o sistema de verdade e só decida depois. Cancelamento a qualquer momento.',
+    replyTitle: 'Resposta em até 1 hora útil',
+    replySub: 'Seg–Sáb · WhatsApp e e-mail',
+    ctaTrial: 'Começar teste grátis',
+    ctaWa: 'Falar no WhatsApp agora',
+    footnote: 'Sem cartão · Sem taxa de setup · LGPD',
+    waText: 'Olá! Tenho uma dúvida sobre o UpClinic.',
+    trust: {
+      t1: { t: 'LGPD', d: 'Dados criptografados e backup diário' },
+      t2: { t: '100% nuvem', d: 'Sem instalar · qualquer dispositivo' },
+      t3: { t: 'Sem cartão', d: 'Teste completo por 7 dias' },
+      t4: { t: 'WhatsApp R$ 0', d: 'Mensagens sem cobrança por envio' }
+    },
+    items: {
+      q1: {
+        q: 'Como funciona o UpClinic?',
+        a: 'É um sistema completo na nuvem: prontuário, agenda, telemedicina, financeiro, WhatsApp, Home Care e IA — tudo no mesmo login, acessível do navegador ou do celular.'
+      },
+      q2: {
+        q: 'Preciso instalar algum software?',
+        a: 'Não. Tudo roda no navegador. Você cria a conta, configura em minutos e já usa — sem instalação no computador da clínica.'
+      },
+      q3: {
+        q: 'Meus dados estão seguros?',
+        a: 'Sim. Criptografia, backup automático e conformidade com a LGPD. Os dados ficam em infraestrutura com monitoramento contínuo.'
+      },
+      q4: {
+        q: 'Posso testar antes de assinar?',
+        a: 'Sim. 7 dias grátis, sem cartão de crédito. Você testa as funcionalidades de verdade e só escolhe o plano se fizer sentido.'
+      },
+      q5: {
+        q: 'O WhatsApp realmente não cobra por mensagem?',
+        a: 'Sim. Lembretes e confirmações saem do seu próprio número, sem tarifa por envio do UpClinic — uso justo dentro das políticas do WhatsApp/Meta.'
+      },
+      q6: {
+        q: 'Posso cancelar quando quiser?',
+        a: 'Pode. Sem multa, sem prazo mínimo e sem burocracia. Você controla a assinatura e cancela quando quiser.'
+      }
+    }
   }
 };

@@ -356,5 +356,53 @@ export const en = {
         signal: 'signal · compliance'
       }
     }
+  },
+  faq: {
+    badge: 'Clear answers',
+    titleA: 'Still have ',
+    titleHi: 'a question?',
+    sub: 'The questions that usually block the decision — answered straight. If something is missing, the team replies on WhatsApp.',
+    online: 'online',
+    panelBadge: 'Ready to start',
+    panelTitle: '7 days free. No card. No risk.',
+    panelSub: 'Open your account, explore the real product, then decide. Cancel anytime.',
+    replyTitle: 'Reply within 1 business hour',
+    replySub: 'Mon–Sat · WhatsApp and email',
+    ctaTrial: 'Start free trial',
+    ctaWa: 'Chat on WhatsApp now',
+    footnote: 'No card · No setup fee · Data compliant',
+    waText: 'Hi! I have a question about UpClinic.',
+    trust: {
+      t1: { t: 'Secure', d: 'Encrypted data and daily backups' },
+      t2: { t: '100% cloud', d: 'No install · any device' },
+      t3: { t: 'No card', d: 'Full trial for 7 days' },
+      t4: { t: 'WhatsApp $0', d: 'No per-message fee' }
+    },
+    items: {
+      q1: {
+        q: 'How does UpClinic work?',
+        a: 'It is a full cloud system: records, scheduling, telemedicine, finance, WhatsApp, Home Care and AI — one login, from browser or phone.'
+      },
+      q2: {
+        q: 'Do I need to install software?',
+        a: 'No. Everything runs in the browser. Create an account, set up in minutes and start — nothing to install on clinic PCs.'
+      },
+      q3: {
+        q: 'Is my data safe?',
+        a: 'Yes. Encryption, automatic backups and data-protection compliance. Data lives on continuously monitored infrastructure.'
+      },
+      q4: {
+        q: 'Can I try before I subscribe?',
+        a: 'Yes. 7 days free, no credit card. You test the real features and only pick a plan if it makes sense.'
+      },
+      q5: {
+        q: 'Is WhatsApp really free per message?',
+        a: 'Yes. Reminders and confirmations go from your own number, with no UpClinic fee per send — fair use under WhatsApp/Meta policies.'
+      },
+      q6: {
+        q: 'Can I cancel anytime?',
+        a: 'Yes. No penalty, no minimum term, no bureaucracy. You control the subscription and cancel whenever you want.'
+      }
+    }
   }
 };
