@@ -1,246 +1,238 @@
 <script>
-  const results = [
-    {
-      icon: 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6',
-      metric: '80%',
-      title: 'Redução de Faltas',
-      description: 'Com lembretes automáticos inteligentes',
-      color: 'blue',
-      gradient: 'from-blue-500 to-blue-600'
-    },
-    {
-      icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z',
-      metric: '90%',
-      title: 'Menos Tempo de Busca',
-      description: 'Acesso instantâneo a informações do paciente',
-      color: 'green',
-      gradient: 'from-green-500 to-green-600'
-    },
-    {
-      icon: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z',
-      metric: '+250%',
-      title: 'Aumento de Produtividade',
-      description: 'Automação de processos administrativos',
-      color: 'purple',
-      gradient: 'from-purple-500 to-purple-600'
-    },
-    {
-      icon: 'M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
-      metric: '60%',
-      title: 'Redução de Inadimplência',
-      description: 'Gestão financeira inteligente e cobranças automáticas',
-      color: 'orange',
-      gradient: 'from-orange-500 to-orange-600'
-    }
+  import { onMount } from 'svelte';
+  import { REGISTER_URL, CONTACT } from '$lib/constants';
+  import { t } from '$lib/i18n';
+
+  $: metrics = [
+    { metric: $t('showcase.m1'), title: $t('showcase.m1t'), desc: $t('showcase.m1d'), accent: '#2563eb' },
+    { metric: $t('showcase.m2'), title: $t('showcase.m2t'), desc: $t('showcase.m2d'), accent: '#059669' },
+    { metric: $t('showcase.m3'), title: $t('showcase.m3t'), desc: $t('showcase.m3d'), accent: '#7c3aed' },
+    { metric: $t('showcase.m4'), title: $t('showcase.m4t'), desc: $t('showcase.m4d'), accent: '#ea580c' },
   ];
-  
-  const testimonials = [
+
+  $: quotes = [
     {
-      name: 'Dr. Carlos M.',
-      role: 'Clínica de Clínica Geral · Goiânia, GO',
-      specialty: 'Clínico Geral',
-      quote: 'Antes usávamos 3 sistemas diferentes e planilhas. Hoje tudo está no UpClinic — agenda, prontuário e financeiro. A recepção ganha pelo menos 2 horas por dia.',
+      name: $t('showcase.q1name'),
+      role: $t('showcase.q1role'),
+      quote: $t('showcase.q1quote'),
+      result: $t('showcase.q1result'),
       avatar: '/avatar-1.png',
-      result: 'Reduziu 70% do tempo administrativo'
+      initials: 'CM',
     },
     {
-      name: 'Dra. Ana L.',
-      role: 'Consultório de Dermatologia · São Paulo, SP',
-      specialty: 'Dermatologista',
-      quote: 'Os lembretes automáticos por WhatsApp foram um divisor de águas. As faltas caíram de 20% para menos de 5% em dois meses. Resultado que eu não esperava tão rápido.',
+      name: $t('showcase.q2name'),
+      role: $t('showcase.q2role'),
+      quote: $t('showcase.q2quote'),
+      result: $t('showcase.q2result'),
       avatar: '/avatar-2.png',
-      result: 'De 20% para menos de 5% de faltas'
+      initials: 'AL',
     },
     {
-      name: 'Dr. Roberto S.',
-      role: 'Clínica de Fisioterapia · Belo Horizonte, MG',
-      specialty: 'Fisioterapeuta',
-      quote: 'O prontuário eletrônico é completo e muito fácil de usar. Acesso o histórico de qualquer paciente em segundos, mesmo no celular entre uma sessão e outra.',
+      name: $t('showcase.q3name'),
+      role: $t('showcase.q3role'),
+      quote: $t('showcase.q3quote'),
+      result: $t('showcase.q3result'),
       avatar: '/retrato-de-homem.png',
-      result: 'Acesso total ao histórico em qualquer lugar'
-    }
+      initials: 'RS',
+    },
   ];
-  
-  let currentTestimonial = 0;
-  let intervalId;
-  
-  function nextTestimonial() {
-    currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+
+  let current = 0;
+  let paused = false;
+  let timer;
+
+  function next() {
+    current = (current + 1) % quotes.length;
   }
-  
-  function prevTestimonial() {
-    currentTestimonial = (currentTestimonial - 1 + testimonials.length) % testimonials.length;
+  function prev() {
+    current = (current - 1 + quotes.length) % quotes.length;
   }
-  
-  function goToTestimonial(index) {
-    currentTestimonial = index;
+  function goTo(i) {
+    current = i;
   }
+
+  onMount(() => {
+    timer = setInterval(() => {
+      if (!paused) next();
+    }, 6000);
+    return () => clearInterval(timer);
+  });
+
+  function trackWa() {
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'click_whatsapp', {
+        event_category: 'engagement',
+        event_label: 'botao_whatsapp_results_showcase',
+      });
+    }
+  }
+
+  const waHref = `${CONTACT.whatsappLink}?text=${encodeURIComponent(
+    'Olá! Gostaria de saber mais sobre os resultados do UpClinic'
+  )}`;
 </script>
 
-<section class="pt-0 pb-12 md:pb-24 bg-gradient-to-br from-gray-50 via-white to-blue-50">
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+<section class="showcase relative overflow-hidden bg-slate-50">
+  <div class="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-white to-transparent"></div>
+
+  <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 md:py-16 lg:py-20">
     <!-- Header -->
-    <div class="text-center mb-6 md:mb-8 pt-0">
-      <span class="inline-block px-3 py-1.5 md:px-4 md:py-2 bg-blue-100 text-blue-600 rounded-full text-xs md:text-sm font-semibold mb-3 md:mb-4">
-        Resultados Comprovados
+    <div class="mx-auto max-w-2xl text-center mb-8 md:mb-12">
+      <span class="inline-flex items-center rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700 ring-1 ring-inset ring-blue-100">
+        {$t('showcase.badge')}
       </span>
-      <h2 class="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 mb-2 md:mb-3">Resultados Reais de Clínicas que Usam UpClinic</h2>
-      <p class="text-xs md:text-sm lg:text-base text-gray-600 max-w-3xl mx-auto">
-        Veja os números que comprovam a eficácia do nosso sistema na gestão de clínicas médicas
+      <h2 class="mt-3 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900">
+        {$t('showcase.title')}<span class="text-blue-600">{$t('showcase.titleHi')}</span>
+      </h2>
+      <p class="mt-2 text-sm sm:text-base text-slate-600 leading-relaxed">
+        {$t('showcase.sub')}
       </p>
     </div>
-    
-    <!-- Métricas -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-4 md:mb-6">
-      {#each results as result}
-        <div class="group relative bg-white rounded-xl md:rounded-2xl p-4 md:p-6 lg:p-8 shadow-md md:shadow-lg hover:shadow-xl md:hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 md:hover:-translate-y-2 border border-gray-100">
-          <div class="absolute top-0 right-0 w-12 h-12 md:w-20 md:h-20 bg-gradient-to-br {result.gradient} opacity-5 rounded-bl-full"></div>
-          <div class="relative">
-            <div class="w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 bg-gradient-to-br {result.gradient} rounded-lg md:rounded-xl flex items-center justify-center mb-3 md:mb-4 group-hover:scale-110 transition-transform">
-              <svg class="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={result.icon} />
-              </svg>
-            </div>
-            <div class="text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-br {result.gradient} bg-clip-text text-transparent mb-1.5 md:mb-2">
-              {result.metric}
-            </div>
-            <h3 class="text-base md:text-lg font-bold text-gray-900 mb-1.5 md:mb-2">{result.title}</h3>
-            <p class="text-xs md:text-sm text-gray-600 leading-relaxed">{result.description}</p>
+
+    <!-- Metrics: 2x2 mobile, 4 cols desktop — sem cards pesados -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-10 md:mb-14">
+      {#each metrics as m}
+        <div
+          class="metric-card rounded-2xl bg-white px-4 py-5 sm:px-5 sm:py-6 ring-1 ring-slate-200/80 shadow-sm"
+          style="--accent: {m.accent}"
+        >
+          <div class="text-2xl sm:text-3xl lg:text-[2rem] font-black tracking-tight" style="color: var(--accent)">
+            {m.metric}
           </div>
+          <div class="mt-1.5 text-sm sm:text-[15px] font-bold text-slate-900 leading-snug">{m.title}</div>
+          <p class="mt-1 text-[11px] sm:text-xs text-slate-500 leading-snug">{m.desc}</p>
         </div>
       {/each}
     </div>
-    
-    <!-- Depoimentos em Destaque -->
-    <div class="bg-white rounded-xl md:rounded-2xl shadow-md md:shadow-lg p-4 md:p-6 lg:p-8 border border-gray-100">
-      <div class="text-center mb-3 md:mb-4">
-        <h3 class="text-base md:text-lg lg:text-xl font-bold text-gray-900 mb-1 md:mb-2">
-          O que nossos clientes dizem
+
+    <!-- Testimonials -->
+    <div class="mx-auto max-w-3xl">
+      <div class="text-center mb-5 md:mb-6">
+        <span class="text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+          {$t('showcase.quotesBadge')}
+        </span>
+        <h3 class="mt-1 text-xl sm:text-2xl font-bold text-slate-900">
+          {$t('showcase.quotesTitle')}
         </h3>
-        <p class="text-gray-600 text-[10px] md:text-xs">
-          Depoimentos reais de profissionais que transformaram suas clínicas
+        <p class="mt-1 text-xs sm:text-sm text-slate-500 max-w-lg mx-auto">
+          {$t('showcase.quotesSub')}
         </p>
       </div>
-      
-      <div class="max-w-3xl mx-auto">
-        <!-- Depoimento Ativo -->
-        <div class="relative">
-          <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg md:rounded-xl p-4 md:p-5 lg:p-6 border border-blue-100">
-            <div class="flex items-start gap-3 md:gap-4 mb-3 md:mb-4">
-              <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden border-2 border-white shadow-md">
-                {#if typeof testimonials[currentTestimonial].avatar === 'string' && testimonials[currentTestimonial].avatar.startsWith('/')}
-                  {@const imageSrc = testimonials[currentTestimonial].avatar.includes(' ') 
-                    ? encodeURI(testimonials[currentTestimonial].avatar) 
-                    : testimonials[currentTestimonial].avatar}
-                  <img 
-                    src={imageSrc} 
-                    alt={testimonials[currentTestimonial].name}
-                    class="w-full h-full object-cover"
-                    loading="lazy"
-                    on:error={(e) => {
-                      e.target.src = 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Ccircle fill=%22%23667eea%22 cx=%2250%22 cy=%2250%22 r=%2250%22/%3E%3Ctext fill=%22white%22 font-size=%2240%22 x=%2250%22 y=%2265%22 text-anchor=%22middle%22%3E👨‍⚕️%3C/text%3E%3C/svg%3E';
-                    }}
-                  />
-                {:else}
-                  <span class="text-2xl">{testimonials[currentTestimonial].avatar}</span>
-                {/if}
+
+      <!-- svelte-ignore a11y-no-static-element-interactions -->
+      <div
+        class="quote-panel relative rounded-2xl bg-white ring-1 ring-slate-200/80 shadow-sm overflow-hidden"
+        on:mouseenter={() => (paused = true)}
+        on:mouseleave={() => (paused = false)}
+        on:focusin={() => (paused = true)}
+        on:focusout={() => (paused = false)}
+      >
+        {#key current}
+          <div class="quote-anim p-5 sm:p-7 md:p-8">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="h-11 w-11 sm:h-12 sm:w-12 rounded-full overflow-hidden bg-slate-100 ring-2 ring-white shadow shrink-0">
+                <img
+                  src={quotes[current].avatar}
+                  alt=""
+                  class="h-full w-full object-cover"
+                  loading="lazy"
+                  on:error={(e) => {
+                    e.currentTarget.style.display = 'none';
+                    e.currentTarget.parentElement?.classList.add('fallback-initials');
+                    if (e.currentTarget.parentElement) {
+                      e.currentTarget.parentElement.dataset.initials = quotes[current].initials;
+                    }
+                  }}
+                />
               </div>
-              <div class="flex-1 min-w-0">
-                <div class="flex items-center gap-0.5 md:gap-1 mb-1 md:mb-1.5">
+              <div class="min-w-0 flex-1">
+                <div class="flex items-center gap-0.5 mb-0.5" aria-hidden="true">
                   {#each Array(5) as _}
-                    <svg class="w-3 h-3 md:w-4 md:h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                    <svg class="w-3.5 h-3.5 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                     </svg>
                   {/each}
                 </div>
-                <h4 class="text-sm md:text-base font-bold text-gray-900 mb-0.5 truncate">
-                  {testimonials[currentTestimonial].name}
-                </h4>
-                <p class="text-gray-500 text-[10px] md:text-xs truncate">{testimonials[currentTestimonial].specialty}</p>
-                <p class="text-gray-600 text-[10px] md:text-xs mb-2 md:mb-3 truncate">
-                  {testimonials[currentTestimonial].role}
-                </p>
-                <p class="text-gray-700 text-xs md:text-sm leading-relaxed italic mb-2">
-                  "{testimonials[currentTestimonial].quote}"
-                </p>
-                <div class="inline-flex items-center gap-1 bg-green-50 text-green-700 px-2 py-0.5 rounded-full text-[10px] md:text-xs font-semibold">
-                  <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-                  {testimonials[currentTestimonial].result}
-                </div>
+                <p class="text-sm font-bold text-slate-900 truncate">{quotes[current].name}</p>
+                <p class="text-xs text-slate-500 truncate">{quotes[current].role}</p>
               </div>
+              <span class="hidden sm:inline-flex items-center rounded-full bg-emerald-50 px-2.5 py-1 text-[11px] font-semibold text-emerald-700 ring-1 ring-inset ring-emerald-100 shrink-0">
+                {quotes[current].result}
+              </span>
             </div>
+
+            <blockquote class="text-[15px] sm:text-base text-slate-700 leading-relaxed">
+              “{quotes[current].quote}”
+            </blockquote>
+
+            <span class="mt-4 inline-flex sm:hidden items-center rounded-full bg-emerald-50 px-2.5 py-1 text-[11px] font-semibold text-emerald-700 ring-1 ring-inset ring-emerald-100">
+              {quotes[current].result}
+            </span>
           </div>
-          
-          <!-- Navegação -->
-          <div class="flex items-center justify-between mt-3 md:mt-4">
-            <button
-              type="button"
-              class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-white border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50 flex items-center justify-center transition-all"
-              on:click={prevTestimonial}
-              aria-label="Depoimento anterior"
-            >
-              <svg class="w-3 h-3 md:w-4 md:h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
-            
-            <div class="flex gap-1 md:gap-1.5">
-              {#each testimonials as _, index}
-                <button
-                  type="button"
-                  class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full transition-all {index === currentTestimonial ? 'bg-blue-600 w-5 md:w-6' : 'bg-gray-300 hover:bg-gray-400'}"
-                  on:click={() => goToTestimonial(index)}
-                  aria-label="Ir para depoimento {index + 1}"
-                ></button>
-              {/each}
-            </div>
-            
-            <button
-              type="button"
-              class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-white border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50 flex items-center justify-center transition-all"
-              on:click={nextTestimonial}
-              aria-label="Próximo depoimento"
-            >
-              <svg class="w-3 h-3 md:w-4 md:h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
+        {/key}
+
+        <div class="flex items-center justify-between gap-3 px-4 sm:px-6 py-3 border-t border-slate-100 bg-slate-50/80">
+          <button
+            type="button"
+            class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50 hover:text-slate-900 transition"
+            on:click={prev}
+            aria-label="Anterior"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+
+          <div class="flex items-center gap-1.5">
+            {#each quotes as _, i}
+              <button
+                type="button"
+                class="h-1.5 rounded-full transition-all {i === current ? 'w-6 bg-blue-600' : 'w-1.5 bg-slate-300 hover:bg-slate-400'}"
+                on:click={() => goTo(i)}
+                aria-label="Depoimento {i + 1}"
+                aria-current={i === current ? 'true' : undefined}
+              ></button>
+            {/each}
           </div>
+
+          <button
+            type="button"
+            class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50 hover:text-slate-900 transition"
+            on:click={next}
+            aria-label="Próximo"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
         </div>
       </div>
     </div>
-    
-    <!-- CTA -->
-    <div class="mt-8 md:mt-12 lg:mt-16 text-center">
-      <div class="inline-flex flex-col sm:flex-row items-center gap-3 md:gap-4 bg-white rounded-xl md:rounded-2xl p-4 md:p-5 lg:p-6 shadow-md md:shadow-lg border border-gray-100 w-full sm:w-auto">
-        <div class="text-center sm:text-left">
-          <h4 class="text-base md:text-lg font-bold text-gray-900 mb-0.5 md:mb-1">Quer resultados como estes?</h4>
-          <p class="text-gray-600 text-xs md:text-sm">Comece sua transformação digital hoje mesmo</p>
+
+    <!-- CTA compacto -->
+    <div class="mt-8 md:mt-10 mx-auto max-w-3xl">
+      <div class="flex flex-col sm:flex-row sm:items-center gap-4 rounded-2xl bg-slate-900 px-5 py-5 sm:px-6 sm:py-5 text-center sm:text-left">
+        <div class="flex-1 min-w-0">
+          <p class="text-base font-bold text-white">{$t('showcase.ctaTitle')}</p>
+          <p class="mt-0.5 text-xs text-slate-300">{$t('showcase.ctaSub')}</p>
         </div>
-        <div class="flex flex-col sm:flex-row gap-2 md:gap-3 w-full sm:w-auto">
+        <div class="flex flex-col xs:flex-row sm:flex-row gap-2 w-full sm:w-auto shrink-0">
           <a
-            href="https://upclinic-aa025.web.app/register"
+            href={REGISTER_URL}
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 text-xs md:text-sm font-bold text-white bg-gradient-to-r from-green-500 to-emerald-600 rounded-lg shadow-md hover:scale-105 transition-all w-full sm:w-auto"
+            class="inline-flex items-center justify-center h-10 px-4 text-sm font-bold text-white bg-emerald-500 hover:bg-emerald-600 rounded-xl transition"
           >
-            Iniciar Teste Grátis — 7 dias
+            {$t('showcase.ctaStart')}
           </a>
-          <a 
-            href="https://wa.me/5562997016149?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20os%20resultados%20do%20UpClinic"
+          <a
+            href={waHref}
             target="_blank"
             rel="noopener noreferrer"
-            class="btn bg-green-500 hover:bg-green-600 text-white px-4 py-2 md:px-6 text-xs md:text-sm w-full sm:w-auto text-center"
-            on:click={() => {
-              if (typeof window !== 'undefined' && window.gtag) {
-                window.gtag('event', 'click_whatsapp', {
-                  event_category: 'engagement',
-                  event_label: 'botao_whatsapp_results_showcase'
-                });
-              }
-            }}
+            class="inline-flex items-center justify-center h-10 px-4 text-sm font-semibold text-white/90 ring-1 ring-white/25 hover:bg-white/10 rounded-xl transition"
+            on:click={trackWa}
           >
-            Falar no WhatsApp
+            {$t('showcase.ctaWa')}
           </a>
         </div>
       </div>
@@ -249,19 +241,46 @@
 </section>
 
 <style>
-  @keyframes fade-in {
+  .metric-card {
+    position: relative;
+  }
+  .metric-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 14px;
+    bottom: 14px;
+    width: 3px;
+    border-radius: 999px;
+    background: var(--accent);
+    opacity: 0.85;
+  }
+
+  .quote-anim {
+    animation: quote-in 0.35s ease;
+  }
+
+  @keyframes quote-in {
     from {
       opacity: 0;
-      transform: translateY(10px);
+      transform: translateY(6px);
     }
     to {
       opacity: 1;
       transform: translateY(0);
     }
   }
-  
-  .animate-fade-in {
-    animation: fade-in 0.4s ease-out;
+
+  .fallback-initials::after {
+    content: attr(data-initials);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    background: #dbeafe;
   }
 </style>
-
