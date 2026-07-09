@@ -266,5 +266,95 @@ export const pt = {
     finalTitle: 'Abra sua conta em poucos minutos e teste na prática.',
     ctaFinal: 'Começar teste grátis',
     waShort: 'WhatsApp'
+  },
+  featCore: {
+    badge: 'Núcleo do sistema',
+    titleA: 'Cada módulo ',
+    titleHi: 'orbitando o mesmo cérebro',
+    sub: 'Clique nos satélites. O painel ao vivo muda — agenda, WhatsApp, GPS, IA, financeiro e muito mais, tudo conectado.',
+    coreLabel: 'núcleo',
+    hint: 'Toque em um satélite · o sistema responde em tempo real',
+    live: 'ao vivo',
+    planAll: 'Todos os planos',
+    planPro: 'Professional+',
+    planEnt: 'Enterprise',
+    ctaSub: 'Mais de 18 módulos. Um só login. Zero planilha solta.',
+    ctaStart: 'Explorar grátis por 7 dias',
+    ctaDemo: 'Ver demonstração',
+    preview: {
+      waIn: 'Olá! Confirmando sua consulta amanhã às 8h. Responda 1 para confirmar.',
+      waOk: '💚 Confirmada · custo R$ 0',
+      gps: 'Rota otimizada · check-in por GPS · trânsito ao vivo',
+      aiThinking: 'analisando prontuário + evidências…',
+      aiSuggest: 'Sugestão: ajustar conduta e solicitar retorno em 15 dias.',
+      financeSub: 'recebido automático este mês',
+      teleLive: 'consulta em andamento',
+      chip1: 'Integrado',
+      chip2: 'LGPD',
+      chip3: 'Nuvem',
+      chip4: 'Tempo real'
+    },
+    mods: {
+      agenda: {
+        title: 'Agenda inteligente',
+        desc: 'Horários, encaixes e lista de espera no mesmo fluxo. Menos buracos, menos faltas, mais consultas fechadas.',
+        signal: 'sinal · ocupação da agenda'
+      },
+      prontuario: {
+        title: 'Prontuário eletrônico',
+        desc: 'Histórico completo, anexos e evolução clínica — seguro, pesquisável e sincronizado com a consulta.',
+        signal: 'sinal · registro clínico'
+      },
+      whatsapp: {
+        title: 'WhatsApp sem cobrança',
+        desc: 'Lembretes e confirmações do seu número, sem tarifa por mensagem. Menos faltas, zero custo variável.',
+        signal: 'sinal · comunicação R$ 0'
+      },
+      telemedicina: {
+        title: 'Telemedicina HD',
+        desc: 'Vídeo com prontuário sincronizado e prescrição digital — sem instalar app no paciente.',
+        signal: 'sinal · consulta remota'
+      },
+      financeiro: {
+        title: 'Financeiro & cobrança',
+        desc: 'Receitas, despesas e cobrança recorrente automática. O sistema cobra; você acompanha o caixa.',
+        signal: 'sinal · fluxo de caixa'
+      },
+      ia: {
+        title: 'IA médica',
+        desc: 'Assistente que lê o contexto do paciente e sugere condutas com base em evidências — dentro do prontuário.',
+        signal: 'sinal · inteligência clínica'
+      },
+      homecare: {
+        title: 'Home Care + GPS',
+        desc: 'Rotas, mapa em tempo real, check-in por localização e trânsito ao vivo para a equipe na rua.',
+        signal: 'sinal · operação em campo'
+      },
+      injetaveis: {
+        title: 'Injetáveis & mapa',
+        desc: 'Marque no corpo e na face cada aplicação, com histórico visual por paciente.',
+        signal: 'sinal · estética / procedimentos'
+      },
+      tiss: {
+        title: 'Convênios & TISS',
+        desc: 'Guias no padrão TISS e faturamento de convênios sem retrabalho manual.',
+        signal: 'sinal · faturamento ANS'
+      },
+      laboratorio: {
+        title: 'Laboratório',
+        desc: 'Pedidos, laudos e histórico de exames integrados ao prontuário do paciente.',
+        signal: 'sinal · exames'
+      },
+      fidelizacao: {
+        title: 'Fidelização',
+        desc: 'Aniversários, retornos e campanhas que trazem de volta quem já confia na sua clínica.',
+        signal: 'sinal · retenção'
+      },
+      sngpc: {
+        title: 'SNGPC / ANVISA',
+        desc: 'Controle de medicamentos e escrituração alinhados às exigências sanitárias.',
+        signal: 'sinal · conformidade'
+      }
+    }
   }
 };

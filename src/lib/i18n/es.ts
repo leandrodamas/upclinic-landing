@@ -266,5 +266,95 @@ export const es = {
     finalTitle: 'Abre tu cuenta en pocos minutos y pruébalo en la práctica.',
     ctaFinal: 'Empezar prueba gratis',
     waShort: 'WhatsApp'
+  },
+  featCore: {
+    badge: 'Núcleo del sistema',
+    titleA: 'Cada módulo ',
+    titleHi: 'orbitando el mismo cerebro',
+    sub: 'Haz clic en los satélites. El panel en vivo cambia — agenda, WhatsApp, GPS, IA, finanzas y más, todo conectado.',
+    coreLabel: 'núcleo',
+    hint: 'Toca un satélite · el sistema responde en tiempo real',
+    live: 'en vivo',
+    planAll: 'Todos los planes',
+    planPro: 'Professional+',
+    planEnt: 'Enterprise',
+    ctaSub: 'Más de 18 módulos. Un solo login. Cero planillas sueltas.',
+    ctaStart: 'Explorar gratis 7 días',
+    ctaDemo: 'Ver demostración',
+    preview: {
+      waIn: '¡Hola! Confirmando tu consulta mañana a las 8h. Responde 1 para confirmar.',
+      waOk: '💚 Confirmada · costo $0',
+      gps: 'Ruta optimizada · check-in por GPS · tráfico en vivo',
+      aiThinking: 'analizando historia clínica + evidencia…',
+      aiSuggest: 'Sugerencia: ajustar conducta y pedir retorno en 15 días.',
+      financeSub: 'recibido automático este mes',
+      teleLive: 'consulta en curso',
+      chip1: 'Integrado',
+      chip2: 'Conforme',
+      chip3: 'Nube',
+      chip4: 'Tiempo real'
+    },
+    mods: {
+      agenda: {
+        title: 'Agenda inteligente',
+        desc: 'Horarios, encajes y lista de espera en el mismo flujo. Menos huecos, menos ausencias, más consultas.',
+        signal: 'señal · ocupación de agenda'
+      },
+      prontuario: {
+        title: 'Historia clínica electrónica',
+        desc: 'Historial completo, adjuntos y evolución — seguro, buscable y sincronizado con la consulta.',
+        signal: 'señal · registro clínico'
+      },
+      whatsapp: {
+        title: 'WhatsApp sin cobro por mensaje',
+        desc: 'Recordatorios y confirmaciones desde tu número, sin tarifa por envío. Menos ausencias, cero costo variable.',
+        signal: 'señal · mensajería $0'
+      },
+      telemedicina: {
+        title: 'Telemedicina HD',
+        desc: 'Video con historia clínica sincronizada y receta digital — sin instalar nada en el paciente.',
+        signal: 'señal · consulta remota'
+      },
+      financeiro: {
+        title: 'Finanzas y cobro',
+        desc: 'Ingresos, gastos y cobro recurrente automático. El sistema cobra; tú miras el flujo de caja.',
+        signal: 'señal · flujo de caja'
+      },
+      ia: {
+        title: 'IA médica',
+        desc: 'Asistente que lee el contexto del paciente y sugiere conductas basadas en evidencia — dentro de la historia.',
+        signal: 'señal · inteligencia clínica'
+      },
+      homecare: {
+        title: 'Home Care + GPS',
+        desc: 'Rutas, mapa en tiempo real, check-in por ubicación y tráfico en vivo para el equipo en la calle.',
+        signal: 'señal · operación en campo'
+      },
+      injetaveis: {
+        title: 'Inyectables y mapa',
+        desc: 'Marca en el cuerpo y el rostro cada aplicación, con historial visual por paciente.',
+        signal: 'señal · procedimientos'
+      },
+      tiss: {
+        title: 'Seguros y facturación',
+        desc: 'Facturación de seguros y convenios sin retrabajo manual.',
+        signal: 'señal · facturación'
+      },
+      laboratorio: {
+        title: 'Laboratorio',
+        desc: 'Pedidos, informes e historial de exámenes integrados a la historia clínica.',
+        signal: 'señal · exámenes'
+      },
+      fidelizacao: {
+        title: 'Fidelización',
+        desc: 'Cumpleaños, seguimientos y campañas que traen de vuelta a quien ya confía en tu clínica.',
+        signal: 'señal · retención'
+      },
+      sngpc: {
+        title: 'Control de medicamentos',
+        desc: 'Control de medicamentos y registro alineados con las exigencias sanitarias.',
+        signal: 'señal · conformidad'
+      }
+    }
   }
 };

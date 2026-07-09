@@ -266,5 +266,95 @@ export const en = {
     finalTitle: 'Open your account in a few minutes and try it for real.',
     ctaFinal: 'Start free trial',
     waShort: 'WhatsApp'
+  },
+  featCore: {
+    badge: 'System core',
+    titleA: 'Every module ',
+    titleHi: 'orbiting the same brain',
+    sub: 'Click the satellites. The live panel shifts — scheduling, WhatsApp, GPS, AI, finance and more, all connected.',
+    coreLabel: 'core',
+    hint: 'Tap a satellite · the system responds in real time',
+    live: 'live',
+    planAll: 'All plans',
+    planPro: 'Professional+',
+    planEnt: 'Enterprise',
+    ctaSub: '18+ modules. One login. No loose spreadsheets.',
+    ctaStart: 'Explore free for 7 days',
+    ctaDemo: 'Watch demo',
+    preview: {
+      waIn: 'Hi! Confirming your appointment tomorrow at 8am. Reply 1 to confirm.',
+      waOk: '💚 Confirmed · cost $0',
+      gps: 'Optimized route · GPS check-in · live traffic',
+      aiThinking: 'analyzing record + evidence…',
+      aiSuggest: 'Suggestion: adjust conduct and schedule a return in 15 days.',
+      financeSub: 'received automatically this month',
+      teleLive: 'consultation in progress',
+      chip1: 'Integrated',
+      chip2: 'Compliant',
+      chip3: 'Cloud',
+      chip4: 'Real time'
+    },
+    mods: {
+      agenda: {
+        title: 'Smart scheduling',
+        desc: 'Slots, fit-ins and waitlist in one flow. Fewer gaps, fewer no-shows, more booked visits.',
+        signal: 'signal · agenda occupancy'
+      },
+      prontuario: {
+        title: 'Electronic records',
+        desc: 'Full history, attachments and clinical notes — secure, searchable and synced with the visit.',
+        signal: 'signal · clinical record'
+      },
+      whatsapp: {
+        title: 'WhatsApp, no per-message fee',
+        desc: 'Reminders and confirmations from your number, with no fee per send. Fewer no-shows, zero variable cost.',
+        signal: 'signal · $0 messaging'
+      },
+      telemedicina: {
+        title: 'HD telemedicine',
+        desc: 'Video with synced records and digital prescriptions — nothing for the patient to install.',
+        signal: 'signal · remote visit'
+      },
+      financeiro: {
+        title: 'Finance & billing',
+        desc: 'Revenue, expenses and automatic recurring billing. The system charges; you watch the cash flow.',
+        signal: 'signal · cash flow'
+      },
+      ia: {
+        title: 'Medical AI',
+        desc: 'An assistant that reads patient context and suggests evidence-based conduct — inside the record.',
+        signal: 'signal · clinical intelligence'
+      },
+      homecare: {
+        title: 'Home Care + GPS',
+        desc: 'Routes, real-time map, location check-in and live traffic for your field team.',
+        signal: 'signal · field ops'
+      },
+      injetaveis: {
+        title: 'Injectables & body map',
+        desc: 'Mark each application on body and face, with a visual history per patient.',
+        signal: 'signal · procedures'
+      },
+      tiss: {
+        title: 'Insurance & claims',
+        desc: 'Standardized claims and insurance billing without manual rework.',
+        signal: 'signal · claims'
+      },
+      laboratorio: {
+        title: 'Laboratory',
+        desc: 'Orders, reports and exam history integrated into the patient record.',
+        signal: 'signal · labs'
+      },
+      fidelizacao: {
+        title: 'Loyalty',
+        desc: 'Birthdays, follow-ups and campaigns that bring back patients who already trust you.',
+        signal: 'signal · retention'
+      },
+      sngpc: {
+        title: 'Controlled drugs',
+        desc: 'Medication control and bookkeeping aligned with regulatory requirements.',
+        signal: 'signal · compliance'
+      }
+    }
   }
 };
