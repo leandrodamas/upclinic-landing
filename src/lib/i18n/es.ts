@@ -5,9 +5,12 @@ export const es = {
     fill: 'Llenar la agenda',
     about: 'Nosotros',
     contact: 'Contacto',
-    login: 'Entrar a UpClinic',
-    trial: 'Iniciar Prueba Gratis',
-    trial7: 'Iniciar Prueba Gratis — 7 días'
+    login: 'Entrar',
+    loginFull: 'Entrar a UpClinic',
+    trial: 'Empezar gratis',
+    trial7: 'Empezar gratis — 7 días',
+    menu: 'Menú',
+    close: 'Cerrar'
   },
   hero: {
     badgePre: 'WhatsApp incluido · ',

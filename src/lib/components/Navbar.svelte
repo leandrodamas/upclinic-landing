@@ -9,24 +9,53 @@
   let langOpen = false;
 
   $: currentLang = LANGS.find((l) => l.code === $locale) ?? LANGS[0];
+  $: isHomePage = $page.url.pathname === '/';
+  $: onLight = scrolled || !isHomePage || mobileMenuOpen;
+
+  $: navLinks = [
+    { href: '/#funcionalidades', label: $t('nav.features') },
+    { href: '/planos', label: $t('nav.plans') },
+    /* CONVERSAO-LINK-INICIO */
+    { href: '/comece', label: $t('nav.fill') },
+    /* CONVERSAO-LINK-FIM */
+    { href: '/sobre', label: $t('nav.about') },
+    { href: '/contato', label: $t('nav.contact') },
+  ];
 
   function chooseLang(code) {
     setLocale(code);
     langOpen = false;
-    mobileMenuOpen = false;
   }
 
-  // Só usa fundo transparente com texto branco na home page (que tem o vídeo escuro)
-  $: isHomePage = $page.url.pathname === '/';
-  $: darkNav = scrolled || !isHomePage; // true = fundo branco + texto escuro
+  function closeMobile() {
+    mobileMenuOpen = false;
+    langOpen = false;
+  }
+
+  function toggleMobileMenu() {
+    mobileMenuOpen = !mobileMenuOpen;
+    langOpen = false;
+  }
 
   onMount(() => {
-    const handleScroll = () => { scrolled = window.scrollY > 60; };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const handleScroll = () => {
+      scrolled = window.scrollY > 40;
+    };
+    const handleKey = (e) => {
+      if (e.key === 'Escape') closeMobile();
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('keydown', handleKey);
+    handleScroll();
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('keydown', handleKey);
+    };
   });
 
-  function toggleMobileMenu() { mobileMenuOpen = !mobileMenuOpen; }
+  $: if (typeof window !== 'undefined') {
+    document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
+  }
 
   function trackEvent(name, source) {
     if (typeof window === 'undefined') return;
@@ -36,110 +65,98 @@
       fetch('/api/meta-event', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ event_name: 'Lead', event_id: eventId, event_data: { content_name: name, content_category: 'SaaS', source } })
+        body: JSON.stringify({
+          event_name: 'Lead',
+          event_id: eventId,
+          event_data: { content_name: name, content_category: 'SaaS', source },
+        }),
       }).catch(() => {});
     }
     if (window.gtag) {
-      window.gtag('event', name === 'CTA Registro' ? 'sign_up' : 'login', { event_category: 'engagement', event_label: source });
+      window.gtag('event', name === 'CTA Registro' ? 'sign_up' : 'login', {
+        event_category: 'engagement',
+        event_label: source,
+      });
     }
+  }
+
+  function openLogin(source) {
+    trackEvent('CTA Login', source);
+    window.open(LOGIN_URL, '_blank');
+  }
+
+  function openRegister(source) {
+    trackEvent('CTA Registro', source);
+    window.open(REGISTER_URL, '_blank');
   }
 </script>
 
-<nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300
-  {darkNav || mobileMenuOpen
-    ? 'bg-white/95 backdrop-blur-md shadow-md'
-    : 'bg-gradient-to-b from-black/30 to-transparent backdrop-blur-none'}">
-
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-16 sm:h-18 md:h-20">
-
-      <!-- Logo compacta na barra (altura da nav) — sem favicon gigante / logo vertical estourada -->
-      <a href="/" class="flex items-center shrink-0" aria-label="UpClinic">
-        <img
-          src={darkNav || mobileMenuOpen ? '/favicon-64.png' : '/logo-upclinic-white.png'}
-          alt="UpClinic"
-          class="logo-img"
-          class:logo-on-light={darkNav || mobileMenuOpen}
-          width="48"
-          height="48"
-        />
+<header
+  class="site-header fixed top-0 left-0 right-0 z-50 transition-[background,box-shadow,border-color] duration-300
+    {onLight
+      ? 'bg-white/90 backdrop-blur-xl border-b border-slate-200/80 shadow-sm'
+      : 'bg-transparent border-b border-transparent'}"
+>
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex h-16 lg:h-[4.25rem] items-center gap-3 lg:gap-6">
+      <!-- Brand -->
+      <a href="/" class="brand group flex items-center gap-2.5 shrink-0" aria-label="UpClinic" on:click={closeMobile}>
+        <span class="brand-mark" aria-hidden="true">
+          <img src="/favicon-64.png" alt="" class="brand-mark-img" width="64" height="64" />
+        </span>
+        <span
+          class="brand-name font-bold tracking-tight transition-colors
+            {onLight ? 'text-slate-900' : 'text-white'}"
+        >UpClinic</span>
       </a>
 
-      <!-- Desktop Menu -->
-      <div class="hidden md:flex items-center space-x-6 lg:space-x-8">
+      <!-- Desktop: links no centro -->
+      <nav class="hidden lg:flex flex-1 items-center justify-center" aria-label="Principal">
+        <ul class="flex items-center gap-0.5">
+          {#each navLinks as item}
+            <li>
+              <a
+                href={item.href}
+                class="nav-link px-3 py-2 text-[13px] font-medium rounded-lg whitespace-nowrap transition-colors
+                  {onLight
+                    ? 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                    : 'text-white/85 hover:text-white hover:bg-white/10'}"
+              >
+                {item.label}
+              </a>
+            </li>
+          {/each}
+        </ul>
+      </nav>
 
-        <!-- Links: brancos no hero (fundo escuro), cinza escuro após scroll -->
-        {#each [
-          { href: '/#funcionalidades', label: $t('nav.features') },
-          { href: '/planos',           label: $t('nav.plans') },
-          /* CONVERSAO-LINK-INICIO — apague esta linha e o bloco no mobile para remover /comece do menu */
-          { href: '/comece',           label: $t('nav.fill') },
-          /* CONVERSAO-LINK-FIM */
-          { href: '/sobre',            label: $t('nav.about') },
-          { href: '/contato',          label: $t('nav.contact') },
-        ] as item}
-          <a
-            href={item.href}
-            class="font-semibold transition-colors duration-200 text-sm lg:text-base
-              {darkNav
-                ? 'text-gray-700 hover:text-blue-600'
-                : 'text-white/90 hover:text-white drop-shadow-sm'}"
-          >
-            {item.label}
-          </a>
-        {/each}
-
-        <!-- Entrar no UpClinic: adapta cor conforme scroll -->
-        <a
-          href={LOGIN_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center px-4 py-2 text-sm font-semibold rounded-lg
-                 transition-all duration-200 whitespace-nowrap border-2
-            {darkNav
-              ? 'text-blue-600 border-blue-600 hover:bg-blue-50'
-              : 'text-white border-white/70 hover:border-white hover:bg-white/10'}"
-          on:click|preventDefault={() => { trackEvent('CTA Login', 'Navbar'); window.open(LOGIN_URL, '_blank'); }}
-        >
-          {$t('nav.login')}
-        </a>
-
-        <!-- Iniciar Teste Grátis: sempre verde, sempre visível -->
-        <a
-          href={REGISTER_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-bold text-white
-                 bg-green-500 hover:bg-green-600 rounded-lg shadow-md hover:shadow-lg
-                 hover:scale-105 transition-all duration-200 whitespace-nowrap"
-          on:click|preventDefault={() => { trackEvent('CTA Registro', 'Navbar'); window.open(REGISTER_URL, '_blank'); }}
-        >
-          {$t('nav.trial')}
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-          </svg>
-        </a>
-
-        <!-- Seletor de idioma -->
+      <!-- Desktop: ações à direita -->
+      <div class="hidden lg:flex items-center gap-2 shrink-0">
         <div class="relative">
           <button
             type="button"
-            class="inline-flex items-center gap-1.5 px-2.5 py-2 text-sm font-semibold rounded-lg transition-colors
-              {darkNav ? 'text-gray-700 hover:bg-gray-100' : 'text-white/90 hover:bg-white/10'}"
+            class="inline-flex items-center gap-1.5 h-9 px-2.5 text-xs font-semibold rounded-lg transition-colors
+              {onLight ? 'text-slate-600 hover:bg-slate-100' : 'text-white/90 hover:bg-white/10'}"
             on:click={() => (langOpen = !langOpen)}
             aria-label="Language"
             aria-expanded={langOpen}
           >
-            <span class="text-base leading-none">{currentLang.flag}</span>
-            <span class="uppercase">{currentLang.code}</span>
-            <svg class="w-3.5 h-3.5 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+            <span class="text-sm leading-none">{currentLang.flag}</span>
+            <span class="uppercase tracking-wide">{currentLang.code}</span>
+            <svg class="w-3 h-3 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
           </button>
           {#if langOpen}
-            <div class="absolute right-0 mt-2 w-44 rounded-xl bg-white shadow-xl border border-gray-100 py-1 z-50">
+            <div
+              class="absolute right-0 mt-2 w-44 rounded-xl bg-white shadow-xl border border-slate-100 py-1 z-50"
+              role="menu"
+            >
               {#each LANGS as l}
                 <button
                   type="button"
-                  class="flex items-center gap-2.5 w-full px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors {l.code === $locale ? 'font-bold text-blue-600' : ''}"
+                  role="menuitem"
+                  class="flex items-center gap-2.5 w-full px-3 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors
+                    {l.code === $locale ? 'font-bold text-blue-600' : ''}"
                   on:click={() => chooseLang(l.code)}
                 >
                   <span class="text-base leading-none">{l.flag}</span>
@@ -149,93 +166,223 @@
             </div>
           {/if}
         </div>
+
+        <a
+          href={LOGIN_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center h-9 px-3.5 text-[13px] font-semibold rounded-lg transition-colors
+            {onLight
+              ? 'text-slate-700 hover:bg-slate-100'
+              : 'text-white/90 hover:bg-white/10'}"
+          on:click|preventDefault={() => openLogin('Navbar')}
+        >
+          {$t('nav.login')}
+        </a>
+
+        <a
+          href={REGISTER_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1.5 h-9 px-4 text-[13px] font-bold text-white
+                 bg-emerald-500 hover:bg-emerald-600 rounded-lg shadow-sm hover:shadow
+                 transition-all whitespace-nowrap"
+          on:click|preventDefault={() => openRegister('Navbar')}
+        >
+          {$t('nav.trial')}
+          <svg class="w-3.5 h-3.5 opacity-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+        </a>
       </div>
 
-      <!-- Mobile Menu Button: ícone branco no hero, cinza após scroll -->
-      <button
-        class="md:hidden p-2 rounded-lg transition-colors
-          {darkNav ? 'text-gray-700 hover:bg-gray-100' : 'text-white hover:bg-white/15'}"
-        on:click={toggleMobileMenu}
-        aria-label="Toggle menu"
-      >
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          {#if mobileMenuOpen}
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-          {:else}
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-          {/if}
-        </svg>
-      </button>
+      <!-- Mobile / tablet: CTA curto + hamburger -->
+      <div class="flex lg:hidden items-center gap-2 ml-auto">
+        <a
+          href={REGISTER_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center h-9 px-3 text-xs font-bold text-white bg-emerald-500 hover:bg-emerald-600 rounded-lg shadow-sm"
+          on:click|preventDefault={() => openRegister('Navbar Mobile Compact')}
+        >
+          {$t('nav.trial')}
+        </a>
+        <button
+          type="button"
+          class="inline-flex items-center justify-center w-10 h-10 rounded-xl transition-colors
+            {onLight ? 'text-slate-800 hover:bg-slate-100' : 'text-white hover:bg-white/15'}"
+          on:click={toggleMobileMenu}
+          aria-label={mobileMenuOpen ? $t('nav.close') : $t('nav.menu')}
+          aria-expanded={mobileMenuOpen}
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            {#if mobileMenuOpen}
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            {:else}
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            {/if}
+          </svg>
+        </button>
+      </div>
     </div>
-
-    <!-- Mobile Menu: sempre fundo branco (aparece sobre qualquer seção) -->
-    {#if mobileMenuOpen}
-      <div class="md:hidden py-4 space-y-2 bg-white rounded-xl mt-2 shadow-xl border border-gray-100 px-2">
-        <a href="/#funcionalidades" class="block text-gray-700 hover:text-blue-600 font-medium px-3 py-2 rounded-md hover:bg-gray-50 transition-colors" on:click={() => mobileMenuOpen = false}>{$t('nav.features')}</a>
-        <a href="/planos" class="block text-gray-700 hover:text-blue-600 font-medium px-3 py-2 rounded-md hover:bg-gray-50 transition-colors" on:click={() => mobileMenuOpen = false}>{$t('nav.plans')}</a>
-        <!-- CONVERSAO-LINK-INICIO -->
-        <a href="/comece" class="block text-gray-700 hover:text-blue-600 font-medium px-3 py-2 rounded-md hover:bg-gray-50 transition-colors" on:click={() => mobileMenuOpen = false}>{$t('nav.fill')}</a>
-        <!-- CONVERSAO-LINK-FIM -->
-        <a href="/sobre" class="block text-gray-700 hover:text-blue-600 font-medium px-3 py-2 rounded-md hover:bg-gray-50 transition-colors" on:click={() => mobileMenuOpen = false}>{$t('nav.about')}</a>
-        <a href="/contato" class="block text-gray-700 hover:text-blue-600 font-medium px-3 py-2 rounded-md hover:bg-gray-50 transition-colors" on:click={() => mobileMenuOpen = false}>{$t('nav.contact')}</a>
-        <div class="flex items-center gap-2 px-3 py-2">
-          {#each LANGS as l}
-            <button
-              type="button"
-              class="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-sm rounded-lg border transition-colors {l.code === $locale ? 'border-blue-600 text-blue-600 font-bold bg-blue-50' : 'border-gray-200 text-gray-600'}"
-              on:click={() => chooseLang(l.code)}
-            >
-              <span class="text-base leading-none">{l.flag}</span>
-              <span class="uppercase">{l.code}</span>
-            </button>
-          {/each}
-        </div>
-        <div class="pt-2 space-y-2 border-t border-gray-100 mt-2">
-          <a
-            href={LOGIN_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="flex items-center justify-center w-full px-4 py-2.5 text-sm font-semibold text-blue-600 border-2 border-blue-600 rounded-lg hover:bg-blue-50 transition-all"
-            on:click={() => { trackEvent('CTA Login', 'Navbar Mobile'); mobileMenuOpen = false; }}
-          >
-            {$t('nav.login')}
-          </a>
-          <a
-            href={REGISTER_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="flex items-center justify-center gap-2 w-full px-4 py-2.5 text-sm font-bold text-white bg-green-500 hover:bg-green-600 rounded-lg shadow-md transition-all"
-            on:click={() => { trackEvent('CTA Registro', 'Navbar Mobile'); mobileMenuOpen = false; }}
-          >
-            {$t('nav.trial7')}
-          </a>
-        </div>
-      </div>
-    {/if}
   </div>
-</nav>
+</header>
+
+<!-- Mobile drawer -->
+{#if mobileMenuOpen}
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <!-- svelte-ignore a11y-no-static-element-interactions -->
+  <div
+    class="fixed inset-0 z-[60] lg:hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-label={$t('nav.menu')}
+  >
+    <button
+      type="button"
+      class="absolute inset-0 bg-slate-950/50 backdrop-blur-[2px]"
+      aria-label={$t('nav.close')}
+      on:click={closeMobile}
+    ></button>
+
+    <div class="absolute inset-y-0 right-0 w-full max-w-[20rem] bg-white shadow-2xl flex flex-col animate-drawer">
+      <div class="flex items-center justify-between px-5 h-16 border-b border-slate-100">
+        <a href="/" class="flex items-center gap-2.5" on:click={closeMobile}>
+          <span class="brand-mark brand-mark--drawer" aria-hidden="true">
+            <img src="/favicon-64.png" alt="" class="brand-mark-img" width="64" height="64" />
+          </span>
+          <span class="text-lg font-bold text-slate-900 tracking-tight">UpClinic</span>
+        </a>
+        <button
+          type="button"
+          class="w-10 h-10 inline-flex items-center justify-center rounded-xl text-slate-500 hover:bg-slate-100"
+          aria-label={$t('nav.close')}
+          on:click={closeMobile}
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <nav class="flex-1 overflow-y-auto px-3 py-4">
+        <ul class="space-y-0.5">
+          {#each navLinks as item}
+            <li>
+              <a
+                href={item.href}
+                class="flex items-center px-3 py-3 text-[15px] font-medium text-slate-700 rounded-xl hover:bg-slate-50 hover:text-slate-900 transition-colors"
+                on:click={closeMobile}
+              >
+                {item.label}
+              </a>
+            </li>
+          {/each}
+        </ul>
+
+        <div class="mt-5 px-2">
+          <p class="px-1 mb-2 text-[11px] font-semibold uppercase tracking-wider text-slate-400">Idioma</p>
+          <div class="flex gap-2">
+            {#each LANGS as l}
+              <button
+                type="button"
+                class="flex-1 inline-flex items-center justify-center gap-1.5 h-10 text-sm rounded-xl border transition-colors
+                  {l.code === $locale
+                    ? 'border-blue-600 text-blue-700 font-bold bg-blue-50'
+                    : 'border-slate-200 text-slate-600 hover:bg-slate-50'}"
+                on:click={() => chooseLang(l.code)}
+              >
+                <span>{l.flag}</span>
+                <span class="uppercase">{l.code}</span>
+              </button>
+            {/each}
+          </div>
+        </div>
+      </nav>
+
+      <div class="p-4 border-t border-slate-100 space-y-2 bg-slate-50/80">
+        <a
+          href={LOGIN_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center justify-center w-full h-11 text-sm font-semibold text-slate-800 bg-white border border-slate-200 rounded-xl hover:bg-slate-50 transition-colors"
+          on:click={() => {
+            trackEvent('CTA Login', 'Navbar Mobile');
+            closeMobile();
+          }}
+        >
+          {$t('nav.loginFull')}
+        </a>
+        <a
+          href={REGISTER_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center justify-center gap-2 w-full h-11 text-sm font-bold text-white bg-emerald-500 hover:bg-emerald-600 rounded-xl shadow-sm transition-colors"
+          on:click={() => {
+            trackEvent('CTA Registro', 'Navbar Mobile');
+            closeMobile();
+          }}
+        >
+          {$t('nav.trial7')}
+        </a>
+      </div>
+    </div>
+  </div>
+{/if}
 
 <style>
-  /* Antes: 80–110px — estourava a barra e o menu sanduíche */
-  .logo-img {
+  /* Ícone: recorta o wordmark do PNG vertical — só o coração */
+  .brand-mark {
+    position: relative;
     display: block;
-    height: 44px;
-    width: auto;
-    max-height: 44px;
-    object-fit: contain;
-    object-position: left center;
-    filter: drop-shadow(0 1px 8px rgba(0, 0, 0, 0.5));
-    transition: height 0.2s ease, filter 0.2s ease;
+    width: 34px;
+    height: 34px;
+    overflow: hidden;
+    flex-shrink: 0;
+    border-radius: 9px;
   }
 
-  .logo-on-light {
-    filter: none;
+  .brand-mark--drawer {
+    width: 36px;
+    height: 36px;
   }
 
-  @media (min-width: 768px) {
-    .logo-img {
-      height: 52px;
-      max-height: 52px;
+  .brand-mark-img {
+    display: block;
+    width: 100%;
+    height: 175%;
+    object-fit: cover;
+    object-position: top center;
+  }
+
+  .brand-name {
+    font-size: 1.125rem;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+
+  @media (min-width: 1024px) {
+    .brand-mark {
+      width: 38px;
+      height: 38px;
     }
+    .brand-name {
+      font-size: 1.2rem;
+    }
+  }
+
+  @keyframes drawer-in {
+    from {
+      transform: translateX(100%);
+      opacity: 0.6;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  .animate-drawer {
+    animation: drawer-in 0.22s ease-out;
   }
 </style>
