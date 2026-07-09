@@ -99,11 +99,16 @@
 >
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <div class="flex h-16 lg:h-[4.25rem] items-center gap-3 lg:gap-6">
-      <!-- Brand -->
+      <!-- Brand: ícone com fundo transparente + wordmark -->
       <a href="/" class="brand group flex items-center gap-2.5 shrink-0" aria-label="UpClinic" on:click={closeMobile}>
-        <span class="brand-mark" aria-hidden="true">
-          <img src="/favicon-64.png" alt="" class="brand-mark-img" width="64" height="64" />
-        </span>
+        <img
+          src="/brand-mark.png"
+          alt=""
+          class="brand-mark"
+          width="128"
+          height="128"
+          decoding="async"
+        />
         <span
           class="brand-name font-bold tracking-tight transition-colors
             {onLight ? 'text-slate-900' : 'text-white'}"
@@ -248,9 +253,14 @@
     <div class="absolute inset-y-0 right-0 w-full max-w-[20rem] bg-white shadow-2xl flex flex-col animate-drawer">
       <div class="flex items-center justify-between px-5 h-16 border-b border-slate-100">
         <a href="/" class="flex items-center gap-2.5" on:click={closeMobile}>
-          <span class="brand-mark brand-mark--drawer" aria-hidden="true">
-            <img src="/favicon-64.png" alt="" class="brand-mark-img" width="64" height="64" />
-          </span>
+          <img
+            src="/brand-mark.png"
+            alt=""
+            class="brand-mark brand-mark--drawer"
+            width="128"
+            height="128"
+            decoding="async"
+          />
           <span class="text-lg font-bold text-slate-900 tracking-tight">UpClinic</span>
         </a>
         <button
@@ -331,28 +341,18 @@
 {/if}
 
 <style>
-  /* Ícone: recorta o wordmark do PNG vertical — só o coração */
+  /* PNG com alpha real — sem caixa branca no hero escuro */
   .brand-mark {
-    position: relative;
     display: block;
-    width: 34px;
-    height: 34px;
-    overflow: hidden;
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
     flex-shrink: 0;
-    border-radius: 9px;
   }
 
   .brand-mark--drawer {
-    width: 36px;
-    height: 36px;
-  }
-
-  .brand-mark-img {
-    display: block;
-    width: 100%;
-    height: 175%;
-    object-fit: cover;
-    object-position: top center;
+    width: 38px;
+    height: 38px;
   }
 
   .brand-name {
@@ -363,8 +363,8 @@
 
   @media (min-width: 1024px) {
     .brand-mark {
-      width: 38px;
-      height: 38px;
+      width: 40px;
+      height: 40px;
     }
     .brand-name {
       font-size: 1.2rem;
