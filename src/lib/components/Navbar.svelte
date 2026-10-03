@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   import { page } from '$app/stores';
   import { LOGIN_URL, REGISTER_URL } from '$lib/constants';
-  import { trackLead } from '$lib/metaPixel';
+  import { trackTrialCta } from '$lib/analytics';
   import { t, locale, setLocale, LANGS } from '$lib/i18n';
 
   let scrolled = false;
@@ -15,7 +15,7 @@
 
   $: navLinks = [
     { href: '/#funcionalidades', label: $t('nav.features') },
-    { href: '/planos', label: $t('nav.plans') },
+    { href: '/#precos', label: $t('nav.plans') },
     /* CONVERSAO-LINK-INICIO */
     { href: '/comece', label: $t('nav.fill') },
     /* CONVERSAO-LINK-FIM */
@@ -58,27 +58,15 @@
     document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
   }
 
-  function trackEvent(name, source) {
-    if (typeof window === 'undefined') return;
-    // Free-trial / signup CTAs → Meta Lead (deduped with global click listener via href key)
-    if (name === 'CTA Registro') {
-      trackLead(name, `Lead:${REGISTER_URL}`);
-    }
-    if (window.gtag) {
-      window.gtag('event', name === 'CTA Registro' ? 'sign_up' : 'login', {
-        event_category: 'engagement',
-        event_label: source,
-      });
-    }
-  }
-
   function openLogin(source) {
-    trackEvent('CTA Login', source);
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'login', { event_category: 'engagement', event_label: source });
+    }
     window.open(LOGIN_URL, '_blank');
   }
 
   function openRegister(source) {
-    trackEvent('CTA Registro', source);
+    trackTrialCta('CTA Testar 7 dias', source);
     window.open(REGISTER_URL, '_blank');
   }
 </script>
@@ -309,7 +297,6 @@
           rel="noopener noreferrer"
           class="flex items-center justify-center w-full h-11 text-sm font-semibold text-slate-800 bg-white border border-slate-200 rounded-xl hover:bg-slate-50 transition-colors"
           on:click={() => {
-            trackEvent('CTA Login', 'Navbar Mobile');
             closeMobile();
           }}
         >
@@ -321,7 +308,7 @@
           rel="noopener noreferrer"
           class="flex items-center justify-center gap-2 w-full h-11 text-sm font-bold text-white bg-emerald-500 hover:bg-emerald-600 rounded-xl shadow-sm transition-colors"
           on:click={() => {
-            trackEvent('CTA Registro', 'Navbar Mobile');
+            trackTrialCta('CTA Testar 7 dias', 'Navbar Mobile');
             closeMobile();
           }}
         >

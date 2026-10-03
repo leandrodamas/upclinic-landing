@@ -7,10 +7,19 @@ export const es = {
     contact: 'Contacto',
     login: 'Entrar',
     loginFull: 'Entrar a UpClinic',
-    trial: 'Empezar gratis',
-    trial7: 'Empezar gratis — 7 días',
+    trial: 'Probar 7 días gratis',
+    trial7: 'Probar 7 días gratis',
     menu: 'Menú',
     close: 'Cerrar'
+  },
+  popup: {
+    close: 'Cerrar',
+    badge: 'Prueba 7 días gratis',
+    title: 'Prueba UpClinic sin tarjeta',
+    desc: 'Agenda, historial, recordatorios por WhatsApp y finanzas para fisio y pilates.',
+    ctaTrial: 'Probar 7 días gratis',
+    ctaWa: 'Hablar por WhatsApp',
+    note: 'Sin tarjeta · Cancela cuando quieras'
   },
   hero: {
     badgePre: 'WhatsApp incluido · ',
@@ -140,7 +149,7 @@ export const es = {
     titleA: 'Toda tu clínica funcionando',
     titleB: 'de verdad — desde hoy',
     p: '7 días gratis, sin tarjeta de crédito y sin costo de instalación. Configúralo en minutos y nota la diferencia desde el primer día.',
-    sub: 'Más de 3.200 clínicas ya usan UpClinic',
+    sub: 'Hecho por fisioterapeuta · soporte por WhatsApp · cancela cuando quieras',
     ctaStart: 'Iniciar Prueba Gratis — 7 días',
     ctaLogin: 'Entrar a UpClinic',
     footnote: 'Sin tarjeta · Sin contrato mínimo · Soporte Lun–Sáb',

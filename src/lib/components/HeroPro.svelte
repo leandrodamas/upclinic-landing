@@ -1,14 +1,11 @@
 <script>
   import { onMount } from 'svelte';
   import { LOGIN_URL, REGISTER_URL } from '$lib/constants';
-  import { trackLead as metaTrackLead } from '$lib/metaPixel';
-  import { countUp } from '$lib/actions/motion';
+  import { trackTrialCta } from '$lib/analytics';
   import { t } from '$lib/i18n';
 
   function trackLead(contentName = 'CTA Principal', source = 'Hero') {
-    if (typeof window === 'undefined') return;
-    metaTrackLead(contentName, `Lead:${REGISTER_URL}`);
-    if (window.gtag) window.gtag('event', 'sign_up', { event_category: 'engagement', event_label: source });
+    trackTrialCta(contentName, source);
   }
 
   let visible = false;
@@ -49,13 +46,13 @@
           </span>
         </div>
 
-        <h1 style="font-size: clamp(2.3rem, 5.2vw, 4rem); font-weight:900; line-height:1.05; color:#fff; letter-spacing:-0.03em; margin-bottom:1.25rem;">
+        <h1 style="font-size: clamp(2.15rem, 5vw, 3.6rem); font-weight:900; line-height:1.08; color:#fff; letter-spacing:-0.03em; margin-bottom:1.25rem;">
           {$t('hero.titleA')}<br>
           {$t('hero.titleB')}
-          <span class="up-gradient-text">{$t('hero.titleC')}<br>{$t('hero.titleD')}</span>
+          <span class="up-gradient-text"><br>{$t('hero.titleC')}<br>{$t('hero.titleD')}</span>
         </h1>
 
-        <p style="font-size:1.15rem; color:rgba(219,234,254,0.92); max-width:540px; line-height:1.65; margin-bottom:0.75rem;">
+        <p style="font-size:1.1rem; color:rgba(219,234,254,0.92); max-width:540px; line-height:1.65; margin-bottom:0.75rem;">
           {$t('hero.sub')}<strong style="color:#6ee7b7;">{$t('hero.subStrong')}</strong>{$t('hero.subEnd')}
         </p>
         <p style="font-size:0.875rem; color:rgba(147,197,253,0.72); margin-bottom:2.25rem;">
@@ -65,14 +62,16 @@
         <!-- CTAs -->
         <div class="flex flex-wrap gap-3 mb-8">
           <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" class="up-btn-primary"
-             on:click|preventDefault={() => { trackLead('CTA Iniciar Teste', 'Hero'); window.open(REGISTER_URL, '_blank'); }}>
+             style="min-height:2.85rem;"
+             on:click|preventDefault={() => { trackLead('CTA Testar 7 dias', 'Hero'); window.open(REGISTER_URL, '_blank'); }}>
             <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="flex-shrink:0;">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/>
             </svg>
             {$t('hero.ctaStart')}
           </a>
           <a href={LOGIN_URL} target="_blank" rel="noopener noreferrer" class="up-btn-ghost"
-             on:click|preventDefault={() => { trackLead('CTA Entrar', 'Hero'); window.open(LOGIN_URL, '_blank'); }}>
+             style="min-height:2.85rem;"
+             on:click|preventDefault={() => { window.open(LOGIN_URL, '_blank'); }}>
             {$t('hero.ctaLogin')}
           </a>
         </div>
@@ -126,13 +125,13 @@
           </div>
         </div>
 
-        <!-- Card financeiro / pagamento -->
+        <!-- Card financeiro -->
         <div class="up-glass up-float-slow absolute" style="bottom:8px; left:12%; width:280px; padding:16px; border-radius:20px;">
           <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
             <span style="color:#bfdbfe; font-size:0.72rem; font-weight:700;">{$t('hero.cardBilling')}</span>
-            <span style="color:#6ee7b7; font-size:0.66rem; font-weight:700;">+18%</span>
+            <span style="color:#6ee7b7; font-size:0.66rem; font-weight:700;">em dia</span>
           </div>
-          <div style="color:#fff; font-size:1.55rem; font-weight:900; line-height:1;">R$ 48.250</div>
+          <div style="color:#fff; font-size:1.35rem; font-weight:900; line-height:1.15;">Mensalidades + sessões</div>
           <div style="color:rgba(147,197,253,0.75); font-size:0.68rem; margin-top:3px;">{$t('hero.cardBillingSub')}</div>
           <div style="height:6px; background:rgba(255,255,255,0.1); border-radius:999px; margin-top:10px; overflow:hidden;">
             <div style="height:100%; width:78%; background:linear-gradient(90deg,#34d399,#10b981); border-radius:999px;"></div>
@@ -142,7 +141,6 @@
         <!-- Selo IA -->
         <div class="up-glass up-float absolute" style="top:36px; right:22%; padding:10px 14px; border-radius:14px; animation-delay:-1.5s;">
           <div style="display:flex; align-items:center; gap:7px;">
-            <span style="font-size:1rem;">🧠</span>
             <span style="color:#e9d5ff; font-size:0.72rem; font-weight:700;">{$t('hero.cardIA')}</span>
           </div>
         </div>
@@ -150,26 +148,26 @@
     </div>
   </div>
 
-  <!-- Faixa de estatísticas -->
+  <!-- Faixa de prova honesta (sem números falsos de clientes) -->
   <div class="relative w-full" style="z-index:3;
        background: linear-gradient(90deg, rgba(5,11,35,0.96) 0%, rgba(29,78,216,0.88) 50%, rgba(5,11,35,0.96) 100%);
        border-top: 1px solid rgba(255,255,255,0.10); backdrop-filter: blur(12px);">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-5">
-      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; text-align:center;">
+      <div class="hero-proof-grid">
         <div>
-          <div style="font-size:1.7rem; font-weight:900; color:#fff; line-height:1;"><span use:countUp={{ to: 3200, suffix: '+' }}>0</span></div>
+          <div style="font-size:1.05rem; font-weight:900; color:#6ee7b7; line-height:1.2;">Fisio</div>
           <div style="font-size:0.72rem; color:rgba(147,197,253,0.75); margin-top:0.25rem;">{$t('hero.statActive')}</div>
         </div>
         <div>
-          <div style="font-size:1.7rem; font-weight:900; color:#fff; line-height:1;"><span use:countUp={{ to: 80, suffix: '%' }}>0</span></div>
+          <div style="font-size:1.05rem; font-weight:900; color:#fff; line-height:1.2;">WhatsApp</div>
           <div style="font-size:0.72rem; color:rgba(147,197,253,0.75); margin-top:0.25rem;">{$t('hero.statNoShows')}</div>
         </div>
         <div>
-          <div style="font-size:1.7rem; font-weight:900; color:#fff; line-height:1;"><span use:countUp={{ to: 18, suffix: '+' }}>0</span></div>
+          <div style="font-size:1.05rem; font-weight:900; color:#fff; line-height:1.2;">Tudo junto</div>
           <div style="font-size:0.72rem; color:rgba(147,197,253,0.75); margin-top:0.25rem;">{$t('hero.statModules')}</div>
         </div>
         <div>
-          <div style="font-size:1.7rem; font-weight:900; color:#fff; line-height:1;">R$ 0</div>
+          <div style="font-size:1.05rem; font-weight:900; color:#fff; line-height:1.2;">R$ 0</div>
           <div style="font-size:0.72rem; color:rgba(147,197,253,0.75); margin-top:0.25rem;">{$t('hero.statPerMsg')}</div>
         </div>
       </div>
@@ -181,4 +179,15 @@
   .up-col { opacity: 0; transform: translateY(30px); transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1); }
   .up-visual { opacity: 0; transform: translateY(40px) scale(0.97); transition: opacity 1.1s cubic-bezier(0.16,1,0.3,1) 0.15s, transform 1.1s cubic-bezier(0.16,1,0.3,1) 0.15s; }
   .up-in { opacity: 1 !important; transform: none !important; }
+  .hero-proof-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    text-align: center;
+  }
+  @media (min-width: 768px) {
+    .hero-proof-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
 </style>

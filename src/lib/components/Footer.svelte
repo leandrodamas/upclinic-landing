@@ -84,7 +84,7 @@
         {#if openSection === 'product'}
           <ul class="pb-3 space-y-2">
             <li><a href="/#funcionalidades" class="text-xs text-gray-400 hover:text-white">{$t('footer.features')}</a></li>
-            <li><a href="/planos" class="text-xs text-gray-400 hover:text-white">{$t('footer.plans')}</a></li>
+            <li><a href="/#precos" class="text-xs text-gray-400 hover:text-white">{$t('footer.plans')}</a></li>
             <li><a href="https://upclinic-aa025.web.app/login" class="text-xs text-gray-400 hover:text-white">{$t('footer.login')}</a></li>
             <li><a href="https://upclinic-aa025.web.app/login" class="text-xs text-gray-400 hover:text-white">{$t('footer.register')}</a></li>
           </ul>
@@ -163,7 +163,7 @@
         <h4 class="text-white font-bold mb-4 text-base">{$t('footer.colProduct')}</h4>
         <ul class="space-y-2">
           <li><a href="/#funcionalidades" class="hover:text-white transition-colors text-sm">{$t('footer.features')}</a></li>
-          <li><a href="/planos" class="hover:text-white transition-colors text-sm">{$t('footer.plans')}</a></li>
+          <li><a href="/#precos" class="hover:text-white transition-colors text-sm">{$t('footer.plans')}</a></li>
           <li><a href="https://upclinic-aa025.web.app/login" class="hover:text-white transition-colors text-sm">{$t('footer.login')}</a></li>
           <li><a href="https://upclinic-aa025.web.app/login" class="hover:text-white transition-colors text-sm">{$t('footer.register')}</a></li>
         </ul>

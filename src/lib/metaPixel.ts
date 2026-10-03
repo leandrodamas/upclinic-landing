@@ -124,7 +124,16 @@ export function handleMetaPixelClick(event: MouseEvent): void {
   }
 
   if (looksLikeFreeTrialCta(anchor, href)) {
-    const name = contentNameFromEl(anchor, 'Start free CTA');
+    const name = contentNameFromEl(anchor, 'Testar 7 dias grátis');
     trackLead(name, `Lead:${href}`);
+    // Google Ads conversion-ready event (importable later as a conversion)
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'generate_lead', {
+        event_category: 'conversion',
+        event_label: name,
+        value: 1,
+        currency: 'BRL'
+      });
+    }
   }
 }

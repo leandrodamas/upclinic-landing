@@ -493,7 +493,7 @@
         <div class="mt-12 bg-gradient-to-r from-blue-600 to-indigo-700 rounded-2xl p-8 md:p-12 text-center text-white">
           <h3 class="text-3xl md:text-4xl font-bold mb-4">Pronto para transformar sua clínica?</h3>
           <p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-            Junte-se a mais de 3.200 clínicas que já transformaram sua gestão com o UpClinic
+            Feito por fisioterapeuta — teste 7 dias grátis, sem cartão de crédito
           </p>
           <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a 
