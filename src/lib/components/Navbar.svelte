@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
   import { page } from '$app/stores';
   import { LOGIN_URL, REGISTER_URL } from '$lib/constants';
+  import { trackLead } from '$lib/metaPixel';
   import { t, locale, setLocale, LANGS } from '$lib/i18n';
 
   let scrolled = false;
@@ -59,18 +60,9 @@
 
   function trackEvent(name, source) {
     if (typeof window === 'undefined') return;
-    const eventId = crypto.randomUUID();
-    if (window.fbq) {
-      window.fbq('track', 'Lead', { content_name: name, content_category: 'SaaS', source }, { eventID: eventId });
-      fetch('/api/meta-event', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          event_name: 'Lead',
-          event_id: eventId,
-          event_data: { content_name: name, content_category: 'SaaS', source },
-        }),
-      }).catch(() => {});
+    // Free-trial / signup CTAs → Meta Lead (deduped with global click listener via href key)
+    if (name === 'CTA Registro') {
+      trackLead(name, `Lead:${REGISTER_URL}`);
     }
     if (window.gtag) {
       window.gtag('event', name === 'CTA Registro' ? 'sign_up' : 'login', {
