@@ -71,7 +71,7 @@ export function trackContact(contentName: string, dedupeKey?: string): void {
 }
 
 function isWhatsAppHref(href: string): boolean {
-  return /(?:^|\.)wa\.me\b|api\.whatsapp\.com/i.test(href);
+  return /wa\.me\b|api\.whatsapp\.com/i.test(href);
 }
 
 function isAppSignupHref(href: string): boolean {
