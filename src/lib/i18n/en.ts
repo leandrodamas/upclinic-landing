@@ -7,10 +7,19 @@ export const en = {
     contact: 'Contact',
     login: 'Log in',
     loginFull: 'Log in to UpClinic',
-    trial: 'Start free',
-    trial7: 'Start free — 7 days',
+    trial: 'Start 7-day free trial',
+    trial7: 'Start 7-day free trial',
     menu: 'Menu',
     close: 'Close'
+  },
+  popup: {
+    close: 'Close',
+    badge: '7-day free trial',
+    title: 'Try UpClinic with no credit card',
+    desc: 'Scheduling, clinical notes, WhatsApp reminders and billing for physio and pilates clinics.',
+    ctaTrial: 'Start 7-day free trial',
+    ctaWa: 'Chat on WhatsApp',
+    note: 'No card · Cancel anytime · Fast reply'
   },
   hero: {
     badgePre: 'WhatsApp included · ',
@@ -140,7 +149,7 @@ export const en = {
     titleA: 'Your entire clinic running',
     titleB: 'for real — starting today',
     p: '7 days free, no credit card and no setup fee. Set it up in minutes and see the difference on day one.',
-    sub: 'Over 3,200 clinics already use UpClinic',
+    sub: 'Built by a physiotherapist · WhatsApp support · cancel anytime',
     ctaStart: 'Start Free Trial — 7 days',
     ctaLogin: 'Log in to UpClinic',
     footnote: 'No card · No minimum contract · Support Mon–Sat',

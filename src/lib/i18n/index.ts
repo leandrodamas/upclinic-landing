@@ -26,12 +26,9 @@ export function detectLocale(): Locale {
     const saved = localStorage.getItem(STORAGE_KEY) as Locale | null;
     if (saved && SUPPORTED.includes(saved)) return saved;
   } catch {}
-  const nav = (navigator.language || navigator.languages?.[0] || 'pt').toLowerCase();
-  if (nav.startsWith('pt')) return 'pt';
-  if (nav.startsWith('es')) return 'es';
-  if (nav.startsWith('en')) return 'en';
-  // Idiomas sem tradução dedicada → inglês (mercado internacional)
-  return 'en';
+  // Paid search / Meta ads target Brazilian physios — default to pt-BR always
+  // unless the visitor explicitly picked another language (saved above).
+  return 'pt';
 }
 
 export function initLocale(): void {

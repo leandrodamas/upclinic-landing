@@ -67,7 +67,7 @@
           <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" class="up-btn-primary">
             {$t('wa.ctaActivate')}
           </a>
-          <a href={`${CONTACT.whatsappLink}?text=Quero%20saber%20do%20WhatsApp%20sem%20cobran%C3%A7a%20do%20UpClinic`}
+          <a href={`${CONTACT.whatsappLink}?text=${encodeURIComponent('Olá! Quero testar o UpClinic')}`}
              target="_blank" rel="noopener noreferrer" class="up-btn-ghost" on:click={trackWhats}>
             {$t('wa.ctaTalk')}
           </a>

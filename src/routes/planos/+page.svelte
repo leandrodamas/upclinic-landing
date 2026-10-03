@@ -5,30 +5,15 @@
   import { reveal } from '$lib/actions/motion';
   import { CONTACT } from '$lib/constants';
   import { t } from '$lib/i18n';
+  import { STRIPE_PAYMENT_LINKS } from '$lib/config/pricing';
 
-  const whatsappHref = `${CONTACT.whatsappLink}?text=Quero%20saber%20mais%20sobre%20os%20planos%20do%20UpClinic`;
-
-  // Stripe Payment Links (modo subscription, Live) — checkout direto sem passar por /auth.
-  // Trial de 7 dias, sem exigir cartão, cupons habilitados. Gerados via Stripe MCP.
-  const paymentLinks = {
-    starter: {
-      monthly: 'https://buy.stripe.com/eVq7sM2iad8Qe9U6URdnW00',
-      annual: 'https://buy.stripe.com/fZucN66yq4Ck8PA92ZdnW01'
-    },
-    professional: {
-      monthly: 'https://buy.stripe.com/4gM7sMf4W8SAfdYbb7dnW02',
-      annual: 'https://buy.stripe.com/8x25kE5um7Ow1n8frndnW03'
-    },
-    enterprise: {
-      monthly: 'https://buy.stripe.com/eVqfZi6yq5Go7LwgvrdnW04',
-      annual: 'https://buy.stripe.com/4gMcN6e0SfgYaXIgvrdnW05'
-    }
-  };
+  const whatsappHref = `${CONTACT.whatsappLink}?text=${encodeURIComponent('Olá! Quero testar o UpClinic')}`;
+  const paymentLinks = STRIPE_PAYMENT_LINKS;
 </script>
 
 <svelte:head>
-  <title>Planos e Preços | UpClinic — 7 dias grátis, sem cartão</title>
-  <meta name="description" content="Escolha o plano ideal para sua clínica. UpClinic para consultórios, clínicas e grupos médicos. Teste grátis por 7 dias, sem cartão de crédito." />
+  <title>Preços | UpClinic — sistema para clínica de fisioterapia</title>
+  <meta name="description" content="Planos do UpClinic para fisioterapia e pilates. Teste 7 dias grátis, sem cartão de crédito. Agenda, prontuário e WhatsApp incluídos." />
   <link rel="canonical" href="https://www.clinicupapp.com/planos" />
 </svelte:head>
 

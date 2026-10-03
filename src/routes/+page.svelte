@@ -10,65 +10,48 @@
   import Navbar from '$lib/components/Navbar.svelte';
   import FeatureDemoModal from '$lib/components/FeatureDemoModal.svelte';
   import PartnersCarousel from '$lib/components/PartnersCarousel.svelte';
+  import PricingPlans from '$lib/components/PricingPlans.svelte';
+  import WhatsAppFloat from '$lib/components/WhatsAppFloat.svelte';
+  import ConversionPopup from '$lib/components/ConversionPopup.svelte';
   import { reveal } from '$lib/actions/motion';
   import { t } from '$lib/i18n';
-  import { trackLead as metaTrackLead } from '$lib/metaPixel';
-  
-  let demoModal: FeatureDemoModal;
-  
-  function openDemo() {
-    if (demoModal) {
-      demoModal.open();
-    }
-  }
-  
-  function trackWhatsAppClick(label: string) {
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'click_whatsapp', {
-        event_category: 'engagement',
-        event_label: label
-      });
-    }
-  }
+  import { LOGIN_URL, REGISTER_URL, CONTACT } from '$lib/constants';
+  import { trackTrialCta } from '$lib/analytics';
+  import { STRIPE_PAYMENT_LINKS } from '$lib/config/pricing';
 
-  function trackLead(contentName = 'CTA Principal', source = 'Landing Page') {
-    // Global click listener also fires Lead; dedupe key matches href used by the CTA
-    const href =
-      contentName.includes('Registro') || contentName.includes('Teste')
-        ? 'https://upclinic-aa025.web.app/register'
-        : 'https://upclinic-aa025.web.app/login';
-    metaTrackLead(contentName, `Lead:${href}`);
-    void source;
-  }
+  let demoModal: FeatureDemoModal;
+
+  const whatsappHref = `${CONTACT.whatsappLink}?text=${encodeURIComponent('Olá! Quero testar o UpClinic')}`;
 </script>
 
+<!-- SEO: single source in app.html for homepage defaults; page only adds JSON-LD + page-specific overrides if needed.
+     Duplicate title/description/og tags removed from here to fix duplicated meta. -->
 <svelte:head>
-  <title>UpClinic - Sistema de Gestão Médica Profissional | clinicupapp.com</title>
-  <meta name="description" content="Sistema completo de gestão médica com prontuário eletrônico, agendamentos inteligentes, telemedicina e muito mais. Transforme sua clínica com tecnologia de ponta." />
-  <meta property="og:title" content="UpClinic - Sistema de Gestão Médica Profissional" />
-  <meta property="og:description" content="Transforme sua clínica com tecnologia de ponta. Sistema completo de gestão médica." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://www.clinicupapp.com" />
-  <!-- og:image removido - já está definido em app.html para evitar duplicação -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <link rel="canonical" href="https://clinicupapp.com" />
-  
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
       "name": "UpClinic",
-      "applicationCategory": "MedicalApplication",
+      "applicationCategory": "HealthApplication",
       "operatingSystem": "Web, iOS, Android",
+      "url": "https://www.clinicupapp.com/",
+      "description": "Sistema para clínica de fisioterapia e pilates: agenda, prontuário eletrônico, lembretes no WhatsApp, financeiro, IA e check-in Wellhub/TotalPass. Teste 7 dias grátis, sem cartão.",
       "offers": {
         "@type": "Offer",
         "price": "0",
-        "priceCurrency": "BRL"
+        "priceCurrency": "BRL",
+        "description": "Teste 7 dias grátis, sem cartão de crédito"
       },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "5",
-        "ratingCount": "1000"
+      "creator": {
+        "@type": "Organization",
+        "name": "UpClinic",
+        "url": "https://www.clinicupapp.com/",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+55-62-99701-6149",
+          "contactType": "sales",
+          "availableLanguage": "Portuguese"
+        }
       }
     }
   </script>
@@ -81,12 +64,54 @@
 <ImpactBand />
 <FeatureGrid />
 <ResultsShowcase />
+
+<!-- Pricing on homepage (nav → /#precos); full Stripe checkout also on /planos -->
+<section
+  id="precos"
+  class="relative overflow-hidden"
+  style="background:#050b23; padding-top:5.5rem; padding-bottom:5.5rem;"
+  aria-labelledby="precos-title"
+>
+  <div class="up-aurora" style="opacity:0.45;"></div>
+  <div class="up-grid-overlay" style="opacity:0.3;"></div>
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative" style="z-index:2;">
+    <div class="text-center max-w-2xl mx-auto mb-10" use:reveal>
+      <p class="mb-4 inline-flex items-center gap-2 up-glass" style="padding:7px 16px; border-radius:999px;">
+        <span class="up-pulse-dot" style="width:8px;height:8px;background:#34d399;border-radius:50%;"></span>
+        <span style="color:#6ee7b7; font-size:0.72rem; font-weight:800; text-transform:uppercase; letter-spacing:0.14em;"
+          >{$t('pricing.badge')}</span
+        >
+      </p>
+      <h2
+        id="precos-title"
+        style="font-size:clamp(1.85rem,4vw,2.75rem); font-weight:900; color:#fff; line-height:1.1; letter-spacing:-0.02em;"
+      >
+        {$t('pricing.title1')} <span class="up-gradient-text">{$t('pricing.title2')}</span>
+      </h2>
+      <p class="mt-4" style="color:rgba(191,219,254,0.85); font-size:1.05rem; line-height:1.6;">
+        {$t('pricing.subPre')}<strong style="color:#6ee7b7;">{$t('pricing.subStrong')}</strong>{$t('pricing.subEnd')}
+      </p>
+    </div>
+
+    <PricingPlans paymentLinks={STRIPE_PAYMENT_LINKS} whatsappFallback={whatsappHref} preferTrialCta={true} />
+
+    <p class="text-center mt-8">
+      <a href="/planos" class="text-sm font-semibold underline underline-offset-4" style="color:#93c5fd;">
+        Ver detalhes e assinar no Stripe →
+      </a>
+    </p>
+  </div>
+</section>
+
 <FAQ />
 
 <PartnersCarousel />
 
-<!-- CTA Section — imersiva -->
-<section class="relative overflow-hidden" style="background: linear-gradient(135deg,#050b23 0%,#0a1a44 45%,#1d4ed8 100%); padding-top:6rem; padding-bottom:6rem;">
+<!-- CTA Section -->
+<section
+  class="relative overflow-hidden home-cta-pad"
+  style="background: linear-gradient(135deg,#050b23 0%,#0a1a44 45%,#1d4ed8 100%); padding-top:6rem; padding-bottom:6rem;"
+>
   <div class="up-aurora" style="opacity:0.6;"></div>
   <div class="up-grid-overlay" style="opacity:0.35;"></div>
   <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative" style="z-index:2;">
@@ -94,8 +119,11 @@
       <span class="up-pulse-dot" style="width:9px;height:9px;background:#34d399;border-radius:50%;"></span>
       <span style="color:#e0f2fe; font-size:0.8rem; font-weight:700;">{$t('homeCta.badge')}</span>
     </div>
-    <h2 use:reveal={{ delay: 60 }} style="font-size:clamp(2.2rem,5vw,3.5rem); font-weight:900; color:#fff; line-height:1.08; letter-spacing:-0.02em; margin-bottom:1.25rem;">
-      {$t('homeCta.titleA')}<br class="hidden md:block">
+    <h2
+      use:reveal={{ delay: 60 }}
+      style="font-size:clamp(2.2rem,5vw,3.5rem); font-weight:900; color:#fff; line-height:1.08; letter-spacing:-0.02em; margin-bottom:1.25rem;"
+    >
+      {$t('homeCta.titleA')}<br class="hidden md:block" />
       <span class="up-gradient-text">{$t('homeCta.titleB')}</span>
     </h2>
     <p use:reveal={{ delay: 120 }} class="text-xl mb-3 max-w-2xl mx-auto" style="color:rgba(219,234,254,0.9);">
@@ -106,52 +134,55 @@
     </p>
     <div use:reveal={{ delay: 200 }} class="flex flex-col sm:flex-row items-center justify-center gap-4">
       <a
-        href="https://upclinic-aa025.web.app/register"
+        href={REGISTER_URL}
         target="_blank"
         rel="noopener noreferrer"
-        on:click|preventDefault={() => {
-          trackLead('CTA Final Registro', 'CTA Section');
-          window.open('https://upclinic-aa025.web.app/register', '_blank');
-        }}
         class="up-btn-primary"
+        style="min-height:2.85rem;"
+        on:click|preventDefault={() => {
+          trackTrialCta('CTA Final Teste', 'CTA Section');
+          window.open(REGISTER_URL, '_blank');
+        }}
       >
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+          ><path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M13 10V3L4 14h7v7l9-11h-7z"
+          /></svg
+        >
         {$t('homeCta.ctaStart')}
       </a>
       <a
-        href="https://upclinic-aa025.web.app/login"
+        href={LOGIN_URL}
         target="_blank"
         rel="noopener noreferrer"
-        on:click|preventDefault={() => {
-          trackLead('CTA Final Login', 'CTA Section');
-          window.open('https://upclinic-aa025.web.app/login', '_blank');
-        }}
         class="up-btn-ghost"
+        style="min-height:2.85rem;"
+        on:click|preventDefault={() => {
+          window.open(LOGIN_URL, '_blank');
+        }}
       >
         {$t('homeCta.ctaLogin')}
       </a>
     </div>
-    <p use:reveal={{ delay: 240 }} style="color:rgba(147,197,253,0.7); font-size:0.82rem; margin-top:1.5rem;">{$t('homeCta.footnote')}</p>
+    <p use:reveal={{ delay: 240 }} style="color:rgba(147,197,253,0.7); font-size:0.82rem; margin-top:1.5rem;">
+      {$t('homeCta.footnote')}
+    </p>
   </div>
 </section>
 
 <Footer />
-
-<!-- WhatsApp Floating Button -->
-<a 
-  href="https://wa.me/5562997016149?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20o%20UpClinic"
-  target="_blank"
-  rel="noopener noreferrer"
-  class="fixed bottom-6 right-6 w-16 h-16 bg-green-500 hover:bg-green-600 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all z-50 group"
-  aria-label={$t('homeCta.waTooltip')}
-  on:click={() => trackWhatsAppClick('botao_whatsapp_flutuante')}
->
-  <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-  </svg>
-  <span class="absolute right-20 bg-gray-900 text-white text-sm px-3 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-    {$t('homeCta.waTooltip')}
-  </span>
-</a>
-
+<WhatsAppFloat />
+<ConversionPopup />
 <FeatureDemoModal bind:this={demoModal} />
+
+<style>
+  /* Extra bottom space on mobile so floating WhatsApp doesn't cover the final CTA */
+  @media (max-width: 640px) {
+    .home-cta-pad {
+      padding-bottom: 7.5rem !important;
+    }
+  }
+</style>

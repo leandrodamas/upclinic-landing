@@ -1,12 +1,12 @@
 <script>
-  import { reveal, countUp } from '$lib/actions/motion';
+  import { reveal } from '$lib/actions/motion';
   import { t } from '$lib/i18n';
 
-  const stats = [
-    { opts: { to: 80, suffix: '%' }, key: 'impact.s1', color: '#34d399' },
-    { opts: { to: 250, prefix: '+', suffix: '%' }, key: 'impact.s2', color: '#60a5fa' },
-    { opts: { to: 60, suffix: '%' }, key: 'impact.s3', color: '#fbbf24' },
-    { opts: { to: 2, suffix: 'h' }, key: 'impact.s4', color: '#c4b5fd' },
+  const items = [
+    { label: '01', key: 'impact.s1', color: '#34d399' },
+    { label: '02', key: 'impact.s2', color: '#60a5fa' },
+    { label: '03', key: 'impact.s3', color: '#fbbf24' },
+    { label: '04', key: 'impact.s4', color: '#c4b5fd' },
   ];
 </script>
 
@@ -18,13 +18,11 @@
         {$t('impact.title')}<span class="up-gradient-text">{$t('impact.titleHi')}</span>
       </h2>
     </div>
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-5">
-      {#each stats as s, i}
-        <div use:reveal={{ delay: i * 80 }} class="text-center up-glass" style="padding:26px 16px; border-radius:20px;">
-          <div style="font-size:clamp(2.2rem,4vw,3rem); font-weight:900; line-height:1; color:{s.color};">
-            <span use:countUp={s.opts}>0</span>
-          </div>
-          <p style="color:rgba(191,219,254,0.85); font-size:0.82rem; line-height:1.45; margin-top:10px;">{$t(s.key)}</p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      {#each items as s, i}
+        <div use:reveal={{ delay: i * 80 }} class="up-glass" style="padding:22px 18px; border-radius:20px;">
+          <div style="font-size:0.75rem; font-weight:800; letter-spacing:0.12em; color:{s.color}; margin-bottom:0.65rem;">{s.label}</div>
+          <p style="color:rgba(219,234,254,0.92); font-size:0.95rem; line-height:1.45; font-weight:600; margin:0;">{$t(s.key)}</p>
         </div>
       {/each}
     </div>

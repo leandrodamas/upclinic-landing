@@ -15,11 +15,9 @@
     COMECE_DEMO_VIDEO_URL,
     COMECE_FIDELIZACAO_VIDEO_URL
   } from '$lib/constants';
-  import { trackLead as metaTrackLead } from '$lib/metaPixel';
+  import { trackTrialCta } from '$lib/analytics';
 
-  const waText = encodeURIComponent(
-    'Olá! Quero conhecer o UpClinic e começar o teste grátis.'
-  );
+  const waText = encodeURIComponent('Olá! Quero testar o UpClinic');
   const whatsappHref = `${CONTACT.whatsappLink}?text=${waText}`;
 
   // Ícones dos 6 passos (a ordem casa com comece.steps no i18n). Textos vêm do dicionário.
@@ -33,11 +31,8 @@
   ];
 
   function trackLead(name: string, source: string) {
-    if (typeof window === 'undefined') return;
-    metaTrackLead(name, `Lead:${REGISTER_URL}`);
-    if (window.gtag) {
-      window.gtag('event', 'sign_up', { event_category: 'engagement', event_label: `${source}: ${name}` });
-    }
+    if (name.toLowerCase().includes('whatsapp')) return;
+    trackTrialCta(name, source);
   }
 
   function scrollToId(e: Event, id: string) {

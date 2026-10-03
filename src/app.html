@@ -12,32 +12,35 @@
   <link rel="manifest" href="/manifest.json" />
 
   <!-- =====================================================
-       SEO BÁSICO
+       SEO BÁSICO (fonte única — páginas filhas podem sobrescrever title/description)
        ===================================================== -->
-  <title>UpClinic – Plataforma Completa para Clínicas, Prontuário e Telemedicina</title>
+  <title>Sistema para clínica de fisioterapia | UpClinic — teste 7 dias grátis</title>
   <meta
     name="description"
-    content="A UpClinic é a plataforma completa para clínicas e profissionais da saúde: agenda online, prontuário eletrônico, telemedicina, financeiro e gestão inteligente."
+    content="Sistema para clínica de fisioterapia e pilates: agenda, prontuário eletrônico, lembretes no WhatsApp, financeiro, IA e check-in Wellhub/TotalPass. Teste 7 dias grátis, sem cartão de crédito."
   />
   <meta name="robots" content="index, follow" />
   <meta name="theme-color" content="#2563eb" />
+  <meta name="language" content="pt-BR" />
   <link rel="canonical" href="https://www.clinicupapp.com/" />
 
   <!-- =====================================================
-       OPEN GRAPH (NÃO usa favicon)
+       OPEN GRAPH
        ===================================================== -->
+  <meta property="og:locale" content="pt_BR" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="UpClinic – Sistema completo para clínicas" />
+  <meta property="og:site_name" content="UpClinic" />
+  <meta property="og:title" content="Sistema para clínica de fisioterapia | UpClinic" />
   <meta
     property="og:description"
-    content="Prontuário eletrônico, agenda online, telemedicina, financeiro e IA integrados."
+    content="Agenda, prontuário/evolução, lembretes no WhatsApp e financeiro para fisioterapeutas e pilates. Teste 7 dias grátis, sem cartão."
   />
   <meta property="og:url" content="https://www.clinicupapp.com/" />
   <meta property="og:image" content="https://www.clinicupapp.com/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:image:type" content="image/png" />
-  <meta property="og:image:alt" content="UpClinic - Sistema de Gestão Médica Profissional" />
+  <meta property="og:image:alt" content="UpClinic — sistema para clínica de fisioterapia e pilates" />
 
   <!-- =====================================================
        FACEBOOK APP ID
@@ -48,10 +51,10 @@
        TWITTER
        ===================================================== -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="UpClinic – Sistema completo para clínicas" />
+  <meta name="twitter:title" content="Sistema para clínica de fisioterapia | UpClinic" />
   <meta
     name="twitter:description"
-    content="Plataforma moderna para gestão clínica com prontuário, agenda e telemedicina."
+    content="Agenda, prontuário, WhatsApp e financeiro para fisio e pilates. Teste 7 dias grátis, sem cartão."
   />
   <meta name="twitter:image" content="https://www.clinicupapp.com/og-image.png" />
 
@@ -74,36 +77,7 @@
   <!-- =====================================================
        SCHEMA.ORG (SEO AVANÇADO)
        ===================================================== -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "UpClinic",
-    "applicationCategory": "HealthApplication",
-    "operatingSystem": "Web",
-    "url": "https://www.clinicupapp.com/",
-    "description": "Plataforma completa com prontuário eletrônico, agendamentos, telemedicina, financeiro e gestão para clínicas e profissionais de saúde.",
-    "image": "https://www.clinicupapp.com/og-image.png",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "BRL",
-      "description": "7 dias de teste gratuito, sem cartão de crédito"
-    },
-    "creator": {
-      "@type": "Organization",
-      "name": "UpClinic",
-      "url": "https://www.clinicupapp.com/",
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "telephone": "+55-62-99701-6149",
-        "contactType": "customer support",
-        "availableLanguage": "Portuguese",
-        "hoursAvailable": "Mo-Fr 08:00-18:00, Sa 08:00-12:00"
-      }
-    }
-  }
-  </script>
+  <!-- JSON-LD principal fica em +page.svelte (homepage) para evitar schema duplicado -->
 
   <!-- =====================================================
        GOOGLE TAG MANAGER
