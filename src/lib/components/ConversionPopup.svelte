@@ -67,7 +67,9 @@
   function onMouseOut(e: MouseEvent) {
     if (shown || alreadySeen()) return;
     // Exit intent (desktop): cursor leaves toward top of viewport
-    if (e.clientY <= 0 && e.relatedTarget == null) {
+    const leavingTop = e.clientY <= 0;
+    const leftDocument = e.target === document.documentElement || e.relatedTarget == null;
+    if (leavingTop && leftDocument) {
       if (window.matchMedia('(min-width: 1024px)').matches) {
         show();
       }
