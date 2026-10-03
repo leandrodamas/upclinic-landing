@@ -1,18 +1,11 @@
 <script>
   import { onMount } from 'svelte';
   import { LOGIN_URL, REGISTER_URL } from '$lib/constants';
+  import { trackLead as metaTrackLead } from '$lib/metaPixel';
 
   function trackLead(contentName = 'CTA Principal', source = 'Hero') {
     if (typeof window === 'undefined') return;
-    const eventId = crypto.randomUUID();
-    if (window.fbq) {
-      window.fbq('track', 'Lead', { content_name: contentName, content_category: 'SaaS', source }, { eventID: eventId });
-      fetch('/api/meta-event', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ event_name: 'Lead', event_id: eventId, event_data: { content_name: contentName, content_category: 'SaaS', source } })
-      }).catch(() => {});
-    }
+    metaTrackLead(contentName, `Lead:${REGISTER_URL}`);
     if (window.gtag) window.gtag('event', 'sign_up', { event_category: 'engagement', event_label: source });
   }
 

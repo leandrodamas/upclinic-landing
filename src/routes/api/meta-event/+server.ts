@@ -7,7 +7,7 @@ import type { RequestHandler } from './$types';
  * 
  * IMPORTANTE: Configure as variáveis de ambiente:
  * - META_ACCESS_TOKEN: Token de acesso da Meta
- * - META_PIXEL_ID: ID do Pixel (24235377289434557)
+ * - META_PIXEL_ID / PUBLIC_META_PIXEL_ID: Pixel/dataset ID (default 646948901744249)
  * - META_TEST_EVENT_CODE: (opcional) Para testar eventos
  */
 export const POST: RequestHandler = async ({ request }) => {
@@ -31,9 +31,14 @@ export const POST: RequestHandler = async ({ request }) => {
       timestamp: new Date().toISOString()
     });
 
-    // Obter variáveis de ambiente
+    // Obter variáveis de ambiente (PUBLIC_META_PIXEL_ID is the preferred client/server source)
     const accessToken = import.meta.env.META_ACCESS_TOKEN || process.env.META_ACCESS_TOKEN;
-    const pixelId = import.meta.env.META_PIXEL_ID || process.env.META_PIXEL_ID || '24235377289434557';
+    const pixelId =
+      import.meta.env.PUBLIC_META_PIXEL_ID ||
+      process.env.PUBLIC_META_PIXEL_ID ||
+      import.meta.env.META_PIXEL_ID ||
+      process.env.META_PIXEL_ID ||
+      '646948901744249';
     const testEventCode = import.meta.env.META_TEST_EVENT_CODE || process.env.META_TEST_EVENT_CODE;
 
     // Se não houver token configurado, apenas logar (não quebrar o fluxo)

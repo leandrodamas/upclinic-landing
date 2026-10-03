@@ -5,9 +5,16 @@
   import { onMount } from 'svelte';
   import { initLocale } from '$lib/i18n';
   import { GOOGLE_ADS_CONVERSION_PAGE_VIEW_SEND_TO } from '$lib/constants';
+  import { handleMetaPixelClick, trackPageView } from '$lib/metaPixel';
 
   onMount(() => {
     initLocale();
+
+    // Lead (free-trial CTAs) + Contact (WhatsApp) — capture so preventDefault handlers still count
+    document.addEventListener('click', handleMetaPixelClick, true);
+    return () => {
+      document.removeEventListener('click', handleMetaPixelClick, true);
+    };
   });
 
   function fireAdsPageViewConversion() {
@@ -27,11 +34,21 @@
     window.setTimeout(() => window.clearInterval(id), 8000);
   }
 
+  let isFirstNav = true;
+
   if (browser) {
     afterNavigate(({ to }) => {
       const path = to?.url.pathname ?? '';
       if (path.startsWith('/api')) return;
+
       fireAdsPageViewConversion();
+
+      // Initial PageView is fired by the base snippet in app.html; fire again on SPA navigations
+      if (isFirstNav) {
+        isFirstNav = false;
+        return;
+      }
+      trackPageView();
     });
   }
 </script>
