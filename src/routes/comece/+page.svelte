@@ -1,26 +1,19 @@
 <!--
-  /comece — experiência premium imersiva: hero aurora, glass, reveal no scroll,
-  count-up, vídeos com chrome de app e narrativa de fidelização em 6 passos.
+  /comece — experiência premium: hero aurora, glass, reveal no scroll,
+  narrativa de fidelização em 6 passos (sem vídeos de terceiros).
 -->
 <script lang="ts">
   import { onMount } from 'svelte';
   import Navbar from '$lib/components/Navbar.svelte';
   import Footer from '$lib/components/Footer.svelte';
-  import YoutubeChannelVideoTeaser from '$lib/components/YoutubeChannelVideoTeaser.svelte';
-  import { reveal, countUp } from '$lib/actions/motion';
+  import { reveal } from '$lib/actions/motion';
   import { t } from '$lib/i18n';
-  import {
-    REGISTER_URL,
-    CONTACT,
-    COMECE_DEMO_VIDEO_URL,
-    COMECE_FIDELIZACAO_VIDEO_URL
-  } from '$lib/constants';
+  import { REGISTER_URL, CONTACT } from '$lib/constants';
   import { trackTrialCta } from '$lib/analytics';
 
   const waText = encodeURIComponent('Olá! Quero testar o UpClinic');
   const whatsappHref = `${CONTACT.whatsappLink}?text=${waText}`;
 
-  // Ícones dos 6 passos (a ordem casa com comece.steps no i18n). Textos vêm do dicionário.
   const stepIcons = [
     'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z',
     'M4 6h16M4 10h16M4 14h10M4 18h6',
@@ -50,7 +43,7 @@
   <title>UpClinic — Agenda, prontuário e pacientes em um só sistema | Teste grátis</title>
   <meta
     name="description"
-    content="Vídeos do UpClinic com controles; canal @drcarloseurico no YouTube. 6 passos para fidelizar pacientes. Agenda, prontuário e financeiro na nuvem. 7 dias grátis."
+    content="6 passos para fidelizar pacientes com o UpClinic. Agenda, prontuário e financeiro na nuvem. 7 dias grátis, sem cartão."
   />
   <link rel="canonical" href="https://www.clinicupapp.com/comece" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -64,7 +57,6 @@
 <Navbar />
 
 <main class="comece-page min-h-screen overflow-x-hidden pb-28 md:pb-0" style="background:#050b23; color:#e5eefb;">
-  <!-- Faixa de urgência -->
   <div class="relative z-10 px-4 py-2.5 text-center text-sm font-bold text-white"
        style="background:linear-gradient(90deg,#059669,#0d9488,#0891b2);">
     <span class="inline-flex items-center justify-center gap-2">
@@ -73,7 +65,6 @@
     </span>
   </div>
 
-  <!-- ══════════ HERO ══════════ -->
   <section class="relative overflow-hidden" style="padding-top:7rem; padding-bottom:5rem;">
     <div class="up-aurora"></div>
     <div class="up-grid-overlay"></div>
@@ -103,8 +94,7 @@
             {$t('comece.ctaStart')}
             <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
           </a>
-          <a href="#demo-sistema" on:click={(e) => scrollToId(e, 'demo-sistema')} class="up-btn-ghost cursor-pointer">
-            <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/></svg>
+          <a href="#passos-heading" on:click={(e) => scrollToId(e, 'passos-heading')} class="up-btn-ghost cursor-pointer">
             {$t('comece.ctaVideos')}
           </a>
         </div>
@@ -131,7 +121,6 @@
 
   <div class="relative z-[2] mx-auto max-w-5xl space-y-16 px-4 pb-16 sm:px-6 lg:space-y-24 lg:pb-24">
 
-    <!-- Fluxo em 3 passos -->
     <nav class="grid gap-4 sm:grid-cols-3" aria-label="UpClinic">
       {#each [
         { n: '1', c: 'linear-gradient(135deg,#34d399,#0d9488)', t: $t('comece.flow1t'), d: $t('comece.flow1d') },
@@ -149,7 +138,7 @@
       {/each}
     </nav>
 
-    <!-- Vídeo 1: demo sistema -->
+    <!-- Bloco neutro no lugar dos vídeos de terceiros -->
     <section id="demo-sistema" class="scroll-mt-24" use:reveal>
       <div class="text-center">
         <span class="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider"
@@ -165,46 +154,27 @@
         </p>
       </div>
 
-      <div class="mx-auto mt-8 max-w-4xl up-glow-border" style="padding:0;">
-        <div class="overflow-hidden" style="border-radius:1.5rem; background:#0b1020;">
-          <div class="flex items-center gap-3 px-4 py-3 sm:px-5" style="background:rgba(255,255,255,0.04); border-bottom:1px solid rgba(255,255,255,0.08);" aria-hidden="true">
-            <span class="flex gap-2">
-              <span class="h-3 w-3 rounded-full bg-red-400/90"></span>
-              <span class="h-3 w-3 rounded-full bg-amber-400/90"></span>
-              <span class="h-3 w-3 rounded-full bg-emerald-400/90"></span>
-            </span>
-            <div class="mx-auto flex min-w-0 flex-1 items-center gap-2 rounded-lg px-3 py-2 font-mono text-[11px] sm:text-xs"
-                 style="background:rgba(2,8,40,0.6); color:rgba(147,197,253,0.7);">
-              <svg class="h-3.5 w-3.5 shrink-0" style="color:#34d399;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-              <span class="truncate">app.clinicupapp.com</span>
-            </div>
-          </div>
-          <YoutubeChannelVideoTeaser
-            videoSrc={COMECE_DEMO_VIDEO_URL}
-            videoAriaLabel="Demonstração do sistema UpClinic: agenda e prontuário"
-            ariaLabel="Abrir o canal @drcarloseurico no YouTube"
-            teaserLine="@drcarloseurico · YouTube"
-          />
+      <div class="mx-auto mt-8 max-w-3xl up-glass text-center" style="border-radius:1.5rem; padding:2rem 1.5rem;">
+        <p class="text-base font-semibold text-white" style="font-family:'Plus Jakarta Sans',system-ui,sans-serif;">
+          Agenda · evolução por sessão · cobrança · WhatsApp
+        </p>
+        <p class="mt-2 text-sm" style="color:rgba(191,219,254,0.75);">
+          Abra o teste grátis e veja o produto real — sem cartão e sem vídeo de terceiros.
+        </p>
+        <div class="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" class="up-btn-primary"
+             on:click|preventDefault={() => { trackLead('CTA Teste grátis', '/comece após bloco produto'); window.open(REGISTER_URL, '_blank'); }}>
+            {$t('comece.ctaTest')}
+            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </a>
+          <a href="#passos-heading" on:click={(e) => scrollToId(e, 'passos-heading')}
+             class="text-sm font-bold underline decoration-white/30 underline-offset-4 hover:decoration-emerald-400" style="color:rgba(191,219,254,0.85);">
+            {$t('comece.see6')}
+          </a>
         </div>
-      </div>
-      <p class="mt-3 text-center text-xs sm:text-sm" style="color:rgba(147,197,253,0.65);">
-        Use <strong style="color:#dbeafe;">play, pausa e o volume</strong> nos controles do vídeo. No canto inferior direito, o link abre o canal <strong style="color:#dbeafe;">@drcarloseurico</strong>.
-      </p>
-
-      <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-        <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" class="up-btn-primary"
-           on:click|preventDefault={() => { trackLead('CTA Teste grátis', '/comece após vídeo sistema'); window.open(REGISTER_URL, '_blank'); }}>
-          {$t('comece.ctaTest')}
-          <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-        </a>
-        <a href="#passos-heading" on:click={(e) => scrollToId(e, 'passos-heading')}
-           class="text-sm font-bold underline decoration-white/30 underline-offset-4 hover:decoration-emerald-400" style="color:rgba(191,219,254,0.85);">
-          {$t('comece.see6')}
-        </a>
       </div>
     </section>
 
-    <!-- Insight -->
     <section use:reveal class="relative overflow-hidden up-glass text-center" style="border-radius:1.5rem; padding:2rem 1.5rem; border-color:rgba(251,191,36,0.3);">
       <div class="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full" style="background:rgba(251,146,60,0.25); filter:blur(60px);" aria-hidden="true"></div>
       <p class="relative text-lg font-bold sm:text-xl" style="font-family:'Plus Jakarta Sans',system-ui,sans-serif; color:#fff;">
@@ -215,7 +185,6 @@
       </p>
     </section>
 
-    <!-- Cards passos -->
     <section aria-labelledby="passos-heading">
       <div use:reveal class="text-center">
         <h2 id="passos-heading" class="text-2xl font-extrabold tracking-tight text-white sm:text-3xl" style="font-family:'Plus Jakarta Sans',system-ui,sans-serif;">
@@ -241,7 +210,6 @@
       </ol>
     </section>
 
-    <!-- Vídeo 2 -->
     <section id="video-fidelizacao" use:reveal class="scroll-mt-24 up-glass overflow-hidden" style="border-radius:1.5rem; padding:1.75rem;">
       <div class="mx-auto max-w-3xl text-center">
         <span class="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider"
@@ -255,67 +223,40 @@
           {$t('comece.video2Sub')}
         </p>
       </div>
-      <div class="mx-auto mt-6 max-w-4xl">
-        <div class="overflow-hidden" style="border-radius:1.25rem; background:#0b1020; border:1px solid rgba(251,146,60,0.2);">
-          <div class="flex items-center gap-3 px-4 py-3 sm:px-5" style="background:rgba(255,255,255,0.04); border-bottom:1px solid rgba(255,255,255,0.08);" aria-hidden="true">
-            <span class="flex gap-2">
-              <span class="h-3 w-3 rounded-full bg-red-400/90"></span>
-              <span class="h-3 w-3 rounded-full bg-amber-400/90"></span>
-              <span class="h-3 w-3 rounded-full bg-emerald-400/90"></span>
-            </span>
-            <div class="mx-auto flex min-w-0 flex-1 items-center gap-2 rounded-lg px-3 py-2 font-mono text-[11px] sm:text-xs"
-                 style="background:rgba(2,8,40,0.6); color:rgba(147,197,253,0.7);">
-              <svg class="h-3.5 w-3.5 shrink-0" style="color:#fdba74;" fill="currentColor" viewBox="0 0 20 20"><path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"/></svg>
-              <span class="truncate">upclinic · vídeo educativo</span>
-            </div>
-          </div>
-          <YoutubeChannelVideoTeaser
-            videoSrc={COMECE_FIDELIZACAO_VIDEO_URL}
-            videoAriaLabel="Vídeo: seis passos para fidelizar pacientes"
-            ariaLabel="Abrir o canal @drcarloseurico no YouTube"
-            teaserLine="@drcarloseurico · YouTube"
-          />
-        </div>
-      </div>
       <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-6">
         <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" class="up-btn-primary"
-           on:click|preventDefault={() => { trackLead('CTA Teste grátis', '/comece após vídeo 6 passos'); window.open(REGISTER_URL, '_blank'); }}>
+           on:click|preventDefault={() => { trackLead('CTA Teste grátis', '/comece bloco fidelizacao'); window.open(REGISTER_URL, '_blank'); }}>
           {$t('comece.ctaStart2')}
         </a>
         <a href={whatsappHref} target="_blank" rel="noopener noreferrer"
            class="inline-flex items-center gap-2 text-sm font-bold hover:text-white" style="color:rgba(191,219,254,0.85);"
-           on:click={() => trackLead('WhatsApp', '/comece após vídeo 6 passos')}>
-          <svg class="h-5 w-5" style="color:#34d399;" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.883 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+           on:click={() => trackLead('WhatsApp', '/comece bloco fidelizacao')}>
           {$t('comece.ctaTalk')}
         </a>
       </div>
     </section>
 
-    <!-- Métricas com count-up -->
+    <!-- Métricas estáticas sem números inventados / count-up em zero -->
     <section aria-labelledby="metricas-heading">
       <h2 id="metricas-heading" use:reveal class="text-center text-xl font-extrabold text-white sm:text-2xl" style="font-family:'Plus Jakarta Sans',system-ui,sans-serif;">
         {$t('comece.metricsTitlePre')}<span class="up-gradient-text">{$t('comece.metricsTitleHi')}</span>
       </h2>
       <div class="mt-8 grid gap-4 sm:grid-cols-3">
         <div use:reveal class="up-glass" style="padding:1.4rem; border-radius:1.25rem;">
-          <p class="text-4xl font-black" style="color:#fbbf24; font-family:'Plus Jakarta Sans',system-ui,sans-serif;"><span use:countUp={{ to: 7, suffix: '×' }}>0</span></p>
-          <p class="mt-1 text-sm font-bold text-white">{$t('comece.m1label')}</p>
+          <p class="text-lg font-bold text-white" style="font-family:'Plus Jakarta Sans',system-ui,sans-serif;">{$t('comece.m1label')}</p>
           <p class="mt-2 text-xs leading-relaxed" style="color:rgba(191,219,254,0.72);">{$t('comece.m1desc')}</p>
         </div>
         <div use:reveal={{ delay: 80 }} class="up-glass" style="padding:1.4rem; border-radius:1.25rem;">
-          <p class="text-4xl font-black" style="color:#34d399; font-family:'Plus Jakarta Sans',system-ui,sans-serif;"><span use:countUp={{ to: 37, prefix: '+', suffix: '%' }}>0</span></p>
-          <p class="mt-1 text-sm font-bold text-white">{$t('comece.m2label')}</p>
+          <p class="text-lg font-bold text-white" style="font-family:'Plus Jakarta Sans',system-ui,sans-serif;">{$t('comece.m2label')}</p>
           <p class="mt-2 text-xs leading-relaxed" style="color:rgba(191,219,254,0.72);">{$t('comece.m2desc')}</p>
         </div>
         <div use:reveal={{ delay: 160 }} class="up-glass" style="padding:1.4rem; border-radius:1.25rem;">
-          <p class="text-4xl font-black" style="color:#34d399; font-family:'Plus Jakarta Sans',system-ui,sans-serif;"><span use:countUp={{ to: 42, prefix: '−', suffix: '%' }}>0</span></p>
-          <p class="mt-1 text-sm font-bold text-white">{$t('comece.m3label')}</p>
+          <p class="text-lg font-bold text-white" style="font-family:'Plus Jakarta Sans',system-ui,sans-serif;">{$t('comece.m3label')}</p>
           <p class="mt-2 text-xs leading-relaxed" style="color:rgba(191,219,254,0.72);">{$t('comece.m3desc')}</p>
         </div>
       </div>
     </section>
 
-    <!-- FAQ + CTA -->
     <section class="grid gap-8 lg:grid-cols-5 lg:gap-10">
       <div use:reveal class="up-glass lg:col-span-2" style="padding:1.5rem; border-radius:1.25rem;">
         <h2 class="font-bold text-white" style="font-family:'Plus Jakarta Sans',system-ui,sans-serif;">{$t('comece.faqTitle')}</h2>
@@ -361,19 +302,16 @@
   </div>
 </main>
 
-<!-- Barra mobile fixa -->
 <div class="fixed bottom-0 left-0 right-0 z-[60] p-3 md:hidden"
      style="background:rgba(5,11,35,0.92); border-top:1px solid rgba(255,255,255,0.1); backdrop-filter:blur(14px); padding-bottom:max(0.75rem, env(safe-area-inset-bottom, 0px));"
      role="region" aria-label="Ação principal">
   <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" class="up-btn-primary" style="width:100%; justify-content:center;"
      on:click|preventDefault={() => { trackLead('CTA Teste grátis', '/comece barra mobile'); window.open(REGISTER_URL, '_blank'); }}>
     {$t('comece.ctaStart')}
-    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
   </a>
   <a href={whatsappHref} target="_blank" rel="noopener noreferrer"
      class="mt-2 flex w-full items-center justify-center gap-1.5 py-2 text-sm font-bold" style="color:rgba(191,219,254,0.85);"
      on:click={() => trackLead('WhatsApp', '/comece barra mobile')}>
-    <svg class="h-4 w-4" style="color:#34d399;" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.883 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
     {$t('comece.waShort')}
   </a>
 </div>

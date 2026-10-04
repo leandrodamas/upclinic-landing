@@ -1,5 +1,5 @@
 <script>
-  import { SOCIAL, YOUTUBE_DRCARLOS_CHANNEL_URL } from '$lib/constants';
+  import { SOCIAL, CONTACT } from '$lib/constants';
   import { t } from '$lib/i18n';
 
   const currentYear = new Date().getFullYear();
@@ -219,11 +219,11 @@
           </svg>
           (62) 99701-6149
         </a>
-        <a href="mailto:upclinic8@gmail.com" class="inline-flex items-center gap-1.5 text-white hover:text-blue-400 transition-colors break-all">
+        <a href={`mailto:${CONTACT.email}`} class="inline-flex items-center gap-1.5 text-white hover:text-blue-400 transition-colors break-all">
           <svg class="w-4 h-4 text-blue-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
           </svg>
-          upclinic8@gmail.com
+          {CONTACT.email}
         </a>
         <span class="inline-flex items-center gap-1.5 text-gray-400">
           <svg class="w-4 h-4 text-blue-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -238,17 +238,6 @@
     <div class="border-t border-gray-800 pt-4 md:pt-8 text-center">
       <p class="text-[11px] md:text-sm text-gray-400">
         &copy; {currentYear} UpClinic. {$t('footer.copyright')}
-      </p>
-      <p class="mx-auto mt-1.5 max-w-xl text-[10px] leading-snug text-gray-500 md:mt-2 md:text-[11px]">
-        {$t('footer.videosNotePre')}
-        <a
-          href={YOUTUBE_DRCARLOS_CHANNEL_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="text-gray-400 underline decoration-gray-600 underline-offset-2 hover:text-gray-300"
-          >@drcarloseurico</a
-        >
-        {$t('footer.videosNotePost')}
       </p>
     </div>
   </div>

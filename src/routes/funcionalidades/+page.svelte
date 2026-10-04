@@ -8,7 +8,7 @@
       icon: 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z',
       title: 'Agenda Inteligente',
       description: 'Agendamento online com confirmação automática por WhatsApp e e-mail. Veja disponibilidade em tempo real, evite conflitos e reduza faltas com lembretes automáticos.',
-      highlight: 'Reduz até 80% das faltas',
+      highlight: 'Lembretes anti-falta no WhatsApp',
       color: 'blue'
     },
     {

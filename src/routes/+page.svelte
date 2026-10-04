@@ -11,13 +11,14 @@
   import FeatureDemoModal from '$lib/components/FeatureDemoModal.svelte';
   import PartnersCarousel from '$lib/components/PartnersCarousel.svelte';
   import PricingPlans from '$lib/components/PricingPlans.svelte';
+  import FounderOffer from '$lib/components/FounderOffer.svelte';
+  import WhySwitch from '$lib/components/WhySwitch.svelte';
   import WhatsAppFloat from '$lib/components/WhatsAppFloat.svelte';
   import ConversionPopup from '$lib/components/ConversionPopup.svelte';
   import { reveal } from '$lib/actions/motion';
   import { t } from '$lib/i18n';
   import { LOGIN_URL, REGISTER_URL, CONTACT } from '$lib/constants';
   import { trackTrialCta } from '$lib/analytics';
-  import { STRIPE_PAYMENT_LINKS } from '$lib/config/pricing';
 
   let demoModal: FeatureDemoModal;
 
@@ -63,9 +64,11 @@
 <BentoFeatures />
 <ImpactBand />
 <FeatureGrid />
+<WhySwitch />
 <ResultsShowcase />
+<FounderOffer />
 
-<!-- Pricing on homepage (nav → /#precos); full Stripe checkout also on /planos -->
+<!-- Pricing on homepage (nav → /#precos); full details also on /planos -->
 <section
   id="precos"
   class="relative overflow-hidden"
@@ -93,11 +96,11 @@
       </p>
     </div>
 
-    <PricingPlans paymentLinks={STRIPE_PAYMENT_LINKS} whatsappFallback={whatsappHref} preferTrialCta={true} />
+    <PricingPlans whatsappFallback={whatsappHref} />
 
     <p class="text-center mt-8">
       <a href="/planos" class="text-sm font-semibold underline underline-offset-4" style="color:#93c5fd;">
-        Ver detalhes e assinar no Stripe →
+        Ver detalhes dos planos →
       </a>
     </p>
   </div>

@@ -142,10 +142,10 @@
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-5">
       <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; text-align: center;">
         {#each [
-          { value: '3.2K+', label: 'Clínicas ativas' },
-          { value: '80%',   label: 'Menos faltas com lembretes' },
-          { value: '18+',   label: 'Módulos integrados' },
-          { value: 'Seg–Sáb', label: 'Suporte 8h–18h' }
+          { value: 'Fisio', label: 'Feito por fisioterapeuta' },
+          { value: 'WA',   label: 'Lembretes anti-falta' },
+          { value: '7d',   label: 'Teste grátis sem cartão' },
+          { value: 'Seg–Sáb', label: 'Suporte 8h–18h / Sáb 8h–12h' }
         ] as stat}
           <div>
             <div style="font-size: 1.625rem; font-weight: 900; color: #fff; line-height:1;">{stat.value}</div>

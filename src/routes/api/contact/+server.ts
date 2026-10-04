@@ -46,7 +46,7 @@ export const POST: RequestHandler = async ({ request }) => {
       );
     }
     
-    // Enviar email para upclinic8@gmail.com
+    // Enviar email para contato@clinicupapp.com
     try {
       await sendContactEmail({
         name: data.name,

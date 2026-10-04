@@ -17,22 +17,14 @@ export const GOOGLE_ADS_CONVERSION_PAGE_VIEW_SEND_TO =
 export const GOOGLE_ADS_PURCHASE_CONVERSION_SEND_TO =
   'AW-17840348694/D3kyCKr5p9obEJa8-LpC';
 
-/** Canal oficial do criador dos vídeos (clique no preview abre o YouTube). */
-export const YOUTUBE_DRCARLOS_CHANNEL_URL =
-  'https://www.youtube.com/@drcarloseurico-novo1998/featured';
-
-/** Prévia local (sem som); clique redireciona ao YouTube. */
-export const COMECE_DEMO_VIDEO_URL = '/videoplayback.mp4';
-export const COMECE_FIDELIZACAO_VIDEO_URL = '/videoplayback-fidelizacao.mp4';
-
-// Horário de suporte real
+// Horário de suporte real (versão mais comum no site)
 export const SUPPORT_HOURS = 'Seg–Sex 8h–18h | Sáb 8h–12h';
 
 // Informações de contato
 export const CONTACT = {
   whatsapp: '62997016149',
   whatsappLink: 'https://wa.me/5562997016149',
-  email: 'upclinic8@gmail.com',
+  email: 'contato@clinicupapp.com',
   phone: '(62) 99701-6149'
 };
 
