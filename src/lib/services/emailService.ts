@@ -7,7 +7,7 @@ const SMTP_CONFIG = {
   port: parseInt(process.env.SMTP_PORT || '465'),
   secure: true, // true para porta 465, false para outras portas
   auth: {
-    user: process.env.SMTP_USER || 'upclinic8@gmail.com',
+    user: process.env.SMTP_USER || 'contato@clinicupapp.com',
     pass: process.env.SMTP_PASSWORD || ''
   }
 };
@@ -177,7 +177,7 @@ export async function sendContactConfirmationEmail(to: string, name: string): Pr
             </div>
             <div class="footer">
               <p>UpClinic - Sistema de Gestão Médica</p>
-              <p>WhatsApp: (62) 99701-6149 | Email: upclinic8@gmail.com</p>
+              <p>WhatsApp: (62) 99701-6149 | Email: contato@clinicupapp.com</p>
             </div>
           </div>
         </body>

@@ -13,7 +13,7 @@
   let mx = 50;
   let my = 40;
 
-  // 12 módulos em órbita — o preview muda conforme o ativo
+  // Foco fisio + pilates na órbita; módulos off-niche ficam em "Outras especialidades"
   const modules = [
     {
       id: 'agenda',
@@ -37,13 +37,6 @@
       preview: 'whatsapp'
     },
     {
-      id: 'telemedicina',
-      icon: 'M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z',
-      accent: '#818cf8',
-      plan: 'pro',
-      preview: 'tele'
-    },
-    {
       id: 'financeiro',
       icon: 'M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
       accent: '#fbbf24',
@@ -58,34 +51,6 @@
       preview: 'ia'
     },
     {
-      id: 'homecare',
-      icon: 'M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z',
-      accent: '#2dd4bf',
-      plan: 'ent',
-      preview: 'homecare'
-    },
-    {
-      id: 'injetaveis',
-      icon: 'M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z',
-      accent: '#f472b6',
-      plan: 'pro',
-      preview: 'inject'
-    },
-    {
-      id: 'tiss',
-      icon: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z',
-      accent: '#38bdf8',
-      plan: 'ent',
-      preview: 'tiss'
-    },
-    {
-      id: 'laboratorio',
-      icon: 'M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z',
-      accent: '#a78bfa',
-      plan: 'pro',
-      preview: 'lab'
-    },
-    {
       id: 'fidelizacao',
       icon: 'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z',
       accent: '#fb7185',
@@ -93,13 +58,22 @@
       preview: 'loyalty'
     },
     {
-      id: 'sngpc',
-      icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
-      accent: '#f87171',
+      id: 'homecare',
+      icon: 'M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z',
+      accent: '#2dd4bf',
       plan: 'ent',
-      preview: 'sngpc'
+      preview: 'homecare'
+    },
+    {
+      id: 'telemedicina',
+      icon: 'M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z',
+      accent: '#818cf8',
+      plan: 'pro',
+      preview: 'tele'
     }
   ];
+
+  const otherSpecialtyIds = ['sngpc', 'laboratorio', 'injetaveis', 'tiss'];
 
   $: mod = modules[active];
   $: title = $t(`featCore.mods.${mod.id}.title`);
@@ -432,6 +406,24 @@
           {/each}
         </div>
       </div>
+    </div>
+
+    <!-- Outras especialidades (baixo destaque) -->
+    <div class="mt-12 max-w-3xl mx-auto" use:reveal>
+      <p class="text-center text-xs font-bold uppercase tracking-wider" style="color:rgba(147,197,253,0.55);">
+        {$t('featCore.othersTitle')}
+      </p>
+      <p class="mt-1 text-center text-xs" style="color:rgba(147,197,253,0.45);">{$t('featCore.othersSub')}</p>
+      <ul class="mt-4 flex flex-wrap justify-center gap-2">
+        {#each otherSpecialtyIds as id}
+          <li
+            class="rounded-full px-3 py-1.5 text-[11px] font-semibold"
+            style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); color:rgba(191,219,254,0.65);"
+          >
+            {$t(`featCore.mods.${id}.title`)}
+          </li>
+        {/each}
+      </ul>
     </div>
 
     <!-- CTA -->

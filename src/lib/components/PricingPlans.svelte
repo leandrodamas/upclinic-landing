@@ -3,44 +3,33 @@
   import { t } from '$lib/i18n';
   import {
     PLAN_CATALOG,
-    STRIPE_PAYMENT_LINKS,
     formatBrl,
+    publicCheckoutUrl,
+    trialUrlForPlan,
     type PlanId
   } from '$lib/config/pricing';
-  import { REGISTER_URL } from '$lib/constants';
   import { trackTrialCta } from '$lib/analytics';
-
-  /**
-   * Checkout de subscription DIRETO no Stripe (sem passar por /auth).
-   * Cada valor é um Stripe Payment Link (modo subscription) por tier/intervalo.
-   * Enquanto vazio (''), o botão cai no fallback de WhatsApp / trial.
-   */
-  export let paymentLinks: {
-    starter: { monthly: string; annual: string };
-    professional: { monthly: string; annual: string };
-    enterprise: { monthly: string; annual: string };
-  } = { ...STRIPE_PAYMENT_LINKS };
 
   export let whatsappFallback =
     'https://wa.me/5562997016149?text=Quero%20assinar%20o%20UpClinic';
 
-  /** Prefer trial signup on homepage; Stripe checkout on /planos when links exist. */
-  export let preferTrialCta = false;
-
   let annual = false;
 
-  function linkFor(id: PlanId) {
-    if (preferTrialCta) return REGISTER_URL;
-    const url = annual ? paymentLinks[id].annual : paymentLinks[id].monthly;
-    return url && url.length > 0 ? url : whatsappFallback;
+  function trialHref(id: PlanId) {
+    return trialUrlForPlan(id);
+  }
+
+  function subscribeHref(id: PlanId) {
+    const url = publicCheckoutUrl(id, annual);
+    return url || whatsappFallback;
+  }
+
+  function trackTrial(planId: string) {
+    trackTrialCta(`Plano ${planId} — teste`, 'Pricing Section');
   }
 
   function trackSubscribe(planId: string) {
     if (typeof window === 'undefined') return;
-    if (preferTrialCta) {
-      trackTrialCta(`Plano ${planId} — teste`, 'Pricing Section');
-      return;
-    }
     const eventId = crypto.randomUUID();
     if (window.fbq) {
       window.fbq(
@@ -137,18 +126,24 @@
       </ul>
 
       <a
-        href={linkFor(plan.id)}
+        href={trialHref(plan.id)}
         target="_blank"
         rel="noopener noreferrer"
         class="mt-7 {plan.popular ? 'up-btn-primary' : 'up-btn-ghost'}"
         style="width:100%; justify-content:center; min-height:2.75rem;"
+        on:click={() => trackTrial(plan.id)}
+      >
+        {$t('plans.ctaTrial')}
+      </a>
+      <a
+        href={subscribeHref(plan.id)}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="mt-2 text-center text-xs font-semibold underline underline-offset-4"
+        style="color:rgba(147,197,253,0.75);"
         on:click={() => trackSubscribe(plan.id)}
       >
-        {#if preferTrialCta}
-          {$t('nav.trial')}
-        {:else}
-          {$t('plans.subscribe')} {plan.name}
-        {/if}
+        {$t('plans.ctaSubscribe')}
       </a>
     </div>
   {/each}

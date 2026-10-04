@@ -2,13 +2,12 @@
   import Navbar from '$lib/components/Navbar.svelte';
   import Footer from '$lib/components/Footer.svelte';
   import PricingPlans from '$lib/components/PricingPlans.svelte';
+  import FounderOffer from '$lib/components/FounderOffer.svelte';
   import { reveal } from '$lib/actions/motion';
   import { CONTACT } from '$lib/constants';
   import { t } from '$lib/i18n';
-  import { STRIPE_PAYMENT_LINKS } from '$lib/config/pricing';
 
   const whatsappHref = `${CONTACT.whatsappLink}?text=${encodeURIComponent('Olá! Quero testar o UpClinic')}`;
-  const paymentLinks = STRIPE_PAYMENT_LINKS;
 </script>
 
 <svelte:head>
@@ -42,10 +41,15 @@
 
   <div class="relative z-[2] mx-auto max-w-6xl px-4 pb-20 sm:px-6">
 
-    <!-- Planos com checkout de subscription direto no Stripe (sem passar por /auth) -->
+    <!-- Preços públicos: CTA principal = teste; "Já quero assinar" só usa Stripe novo (env) ou cai no trial -->
     <div class="mb-14">
-      <PricingPlans {paymentLinks} whatsappFallback={whatsappHref} />
+      <PricingPlans whatsappFallback={whatsappHref} />
     </div>
+  </div>
+
+  <FounderOffer />
+
+  <div class="relative z-[2] mx-auto max-w-6xl px-4 pb-20 sm:px-6">
 
     <!-- Garantias -->
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto mb-14">

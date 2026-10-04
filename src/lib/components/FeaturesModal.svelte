@@ -59,7 +59,7 @@
         'Bloqueio de horários e feriados',
         'Relatórios de ocupação e produtividade'
       ],
-      impact: 'Redução de 80% nas faltas de pacientes',
+      impact: 'Menos faltas com lembretes e confirmações',
       color: 'purple',
       gradient: 'from-purple-500 to-purple-600',
       bgLight: 'bg-purple-50',
@@ -252,7 +252,7 @@
       category: 'Tecnologia',
       description: 'Sistema de alertas e lembretes automáticos por WhatsApp, SMS e email para pacientes e profissionais.',
       benefits: [
-        'Redução de 80% nas faltas',
+        'Menos faltas com lembretes',
         'Lembretes automáticos multi-canal',
         'Comunicação personalizada',
         'Templates de mensagens',

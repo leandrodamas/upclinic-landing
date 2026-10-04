@@ -15,7 +15,7 @@
 
 <svelte:head>
   <title>Contato - UpClinic | clinicupapp.com</title>
-  <meta name="description" content="Entre em contato com a UpClinic. WhatsApp: (62) 99701-6149 | Email: upclinic8@gmail.com" />
+  <meta name="description" content="Entre em contato com a UpClinic. WhatsApp: (62) 99701-6149 | Email: contato@clinicupapp.com" />
   <link rel="canonical" href="https://clinicupapp.com/contato" />
 </svelte:head>
 
@@ -71,9 +71,9 @@
             </div>
             <div>
               <h3 class="text-xl font-bold text-gray-900 mb-2">Email</h3>
-              <p class="text-gray-600 mb-3">upclinic8@gmail.com</p>
+              <p class="text-gray-600 mb-3">contato@clinicupapp.com</p>
               <a 
-                href="mailto:upclinic8@gmail.com"
+                href="mailto:contato@clinicupapp.com"
                 class="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium"
               >
                 Enviar email
@@ -94,8 +94,8 @@
             </div>
             <div>
               <h3 class="text-xl font-bold text-gray-900 mb-2">Horário de Atendimento</h3>
-              <p class="text-gray-600">Segunda a Sexta: 8h às 18h</p>
-              <p class="text-gray-600">Sábado: 8h às 12h</p>
+              <p class="text-gray-600">Seg–Sex 8h–18h</p>
+              <p class="text-gray-600">Sáb 8h–12h</p>
             </div>
           </div>
         </div>
