@@ -21,6 +21,7 @@ export default {
         '/politica-cookies',
         '/comece',
         '/conversao',
+        '/obrigado',
         '/obrigado-compra'
       ],
       handleMissingId: ({ path, id, referrer }) => {
