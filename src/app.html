@@ -95,6 +95,18 @@
   <!-- END GTM -->
 
   <!-- =====================================================
+       GA4 (gtag) — property linked to Google Ads sign_up import
+       ID from PUBLIC_GA4_MEASUREMENT_ID via hooks.server.ts
+       ===================================================== -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=%ga4_measurement_id%"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '%ga4_measurement_id%');
+  </script>
+
+  <!-- =====================================================
        GOOGLE ADS (gtag) - Conta Principal
        ===================================================== -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17367062285"></script>
