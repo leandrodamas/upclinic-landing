@@ -13,6 +13,7 @@
  * "Já quero assinar" on the public cards falls back to the free-trial signup.
  */
 
+import * as publicEnv from '$env/static/public';
 import { REGISTER_URL } from '$lib/constants';
 
 export type PlanId = 'starter' | 'professional' | 'enterprise';
@@ -132,8 +133,17 @@ export const STRIPE_PAYMENT_LINKS = {
   }
 } as const;
 
+/**
+ * Read PUBLIC_* Stripe Payment Links from SvelteKit's static public env.
+ *
+ * Do NOT use import.meta.env[key] here: Vite only statically replaces
+ * import.meta.env.VITE_* (unless envPrefix is widened), and dynamic
+ * bracket access is never replaced — so links always looked unset and
+ * fell back to the free-trial URL. $env/static/public is the supported
+ * path for PUBLIC_* vars and inlines them at build/prerender time.
+ */
 function envStripeLink(key: string): string {
-  const v = (import.meta.env[key] as string | undefined)?.trim();
+  const v = (publicEnv as Record<string, string | undefined>)[key]?.trim();
   return v || '';
 }
 
