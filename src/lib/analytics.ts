@@ -1,28 +1,22 @@
-import { REGISTER_URL } from '$lib/constants';
-import { trackLead as metaTrackLead } from '$lib/metaPixel';
+import {
+  trackCompleteRegistration as metaTrackCompleteRegistration,
+  trackLead as metaTrackLead,
+  trackTrialGtag
+} from '$lib/metaPixel';
 
 /**
- * Fire Meta Lead + Google Ads conversion-ready generate_lead on free-trial CTAs.
- * Safe to call from click handlers; Meta click listener may also fire Lead (deduped).
+ * Fire conversion events when a visitor starts the free-trial / signup flow
+ * (click on "teste grátis" / create-account CTA → login?trial=true).
+ *
+ * - GA4 / Google Ads: gtag event `sign_up` (imported conversion)
+ * - Meta Pixel: Lead + CompleteRegistration (deduped vs capture-phase listener)
  */
 export function trackTrialCta(contentName: string, source = 'Landing'): void {
   if (typeof window === 'undefined') return;
 
-  metaTrackLead(contentName, `Lead:${REGISTER_URL}`);
-
-  if (window.gtag) {
-    window.gtag('event', 'generate_lead', {
-      event_category: 'conversion',
-      event_label: source,
-      value: 1,
-      currency: 'BRL'
-    });
-    // Keep legacy engagement event for existing GA reports
-    window.gtag('event', 'sign_up', {
-      event_category: 'engagement',
-      event_label: source
-    });
-  }
+  metaTrackLead(contentName, 'Lead:trial');
+  metaTrackCompleteRegistration(contentName, 'CompleteRegistration:trial');
+  trackTrialGtag(source);
 }
 
 export function trackWhatsAppClick(label: string): void {

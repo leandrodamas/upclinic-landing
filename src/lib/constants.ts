@@ -12,6 +12,14 @@ export const META_PIXEL_ID =
   (publicEnv as Record<string, string | undefined>).PUBLIC_META_PIXEL_ID?.trim() ||
   '646948901744249';
 
+/**
+ * GA4 measurement ID (clinicupapp.com property linked to Google Ads).
+ * Override with PUBLIC_GA4_MEASUREMENT_ID in env (Vercel). Do not invent new IDs.
+ */
+export const GA4_MEASUREMENT_ID =
+  (publicEnv as Record<string, string | undefined>).PUBLIC_GA4_MEASUREMENT_ID?.trim() ||
+  'G-K7SE125H5D';
+
 /** Google Ads — conversão “Visualização de página (2)” (disparo global no layout, todas as rotas exceto /api). */
 export const GOOGLE_ADS_CONVERSION_PAGE_VIEW_SEND_TO =
   'AW-17367062285/fUu0CKCPwZocEI2uodlA';

@@ -66,8 +66,40 @@ export function trackLead(contentName: string, dedupeKey?: string): void {
   trackMetaEvent('Lead', { content_name: contentName }, dedupeKey ?? `Lead:${contentName}`);
 }
 
+export function trackCompleteRegistration(contentName: string, dedupeKey?: string): void {
+  trackMetaEvent(
+    'CompleteRegistration',
+    { content_name: contentName, status: true },
+    dedupeKey ?? `CompleteRegistration:${contentName}`
+  );
+}
+
 export function trackContact(contentName: string, dedupeKey?: string): void {
   trackMetaEvent('Contact', { content_name: contentName }, dedupeKey ?? `Contact:${contentName}`);
+}
+
+/**
+ * GA4 / gtag events for free-trial start. Deduped so capture-phase + on:click
+ * handlers (trackTrialCta) do not double-count within DEDUPE_MS.
+ */
+export function trackTrialGtag(label: string): void {
+  if (typeof window === 'undefined' || typeof window.gtag !== 'function') return;
+
+  if (!shouldDedupe('gtag:sign_up:trial')) {
+    window.gtag('event', 'sign_up', {
+      method: label,
+      event_category: 'engagement',
+      event_label: label
+    });
+  }
+  if (!shouldDedupe('gtag:generate_lead:trial')) {
+    window.gtag('event', 'generate_lead', {
+      event_category: 'conversion',
+      event_label: label,
+      value: 1,
+      currency: 'BRL'
+    });
+  }
 }
 
 function isWhatsAppHref(href: string): boolean {
@@ -125,15 +157,8 @@ export function handleMetaPixelClick(event: MouseEvent): void {
 
   if (looksLikeFreeTrialCta(anchor, href)) {
     const name = contentNameFromEl(anchor, 'Testar 7 dias grátis');
-    trackLead(name, `Lead:${href}`);
-    // Google Ads conversion-ready event (importable later as a conversion)
-    if (typeof window.gtag === 'function') {
-      window.gtag('event', 'generate_lead', {
-        event_category: 'conversion',
-        event_label: name,
-        value: 1,
-        currency: 'BRL'
-      });
-    }
+    trackLead(name, 'Lead:trial');
+    trackCompleteRegistration(name, 'CompleteRegistration:trial');
+    trackTrialGtag(name);
   }
 }
