@@ -1,3 +1,5 @@
+import * as publicEnv from '$env/static/public';
+
 // Constantes do site
 export const SITE_URL = 'https://clinicupapp.com';
 export const FIREBASE_URL = 'https://site-upclinic.web.app';
@@ -7,7 +9,8 @@ export const REGISTER_URL = 'https://upclinic-aa025.web.app/login?trial=true';
 
 /** Meta Pixel / dataset ID — override with PUBLIC_META_PIXEL_ID in env (Vercel). */
 export const META_PIXEL_ID =
-  (import.meta.env.PUBLIC_META_PIXEL_ID as string | undefined)?.trim() || '646948901744249';
+  (publicEnv as Record<string, string | undefined>).PUBLIC_META_PIXEL_ID?.trim() ||
+  '646948901744249';
 
 /** Google Ads — conversão “Visualização de página (2)” (disparo global no layout, todas as rotas exceto /api). */
 export const GOOGLE_ADS_CONVERSION_PAGE_VIEW_SEND_TO =
