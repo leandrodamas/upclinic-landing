@@ -1,0 +1,24 @@
+{
+  "redirects": [
+    {
+      "source": "/login",
+      "destination": "https://upclinic-aa025.web.app/login",
+      "permanent": true
+    },
+    {
+      "source": "/cadastro",
+      "destination": "https://upclinic-aa025.web.app/login?trial=true",
+      "permanent": true
+    },
+    {
+      "source": "/signup",
+      "destination": "https://upclinic-aa025.web.app/login?trial=true",
+      "permanent": true
+    },
+    {
+      "source": "/teste-gratis",
+      "destination": "https://upclinic-aa025.web.app/login?trial=true",
+      "permanent": true
+    }
+  ]
+}
