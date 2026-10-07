@@ -20,6 +20,7 @@ export default {
         '/politica-privacidade',
         '/politica-cookies',
         '/comece',
+        '/teste',
         '/conversao',
         '/obrigado',
         '/obrigado-compra'
