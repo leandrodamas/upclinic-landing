@@ -20,22 +20,22 @@ export const pt = {
     titleC: '— agenda, prontuário',
     titleD: 'e menos faltas',
     sub: 'Lembretes no WhatsApp, evolução do paciente, financeiro e check-in Wellhub/TotalPass num só lugar. E o ',
-    subStrong: 'WhatsApp sem cobrar por mensagem',
+    subStrong: 'WhatsApp sem cobrar por mensagem*',
     subEnd: '.',
     sub2: 'Para fisioterapeutas, studios de pilates e clínicas de saúde pequenas.',
     ctaStart: 'Testar 7 dias grátis',
     ctaLogin: 'Já tenho conta',
-    trust: ['Sem cartão de crédito', 'Feito por fisioterapeuta', 'Configure em minutos', '100% LGPD'],
+    trust: ['Sem cartão de crédito', 'Feito por fisioterapeuta', 'Configure em minutos', 'Política LGPD'],
     statActive: 'Feito por fisioterapeuta',
     statNoShows: 'Lembretes anti-falta',
     statModules: 'Agenda + prontuário',
-    statPerMsg: 'R$ 0 por msg no WhatsApp',
+    statPerMsg: 'R$ 0 por msg no WhatsApp*',
     cardAgenda: 'Agenda de hoje',
     cardConsults: '8 sessões',
     cardReminder: 'Lembrete enviado',
     cardReminderSub: 'automático · custo R$ 0',
-    cardMsg: 'Olá Maria! Confirmando sua sessão amanhã às 8h. Responda SIM para confirmar.',
-    cardConfirmed: 'Confirmada — falta evitada',
+    cardMsg: 'Olá Maria! Lembrete: sua sessão é amanhã às 8h. Te esperamos!',
+    cardConfirmed: 'Lembretes 24h e 2h antes',
     cardBilling: 'Financeiro do mês',
     cardBillingSub: 'mensalidades e sessões em dia',
     cardIA: 'IA apoiando a evolução…'
@@ -55,7 +55,7 @@ export const pt = {
     titleB: 'Sem pagar por mensagem.',
     p1: 'A maioria dos sistemas cobra por SMS ou por mensagem de WhatsApp — e isso vira uma conta que só cresce. No UpClinic, os lembretes, confirmações e avisos saem direto do seu número, ',
     pStrong: 'sem tarifa por envio',
-    p2: '. Menos faltas, mais consultas, zero custo variável.',
+    p2: '. Lembretes ajudam a reduzir faltas, sem custo variável.',
     otherLabel: 'Outros sistemas',
     otherPrice: 'R$ 0,10–0,45',
     otherDesc: 'por mensagem · some no fim do mês',
@@ -66,12 +66,12 @@ export const pt = {
     ctaTalk: 'Falar no WhatsApp',
     disclaimer: '*Uso justo dentro das políticas oficiais do WhatsApp/Meta, a partir do seu próprio número.',
     phoneName: 'Clínica UpVida',
-    phoneStatus: 'online · resposta automática',
-    chat1: 'Olá, Maria! 👋 Aqui é da Clínica UpVida. Confirmando sua consulta amanhã (Ter) às 08:00 com Dr. Silva.',
-    chat2: 'Responda: 1️⃣ Confirmar · 2️⃣ Remarcar',
-    chat3: '1 ✅',
-    chat4: 'Perfeito! Consulta confirmada. Te esperamos 💙 Enviamos a localização e o preparo por aqui.',
-    avoided: '💚 Falta evitada · custo R$ 0,00'
+    phoneStatus: 'online · lembrete automático',
+    chat1: 'Olá, Maria! 👋 Aqui é da Clínica UpVida. Lembrete: sua consulta é amanhã (Ter) às 08:00 com Dr. Silva.',
+    chat2: 'Amanhã, 2h antes, mandamos outro lembrete por aqui.',
+    chat3: 'Obrigada! 🙂',
+    chat4: 'Nós que agradecemos. Te esperamos 💙',
+    avoided: '💚 Lembrete automático · custo R$ 0,00*'
   },
   impact: {
     title: 'O que o UpClinic ajuda ',
@@ -137,7 +137,7 @@ export const pt = {
     chip2: 'Pacotes de sessões',
     chip3: 'Cobrança recorrente',
     c6t: 'WhatsApp sem tarifa por msg',
-    c6d: 'Confirmações e lembretes do seu número, sem cobrança por envio no UpClinic.',
+    c6d: 'Lembretes do seu número, sem cobrança por envio no UpClinic.*',
     c7t: 'Home Care com GPS',
     c7d: 'Atendimento domiciliar com rota e check-in por localização quando a equipe vai até o paciente.',
     c8t: 'Fidelização automática',
@@ -160,10 +160,10 @@ export const pt = {
     title: 'Infraestrutura que a clínica',
     titleHi: ' pode confiar',
     sub: 'Pagamentos, nuvem e dados em plataformas usadas por milhões — com segurança e disponibilidade de nível enterprise.',
-    t1: '99,9% uptime',
+    t1: 'Nuvem Google / Firebase',
     t2: 'Criptografia em trânsito',
     t3: 'LGPD by design',
-    t4: 'Backups automáticos',
+    t4: 'Acesso por login da equipe',
   },
   footer: {
     desc: 'Sistema para clínicas de fisioterapia e pilates: agenda, prontuário, WhatsApp e financeiro.',
@@ -226,7 +226,7 @@ export const pt = {
     title1: 'Planos para o tamanho',
     title2: 'da sua clínica',
     subPre: 'Teste 7 dias grátis, sem cartão. Depois escolha o plano — e lembre: ',
-    subStrong: 'WhatsApp incluído, sem cobrança por mensagem',
+    subStrong: 'WhatsApp incluído, sem cobrança por mensagem*',
     subEnd: '.',
     g1t: '7 dias grátis',
     g1d: 'Teste completo sem cartão de crédito',
@@ -249,7 +249,7 @@ export const pt = {
     subscribe: 'Assinar',
     ctaTrial: 'Começar teste grátis',
     ctaSubscribe: 'Já quero assinar',
-    footnote: 'Teste 7 dias grátis · sem cartão · cancele quando quiser · WhatsApp sem cobrança por mensagem',
+    footnote: 'Teste 7 dias grátis · sem cartão · cancele quando quiser · *WhatsApp sem cobrança por mensagem: uso justo conforme políticas do WhatsApp/Meta',
     starterName: 'Solo',
     starterTag: '1 profissional — consultório solo',
     proName: 'Clínica / Studio',
@@ -348,12 +348,12 @@ export const pt = {
     ctaStart: 'Testar 7 dias grátis',
     ctaDemo: 'Ver demonstração',
     preview: {
-      waIn: 'Olá! Confirmando sua consulta amanhã às 8h. Responda 1 para confirmar.',
-      waOk: '💚 Confirmada · custo R$ 0',
+      waIn: 'Olá! Lembrete: sua consulta é amanhã às 8h.',
+      waOk: '💚 Lembrete enviado · custo R$ 0*',
       gps: 'Rota otimizada · check-in por GPS · trânsito ao vivo',
       aiThinking: 'analisando prontuário + evidências…',
       aiSuggest: 'Sugestão: ajustar conduta e solicitar retorno em 15 dias.',
-      financeSub: 'recebido automático este mês',
+      financeSub: 'recebido este mês',
       teleLive: 'consulta em andamento',
       chip1: 'Integrado',
       chip2: 'LGPD',
@@ -363,7 +363,7 @@ export const pt = {
     mods: {
       agenda: {
         title: 'Agenda inteligente',
-        desc: 'Horários, encaixes e lista de espera no mesmo fluxo. Menos buracos, menos faltas, mais consultas fechadas.',
+        desc: 'Horários, encaixes e lista de espera no mesmo fluxo. Menos buracos na agenda.',
         signal: 'sinal · ocupação da agenda'
       },
       prontuario: {
@@ -373,7 +373,7 @@ export const pt = {
       },
       whatsapp: {
         title: 'WhatsApp sem cobrança',
-        desc: 'Lembretes e confirmações do seu número, sem tarifa por mensagem. Menos faltas, zero custo variável.',
+        desc: 'Lembretes 24h e 2h antes, do seu número, sem tarifa por mensagem.* Lembretes ajudam a reduzir faltas.',
         signal: 'sinal · comunicação R$ 0'
       },
       telemedicina: {
@@ -383,7 +383,7 @@ export const pt = {
       },
       financeiro: {
         title: 'Financeiro & cobrança',
-        desc: 'Receitas, despesas e cobrança recorrente automática. O sistema cobra; você acompanha o caixa.',
+        desc: 'Receitas, despesas, mensalidades e cobrança recorrente (conectando sua conta Stripe). Você acompanha o caixa.',
         signal: 'sinal · fluxo de caixa'
       },
       ia: {
@@ -439,10 +439,10 @@ export const pt = {
     footnote: 'Sem cartão · Sem taxa de setup · LGPD',
     waText: 'Olá! Quero testar o UpClinic',
     trust: {
-      t1: { t: 'LGPD', d: 'Dados criptografados e backup diário' },
+      t1: { t: 'LGPD', d: 'Conexão criptografada (HTTPS) e política LGPD' },
       t2: { t: '100% nuvem', d: 'Sem instalar · qualquer dispositivo' },
       t3: { t: 'Sem cartão', d: 'Teste completo por 7 dias' },
-      t4: { t: 'WhatsApp R$ 0', d: 'Mensagens sem cobrança por envio' }
+      t4: { t: 'WhatsApp R$ 0', d: 'Sem cobrança por envio (uso justo WhatsApp/Meta)' }
     },
     items: {
       q1: {
@@ -455,7 +455,7 @@ export const pt = {
       },
       q3: {
         q: 'Meus dados estão seguros?',
-        a: 'Sim. Criptografia, backup automático e conformidade com a LGPD. Os dados ficam em infraestrutura com monitoramento contínuo.'
+        a: 'Os dados ficam na nuvem do Google (Firebase), com conexão criptografada (HTTPS) e acesso só com o login da sua equipe. O tratamento de dados está descrito na nossa Política de Privacidade e na página LGPD.'
       },
       q4: {
         q: 'Posso testar antes de assinar?',
