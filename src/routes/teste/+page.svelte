@@ -51,13 +51,13 @@
 
   const benefits = [
     {
-      title: 'Robô do WhatsApp que agenda sozinho',
-      text: 'O paciente escolhe o profissional, o dia e um horário livre pelo WhatsApp, e a consulta cai direto na sua agenda. Ele também confirma, cancela e remarca por lá.',
+      title: 'Robô de atendimento no seu WhatsApp',
+      text: 'Um robô de menu responde o paciente no número da clínica, conectado por QR Code. As conversas ficam no painel do UpClinic para a sua equipe continuar o atendimento.',
       icon: 'M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z'
     },
     {
-      title: 'Lembrete automático, menos faltas',
-      text: 'Lembrete no WhatsApp 24h e 2h antes, do seu próprio número. O paciente responde SIM e a consulta já fica confirmada na agenda.',
+      title: 'Lembrete automático no WhatsApp',
+      text: 'Lembrete automático no WhatsApp do paciente 24h e 2h antes da consulta, do seu próprio número. Lembretes ajudam a reduzir faltas.',
       icon: 'M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9'
     },
     {
@@ -86,7 +86,7 @@
     },
     {
       q: 'Meus dados ficam seguros?',
-      a: 'Sim. Os dados ficam na nuvem, com criptografia, backup automático e acesso só da sua equipe, seguindo a LGPD.'
+      a: 'Os dados ficam na nuvem do Google (Firebase), com conexão criptografada (HTTPS) e acesso só com o login da sua equipe. O tratamento de dados está descrito na nossa Política de Privacidade e na página LGPD (links no rodapé).'
     }
   ];
 </script>
@@ -95,7 +95,7 @@
   <title>UpClinic: robô do WhatsApp + agenda num lugar só | Teste 7 dias grátis</title>
   <meta
     name="description"
-    content="Seu WhatsApp agenda, confirma e lembra o paciente sozinho, direto na sua agenda. Para fisioterapia, pilates e RPG. Teste 7 dias grátis, sem cartão."
+    content="Lembrete automático no WhatsApp do paciente 24h e 2h antes, direto da sua agenda. Para fisioterapia, pilates e RPG. Teste 7 dias grátis, sem cartão."
   />
   <link rel="canonical" href="https://www.clinicupapp.com/teste" />
   <meta property="og:title" content="UpClinic: robô do WhatsApp + agenda num lugar só" />
@@ -120,9 +120,9 @@
   <main>
     <section class="tp-hero">
       <p class="tp-kicker">Para fisioterapia, pilates e RPG</p>
-      <h1>Seu WhatsApp agenda, confirma e lembra o paciente sozinho. <span>Direto na sua agenda.</span></h1>
+      <h1>Seu WhatsApp lembra o paciente da consulta sozinho. <span>Direto da sua agenda.</span></h1>
       <p class="tp-sub">
-        Robô do WhatsApp, agenda, prontuário e financeiro num lugar só. Menos faltas e menos tempo respondendo mensagem.
+        Robô do WhatsApp, agenda, prontuário e financeiro num lugar só. Lembretes 24h e 2h antes ajudam a reduzir faltas.
         Teste 7 dias grátis, sem cartão.
       </p>
       <a href={ctaHref} class="tp-cta" rel="noopener">{CTA_LABEL}</a>
@@ -133,13 +133,11 @@
       </ul>
     </section>
 
-    <section class="tp-demo" aria-label="Exemplo de conversa com o robô">
+    <section class="tp-demo" aria-label="Exemplo de lembrete automático no WhatsApp">
       <div class="tp-chat">
-        <div class="tp-bubble in">Oi! Tem horário amanhã? 🙂</div>
-        <div class="tp-bubble out">Claro! Com quem você prefere? Depois é só escolher um horário livre 👇</div>
-        <div class="tp-bubble in">10h com a Dra. Ana</div>
-        <div class="tp-bubble out">✅ Consulta confirmada! Amanhã às 10:00 com Dra. Ana. Enviaremos lembretes antes do horário.</div>
-        <div class="tp-chip">📅 Já está na sua agenda</div>
+        <div class="tp-bubble out">Olá, Maria! 👋 Lembrete: sua consulta é amanhã às 10:00 com a Dra. Ana.</div>
+        <div class="tp-bubble out">Oi, Maria! Sua consulta é hoje às 10:00, daqui a 2 horas. Até já! 💙</div>
+        <div class="tp-chip">⏰ Enviado sozinho, 24h e 2h antes</div>
       </div>
       <p class="tp-note">Exemplo ilustrativo, com nomes fictícios.</p>
     </section>
@@ -160,7 +158,7 @@
     </section>
 
     <section class="tp-mid">
-      <p><strong>7 dias grátis, sem cartão.</strong> Conecte o WhatsApp com um QR Code e veja a primeira confirmação sair hoje.</p>
+      <p><strong>7 dias grátis, sem cartão.</strong> Conecte o WhatsApp com um QR Code e veja os lembretes saindo do seu próprio número.</p>
       <a href={ctaHref} class="tp-cta" rel="noopener">{CTA_LABEL}</a>
     </section>
 
