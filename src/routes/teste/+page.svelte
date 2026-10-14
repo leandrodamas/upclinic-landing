@@ -7,36 +7,19 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { REGISTER_URL, CONTACT } from '$lib/constants';
+  import { appendUtmToUrl, captureFirstTouchUtm, withDefaultUtmContent } from '$lib/utm';
   import WellhubIntegration from '$lib/components/WellhubIntegration.svelte';
 
   const CTA_LABEL = 'Começar meus 7 dias grátis';
-  const PASS_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid', 'fbclid'];
-  const DEFAULT_UTMS: Record<string, string> = {
-    utm_source: 'site',
-    utm_medium: 'landing',
-    utm_campaign: 'teste'
-  };
 
-  /** Monta o link do teste repassando UTMs (e gclid/fbclid) da URL atual. */
-  function buildCtaHref(search: string): string {
+  /** CTA → app login com trial=true + first-touch UTMs (utm_content default: sem_codigo). */
+  function buildCtaHref(params: ReturnType<typeof captureFirstTouchUtm>): string {
     const target = new URL(REGISTER_URL); // já contém ?trial=true
     target.searchParams.set('trial', 'true');
-    const incoming = new URLSearchParams(search);
-    let hasUtm = false;
-    for (const key of PASS_KEYS) {
-      const value = incoming.get(key);
-      if (value) {
-        target.searchParams.set(key, value.slice(0, 200));
-        if (key.startsWith('utm_')) hasUtm = true;
-      }
-    }
-    if (!hasUtm) {
-      for (const [k, v] of Object.entries(DEFAULT_UTMS)) target.searchParams.set(k, v);
-    }
-    return target.toString();
+    return appendUtmToUrl(target.toString(), withDefaultUtmContent(params));
   }
 
-  let ctaHref = buildCtaHref('');
+  let ctaHref = buildCtaHref({ utm_content: 'sem_codigo' });
 
   // Faixa do Dia dos Professores: só de 08/10/2026 00:00 até 15/10/2026 23:59 (Brasília, UTC-3).
   const DDP_START = Date.parse('2026-10-08T00:00:00-03:00');
@@ -44,7 +27,9 @@
   let showDdp = false;
 
   onMount(() => {
-    ctaHref = buildCtaHref(window.location.search);
+    // First-touch: salva utm_* + gclid/fbclid em localStorage uc_utm (90d) e cookie .clinicupapp.com
+    const attribution = captureFirstTouchUtm(window.location.search);
+    ctaHref = buildCtaHref(attribution);
     const now = Date.now();
     const preview = new URLSearchParams(window.location.search).get('preview_ddp') === '1';
     showDdp = preview || (now >= DDP_START && now < DDP_END);
