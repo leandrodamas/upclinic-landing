@@ -239,6 +239,9 @@
       <p class="text-[11px] md:text-sm text-gray-400">
         &copy; {currentYear} UpClinic. {$t('footer.copyright')}
       </p>
+      <p class="mt-2 text-[10px] md:text-xs text-gray-500">
+        Wellhub é marca de seu titular.
+      </p>
     </div>
   </div>
 </footer>

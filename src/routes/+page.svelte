@@ -13,6 +13,7 @@
   import PricingPlans from '$lib/components/PricingPlans.svelte';
   import FounderOffer from '$lib/components/FounderOffer.svelte';
   import WhySwitch from '$lib/components/WhySwitch.svelte';
+  import WellhubIntegration from '$lib/components/WellhubIntegration.svelte';
   import WhatsAppFloat from '$lib/components/WhatsAppFloat.svelte';
   import ConversionPopup from '$lib/components/ConversionPopup.svelte';
   import { reveal } from '$lib/actions/motion';
@@ -65,6 +66,7 @@
 <ImpactBand />
 <FeatureGrid />
 <WhySwitch />
+<WellhubIntegration />
 <ResultsShowcase />
 <FounderOffer />
 
