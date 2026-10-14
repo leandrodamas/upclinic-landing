@@ -8,6 +8,7 @@
   import { onMount } from 'svelte';
   import { REGISTER_URL, CONTACT } from '$lib/constants';
   import { appendUtmToUrl, captureFirstTouchUtm, withDefaultUtmContent } from '$lib/utm';
+  import WellhubIntegration from '$lib/components/WellhubIntegration.svelte';
 
   const CTA_LABEL = 'Começar meus 7 dias grátis';
 
@@ -147,6 +148,8 @@
       <a href={ctaHref} class="tp-cta" rel="noopener">{CTA_LABEL}</a>
     </section>
 
+    <WellhubIntegration compact />
+
     <section class="tp-faq" aria-labelledby="duvidas">
       <h2 id="duvidas">Dúvidas rápidas</h2>
       {#each faqs as f}
@@ -170,6 +173,7 @@
       UpClinic · <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a> ·
       <a href="/politica-privacidade">Privacidade</a> · <a href="/lgpd">LGPD</a>
     </p>
+    <p>Wellhub é marca de seu titular.</p>
   </footer>
 
   <div class="tp-sticky">
