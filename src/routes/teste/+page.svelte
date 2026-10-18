@@ -27,7 +27,7 @@
   let showDdp = false;
 
   onMount(() => {
-    // First-touch: salva utm_* + gclid/fbclid em localStorage uc_utm (90d) e cookie .clinicupapp.com
+    // First-touch also runs in +layout; capture here so CTAs update before paint settles
     const attribution = captureFirstTouchUtm(window.location.search);
     ctaHref = buildCtaHref(attribution);
     const now = Date.now();

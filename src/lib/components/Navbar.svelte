@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
   import { page } from '$app/stores';
   import { LOGIN_URL, REGISTER_URL } from '$lib/constants';
+  import { attributedAppUrl } from '$lib/utm';
   import { trackTrialCta } from '$lib/analytics';
   import { t, locale, setLocale, LANGS } from '$lib/i18n';
 
@@ -62,12 +63,12 @@
     if (typeof window !== 'undefined' && window.gtag) {
       window.gtag('event', 'login', { event_category: 'engagement', event_label: source });
     }
-    window.open(LOGIN_URL, '_blank');
+    window.open(attributedAppUrl(LOGIN_URL), '_blank');
   }
 
   function openRegister(source) {
     trackTrialCta('CTA Testar 7 dias', source);
-    window.open(REGISTER_URL, '_blank');
+    window.open(attributedAppUrl(REGISTER_URL), '_blank');
   }
 </script>
 

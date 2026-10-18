@@ -3,6 +3,7 @@
   import { LOGIN_URL, REGISTER_URL } from '$lib/constants';
   import { trackTrialCta } from '$lib/analytics';
   import { t } from '$lib/i18n';
+  import { attributedAppUrl } from '$lib/utm';
 
   function trackLead(contentName = 'CTA Principal', source = 'Hero') {
     trackTrialCta(contentName, source);
@@ -63,7 +64,7 @@
         <div class="flex flex-wrap gap-3 mb-8">
           <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" class="up-btn-primary"
              style="min-height:2.85rem;"
-             on:click|preventDefault={() => { trackLead('CTA Testar 7 dias', 'Hero'); window.open(REGISTER_URL, '_blank'); }}>
+             on:click|preventDefault={() => { trackLead('CTA Testar 7 dias', 'Hero'); window.open(attributedAppUrl(REGISTER_URL), '_blank'); }}>
             <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="flex-shrink:0;">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/>
             </svg>
@@ -71,7 +72,7 @@
           </a>
           <a href={LOGIN_URL} target="_blank" rel="noopener noreferrer" class="up-btn-ghost"
              style="min-height:2.85rem;"
-             on:click|preventDefault={() => { window.open(LOGIN_URL, '_blank'); }}>
+             on:click|preventDefault={() => { window.open(attributedAppUrl(LOGIN_URL), '_blank'); }}>
             {$t('hero.ctaLogin')}
           </a>
         </div>

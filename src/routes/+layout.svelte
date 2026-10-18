@@ -6,13 +6,23 @@
   import { initLocale } from '$lib/i18n';
   import { GOOGLE_ADS_CONVERSION_PAGE_VIEW_SEND_TO } from '$lib/constants';
   import { handleMetaPixelClick, trackPageView } from '$lib/metaPixel';
+  import {
+    captureFirstTouchUtm,
+    decorateAppLinks,
+    installAppLinkAttribution
+  } from '$lib/utm';
 
   onMount(() => {
     initLocale();
 
+    // First-touch UTMs on every page (incl. /teste): localStorage + cookie
+    captureFirstTouchUtm(window.location.search);
+    const stopAttribution = installAppLinkAttribution();
+
     // Lead (free-trial CTAs) + Contact (WhatsApp) — capture so preventDefault handlers still count
     document.addEventListener('click', handleMetaPixelClick, true);
     return () => {
+      stopAttribution();
       document.removeEventListener('click', handleMetaPixelClick, true);
     };
   });
@@ -40,6 +50,12 @@
     afterNavigate(({ to }) => {
       const path = to?.url.pathname ?? '';
       if (path.startsWith('/api')) return;
+
+      // Re-capture on SPA navigations (query may carry UTMs); decorate CTAs after render
+      captureFirstTouchUtm(to?.url.search ?? window.location.search);
+      // Defer so Svelte has painted hrefs from constants
+      queueMicrotask(() => decorateAppLinks());
+      requestAnimationFrame(() => decorateAppLinks());
 
       fireAdsPageViewConversion();
 
