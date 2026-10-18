@@ -8,7 +8,7 @@
       title: 'Agenda cheia de buracos',
       text: 'Encaixes, cancelamentos de última hora e horários ociosos drenam o faturamento do studio e do consultório.',
       img: '/media/studio.webp',
-      accent: '#0d9488'
+      accent: '#f97316'
     },
     {
       title: 'Faltas que poderiam ser evitadas',
@@ -20,13 +20,13 @@
       title: 'Evolução espalhada em papel',
       text: 'Prontuário em planilha ou caderno atrasa a sessão e dificulta acompanhar o progresso do paciente.',
       img: '/media/fisio.webp',
-      accent: '#0f766e'
+      accent: '#ea580c'
     },
     {
       title: 'Financeiro no escuro',
       text: 'Mensalidades, pacotes e inadimplência sem um painel claro — tempo perdido correndo atrás de pagamento.',
       img: '/media/rehab.webp',
-      accent: '#14b8a6'
+      accent: '#fb923c'
     }
   ];
 </script>
@@ -87,7 +87,7 @@
     font-weight: 800;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #0d9488;
+    color: #f97316;
   }
 
   h2 {
@@ -95,12 +95,12 @@
     font-size: clamp(1.75rem, 3.5vw, 2.5rem);
     font-weight: 800;
     letter-spacing: -0.03em;
-    color: #0f1f1c;
+    color: #0c1222;
   }
 
   .sub {
     margin: 0.85rem 0 0;
-    color: #5b6f6a;
+    color: #5c6578;
     line-height: 1.6;
     font-size: 1.02rem;
   }
@@ -121,8 +121,8 @@
     grid-template-columns: 120px 1fr;
     gap: 1rem;
     align-items: stretch;
-    background: #f7fbfa;
-    border: 1px solid rgba(13, 148, 136, 0.1);
+    background: #fffaf5;
+    border: 1px solid rgba(249, 115, 22, 0.1);
     border-radius: 1.25rem;
     overflow: hidden;
     transition: transform 0.25s ease, box-shadow 0.25s ease;
@@ -130,7 +130,7 @@
 
   .item:hover {
     transform: translateY(-3px);
-    box-shadow: 0 16px 36px rgba(15, 118, 110, 0.08);
+    box-shadow: 0 16px 36px rgba(234, 88, 12, 0.08);
   }
 
   .media {
@@ -160,14 +160,14 @@
     margin: 0 0 0.4rem;
     font-size: 1.05rem;
     font-weight: 800;
-    color: #0f1f1c;
+    color: #0c1222;
   }
 
   .body p {
     margin: 0;
     font-size: 0.92rem;
     line-height: 1.55;
-    color: #5b6f6a;
+    color: #5c6578;
   }
 
   .cta {

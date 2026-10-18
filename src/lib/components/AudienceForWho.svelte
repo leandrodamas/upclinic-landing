@@ -8,19 +8,19 @@
       title: 'Fisioterapia',
       text: 'Agenda de sessões, evolução clínica e financeiro — da bola suíça ao home care.',
       img: '/media/fisio-paciente-card.webp',
-      color: '#0d9488'
+      color: '#f97316'
     },
     {
       title: 'Pilates',
       text: 'Turmas, mensalidades, check-in Wellhub e remarcações sem planilha.',
       img: '/media/reformer-card.webp',
-      color: '#0f766e'
+      color: '#ea580c'
     },
     {
       title: 'RPG & osteopatia',
       text: 'Histórico do paciente e lembretes no WhatsApp para manter a continuidade.',
       img: '/media/ombro-card.webp',
-      color: '#14b8a6'
+      color: '#fb923c'
     },
     {
       title: 'Terapia ocupacional',
@@ -38,7 +38,7 @@
       title: 'Studio / clínica',
       text: 'Até 15 profissionais no Clínica Plus. Equipe alinhada, recepção leve.',
       img: '/media/studio-pilates-card.webp',
-      color: '#0d9488'
+      color: '#f97316'
     }
   ];
 </script>
@@ -82,7 +82,7 @@
 <style>
   .aud {
     padding: 5rem 0;
-    background: linear-gradient(180deg, #fff 0%, #eef8f6 100%);
+    background: linear-gradient(180deg, #fff 0%, #fff7ed 100%);
   }
 
   .head {
@@ -97,7 +97,7 @@
     font-weight: 800;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: #0d9488;
+    color: #f97316;
   }
 
   h2 {
@@ -106,12 +106,12 @@
     font-size: clamp(1.7rem, 3.5vw, 2.6rem);
     font-weight: 800;
     letter-spacing: -0.03em;
-    color: #0f1f1c;
+    color: #0c1222;
   }
 
   .sub {
     margin: 0.85rem 0 0;
-    color: #5b6f6a;
+    color: #5c6578;
     line-height: 1.6;
   }
 
@@ -125,14 +125,14 @@
     background: #fff;
     border-radius: 1.25rem;
     overflow: hidden;
-    border: 1px solid rgba(13, 148, 136, 0.12);
-    box-shadow: 0 16px 40px rgba(15, 118, 110, 0.08);
+    border: 1px solid rgba(249, 115, 22, 0.12);
+    box-shadow: 0 16px 40px rgba(234, 88, 12, 0.08);
     transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s;
   }
 
   .card:hover {
     transform: translateY(-6px) scale(1.01);
-    box-shadow: 0 24px 50px rgba(15, 118, 110, 0.14);
+    box-shadow: 0 24px 50px rgba(234, 88, 12, 0.14);
   }
 
   .photo {
@@ -153,21 +153,21 @@
 
   .body {
     padding: 1.1rem 1.15rem 1.25rem;
-    border-top: 3px solid var(--c, #0d9488);
+    border-top: 3px solid var(--c, #f97316);
   }
 
   h3 {
     margin: 0 0 0.4rem;
     font-size: 1.1rem;
     font-weight: 800;
-    color: #0f1f1c;
+    color: #0c1222;
   }
 
   .body p {
     margin: 0;
     font-size: 0.92rem;
     line-height: 1.5;
-    color: #5b6f6a;
+    color: #5c6578;
   }
 
   .cta {

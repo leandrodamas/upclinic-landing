@@ -30,7 +30,7 @@
         >
           <span
             class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-sm font-black text-white"
-            style="background:linear-gradient(135deg,#2563eb,#0d9488);">{i + 1}</span
+            style="background:linear-gradient(135deg,#2563eb,#f97316);">{i + 1}</span
           >
           <div>
             <p class="font-bold text-slate-900">{$t(`whySwitch.${key}t`)}</p>

@@ -1,5 +1,6 @@
 <script>
   import { reveal } from '$lib/actions/motion';
+  import { tilt3d } from '$lib/actions/gsapMotion';
   import { TRIAL_PAGE_URL } from '$lib/constants';
   import { t } from '$lib/i18n';
 
@@ -12,19 +13,19 @@
   }
 </script>
 
-<section class="relative overflow-hidden" style="background:#f7fbfa; padding-top:6rem; padding-bottom:6rem;">
+<section class="relative overflow-hidden" style="background:#fffaf5; padding-top:6rem; padding-bottom:6rem;">
   <div class="up-grid-overlay" style="opacity:0.4;"></div>
 
   <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative" style="z-index:2;">
     <div class="text-center max-w-3xl mx-auto mb-12" use:reveal>
       <span class="inline-block px-4 py-1.5 rounded-full text-xs font-bold mb-4"
-        style="background:rgba(56,189,248,0.12); border:1px solid rgba(56,189,248,0.35); color:#0d9488; text-transform:uppercase; letter-spacing:0.06em;">
+        style="background:rgba(56,189,248,0.12); border:1px solid rgba(56,189,248,0.35); color:#f97316; text-transform:uppercase; letter-spacing:0.06em;">
         {$t('bento.badge')}
       </span>
-      <h2 style="font-size:clamp(2rem,4vw,3rem); font-weight:900; color:#0f1f1c; line-height:1.1; letter-spacing:-0.02em; margin-bottom:1rem;">
+      <h2 style="font-size:clamp(2rem,4vw,3rem); font-weight:900; color:#0c1222; line-height:1.1; letter-spacing:-0.02em; margin-bottom:1rem;">
         {$t('bento.title')}<span class="up-gradient-text">{$t('bento.titleHi')}</span>
       </h2>
-      <p style="color:#5b6f6a; font-size:1.05rem; line-height:1.6;">
+      <p style="color:#5c6578; font-size:1.05rem; line-height:1.6;">
         {$t('bento.sub')}
       </p>
     </div>
@@ -33,7 +34,7 @@
     <div class="up-bento">
 
       <!-- Home Care GPS (destaque grande) -->
-      <div class="up-bento-card up-glow-border up-cell-lg" role="presentation" on:mousemove={glow} use:reveal>
+      <div class="up-bento-card up-glow-border up-cell-lg" role="presentation" on:mousemove={glow} use:reveal use:tilt3d={8}>
         <div class="up-cell-inner">
           <div class="up-icon" style="background:linear-gradient(135deg,#22c55e,#15803d);">
             <svg width="22" height="22" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><circle cx="12" cy="11" r="3"/></svg>
@@ -102,7 +103,7 @@
       <!-- TISS / Convênios -->
       <div class="up-bento-card up-glow-border" role="presentation" on:mousemove={glow} use:reveal>
         <div class="up-cell-inner">
-          <div class="up-icon" style="background:linear-gradient(135deg,#2dd4bf,#0d9488);">
+          <div class="up-icon" style="background:linear-gradient(135deg,#fdba74,#f97316);">
             <svg width="20" height="20" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
           </div>
           <h3 class="up-cell-title">{$t('bento.c6t')}</h3>
@@ -158,24 +159,24 @@
     padding: 22px;
     border-radius: 1.4rem;
     background: #fff;
-    border: 1px solid rgba(13, 148, 136, 0.1);
-    box-shadow: 0 12px 32px rgba(15, 118, 110, 0.06);
+    border: 1px solid rgba(249, 115, 22, 0.1);
+    box-shadow: 0 12px 32px rgba(234, 88, 12, 0.06);
     display: flex;
     flex-direction: column;
   }
   .up-icon {
     width: 46px; height: 46px; border-radius: 13px;
     display: flex; align-items: center; justify-content: center;
-    margin-bottom: 14px; box-shadow: 0 8px 20px rgba(13, 148, 136, 0.18);
+    margin-bottom: 14px; box-shadow: 0 8px 20px rgba(249, 115, 22, 0.18);
     flex-shrink: 0;
   }
-  .up-cell-title { color: #0f1f1c; font-weight: 800; font-size: 1.05rem; margin-bottom: 6px; letter-spacing: -0.01em; }
-  .up-cell-desc { color: #5b6f6a; font-size: 0.86rem; line-height: 1.55; }
+  .up-cell-title { color: #0c1222; font-weight: 800; font-size: 1.05rem; margin-bottom: 6px; letter-spacing: -0.01em; }
+  .up-cell-desc { color: #5c6578; font-size: 0.86rem; line-height: 1.55; }
 
   .up-chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 16px; }
   .up-chip {
-    background: rgba(13, 148, 136, 0.08); border: 1px solid rgba(13, 148, 136, 0.14);
-    color: #0f766e; font-size: 0.72rem; font-weight: 600; padding: 5px 11px; border-radius: 999px;
+    background: rgba(249, 115, 22, 0.08); border: 1px solid rgba(249, 115, 22, 0.14);
+    color: #ea580c; font-size: 0.72rem; font-weight: 600; padding: 5px 11px; border-radius: 999px;
   }
 
   /* Mini mapa Home Care */

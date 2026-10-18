@@ -61,7 +61,7 @@ export const PLAN_CATALOG: PlanPricing[] = [
     tagline: '1 profissional — consultório solo de fisioterapia ou pilates',
     monthly: CURRENT_PRICING.starter.monthly,
     annual: CURRENT_PRICING.starter.annual,
-    accent: '#0d9488',
+    accent: '#f97316',
     popular: false,
     features: [
       'Agenda para 1 profissional',
@@ -78,7 +78,7 @@ export const PLAN_CATALOG: PlanPricing[] = [
     tagline: 'Até 5 profissionais — clínicas e studios de pilates',
     monthly: CURRENT_PRICING.professional.monthly,
     annual: CURRENT_PRICING.professional.annual,
-    accent: '#14b8a6',
+    accent: '#fb923c',
     popular: true,
     features: [
       'Até 5 profissionais',

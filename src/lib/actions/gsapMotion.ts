@@ -113,7 +113,7 @@ export function playHeroIntro(root: HTMLElement) {
   const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
   tl.from(root.querySelectorAll('[data-hero="brand"]'), { opacity: 0, y: 24, duration: 0.7 })
     .from(root.querySelectorAll('[data-hero="copy"]'), { opacity: 0, y: 32, duration: 0.75 }, '-=0.35')
-    .from(root.querySelectorAll('[data-hero="cta"]'), { opacity: 0, y: 20, duration: 0.55 }, '-=0.4')
+    .from(root.querySelectorAll('[data-hero="cta"]'), { opacity: 0, y: 20, scale: 0.96, duration: 0.55 }, '-=0.4')
     .from(
       root.querySelectorAll('[data-hero="device"]'),
       { opacity: 0, y: 48, scale: 0.94, duration: 0.95 },
@@ -121,7 +121,43 @@ export function playHeroIntro(root: HTMLElement) {
     )
     .from(
       root.querySelectorAll('[data-hero="float"]'),
-      { opacity: 0, y: 16, duration: 0.45, stagger: 0.1 },
+      { opacity: 0, y: 16, duration: 0.45, stagger: 0.08 },
       '-=0.45'
+    )
+    .from(
+      root.querySelectorAll('[data-hero="avatar"]'),
+      { opacity: 0, scale: 0.6, duration: 0.4, stagger: 0.06 },
+      '-=0.55'
     );
+}
+
+/** Tilt 3D suave no ponteiro (desktop). */
+export function tilt3d(node: HTMLElement, max = 10) {
+  if (!ensure() || prefersReducedMotion()) return {};
+  if (window.matchMedia('(pointer: coarse)').matches) return {};
+
+  const onMove = (e: PointerEvent) => {
+    const r = node.getBoundingClientRect();
+    const px = (e.clientX - r.left) / r.width - 0.5;
+    const py = (e.clientY - r.top) / r.height - 0.5;
+    gsap.to(node, {
+      rotateY: px * max,
+      rotateX: -py * max,
+      transformPerspective: 900,
+      duration: 0.35,
+      ease: 'power2.out'
+    });
+  };
+  const onLeave = () => {
+    gsap.to(node, { rotateY: 0, rotateX: 0, duration: 0.5, ease: 'power3.out' });
+  };
+
+  node.addEventListener('pointermove', onMove);
+  node.addEventListener('pointerleave', onLeave);
+  return {
+    destroy() {
+      node.removeEventListener('pointermove', onMove);
+      node.removeEventListener('pointerleave', onLeave);
+    }
+  };
 }

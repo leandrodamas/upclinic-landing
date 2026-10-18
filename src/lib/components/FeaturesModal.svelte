@@ -281,10 +281,10 @@
       ],
       impact: 'Controle total de medicamentos e estoque',
       color: 'teal',
-      gradient: 'from-teal-500 to-teal-600',
-      bgLight: 'bg-teal-50',
-      borderColor: 'border-teal-500',
-      textColor: 'text-teal-600'
+      gradient: 'from-orange-500 to-orange-600',
+      bgLight: 'bg-orange-50',
+      borderColor: 'border-orange-500',
+      textColor: 'text-orange-600'
     },
     {
       icon: 'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0z',
@@ -393,7 +393,7 @@
       red: 'hover:border-red-400',
       orange: 'hover:border-orange-400',
       yellow: 'hover:border-yellow-400',
-      teal: 'hover:border-teal-400'
+      teal: 'hover:border-orange-400'
     };
     return classes[color] || 'hover:border-blue-400';
   }

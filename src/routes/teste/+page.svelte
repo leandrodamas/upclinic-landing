@@ -4,7 +4,7 @@
   import { appendUtmToUrl, captureFirstTouchUtm, withDefaultUtmContent } from '$lib/utm';
   import WellhubIntegration from '$lib/components/WellhubIntegration.svelte';
   import { trackTrialCta } from '$lib/analytics';
-  import { pickHeroVariant, type HeroVariant } from '$lib/heroVariants';
+  import { HERO_AVATARS, pickHeroVariant, type HeroVariant } from '$lib/heroVariants';
   import { prefersReducedMotion } from '$lib/actions/gsapMotion';
 
   const CTA_LABEL = 'Começar meus 7 dias grátis';
@@ -78,7 +78,7 @@
     content="Lembrete automático no WhatsApp 24h e 2h antes. Para fisioterapia, pilates e RPG. Teste 7 dias grátis, sem cartão."
   />
   <link rel="canonical" href="https://www.clinicupapp.com/teste" />
-  <meta name="theme-color" content="#0d9488" />
+  <meta name="theme-color" content="#f97316" />
 </svelte:head>
 
 <div class="tp" style="--accent:{variant.accent};">
@@ -119,14 +119,32 @@
             Robô do WhatsApp, agenda, prontuário e financeiro num lugar só. Sem cartão de crédito.
           </p>
           <a href={ctaHref} class="tp-cta" rel="noopener" on:click={onCtaClick}>{CTA_LABEL}</a>
+          <div class="tp-stack" aria-label="Profissionais de movimento">
+            {#each HERO_AVATARS.slice(0, 7) as a, i}
+              <img
+                src={a.src}
+                alt=""
+                width="40"
+                height="40"
+                style="z-index:{7 - i}; margin-left:{i === 0 ? 0 : -10}px;"
+                loading="eager"
+              />
+            {/each}
+            <span>Fisio · Pilates · TO · pacientes</span>
+          </div>
           <ul class="tp-checks">
             <li>✓ Sem cartão</li>
             <li>✓ Cancela quando quiser</li>
             <li>✓ Ajuda pelo WhatsApp</li>
           </ul>
         </div>
-        <div class="tp-persona">
-          <img src={variant.photo} alt={variant.photoAlt} width="640" height="800" fetchpriority="high" />
+        <div class="tp-stage">
+          {#each HERO_AVATARS.slice(0, 5) as a, i}
+            <img class="tp-orb tp-orb-{i}" src={a.src} alt="" width="56" height="56" loading="lazy" />
+          {/each}
+          <div class="tp-persona">
+            <img src={variant.photo} alt={variant.photoAlt} width="640" height="800" fetchpriority="high" />
+          </div>
         </div>
       </div>
     </section>
@@ -218,13 +236,13 @@
 <style>
   .tp {
     min-height: 100vh;
-    background: #f7fbfa;
-    color: #0f1f1c;
+    background: linear-gradient(180deg, #fffaf5 0%, #fff4eb 40%, #fffaf5 100%);
+    color: #0c1222;
     font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
     padding-bottom: 88px;
   }
   .tp-ddp {
-    background: linear-gradient(90deg, #0d9488, #14b8a6);
+    background: linear-gradient(90deg, #f97316, #fb923c);
     color: #fff;
     text-align: center;
     font-size: 0.85rem;
@@ -233,7 +251,7 @@
   .tp-header { max-width: 1040px; margin: 0 auto; padding: 14px 18px; }
   .tp-logo {
     display: inline-flex; align-items: center; gap: 8px;
-    color: #0f766e; font-weight: 800; text-decoration: none;
+    color: #ea580c; font-weight: 800; text-decoration: none;
     font-size: 1.15rem; font-family: 'Outfit', system-ui, sans-serif;
   }
   main { max-width: 1040px; margin: 0 auto; padding: 0 18px; }
@@ -243,7 +261,7 @@
   .tp-bg video, .tp-bg img { width: 100%; height: 100%; object-fit: cover; }
   .tp-veil {
     position: absolute; inset: 0;
-    background: linear-gradient(100deg, rgba(247,251,250,0.96) 0%, rgba(247,251,250,0.78) 55%, rgba(13,148,136,0.25) 100%);
+    background: linear-gradient(100deg, rgba(247,251,250,0.96) 0%, rgba(247,251,250,0.78) 55%, rgba(249,115,22,0.25) 100%);
   }
   .tp-hero-inner {
     position: relative; z-index: 1;
@@ -254,78 +272,101 @@
     .tp-hero-inner { grid-template-columns: 1.2fr 0.9fr; padding: 2.5rem; }
   }
   .tp-kicker {
-    display: inline-block; color: var(--accent, #0d9488);
-    background: rgba(13,148,136,0.1); border: 1px solid rgba(13,148,136,0.22);
+    display: inline-block; color: var(--accent, #f97316);
+    background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.22);
     border-radius: 999px; padding: 5px 12px; font-size: 0.72rem; font-weight: 800;
     letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 12px;
   }
   h1 {
     font-family: 'Outfit', system-ui, sans-serif;
     font-size: clamp(1.7rem, 5vw, 2.7rem); line-height: 1.12; font-weight: 800;
-    letter-spacing: -0.03em; margin: 0 0 12px; color: #0f1f1c;
+    letter-spacing: -0.03em; margin: 0 0 12px; color: #0c1222;
   }
-  h1 span { color: var(--accent, #0d9488); display: block; }
-  .tp-sub { font-size: 1.05rem; line-height: 1.6; color: #5b6f6a; margin: 0 0 18px; max-width: 36rem; }
+  h1 span { color: var(--accent, #f97316); display: block; }
+  .tp-sub { font-size: 1.05rem; line-height: 1.6; color: #5c6578; margin: 0 0 18px; max-width: 36rem; }
   .tp-cta {
-    display: inline-block; background: linear-gradient(135deg, #0d9488, #14b8a6); color: #fff;
-    font-weight: 800; font-size: 1.05rem; text-decoration: none; padding: 16px 26px;
-    border-radius: 14px; box-shadow: 0 12px 28px rgba(13,148,136,0.28);
+    display: inline-block; background: linear-gradient(135deg, #ea580c, #f97316 50%, #fb923c); color: #fff;
+    font-weight: 800; font-size: 1.08rem; text-decoration: none; padding: 16px 28px;
+    border-radius: 14px; box-shadow: 0 12px 28px rgba(234, 88, 12, 0.42), 0 0 0 3px rgba(249, 115, 22, 0.18);
   }
+  .tp-stack {
+    display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin: 14px 0 4px;
+  }
+  .tp-stack img {
+    width: 36px; height: 36px; border-radius: 50%; object-fit: cover;
+    border: 2.5px solid #fff; box-shadow: 0 4px 12px rgba(11, 29, 58, 0.18);
+  }
+  .tp-stack span { font-size: 0.78rem; font-weight: 700; color: #5c6578; }
   .tp-checks {
     list-style: none; padding: 0; margin: 14px 0 0; display: flex; flex-wrap: wrap;
-    gap: 6px 16px; font-size: 0.9rem; color: #0f766e; font-weight: 600;
+    gap: 6px 16px; font-size: 0.9rem; color: #ea580c; font-weight: 600;
   }
+  .tp-stage { position: relative; min-height: 280px; }
+  .tp-orb {
+    position: absolute; width: 52px; height: 52px; border-radius: 50%;
+    object-fit: cover; border: 3px solid #fff; z-index: 2;
+    box-shadow: 0 10px 22px rgba(11, 29, 58, 0.2);
+  }
+  .tp-orb-0 { top: 0; left: 0; }
+  .tp-orb-1 { top: 8%; right: 4%; width: 58px; height: 58px; }
+  .tp-orb-2 { bottom: 18%; left: -4%; }
+  .tp-orb-3 { bottom: 6%; right: 12%; width: 46px; height: 46px; }
+  .tp-orb-4 { top: 40%; left: 6%; width: 44px; height: 44px; }
   .tp-persona img {
     width: 100%; max-height: 360px; object-fit: cover; border-radius: 1.25rem;
-    border: 4px solid #fff; box-shadow: 0 20px 48px rgba(15,118,110,0.2);
+    border: 4px solid #fff; box-shadow: 0 20px 48px rgba(234,88,12,0.2);
+    position: relative; z-index: 1;
+  }
+  @media (max-width: 640px) {
+    .tp-orb-2, .tp-orb-4 { display: none; }
   }
 
   .tp-pains { margin: 0 0 2rem; }
   h2 {
     font-family: 'Outfit', system-ui, sans-serif; font-size: 1.45rem; font-weight: 800;
-    color: #0f1f1c; text-align: center; margin: 0 0 18px;
+    color: #0c1222; text-align: center; margin: 0 0 18px;
   }
   .tp-pains-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
   @media (min-width: 760px) { .tp-pains-grid { grid-template-columns: repeat(4, 1fr); } }
   .tp-pain {
-    background: #fff; border: 1px solid rgba(13,148,136,0.12); border-radius: 14px;
-    overflow: hidden; text-align: center; box-shadow: 0 10px 28px rgba(15,118,110,0.06);
+    background: #fff; border: 1px solid rgba(249,115,22,0.12); border-radius: 14px;
+    overflow: hidden; text-align: center; box-shadow: 0 10px 28px rgba(234,88,12,0.06);
   }
   .tp-pain img { width: 100%; height: 90px; object-fit: cover; display: block; }
-  .tp-pain strong { display: block; color: #0d9488; font-size: 0.95rem; margin: 8px 8px 2px; }
-  .tp-pain span { display: block; font-size: 0.8rem; color: #5b6f6a; padding: 0 8px 12px; line-height: 1.35; }
+  .tp-pain strong { display: block; color: #f97316; font-size: 0.95rem; margin: 8px 8px 2px; }
+  .tp-pain span { display: block; font-size: 0.8rem; color: #5c6578; padding: 0 8px 12px; line-height: 1.35; }
 
   .tp-demo { margin: 0 auto 2rem; max-width: 420px; }
   .tp-chat {
-    background: #fff; border: 1px solid rgba(13,148,136,0.12); border-radius: 20px;
+    background: #fff; border: 1px solid rgba(249,115,22,0.12); border-radius: 20px;
     padding: 16px 12px; display: flex; flex-direction: column; gap: 8px;
-    box-shadow: 0 16px 40px rgba(15,118,110,0.08);
+    box-shadow: 0 16px 40px rgba(234,88,12,0.08);
   }
   .tp-bubble {
     max-width: 85%; padding: 9px 12px; border-radius: 12px 12px 12px 3px;
-    font-size: 0.88rem; line-height: 1.4; background: #e7f7f4; color: #0f1f1c;
+    font-size: 0.88rem; line-height: 1.4; background: #fff7ed; color: #0c1222;
   }
   .tp-chip {
-    align-self: center; background: rgba(13,148,136,0.1); color: #0d9488;
+    align-self: center; background: rgba(249,115,22,0.1); color: #f97316;
     font-size: 0.75rem; font-weight: 700; padding: 4px 12px; border-radius: 999px;
   }
-  .tp-note { text-align: center; font-size: 0.7rem; color: #7a908a; margin-top: 6px; }
+  .tp-note { text-align: center; font-size: 0.7rem; color: #8b95a5; margin-top: 6px; }
 
   .tp-benefits { padding: 0 0 2rem; }
   .tp-grid { display: grid; gap: 14px; }
   @media (min-width: 760px) { .tp-grid { grid-template-columns: repeat(3, 1fr); } }
   .tp-card {
-    background: #fff; border: 1px solid rgba(13,148,136,0.12); border-radius: 16px;
-    overflow: hidden; box-shadow: 0 10px 28px rgba(15,118,110,0.05);
+    background: #fff; border: 1px solid rgba(249,115,22,0.12); border-radius: 16px;
+    overflow: hidden; box-shadow: 0 10px 28px rgba(234,88,12,0.05);
   }
   .tp-card img { width: 100%; height: 140px; object-fit: cover; display: block; }
-  .tp-card h3 { color: #0f1f1c; font-size: 1.05rem; font-weight: 800; margin: 12px 14px 6px; }
-  .tp-card p { color: #5b6f6a; font-size: 0.95rem; line-height: 1.55; margin: 0 14px 16px; }
+  .tp-card h3 { color: #0c1222; font-size: 1.05rem; font-weight: 800; margin: 12px 14px 6px; }
+  .tp-card p { color: #5c6578; font-size: 0.95rem; line-height: 1.55; margin: 0 14px 16px; }
 
   .tp-mid {
     display: grid; gap: 1rem; align-items: center;
-    background: linear-gradient(135deg, rgba(13,148,136,0.08), rgba(240,121,106,0.06));
-    border: 1px solid rgba(13,148,136,0.18); border-radius: 18px; padding: 1rem;
+    background: linear-gradient(135deg, rgba(249,115,22,0.08), rgba(240,121,106,0.06));
+    border: 1px solid rgba(249,115,22,0.18); border-radius: 18px; padding: 1rem;
     margin: 0 0 2rem; text-align: center;
   }
   @media (min-width: 720px) {
@@ -333,28 +374,28 @@
   }
   .tp-mid-media { border-radius: 14px; overflow: hidden; min-height: 160px; }
   .tp-mid-media video, .tp-mid-media img { width: 100%; height: 180px; object-fit: cover; display: block; }
-  .tp-mid p { margin: 0 0 14px; line-height: 1.55; color: #3d524d; }
+  .tp-mid p { margin: 0 0 14px; line-height: 1.55; color: #4a5568; }
 
   .tp-faq { margin: 0 auto 2rem; max-width: 680px; }
-  .tp-faq details { border-bottom: 1px solid rgba(13,148,136,0.12); padding: 14px 4px; }
-  .tp-faq summary { cursor: pointer; font-weight: 700; color: #0f1f1c; }
-  .tp-faq p { margin: 8px 0 0; color: #5b6f6a; line-height: 1.55; }
+  .tp-faq details { border-bottom: 1px solid rgba(249,115,22,0.12); padding: 14px 4px; }
+  .tp-faq summary { cursor: pointer; font-weight: 700; color: #0c1222; }
+  .tp-faq p { margin: 8px 0 0; color: #5c6578; line-height: 1.55; }
 
   .tp-final {
     text-align: center;
-    background: linear-gradient(135deg, rgba(13,148,136,0.1), rgba(240,121,106,0.08));
-    border: 1px solid rgba(13,148,136,0.18); border-radius: 18px; padding: 22px 16px; margin: 0 0 30px;
+    background: linear-gradient(135deg, rgba(249,115,22,0.1), rgba(240,121,106,0.08));
+    border: 1px solid rgba(249,115,22,0.18); border-radius: 18px; padding: 22px 16px; margin: 0 0 30px;
   }
-  .tp-small { font-size: 0.8rem; color: #0f766e; margin: 12px 0 0; }
+  .tp-small { font-size: 0.8rem; color: #ea580c; margin: 12px 0 0; }
   .tp-footer {
     max-width: 1040px; margin: 0 auto; padding: 10px 18px 24px; font-size: 0.75rem;
-    color: #7a908a; text-align: center; line-height: 1.6;
+    color: #8b95a5; text-align: center; line-height: 1.6;
   }
-  .tp-footer a { color: #0d9488; }
+  .tp-footer a { color: #f97316; }
   .tp-sticky {
     position: fixed; left: 0; right: 0; bottom: 0;
     padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
-    background: rgba(247,251,250,0.94); border-top: 1px solid rgba(13,148,136,0.12);
+    background: rgba(247,251,250,0.94); border-top: 1px solid rgba(249,115,22,0.12);
     backdrop-filter: blur(10px); z-index: 50;
   }
   .tp-sticky .tp-cta { display: block; text-align: center; padding: 14px 18px; }

@@ -10,11 +10,11 @@
   ];
 </script>
 
-<section class="relative overflow-hidden" style="background: linear-gradient(180deg,#eef8f6 0%, #ffffff 100%); padding-top:4.5rem; padding-bottom:5rem;">
+<section class="relative overflow-hidden" style="background: linear-gradient(180deg,#fff7ed 0%, #ffffff 100%); padding-top:4.5rem; padding-bottom:5rem;">
   <div class="up-aurora" style="opacity:0.4;"></div>
   <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative" style="z-index:2;">
     <div class="text-center max-w-2xl mx-auto mb-10" use:reveal>
-      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem); font-weight:900; color:#0f1f1c; letter-spacing:-0.02em;">
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem); font-weight:900; color:#0c1222; letter-spacing:-0.02em;">
         {$t('impact.title')}<span class="up-gradient-text">{$t('impact.titleHi')}</span>
       </h2>
     </div>
@@ -22,7 +22,7 @@
       {#each items as s, i}
         <div use:reveal={{ delay: i * 80 }} class="up-glass" style="padding:22px 18px; border-radius:20px;">
           <div style="font-size:0.75rem; font-weight:800; letter-spacing:0.12em; color:{s.color}; margin-bottom:0.65rem;">{s.label}</div>
-          <p style="color:#3d524d; font-size:0.95rem; line-height:1.45; font-weight:600; margin:0;">{$t(s.key)}</p>
+          <p style="color:#4a5568; font-size:0.95rem; line-height:1.45; font-weight:600; margin:0;">{$t(s.key)}</p>
         </div>
       {/each}
     </div>

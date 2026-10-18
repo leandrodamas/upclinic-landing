@@ -20,8 +20,8 @@ export const HERO_VARIANTS: HeroVariant[] = [
     sub: 'Lembretes no WhatsApp, evolução do paciente e financeiro num só lugar — pensado para quem atende com bola, faixa e mesa.',
     photo: '/media/bola-suica.webp',
     photoAlt: 'Fisioterapeuta auxiliando paciente com bola suíça',
-    accent: '#0d9488',
-    accentSoft: '#ccfbf1'
+    accent: '#f97316',
+    accentSoft: '#ffedd5'
   },
   {
     id: 'pilates-reformer',
@@ -31,8 +31,8 @@ export const HERO_VARIANTS: HeroVariant[] = [
     sub: 'Turmas, mensalidades, check-in Wellhub e lembretes no WhatsApp — para o reformer não ficar ocioso.',
     photo: '/media/reformer.webp',
     photoAlt: 'Aula de pilates em reformer no studio',
-    accent: '#0f766e',
-    accentSoft: '#d8f3ef'
+    accent: '#ea580c',
+    accentSoft: '#fff7ed'
   },
   {
     id: 'to-rehab',
@@ -42,8 +42,8 @@ export const HERO_VARIANTS: HeroVariant[] = [
     sub: 'Prontuário com evolução, agenda anti-falta e financeiro organizado para TO, RPG e reabilitação.',
     photo: '/media/to-rehab.webp',
     photoAlt: 'Terapeuta ocupacional em sessão de reabilitação',
-    accent: '#f0796a',
-    accentSoft: '#ffe8e3'
+    accent: '#6d28d9',
+    accentSoft: '#ede9fe'
   },
   {
     id: 'joelho-ombro',
@@ -53,8 +53,8 @@ export const HERO_VARIANTS: HeroVariant[] = [
     sub: 'Robô e lembretes no WhatsApp 24h e 2h antes — para joelho, ombro e retorno ao movimento não perder ritmo.',
     photo: '/media/joelho.webp',
     photoAlt: 'Reabilitação de joelho com fisioterapeuta',
-    accent: '#14b8a6',
-    accentSoft: '#e0f7f4'
+    accent: '#f97316',
+    accentSoft: '#ffedd5'
   },
   {
     id: 'studio-equipe',
@@ -64,8 +64,8 @@ export const HERO_VARIANTS: HeroVariant[] = [
     sub: 'Fisioterapeutas, instrutores de pilates e recepção no mesmo login — com WhatsApp sem tarifa por mensagem*.',
     photo: '/media/studio-pilates.webp',
     photoAlt: 'Studio de pilates com aparelhos e ambiente claro',
-    accent: '#0d9488',
-    accentSoft: '#ecfdf8'
+    accent: '#fb923c',
+    accentSoft: '#fff7ed'
   },
   {
     id: 'theraband',
@@ -75,10 +75,23 @@ export const HERO_VARIANTS: HeroVariant[] = [
     sub: 'Comece no Solo e cresça. Teste 7 dias grátis, sem cartão, com suporte no WhatsApp.',
     photo: '/media/theraband.webp',
     photoAlt: 'Exercício com theraband em sessão de fisioterapia',
-    accent: '#e85a48',
-    accentSoft: '#fff1ee'
+    accent: '#ea580c',
+    accentSoft: '#ffedd5'
   }
 ];
+
+/** Avatares flutuantes do hero (fotos reais do media — sem depoimentos). */
+export const HERO_AVATARS = [
+  { src: '/media/fisio-paciente-card.webp', label: 'Fisio', role: 'Fisioterapeuta' },
+  { src: '/media/reformer-card.webp', label: 'Pilates', role: 'Instrutor(a)' },
+  { src: '/media/to-rehab.webp', label: 'TO', role: 'Terapia ocupacional' },
+  { src: '/media/bola-suica-card.webp', label: 'Paciente', role: 'Sessão' },
+  { src: '/media/joelho-card.webp', label: 'Rehab', role: 'Reabilitação' },
+  { src: '/media/theraband-card.webp', label: 'RPG', role: 'Movimento' },
+  { src: '/media/studio-pilates-card.webp', label: 'Studio', role: 'Equipe' },
+  { src: '/media/ombro-card.webp', label: 'Orto', role: 'Ortopedia' },
+  { src: '/media/alongamento-card.webp', label: 'Along.', role: 'Alongamento' }
+] as const;
 
 /** Escolhe variante aleatória (determinística só se seed for passado). */
 export function pickHeroVariant(seed?: number): HeroVariant {

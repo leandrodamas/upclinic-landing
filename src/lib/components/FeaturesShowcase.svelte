@@ -159,7 +159,7 @@
       roi: '+110%',
       roiText: 'controle de medicamentos',
       color: 'teal',
-      gradient: 'from-teal-500 to-teal-600'
+      gradient: 'from-orange-500 to-orange-600'
     },
     {
       icon: 'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0z',
@@ -292,12 +292,12 @@
         button: 'bg-yellow-600 hover:bg-yellow-700'
       },
       teal: {
-        border: 'hover:border-teal-400',
-        bg: 'bg-teal-50',
-        borderLeft: 'border-teal-500',
-        text: 'text-teal-600',
-        textDark: 'text-teal-700',
-        button: 'bg-teal-600 hover:bg-teal-700'
+        border: 'hover:border-orange-400',
+        bg: 'bg-orange-50',
+        borderLeft: 'border-orange-500',
+        text: 'text-orange-600',
+        textDark: 'text-orange-700',
+        button: 'bg-orange-600 hover:bg-orange-700'
       }
     };
     return classes[color] || classes.blue;

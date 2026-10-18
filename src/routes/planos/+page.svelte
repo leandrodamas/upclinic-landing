@@ -18,7 +18,7 @@
 
 <Navbar />
 
-<main class="planos-page min-h-screen overflow-x-hidden" style="background:#f7fbfa; color:#0f1f1c;">
+<main class="planos-page min-h-screen overflow-x-hidden" style="background:#fffaf5; color:#0c1222;">
 
   <!-- ══════════ HERO ══════════ -->
   <section class="relative overflow-hidden" style="padding-top:8rem; padding-bottom:3rem;">
@@ -28,13 +28,13 @@
     <div class="relative z-[2] mx-auto max-w-3xl px-4 text-center sm:px-6">
       <p use:reveal class="mb-5 inline-flex items-center gap-2 up-glass" style="padding:7px 16px; border-radius:999px;">
         <span class="up-pulse-dot" style="width:8px;height:8px;background:#34d399;border-radius:50%;"></span>
-        <span style="color:#0d9488; font-size:0.72rem; font-weight:800; text-transform:uppercase; letter-spacing:0.16em;">{$t('pricing.badge')}</span>
+        <span style="color:#f97316; font-size:0.72rem; font-weight:800; text-transform:uppercase; letter-spacing:0.16em;">{$t('pricing.badge')}</span>
       </p>
-      <h1 use:reveal={{ delay: 60 }} style="font-size:clamp(2.2rem,5vw,3.5rem); font-weight:900; line-height:1.08; letter-spacing:-0.02em; color:#0f1f1c;">
+      <h1 use:reveal={{ delay: 60 }} style="font-size:clamp(2.2rem,5vw,3.5rem); font-weight:900; line-height:1.08; letter-spacing:-0.02em; color:#0c1222;">
         {$t('pricing.title1')}<br class="hidden md:block"> <span class="up-gradient-text">{$t('pricing.title2')}</span>
       </h1>
-      <p use:reveal={{ delay: 120 }} class="mx-auto mt-5 max-w-2xl" style="font-size:1.1rem; line-height:1.65; color:#5b6f6a;">
-        {$t('pricing.subPre')}<strong style="color:#0d9488;">{$t('pricing.subStrong')}</strong>{$t('pricing.subEnd')}
+      <p use:reveal={{ delay: 120 }} class="mx-auto mt-5 max-w-2xl" style="font-size:1.1rem; line-height:1.65; color:#5c6578;">
+        {$t('pricing.subPre')}<strong style="color:#f97316;">{$t('pricing.subStrong')}</strong>{$t('pricing.subEnd')}
       </p>
     </div>
   </section>

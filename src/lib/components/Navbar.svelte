@@ -172,7 +172,7 @@
         <a
           href={TRIAL_PAGE_URL}
           class="inline-flex items-center gap-1.5 h-9 px-4 text-[13px] font-bold text-white
-                 bg-teal-600 hover:bg-teal-700 rounded-lg shadow-sm hover:shadow
+                 bg-orange-600 hover:bg-orange-700 rounded-lg shadow-sm hover:shadow
                  transition-all whitespace-nowrap"
           on:click|preventDefault={() => openRegister('Navbar')}
         >
@@ -187,7 +187,7 @@
       <div class="flex lg:hidden items-center gap-2 ml-auto">
         <a
           href={TRIAL_PAGE_URL}
-          class="inline-flex items-center h-9 px-3 text-xs font-bold text-white bg-teal-600 hover:bg-teal-700 rounded-lg shadow-sm"
+          class="inline-flex items-center h-9 px-3 text-xs font-bold text-white bg-orange-600 hover:bg-orange-700 rounded-lg shadow-sm"
           on:click|preventDefault={() => openRegister('Navbar Mobile Compact')}
         >
           Teste grátis
@@ -304,7 +304,7 @@
         </a>
         <a
           href={TRIAL_PAGE_URL}
-          class="flex items-center justify-center gap-2 w-full h-11 text-sm font-bold text-white bg-teal-600 hover:bg-teal-700 rounded-xl shadow-sm transition-colors"
+          class="flex items-center justify-center gap-2 w-full h-11 text-sm font-bold text-white bg-orange-600 hover:bg-orange-700 rounded-xl shadow-sm transition-colors"
           on:click|preventDefault={() => openRegister('Navbar Mobile')}
         >
           Teste grátis 7 dias

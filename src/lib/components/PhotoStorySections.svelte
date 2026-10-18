@@ -18,7 +18,7 @@
       img: '/media/recepcao.webp',
       video: '/media/video/loop-pilates.mp4',
       reverse: false,
-      band: '#eef8f6'
+      band: '#fff7ed'
     },
     {
       kicker: 'Prontuário e evolução',
@@ -45,7 +45,7 @@
       img: '/media/movimento.webp',
       video: '',
       reverse: true,
-      band: '#eef8f6'
+      band: '#fff7ed'
     }
   ];
 </script>
@@ -121,7 +121,7 @@
     position: relative;
     border-radius: 1.5rem;
     overflow: hidden;
-    box-shadow: 0 28px 60px rgba(15, 118, 110, 0.14);
+    box-shadow: 0 28px 60px rgba(234, 88, 12, 0.14);
     min-height: 280px;
   }
 
@@ -140,7 +140,7 @@
     inset: auto -10% -20% auto;
     width: 55%;
     height: 55%;
-    background: radial-gradient(circle, rgba(20, 184, 166, 0.35), transparent 70%);
+    background: radial-gradient(circle, rgba(249, 115, 22, 0.35), transparent 70%);
     pointer-events: none;
   }
 
@@ -150,7 +150,7 @@
     font-weight: 800;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: #0d9488;
+    color: #f97316;
   }
 
   h2 {
@@ -159,13 +159,13 @@
     font-size: clamp(1.55rem, 3vw, 2.2rem);
     font-weight: 800;
     letter-spacing: -0.03em;
-    color: #0f1f1c;
+    color: #0c1222;
     line-height: 1.15;
   }
 
   .text {
     margin: 0 0 1.35rem;
-    color: #5b6f6a;
+    color: #5c6578;
     font-size: 1.05rem;
     line-height: 1.65;
     max-width: 32rem;

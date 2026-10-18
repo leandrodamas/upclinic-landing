@@ -86,7 +86,7 @@
     </div>
     <PricingPlans whatsappFallback={whatsappHref} />
     <p class="text-center mt-8">
-      <a href="/planos" class="text-sm font-semibold underline underline-offset-4" style="color:#0d9488;">
+      <a href="/planos" class="text-sm font-semibold underline underline-offset-4" style="color:#f97316;">
         Ver detalhes dos planos →
       </a>
     </p>
@@ -129,7 +129,7 @@
     font-weight: 800;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: #0d9488;
+    color: #f97316;
   }
 
   .proof {
@@ -143,7 +143,7 @@
     font-family: 'Outfit', system-ui, sans-serif;
     font-size: clamp(1.5rem, 3vw, 2.1rem);
     font-weight: 800;
-    color: #0f1f1c;
+    color: #0c1222;
   }
 
   .ph {
@@ -157,7 +157,7 @@
 
   .ph p {
     margin: 0 0 1rem;
-    color: #5b6f6a;
+    color: #5c6578;
     line-height: 1.55;
   }
 
@@ -177,32 +177,32 @@
   }
 
   .pricing-section {
-    background: linear-gradient(180deg, #f7fbfa 0%, #eef8f6 55%, #fff 100%);
+    background: linear-gradient(180deg, #fffaf5 0%, #fff7ed 55%, #fff 100%);
     padding: 5.5rem 0;
   }
 
   .price-title {
     font-size: clamp(1.85rem, 4vw, 2.75rem);
     font-weight: 900;
-    color: #0f1f1c;
+    color: #0c1222;
     line-height: 1.1;
     letter-spacing: -0.02em;
   }
 
   .price-sub {
     margin-top: 1rem;
-    color: #5b6f6a;
+    color: #5c6578;
     font-size: 1.05rem;
     line-height: 1.6;
   }
 
   .price-sub strong {
-    color: #0d9488;
+    color: #f97316;
   }
 
   .final-cta {
     background:
-      linear-gradient(145deg, rgba(232, 247, 244, 0.95), rgba(255, 245, 242, 0.9)),
+      linear-gradient(145deg, rgba(255, 237, 213, 0.95), rgba(255, 245, 242, 0.9)),
       url('/media/studio-pilates.webp') center / cover;
     padding: 6rem 0;
   }
@@ -210,7 +210,7 @@
   .final-title {
     font-size: clamp(2rem, 4.5vw, 3.2rem);
     font-weight: 900;
-    color: #0f1f1c;
+    color: #0c1222;
     line-height: 1.08;
     letter-spacing: -0.02em;
   }
@@ -218,7 +218,7 @@
   .final-p {
     margin: 1rem auto 0;
     max-width: 36rem;
-    color: #3d524d;
+    color: #4a5568;
     font-size: 1.1rem;
   }
 
