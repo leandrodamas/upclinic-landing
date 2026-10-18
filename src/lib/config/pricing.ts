@@ -15,6 +15,7 @@
 
 import * as publicEnv from '$env/static/public';
 import { REGISTER_URL } from '$lib/constants';
+import { attributedAppUrl } from '$lib/utm';
 
 export type PlanId = 'starter' | 'professional' | 'enterprise';
 export type BillingInterval = 'monthly' | 'annual';
@@ -185,11 +186,12 @@ export const PUBLIC_STRIPE_PAYMENT_LINKS: Record<
   }
 };
 
-/** Trial signup URL, optionally with plan hint for the app. */
+/** Trial signup URL, optionally with plan hint for the app (+ first-touch UTMs in browser). */
 export function trialUrlForPlan(planId?: PlanId): string {
-  if (!planId) return REGISTER_URL;
-  const sep = REGISTER_URL.includes('?') ? '&' : '?';
-  return `${REGISTER_URL}${sep}plan=${planId}`;
+  const base = !planId
+    ? REGISTER_URL
+    : `${REGISTER_URL}${REGISTER_URL.includes('?') ? '&' : '?'}plan=${planId}`;
+  return attributedAppUrl(base);
 }
 
 /**

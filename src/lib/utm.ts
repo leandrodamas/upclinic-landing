@@ -1,7 +1,10 @@
 /**
  * First-touch UTM / click-id attribution for the landing site.
  * Stored in localStorage (`uc_utm`, 90 days) and a cookie on `.clinicupapp.com`.
+ * Appended to every link that points at the Firebase app (signup/login).
  */
+
+import { SYSTEM_URL } from '$lib/constants';
 
 export const UTM_STORAGE_KEY = 'uc_utm';
 export const UTM_COOKIE_NAME = 'uc_utm';
@@ -26,10 +29,14 @@ export type UtmParams = Partial<Record<UtmKey, string>>;
 export type StoredUtm = {
   params: UtmParams;
   /** Epoch ms when first touch was recorded */
-  ts: number;
+  firstTouchAt: number;
   /** Epoch ms when this record expires */
   expiresAt: number;
+  /** @deprecated legacy field from earlier first-touch PR — read as fallback */
+  ts?: number;
 };
+
+const APP_HOSTS = new Set(['upclinic-aa025.web.app', 'upclinic-aa025.firebaseapp.com']);
 
 function clampValue(value: string): string {
   return value.slice(0, 200);
@@ -54,6 +61,16 @@ export function withDefaultUtmContent(params: UtmParams): UtmParams {
   return params;
 }
 
+function firstTouchAtOf(data: { firstTouchAt?: unknown; ts?: unknown }): number | null {
+  if (typeof data.firstTouchAt === 'number' && Number.isFinite(data.firstTouchAt)) {
+    return data.firstTouchAt;
+  }
+  if (typeof data.ts === 'number' && Number.isFinite(data.ts)) {
+    return data.ts;
+  }
+  return null;
+}
+
 function parseStored(raw: string | null): StoredUtm | null {
   if (!raw) return null;
   try {
@@ -61,7 +78,9 @@ function parseStored(raw: string | null): StoredUtm | null {
     if (!data || typeof data !== 'object' || typeof data.expiresAt !== 'number') return null;
     if (Date.now() > data.expiresAt) return null;
     if (!data.params || typeof data.params !== 'object') return null;
-    return data;
+    const firstTouchAt = firstTouchAtOf(data);
+    if (firstTouchAt == null) return null;
+    return { params: data.params, firstTouchAt, expiresAt: data.expiresAt };
   } catch {
     return null;
   }
@@ -160,7 +179,7 @@ export function captureFirstTouchUtm(search?: string | URLSearchParams): UtmPara
     const now = Date.now();
     persist({
       params,
-      ts: now,
+      firstTouchAt: now,
       expiresAt: now + UTM_TTL_MS
     });
   }
@@ -187,4 +206,73 @@ export function appendUtmToUrl(baseUrl: string, params: UtmParams): string {
     if (value) target.searchParams.set(key, value);
   }
   return target.toString();
+}
+
+/** True when href points at the Firebase app (signup/login host). */
+export function isAppUrl(href: string | null | undefined): boolean {
+  if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) {
+    return false;
+  }
+  try {
+    const url = new URL(href, typeof window !== 'undefined' ? window.location.origin : SYSTEM_URL);
+    if (APP_HOSTS.has(url.hostname)) return true;
+    // Relative / absolute paths that already target SYSTEM_URL
+    return href.startsWith(SYSTEM_URL) || url.href.startsWith(SYSTEM_URL);
+  } catch {
+    return false;
+  }
+}
+
+/** Effective attribution for CTAs (stored first-touch, else default utm_content). */
+export function effectiveUtmParams(): UtmParams {
+  return getStoredUtm() ?? withDefaultUtmContent({});
+}
+
+/** Append stored/default UTMs onto an app URL. No-op for non-app URLs. */
+export function attributedAppUrl(baseUrl: string): string {
+  if (!isAppUrl(baseUrl)) return baseUrl;
+  return appendUtmToUrl(baseUrl, effectiveUtmParams());
+}
+
+/** Rewrite every app-bound <a href> under root to include first-touch UTMs. */
+export function decorateAppLinks(root: ParentNode = document): void {
+  if (typeof document === 'undefined') return;
+  const anchors = root.querySelectorAll?.('a[href]') ?? [];
+  anchors.forEach((node) => {
+    const a = node as HTMLAnchorElement;
+    const href = a.getAttribute('href');
+    if (!href || !isAppUrl(href)) return;
+    const next = attributedAppUrl(href);
+    if (next !== href) a.setAttribute('href', next);
+  });
+}
+
+/**
+ * Capture-phase click handler: ensure app links carry UTMs even when
+ * Svelte re-renders bare hrefs, or when the click uses the native navigation.
+ */
+function onAppLinkClick(event: MouseEvent): void {
+  const target = event.target;
+  if (!(target instanceof Element)) return;
+  const a = target.closest('a[href]');
+  if (!(a instanceof HTMLAnchorElement)) return;
+  const href = a.getAttribute('href');
+  if (!href || !isAppUrl(href)) return;
+  const next = attributedAppUrl(href);
+  if (next !== a.href && next !== href) {
+    a.setAttribute('href', next);
+  }
+}
+
+/**
+ * Site-wide: rewrite app CTAs now + on future clicks.
+ * Returns a cleanup function for onMount.
+ */
+export function installAppLinkAttribution(): () => void {
+  if (typeof document === 'undefined') return () => {};
+  decorateAppLinks();
+  document.addEventListener('click', onAppLinkClick, true);
+  return () => {
+    document.removeEventListener('click', onAppLinkClick, true);
+  };
 }

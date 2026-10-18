@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
   import { LOGIN_URL, REGISTER_URL } from '$lib/constants';
   import { trackLead as metaTrackLead } from '$lib/metaPixel';
+  import { attributedAppUrl } from '$lib/utm';
 
   function trackLead(contentName = 'CTA Principal', source = 'Hero') {
     if (typeof window === 'undefined') return;
@@ -97,7 +98,7 @@
           target="_blank"
           rel="noopener noreferrer"
           class="btn-hero-primary"
-          on:click|preventDefault={() => { trackLead('CTA Iniciar Teste', 'Hero'); window.open(REGISTER_URL, '_blank'); }}
+          on:click|preventDefault={() => { trackLead('CTA Iniciar Teste', 'Hero'); window.open(attributedAppUrl(REGISTER_URL), '_blank'); }}
         >
           <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="flex-shrink:0;">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/>
@@ -111,7 +112,7 @@
           target="_blank"
           rel="noopener noreferrer"
           class="btn-hero-secondary"
-          on:click|preventDefault={() => { trackLead('CTA Entrar', 'Hero'); window.open(LOGIN_URL, '_blank'); }}
+          on:click|preventDefault={() => { trackLead('CTA Entrar', 'Hero'); window.open(attributedAppUrl(LOGIN_URL), '_blank'); }}
         >
           Entrar no UpClinic
         </a>

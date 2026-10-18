@@ -20,6 +20,7 @@
   import { t } from '$lib/i18n';
   import { LOGIN_URL, REGISTER_URL, CONTACT } from '$lib/constants';
   import { trackTrialCta } from '$lib/analytics';
+  import { attributedAppUrl } from '$lib/utm';
 
   let demoModal: FeatureDemoModal;
 
@@ -146,7 +147,7 @@
         style="min-height:2.85rem;"
         on:click|preventDefault={() => {
           trackTrialCta('CTA Final Teste', 'CTA Section');
-          window.open(REGISTER_URL, '_blank');
+          window.open(attributedAppUrl(REGISTER_URL), '_blank');
         }}
       >
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -166,7 +167,7 @@
         class="up-btn-ghost"
         style="min-height:2.85rem;"
         on:click|preventDefault={() => {
-          window.open(LOGIN_URL, '_blank');
+          window.open(attributedAppUrl(LOGIN_URL), '_blank');
         }}
       >
         {$t('homeCta.ctaLogin')}

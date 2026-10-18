@@ -10,6 +10,7 @@
   import { t } from '$lib/i18n';
   import { REGISTER_URL, CONTACT } from '$lib/constants';
   import { trackTrialCta } from '$lib/analytics';
+  import { attributedAppUrl } from '$lib/utm';
 
   const waText = encodeURIComponent('Olá! Quero testar o UpClinic');
   const whatsappHref = `${CONTACT.whatsappLink}?text=${waText}`;
@@ -90,7 +91,7 @@
 
         <div class="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:flex-wrap sm:justify-center">
           <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" class="up-btn-primary"
-             on:click|preventDefault={() => { trackLead('CTA Teste grátis', '/comece hero'); window.open(REGISTER_URL, '_blank'); }}>
+             on:click|preventDefault={() => { trackLead('CTA Teste grátis', '/comece hero'); window.open(attributedAppUrl(REGISTER_URL), '_blank'); }}>
             {$t('comece.ctaStart')}
             <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
           </a>
@@ -163,7 +164,7 @@
         </p>
         <div class="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" class="up-btn-primary"
-             on:click|preventDefault={() => { trackLead('CTA Teste grátis', '/comece após bloco produto'); window.open(REGISTER_URL, '_blank'); }}>
+             on:click|preventDefault={() => { trackLead('CTA Teste grátis', '/comece após bloco produto'); window.open(attributedAppUrl(REGISTER_URL), '_blank'); }}>
             {$t('comece.ctaTest')}
             <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
           </a>
@@ -225,7 +226,7 @@
       </div>
       <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-6">
         <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" class="up-btn-primary"
-           on:click|preventDefault={() => { trackLead('CTA Teste grátis', '/comece bloco fidelizacao'); window.open(REGISTER_URL, '_blank'); }}>
+           on:click|preventDefault={() => { trackLead('CTA Teste grátis', '/comece bloco fidelizacao'); window.open(attributedAppUrl(REGISTER_URL), '_blank'); }}>
           {$t('comece.ctaStart2')}
         </a>
         <a href={whatsappHref} target="_blank" rel="noopener noreferrer"
@@ -285,7 +286,7 @@
             </p>
             <div class="mt-6 flex flex-col items-center gap-4">
               <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" class="up-btn-primary"
-                 on:click|preventDefault={() => { trackLead('CTA Teste grátis', '/comece card final'); window.open(REGISTER_URL, '_blank'); }}>
+                 on:click|preventDefault={() => { trackLead('CTA Teste grátis', '/comece card final'); window.open(attributedAppUrl(REGISTER_URL), '_blank'); }}>
                 {$t('comece.ctaFinal')}
                 <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
               </a>
@@ -306,7 +307,7 @@
      style="background:rgba(5,11,35,0.92); border-top:1px solid rgba(255,255,255,0.1); backdrop-filter:blur(14px); padding-bottom:max(0.75rem, env(safe-area-inset-bottom, 0px));"
      role="region" aria-label="Ação principal">
   <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" class="up-btn-primary" style="width:100%; justify-content:center;"
-     on:click|preventDefault={() => { trackLead('CTA Teste grátis', '/comece barra mobile'); window.open(REGISTER_URL, '_blank'); }}>
+     on:click|preventDefault={() => { trackLead('CTA Teste grátis', '/comece barra mobile'); window.open(attributedAppUrl(REGISTER_URL), '_blank'); }}>
     {$t('comece.ctaStart')}
   </a>
   <a href={whatsappHref} target="_blank" rel="noopener noreferrer"
