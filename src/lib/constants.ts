@@ -7,6 +7,9 @@ export const SYSTEM_URL = 'https://upclinic-aa025.web.app';
 export const LOGIN_URL = 'https://upclinic-aa025.web.app/login?tab=entrar';
 export const REGISTER_URL = 'https://upclinic-aa025.web.app/login?trial=true';
 
+/** Página de conversão do teste grátis (CTAs de marketing apontam aqui, não para o login do app). */
+export const TRIAL_PAGE_URL = '/teste';
+
 /** Meta Pixel / dataset ID — override with PUBLIC_META_PIXEL_ID in env (Vercel). */
 export const META_PIXEL_ID =
   (publicEnv as Record<string, string | undefined>).PUBLIC_META_PIXEL_ID?.trim() ||

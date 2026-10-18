@@ -1,6 +1,6 @@
 <script>
   import { reveal } from '$lib/actions/motion';
-  import { REGISTER_URL } from '$lib/constants';
+  import { TRIAL_PAGE_URL } from '$lib/constants';
   import { t } from '$lib/i18n';
 
   // Segue o mouse para o brilho interno de cada card
@@ -12,19 +12,19 @@
   }
 </script>
 
-<section class="relative overflow-hidden" style="background:#050b23; padding-top:6rem; padding-bottom:6rem;">
+<section class="relative overflow-hidden" style="background:#f7fbfa; padding-top:6rem; padding-bottom:6rem;">
   <div class="up-grid-overlay" style="opacity:0.4;"></div>
 
   <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative" style="z-index:2;">
     <div class="text-center max-w-3xl mx-auto mb-12" use:reveal>
       <span class="inline-block px-4 py-1.5 rounded-full text-xs font-bold mb-4"
-        style="background:rgba(56,189,248,0.12); border:1px solid rgba(56,189,248,0.35); color:#7dd3fc; text-transform:uppercase; letter-spacing:0.06em;">
+        style="background:rgba(56,189,248,0.12); border:1px solid rgba(56,189,248,0.35); color:#0d9488; text-transform:uppercase; letter-spacing:0.06em;">
         {$t('bento.badge')}
       </span>
-      <h2 style="font-size:clamp(2rem,4vw,3rem); font-weight:900; color:#fff; line-height:1.1; letter-spacing:-0.02em; margin-bottom:1rem;">
+      <h2 style="font-size:clamp(2rem,4vw,3rem); font-weight:900; color:#0f1f1c; line-height:1.1; letter-spacing:-0.02em; margin-bottom:1rem;">
         {$t('bento.title')}<span class="up-gradient-text">{$t('bento.titleHi')}</span>
       </h2>
-      <p style="color:rgba(191,219,254,0.8); font-size:1.05rem; line-height:1.6;">
+      <p style="color:#5b6f6a; font-size:1.05rem; line-height:1.6;">
         {$t('bento.sub')}
       </p>
     </div>
@@ -135,7 +135,7 @@
     </div>
 
     <div class="text-center mt-12" use:reveal>
-      <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" class="up-btn-primary">
+      <a href={TRIAL_PAGE_URL} class="up-btn-primary">
         {$t('bento.cta')}
       </a>
     </div>
@@ -157,23 +157,25 @@
     height: 100%;
     padding: 22px;
     border-radius: 1.4rem;
-    background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+    background: #fff;
+    border: 1px solid rgba(13, 148, 136, 0.1);
+    box-shadow: 0 12px 32px rgba(15, 118, 110, 0.06);
     display: flex;
     flex-direction: column;
   }
   .up-icon {
     width: 46px; height: 46px; border-radius: 13px;
     display: flex; align-items: center; justify-content: center;
-    margin-bottom: 14px; box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+    margin-bottom: 14px; box-shadow: 0 8px 20px rgba(13, 148, 136, 0.18);
     flex-shrink: 0;
   }
-  .up-cell-title { color: #fff; font-weight: 800; font-size: 1.05rem; margin-bottom: 6px; letter-spacing: -0.01em; }
-  .up-cell-desc { color: rgba(191,219,254,0.8); font-size: 0.86rem; line-height: 1.55; }
+  .up-cell-title { color: #0f1f1c; font-weight: 800; font-size: 1.05rem; margin-bottom: 6px; letter-spacing: -0.01em; }
+  .up-cell-desc { color: #5b6f6a; font-size: 0.86rem; line-height: 1.55; }
 
   .up-chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 16px; }
   .up-chip {
-    background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
-    color: #dbeafe; font-size: 0.72rem; font-weight: 600; padding: 5px 11px; border-radius: 999px;
+    background: rgba(13, 148, 136, 0.08); border: 1px solid rgba(13, 148, 136, 0.14);
+    color: #0f766e; font-size: 0.72rem; font-weight: 600; padding: 5px 11px; border-radius: 999px;
   }
 
   /* Mini mapa Home Care */

@@ -1,7 +1,7 @@
 <script lang="ts">
   import Navbar from '$lib/components/Navbar.svelte';
   import Footer from '$lib/components/Footer.svelte';
-  import { REGISTER_URL } from '$lib/constants';
+  import { TRIAL_PAGE_URL } from '$lib/constants';
 
   const benefits = [
     { icon: 'M15 10l4.553-2.069A1 1 0 0121 8.82V15.18a1 1 0 01-1.447.894L15 14M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z', title: 'Videoconsulta HD', desc: 'Atendimento por vídeo com qualidade HD, sem instalação de aplicativo pelo paciente.' },
@@ -37,7 +37,7 @@
         Atenda seus pacientes de forma remota, segura e legal. A videoconsulta, o prontuário e a prescrição digital funcionam integrados — sem abrir outro sistema.
       </p>
       <div class="flex flex-col sm:flex-row gap-3 justify-center">
-        <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer"
+        <a href={TRIAL_PAGE_URL}
           class="inline-flex items-center justify-center gap-2 px-7 py-3.5 text-base font-bold text-white bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl shadow-lg hover:scale-105 transition-all">
           Testar Grátis por 7 Dias
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
@@ -106,7 +106,7 @@
       <p class="text-purple-100 text-lg mb-8 max-w-2xl mx-auto">
         Configure a telemedicina em minutos e comece a atender remotamente hoje mesmo. 7 dias grátis, sem cartão.
       </p>
-      <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer"
+      <a href={TRIAL_PAGE_URL}
         class="inline-flex items-center justify-center gap-2 px-8 py-4 text-lg font-bold text-purple-700 bg-white rounded-xl hover:bg-purple-50 hover:scale-105 transition-all shadow-lg">
         Criar conta grátis — 7 dias
       </a>

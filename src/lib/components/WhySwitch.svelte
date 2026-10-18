@@ -1,7 +1,7 @@
 <script lang="ts">
   import { reveal } from '$lib/actions/motion';
   import { t } from '$lib/i18n';
-  import { REGISTER_URL } from '$lib/constants';
+  import { TRIAL_PAGE_URL } from '$lib/constants';
   import { trackTrialCta } from '$lib/analytics';
 </script>
 
@@ -46,9 +46,7 @@
 
     <div use:reveal class="mt-8 text-center">
       <a
-        href={REGISTER_URL}
-        target="_blank"
-        rel="noopener noreferrer"
+        href={TRIAL_PAGE_URL}
         class="inline-flex items-center justify-center min-h-[2.75rem] px-5 text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-700 rounded-xl transition"
         on:click={() => trackTrialCta('Por que trocar — teste', 'Why Switch')}
       >

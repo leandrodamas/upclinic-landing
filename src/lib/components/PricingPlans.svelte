@@ -5,9 +5,9 @@
     PLAN_CATALOG,
     formatBrl,
     publicCheckoutUrl,
-    trialUrlForPlan,
     type PlanId
   } from '$lib/config/pricing';
+  import { TRIAL_PAGE_URL } from '$lib/constants';
   import { trackTrialCta } from '$lib/analytics';
 
   export let whatsappFallback =
@@ -15,8 +15,8 @@
 
   let annual = false;
 
-  function trialHref(id: PlanId) {
-    return trialUrlForPlan(id);
+  function trialHref(_id: PlanId) {
+    return TRIAL_PAGE_URL;
   }
 
   function subscribeHref(id: PlanId) {
@@ -48,7 +48,6 @@
   }
 </script>
 
-<!-- Toggle Mensal / Anual -->
 <div use:reveal class="flex justify-center mb-10">
   <div class="up-glass inline-flex items-center gap-1" style="padding:5px; border-radius:999px;">
     <button
@@ -65,7 +64,7 @@
       class:up-toggle-on={annual}
       aria-pressed={annual}
     >
-      {$t('plans.annual')} <span style="color:#6ee7b7; font-weight:800;">{$t('plans.save')}</span>
+      {$t('plans.annual')} <span style="color:#0d9488; font-weight:800;">{$t('plans.save')}</span>
     </button>
   </div>
 </div>
@@ -75,41 +74,38 @@
     {@const price = annual ? plan.annual / 12 : plan.monthly}
     <div
       use:reveal={{ delay: i * 90 }}
-      class="relative up-glass flex flex-col"
+      class="relative plan-card flex flex-col"
       class:up-plan-popular={plan.popular}
-      style="border-radius:1.5rem; padding:1.75rem;{plan.popular
-        ? ' border-color:rgba(96,165,250,0.6);'
-        : ''}"
+      style={plan.popular ? 'border-color:rgba(13,148,136,0.45);' : ''}
     >
       {#if plan.popular}
         <span
           class="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full px-4 py-1 text-xs font-bold text-white"
-          style="background:linear-gradient(90deg,#2563eb,#7c3aed);">{$t('plans.popular')}</span
+          style="background:linear-gradient(90deg,#0d9488,#14b8a6);">{$t('plans.popular')}</span
         >
       {/if}
 
-      <h3
-        class="text-xl font-bold text-white"
-        style="font-family:'Plus Jakarta Sans',system-ui,sans-serif;">{plan.name}</h3
-      >
-      <p class="mt-1 text-sm" style="color:rgba(191,219,254,0.72);">{plan.tagline}</p>
+      <h3 class="text-xl font-bold" style="color:#0f1f1c; font-family:'Outfit',system-ui,sans-serif;">
+        {plan.name}
+      </h3>
+      <p class="mt-1 text-sm" style="color:#5b6f6a;">{plan.tagline}</p>
 
       <div class="mt-5 flex items-end gap-1">
         <span class="text-sm font-semibold" style="color:{plan.accent};">R$</span>
-        <span class="text-4xl font-black text-white" style="line-height:1;">{formatBrl(price)}</span>
-        <span class="text-sm mb-1" style="color:rgba(191,219,254,0.6);">{$t('plans.perMonth')}</span>
+        <span class="text-4xl font-black" style="line-height:1; color:#0f1f1c;">{formatBrl(price)}</span>
+        <span class="text-sm mb-1" style="color:#7a908a;">{$t('plans.perMonth')}</span>
       </div>
       {#if annual}
-        <p class="mt-1 text-xs" style="color:rgba(167,243,208,0.85);">
+        <p class="mt-1 text-xs" style="color:#0f766e;">
           R$ {formatBrl(plan.annual)} {$t('plans.billedAnnually')}
         </p>
       {:else}
-        <p class="mt-1 text-xs" style="color:rgba(191,219,254,0.5);">{$t('plans.billedMonthly')}</p>
+        <p class="mt-1 text-xs" style="color:#7a908a;">{$t('plans.billedMonthly')}</p>
       {/if}
 
       <ul class="mt-6 space-y-2.5 flex-1">
         {#each plan.features as f}
-          <li class="flex items-start gap-2 text-sm" style="color:rgba(219,234,254,0.88);">
+          <li class="flex items-start gap-2 text-sm" style="color:#3d524d;">
             <svg
               width="18"
               height="18"
@@ -127,20 +123,18 @@
 
       <a
         href={trialHref(plan.id)}
-        target="_blank"
-        rel="noopener noreferrer"
         class="mt-7 {plan.popular ? 'up-btn-primary' : 'up-btn-ghost'}"
         style="width:100%; justify-content:center; min-height:2.75rem;"
         on:click={() => trackTrial(plan.id)}
       >
-        {$t('plans.ctaTrial')}
+        Teste grátis 7 dias
       </a>
       <a
         href={subscribeHref(plan.id)}
         target="_blank"
         rel="noopener noreferrer"
         class="mt-2 text-center text-xs font-semibold underline underline-offset-4"
-        style="color:rgba(147,197,253,0.75);"
+        style="color:#7a908a;"
         on:click={() => trackSubscribe(plan.id)}
       >
         {$t('plans.ctaSubscribe')}
@@ -149,26 +143,33 @@
   {/each}
 </div>
 
-<p use:reveal class="text-center text-xs mt-6" style="color:rgba(147,197,253,0.6);">
+<p use:reveal class="text-center text-xs mt-6" style="color:#7a908a;">
   {$t('plans.footnote')}
 </p>
 
 <style>
+  .plan-card {
+    background: #fff;
+    border: 1px solid rgba(13, 148, 136, 0.12);
+    border-radius: 1.5rem;
+    padding: 1.75rem;
+    box-shadow: 0 14px 36px rgba(15, 118, 110, 0.06);
+  }
   .up-toggle {
     padding: 8px 20px;
     border-radius: 999px;
     font-size: 0.85rem;
     font-weight: 700;
-    color: rgba(191, 219, 254, 0.8);
+    color: #5b6f6a;
     background: transparent;
     border: none;
     cursor: pointer;
     transition: all 0.2s ease;
   }
   .up-toggle-on {
-    background: rgba(255, 255, 255, 0.16);
-    color: #fff;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+    background: #fff;
+    color: #0f1f1c;
+    box-shadow: 0 2px 10px rgba(15, 118, 110, 0.12);
   }
   .up-plan-popular {
     transform: scale(1.03);

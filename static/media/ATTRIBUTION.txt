@@ -1,0 +1,9 @@
+Imagens de stock (licença livre — Unsplash / Pexels), otimizadas em WebP:
+
+- hero-pilates.webp — Unsplash (pilates / movimento)
+- fisio.webp — Unsplash (fisioterapia / clínica)
+- rehab.webp — Unsplash (reabilitação / exercício)
+- pilates-class.webp — Pexels (aula / studio)
+- studio.webp — Pexels (ambiente de studio)
+
+Uso editorial na landing UpClinic. Créditos aos fotógrafos originais nas plataformas Unsplash e Pexels.

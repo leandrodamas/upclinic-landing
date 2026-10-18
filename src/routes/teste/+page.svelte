@@ -1,14 +1,14 @@
 <!--
   /teste — landing de objetivo único (anúncios + WhatsApp).
   Um CTA só: "Começar meus 7 dias grátis" → app com trial=true, repassando UTMs.
-  Sem depoimentos (só entram depoimentos reais e autorizados).
-  Leve: sem Navbar/Footer pesados, sem imagens grandes, sem fontes externas.
+  Sem depoimentos inventados. Tema claro alinhado à nova marca.
 -->
 <script lang="ts">
   import { onMount } from 'svelte';
   import { REGISTER_URL, CONTACT } from '$lib/constants';
   import { appendUtmToUrl, captureFirstTouchUtm, withDefaultUtmContent } from '$lib/utm';
   import WellhubIntegration from '$lib/components/WellhubIntegration.svelte';
+  import { trackTrialCta } from '$lib/analytics';
 
   const CTA_LABEL = 'Começar meus 7 dias grátis';
 
@@ -27,13 +27,16 @@
   let showDdp = false;
 
   onMount(() => {
-    // First-touch also runs in +layout; capture here so CTAs update before paint settles
     const attribution = captureFirstTouchUtm(window.location.search);
     ctaHref = buildCtaHref(attribution);
     const now = Date.now();
     const preview = new URLSearchParams(window.location.search).get('preview_ddp') === '1';
     showDdp = preview || (now >= DDP_START && now < DDP_END);
   });
+
+  function onCtaClick() {
+    trackTrialCta('CTA /teste — começar 7 dias', '/teste');
+  }
 
   const benefits = [
     {
@@ -51,6 +54,13 @@
       text: 'Agenda, WhatsApp, prontuário com evolução e financeiro (mensalidades e pacotes) no mesmo login. WhatsApp incluído, sem pagar por mensagem.*',
       icon: 'M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z'
     }
+  ];
+
+  const pains = [
+    { t: 'Agenda', d: 'Horários ociosos e encaixes sem controle' },
+    { t: 'Faltas', d: 'Paciente esquece e a sessão some' },
+    { t: 'Evolução', d: 'Histórico espalhado em papel ou planilha' },
+    { t: 'Financeiro', d: 'Mensalidades e pacotes difíceis de acompanhar' }
   ];
 
   const faqs = [
@@ -87,31 +97,35 @@
   <meta property="og:title" content="UpClinic: robô do WhatsApp + agenda num lugar só" />
   <meta property="og:description" content="Teste 7 dias grátis, sem cartão." />
   <meta property="og:url" content="https://www.clinicupapp.com/teste" />
+  <meta name="theme-color" content="#0d9488" />
 </svelte:head>
 
 <div class="tp">
   {#if showDdp}
     <div class="tp-ddp" role="note">
-      🍎 <strong>15 de outubro: Dia do Professor.</strong> Uma homenagem a quem ensina movimento todos os dias, professores de pilates e de RPG.
+      <strong>15 de outubro: Dia do Professor.</strong> Uma homenagem a quem ensina movimento todos os dias, professores de pilates e de RPG.
     </div>
   {/if}
 
   <header class="tp-header">
-    <div class="tp-logo">
+    <a href="/" class="tp-logo">
       <img src="/brand-mark-64.png" alt="" width="32" height="32" />
       <span>UpClinic</span>
-    </div>
+    </a>
   </header>
 
   <main>
     <section class="tp-hero">
-      <p class="tp-kicker">Para fisioterapia, pilates e RPG</p>
-      <h1>Seu WhatsApp lembra o paciente da consulta sozinho. <span>Direto da sua agenda.</span></h1>
+      <div class="tp-hero-visual" aria-hidden="true">
+        <img src="/media/hero-pilates.webp" alt="" width="800" height="533" fetchpriority="high" decoding="async" />
+      </div>
+      <p class="tp-kicker">Para fisioterapia, pilates, RPG e reabilitação</p>
+      <h1>Menos faltas. Agenda no automático. <span>Teste grátis 7 dias.</span></h1>
       <p class="tp-sub">
         Robô do WhatsApp, agenda, prontuário e financeiro num lugar só. Lembretes 24h e 2h antes ajudam a reduzir faltas.
-        Teste 7 dias grátis, sem cartão.
+        Sem cartão de crédito.
       </p>
-      <a href={ctaHref} class="tp-cta" rel="noopener">{CTA_LABEL}</a>
+      <a href={ctaHref} class="tp-cta" rel="noopener" on:click={onCtaClick}>{CTA_LABEL}</a>
       <ul class="tp-checks" aria-label="Condições do teste">
         <li>✓ Sem cartão</li>
         <li>✓ Cancela quando quiser</li>
@@ -119,11 +133,23 @@
       </ul>
     </section>
 
+    <section class="tp-pains" aria-labelledby="dores-teste">
+      <h2 id="dores-teste">O que trava a rotina da clínica</h2>
+      <div class="tp-pains-grid">
+        {#each pains as p}
+          <div class="tp-pain">
+            <strong>{p.t}</strong>
+            <span>{p.d}</span>
+          </div>
+        {/each}
+      </div>
+    </section>
+
     <section class="tp-demo" aria-label="Exemplo de lembrete automático no WhatsApp">
       <div class="tp-chat">
-        <div class="tp-bubble out">Olá, Maria! 👋 Lembrete: sua consulta é amanhã às 10:00 com a Dra. Ana.</div>
-        <div class="tp-bubble out">Oi, Maria! Sua consulta é hoje às 10:00, daqui a 2 horas. Até já! 💙</div>
-        <div class="tp-chip">⏰ Enviado sozinho, 24h e 2h antes</div>
+        <div class="tp-bubble out">Olá, Maria! Lembrete: sua consulta é amanhã às 10:00 com a Dra. Ana.</div>
+        <div class="tp-bubble out">Oi, Maria! Sua consulta é hoje às 10:00, daqui a 2 horas. Até já!</div>
+        <div class="tp-chip">Enviado sozinho, 24h e 2h antes</div>
       </div>
       <p class="tp-note">Exemplo ilustrativo, com nomes fictícios.</p>
     </section>
@@ -145,7 +171,7 @@
 
     <section class="tp-mid">
       <p><strong>7 dias grátis, sem cartão.</strong> Conecte o WhatsApp com um QR Code e veja os lembretes saindo do seu próprio número.</p>
-      <a href={ctaHref} class="tp-cta" rel="noopener">{CTA_LABEL}</a>
+      <a href={ctaHref} class="tp-cta" rel="noopener" on:click={onCtaClick}>{CTA_LABEL}</a>
     </section>
 
     <WellhubIntegration compact />
@@ -162,7 +188,7 @@
 
     <section class="tp-final">
       <h2>Pronto para testar?</h2>
-      <a href={ctaHref} class="tp-cta" rel="noopener">{CTA_LABEL}</a>
+      <a href={ctaHref} class="tp-cta" rel="noopener" on:click={onCtaClick}>{CTA_LABEL}</a>
       <p class="tp-small">Sem cartão · sem taxa de setup · cancele quando quiser</p>
     </section>
   </main>
@@ -177,20 +203,20 @@
   </footer>
 
   <div class="tp-sticky">
-    <a href={ctaHref} class="tp-cta" rel="noopener">{CTA_LABEL}</a>
+    <a href={ctaHref} class="tp-cta" rel="noopener" on:click={onCtaClick}>{CTA_LABEL}</a>
   </div>
 </div>
 
 <style>
   .tp {
     min-height: 100vh;
-    background: #050b23;
-    color: #e5eefb;
-    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-    padding-bottom: 88px; /* espaço do botão fixo no mobile */
+    background: linear-gradient(180deg, #f7fbfa 0%, #eef8f6 40%, #ffffff 100%);
+    color: #0f1f1c;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    padding-bottom: 88px;
   }
   .tp-ddp {
-    background: linear-gradient(90deg, #b91c1c, #dc2626);
+    background: linear-gradient(90deg, #0d9488, #14b8a6);
     color: #fff;
     text-align: center;
     font-size: 0.85rem;
@@ -206,19 +232,42 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    color: #fff;
+    color: #0f766e;
     font-weight: 800;
     text-decoration: none;
-    font-size: 1.05rem;
+    font-size: 1.15rem;
+    font-family: 'Outfit', system-ui, sans-serif;
   }
   .tp-logo img { border-radius: 8px; }
   main { max-width: 960px; margin: 0 auto; padding: 0 18px; }
-  .tp-hero { padding: 18px 0 28px; text-align: center; }
+
+  .tp-hero {
+    position: relative;
+    padding: 10px 0 28px;
+    text-align: center;
+    overflow: hidden;
+  }
+  .tp-hero-visual {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.18;
+  }
+  .tp-hero-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    mask-image: linear-gradient(180deg, #000 20%, transparent 95%);
+    -webkit-mask-image: linear-gradient(180deg, #000 20%, transparent 95%);
+  }
+  .tp-hero > *:not(.tp-hero-visual) { position: relative; z-index: 1; }
+
   .tp-kicker {
     display: inline-block;
-    color: #6ee7b7;
-    background: rgba(16, 185, 129, 0.12);
-    border: 1px solid rgba(16, 185, 129, 0.35);
+    color: #0d9488;
+    background: rgba(13, 148, 136, 0.1);
+    border: 1px solid rgba(13, 148, 136, 0.22);
     border-radius: 999px;
     padding: 5px 12px;
     font-size: 0.75rem;
@@ -228,35 +277,36 @@
     margin-bottom: 14px;
   }
   h1 {
-    font-size: clamp(1.75rem, 6vw, 2.9rem);
+    font-family: 'Outfit', system-ui, sans-serif;
+    font-size: clamp(1.75rem, 6vw, 2.85rem);
     line-height: 1.12;
-    font-weight: 900;
-    letter-spacing: -0.02em;
-    color: #fff;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: #0f1f1c;
     margin: 0 0 14px;
   }
-  h1 span { color: #34d399; }
+  h1 span { color: #0d9488; }
   .tp-sub {
     font-size: 1.05rem;
     line-height: 1.6;
-    color: rgba(219, 234, 254, 0.9);
+    color: #5b6f6a;
     max-width: 620px;
     margin: 0 auto 22px;
   }
   .tp-cta {
     display: inline-block;
-    background: linear-gradient(135deg, #10b981, #059669);
+    background: linear-gradient(135deg, #0d9488, #14b8a6);
     color: #fff;
     font-weight: 800;
     font-size: 1.05rem;
     text-decoration: none;
     padding: 16px 26px;
     border-radius: 14px;
-    box-shadow: 0 10px 28px rgba(16, 185, 129, 0.4);
+    box-shadow: 0 12px 28px rgba(13, 148, 136, 0.28);
     transition: transform 0.15s ease;
   }
   .tp-cta:hover, .tp-cta:focus-visible { transform: translateY(-2px); }
-  .tp-cta:focus-visible { outline: 3px solid #a7f3d0; outline-offset: 3px; }
+  .tp-cta:focus-visible { outline: 3px solid #99f6e4; outline-offset: 3px; }
   .tp-checks {
     list-style: none;
     padding: 0;
@@ -266,17 +316,56 @@
     justify-content: center;
     gap: 6px 16px;
     font-size: 0.9rem;
-    color: #a7f3d0;
+    color: #0f766e;
+    font-weight: 600;
   }
+
+  .tp-pains { margin: 8px 0 28px; }
+  .tp-pains h2, .tp-benefits h2, .tp-faq h2, .tp-final h2 {
+    font-family: 'Outfit', system-ui, sans-serif;
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: #0f1f1c;
+    text-align: center;
+    margin: 0 0 18px;
+  }
+  .tp-pains-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  @media (min-width: 760px) {
+    .tp-pains-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  .tp-pain {
+    background: #fff;
+    border: 1px solid rgba(13, 148, 136, 0.12);
+    border-radius: 14px;
+    padding: 14px;
+    text-align: center;
+  }
+  .tp-pain strong {
+    display: block;
+    color: #0d9488;
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+  }
+  .tp-pain span {
+    font-size: 0.82rem;
+    color: #5b6f6a;
+    line-height: 1.4;
+  }
+
   .tp-demo { margin: 6px auto 34px; max-width: 420px; }
   .tp-chat {
-    background: #0b141a;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #fff;
+    border: 1px solid rgba(13, 148, 136, 0.12);
     border-radius: 20px;
     padding: 16px 12px;
     display: flex;
     flex-direction: column;
     gap: 8px;
+    box-shadow: 0 16px 40px rgba(15, 118, 110, 0.08);
   }
   .tp-bubble {
     max-width: 85%;
@@ -285,66 +374,73 @@
     font-size: 0.88rem;
     line-height: 1.4;
   }
-  .tp-bubble.in { align-self: flex-end; background: #005c4b; color: #e9ffe9; border-top-right-radius: 3px; }
-  .tp-bubble.out { align-self: flex-start; background: #1f2c33; color: #e9edef; border-top-left-radius: 3px; }
+  .tp-bubble.out {
+    align-self: flex-start;
+    background: #e7f7f4;
+    color: #0f1f1c;
+    border-top-left-radius: 3px;
+  }
   .tp-chip {
     align-self: center;
-    background: rgba(37, 211, 102, 0.16);
-    color: #6ee7b7;
+    background: rgba(13, 148, 136, 0.1);
+    color: #0d9488;
     font-size: 0.75rem;
     font-weight: 700;
     padding: 4px 12px;
     border-radius: 999px;
   }
-  .tp-note { text-align: center; font-size: 0.7rem; color: rgba(147, 197, 253, 0.6); margin-top: 6px; }
-  h2 { font-size: 1.45rem; font-weight: 900; color: #fff; text-align: center; margin: 0 0 18px; }
+  .tp-note { text-align: center; font-size: 0.7rem; color: #7a908a; margin-top: 6px; }
+
   .tp-benefits { padding: 10px 0 30px; }
   .tp-grid { display: grid; gap: 14px; }
   @media (min-width: 760px) { .tp-grid { grid-template-columns: repeat(3, 1fr); } }
   .tp-card {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: #fff;
+    border: 1px solid rgba(13, 148, 136, 0.12);
     border-radius: 16px;
     padding: 18px;
-    color: #34d399;
+    color: #0d9488;
+    box-shadow: 0 10px 28px rgba(15, 118, 110, 0.05);
   }
-  .tp-card h3 { color: #fff; font-size: 1.05rem; font-weight: 800; margin: 10px 0 6px; }
-  .tp-card p { color: rgba(219, 234, 254, 0.85); font-size: 0.95rem; line-height: 1.55; margin: 0; }
+  .tp-card h3 { color: #0f1f1c; font-size: 1.05rem; font-weight: 800; margin: 10px 0 6px; }
+  .tp-card p { color: #5b6f6a; font-size: 0.95rem; line-height: 1.55; margin: 0; }
+
   .tp-mid, .tp-final {
     text-align: center;
-    background: rgba(16, 185, 129, 0.08);
-    border: 1px solid rgba(16, 185, 129, 0.25);
+    background: linear-gradient(135deg, rgba(13, 148, 136, 0.08), rgba(240, 121, 106, 0.06));
+    border: 1px solid rgba(13, 148, 136, 0.18);
     border-radius: 18px;
     padding: 22px 16px;
     margin: 0 0 30px;
   }
-  .tp-mid p { margin: 0 0 14px; line-height: 1.55; }
+  .tp-mid p { margin: 0 0 14px; line-height: 1.55; color: #3d524d; }
   .tp-faq { margin: 0 auto 30px; max-width: 680px; }
   .tp-faq details {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(13, 148, 136, 0.12);
     padding: 14px 4px;
   }
-  .tp-faq summary { cursor: pointer; font-weight: 700; color: #fff; list-style-position: outside; }
-  .tp-faq p { margin: 8px 0 0; color: rgba(219, 234, 254, 0.85); line-height: 1.55; }
-  .tp-small { font-size: 0.8rem; color: rgba(167, 243, 208, 0.85); margin: 12px 0 0; }
+  .tp-faq summary { cursor: pointer; font-weight: 700; color: #0f1f1c; list-style-position: outside; }
+  .tp-faq p { margin: 8px 0 0; color: #5b6f6a; line-height: 1.55; }
+  .tp-small { font-size: 0.8rem; color: #0f766e; margin: 12px 0 0; }
   .tp-footer {
     max-width: 960px;
     margin: 0 auto;
     padding: 10px 18px 24px;
     font-size: 0.75rem;
-    color: rgba(147, 197, 253, 0.7);
+    color: #7a908a;
     text-align: center;
     line-height: 1.6;
   }
-  .tp-footer a { color: inherit; }
+  .tp-footer a { color: #0d9488; }
   .tp-sticky {
     position: fixed;
     left: 0;
     right: 0;
     bottom: 0;
     padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
-    background: rgba(5, 11, 35, 0.94);
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(247, 251, 250, 0.94);
+    border-top: 1px solid rgba(13, 148, 136, 0.12);
+    backdrop-filter: blur(10px);
     z-index: 50;
   }
   .tp-sticky .tp-cta { display: block; text-align: center; padding: 14px 18px; }

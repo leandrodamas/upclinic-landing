@@ -1,7 +1,7 @@
 <script lang="ts">
   import Navbar from '$lib/components/Navbar.svelte';
   import Footer from '$lib/components/Footer.svelte';
-  import { REGISTER_URL, CONTACT } from '$lib/constants';
+  import { TRIAL_PAGE_URL, CONTACT } from '$lib/constants';
 
   const modules = [
     {
@@ -105,7 +105,7 @@
         Chega de sistemas separados que não se falam. O UpClinic integra agenda, prontuário, financeiro e comunicação — sem planilhas, sem papel, sem dor de cabeça.
       </p>
       <div class="flex flex-col sm:flex-row gap-3 justify-center">
-        <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer"
+        <a href={TRIAL_PAGE_URL}
           class="inline-flex items-center justify-center gap-2 px-7 py-3.5 text-base font-bold text-white bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl shadow-lg hover:scale-105 transition-all">
           Testar Grátis por 7 Dias
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
@@ -146,7 +146,7 @@
         Comece com 7 dias grátis, sem cartão de crédito e sem taxa de setup. Configure em minutos e veja a diferença no primeiro dia.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer"
+        <a href={TRIAL_PAGE_URL}
           class="inline-flex items-center justify-center gap-2 px-8 py-4 text-lg font-bold text-blue-700 bg-white rounded-xl hover:bg-blue-50 hover:scale-105 transition-all shadow-lg">
           Criar conta grátis — 7 dias
         </a>

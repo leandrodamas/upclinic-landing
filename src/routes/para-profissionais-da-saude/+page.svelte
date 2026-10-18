@@ -1,7 +1,7 @@
 <script lang="ts">
   import Navbar from '$lib/components/Navbar.svelte';
   import Footer from '$lib/components/Footer.svelte';
-  import { REGISTER_URL } from '$lib/constants';
+  import { TRIAL_PAGE_URL } from '$lib/constants';
 
   const specialties = [
     { icon: '🩺', name: 'Clínica Geral', benefit: 'Agenda, prontuário e prescrição em uma tela só' },
@@ -63,7 +63,7 @@
       <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
         Do consultório solo à rede de clínicas, o UpClinic tem o perfil certo para você. Sem configuração complexa, sem treinamento longo — comece a usar no mesmo dia.
       </p>
-      <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer"
+      <a href={TRIAL_PAGE_URL}
         class="inline-flex items-center justify-center gap-2 px-8 py-4 text-lg font-bold text-white bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl shadow-lg hover:scale-105 transition-all">
         Criar conta grátis — 7 dias, sem cartão
       </a>
@@ -118,7 +118,7 @@
         Interface em português, suporte local, conformidade com CFM e LGPD, e preço justo. Experimente 7 dias grátis.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer"
+        <a href={TRIAL_PAGE_URL}
           class="inline-flex items-center justify-center gap-2 px-8 py-4 text-lg font-bold text-teal-700 bg-white rounded-xl hover:bg-teal-50 hover:scale-105 transition-all shadow-lg">
           Iniciar Teste Grátis
         </a>

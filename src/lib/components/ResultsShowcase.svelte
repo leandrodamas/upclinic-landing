@@ -1,5 +1,5 @@
 <script>
-  import { REGISTER_URL, CONTACT } from '$lib/constants';
+  import { TRIAL_PAGE_URL, CONTACT } from '$lib/constants';
   import { t } from '$lib/i18n';
   import { trackWhatsAppClick } from '$lib/analytics';
 
@@ -104,7 +104,7 @@
         </div>
         <div class="flex flex-col sm:flex-row gap-2 w-full sm:w-auto shrink-0">
           <a
-            href={REGISTER_URL}
+            href={TRIAL_PAGE_URL}
             target="_blank"
             rel="noopener noreferrer"
             class="inline-flex items-center justify-center min-h-[2.75rem] px-4 text-sm font-bold text-white bg-emerald-500 hover:bg-emerald-600 rounded-xl transition"

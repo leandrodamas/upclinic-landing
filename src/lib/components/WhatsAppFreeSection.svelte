@@ -1,7 +1,7 @@
 <script>
   import { onMount } from 'svelte';
   import { reveal } from '$lib/actions/motion';
-  import { REGISTER_URL, CONTACT } from '$lib/constants';
+  import { TRIAL_PAGE_URL, CONTACT } from '$lib/constants';
   import { t } from '$lib/i18n';
 
   // Mensagens que aparecem em sequência no mockup do celular
@@ -27,7 +27,7 @@
   }
 </script>
 
-<section class="relative overflow-hidden" style="background: linear-gradient(180deg,#050b23 0%, #071233 55%, #0a1a44 100%);">
+<section class="relative overflow-hidden" style="background: linear-gradient(180deg,#f7fbfa 0%, #eef8f6 55%, #ffffff 100%);">
   <div class="up-aurora" style="opacity:0.55;"></div>
 
   <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative" style="z-index:2; padding-top:6rem; padding-bottom:6rem;">
@@ -37,34 +37,34 @@
       <div>
         <div use:reveal class="inline-flex items-center gap-2 mb-5" style="background:rgba(37,211,102,0.12); border:1px solid rgba(37,211,102,0.35); padding:6px 14px; border-radius:999px;">
           <span style="font-size:0.95rem;">💬</span>
-          <span style="color:#6ee7b7; font-size:0.8rem; font-weight:800; text-transform:uppercase; letter-spacing:0.05em;">{$t('wa.badge')}</span>
+          <span style="color:#0d9488; font-size:0.8rem; font-weight:800; text-transform:uppercase; letter-spacing:0.05em;">{$t('wa.badge')}</span>
         </div>
 
-        <h2 use:reveal={{ delay: 60 }} style="font-size:clamp(2rem,4vw,3rem); font-weight:900; color:#fff; line-height:1.08; letter-spacing:-0.02em; margin-bottom:1.25rem;">
+        <h2 use:reveal={{ delay: 60 }} style="font-size:clamp(2rem,4vw,3rem); font-weight:900; color:#0f1f1c; line-height:1.08; letter-spacing:-0.02em; margin-bottom:1.25rem;">
           {$t('wa.titleA')}<br>
           <span class="up-gradient-text">{$t('wa.titleB')}</span>
         </h2>
 
-        <p use:reveal={{ delay: 120 }} style="color:rgba(219,234,254,0.9); font-size:1.1rem; line-height:1.7; margin-bottom:1.75rem; max-width:520px;">
-          {$t('wa.p1')}<strong style="color:#6ee7b7;">{$t('wa.pStrong')}</strong>{$t('wa.p2')}
+        <p use:reveal={{ delay: 120 }} style="color:#5b6f6a; font-size:1.1rem; line-height:1.7; margin-bottom:1.75rem; max-width:520px;">
+          {$t('wa.p1')}<strong style="color:#0d9488;">{$t('wa.pStrong')}</strong>{$t('wa.p2')}
         </p>
 
         <!-- Comparativo de custo -->
         <div use:reveal={{ delay: 180 }} class="grid grid-cols-2 gap-3 mb-8" style="max-width:520px;">
           <div style="background:rgba(239,68,68,0.08); border:1px solid rgba(239,68,68,0.28); border-radius:16px; padding:16px;">
             <div style="color:#fca5a5; font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:6px;">{$t('wa.otherLabel')}</div>
-            <div style="color:#fff; font-size:1.5rem; font-weight:900; line-height:1;">{$t('wa.otherPrice')}</div>
+            <div style="color:#0f1f1c; font-size:1.5rem; font-weight:900; line-height:1;">{$t('wa.otherPrice')}</div>
             <div style="color:rgba(252,165,165,0.85); font-size:0.72rem; margin-top:4px;">{$t('wa.otherDesc')}</div>
           </div>
           <div style="background:rgba(37,211,102,0.1); border:1px solid rgba(37,211,102,0.4); border-radius:16px; padding:16px;">
-            <div style="color:#6ee7b7; font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:6px;">{$t('wa.upLabel')}</div>
-            <div style="color:#fff; font-size:1.5rem; font-weight:900; line-height:1;">{$t('wa.upPrice')}</div>
-            <div style="color:rgba(167,243,208,0.9); font-size:0.72rem; margin-top:4px;">{$t('wa.upDesc')}</div>
+            <div style="color:#0d9488; font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:6px;">{$t('wa.upLabel')}</div>
+            <div style="color:#0f1f1c; font-size:1.5rem; font-weight:900; line-height:1;">{$t('wa.upPrice')}</div>
+            <div style="color:#0f766e; font-size:0.72rem; margin-top:4px;">{$t('wa.upDesc')}</div>
           </div>
         </div>
 
         <div use:reveal={{ delay: 240 }} class="flex flex-wrap gap-3">
-          <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" class="up-btn-primary">
+          <a href={TRIAL_PAGE_URL} class="up-btn-primary">
             {$t('wa.ctaActivate')}
           </a>
           <a href={`${CONTACT.whatsappLink}?text=${encodeURIComponent('Olá! Quero testar o UpClinic')}`}
@@ -72,7 +72,7 @@
             {$t('wa.ctaTalk')}
           </a>
         </div>
-        <p use:reveal={{ delay: 300 }} style="color:rgba(147,197,253,0.6); font-size:0.72rem; margin-top:0.9rem;">
+        <p use:reveal={{ delay: 300 }} style="color:#7a908a; font-size:0.72rem; margin-top:0.9rem;">
           {$t('wa.disclaimer')}
         </p>
       </div>
@@ -87,8 +87,8 @@
               <svg width="20" height="20" fill="#fff" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.683-1.448L.057 24z"/></svg>
             </div>
             <div style="flex:1; min-width:0;">
-              <div style="color:#fff; font-weight:700; font-size:0.85rem;">{$t('wa.phoneName')}</div>
-              <div style="color:#a7f3d0; font-size:0.68rem;">{$t('wa.phoneStatus')}</div>
+              <div style="color:#0f1f1c; font-weight:700; font-size:0.85rem;">{$t('wa.phoneName')}</div>
+              <div style="color:#0d9488; font-size:0.68rem;">{$t('wa.phoneStatus')}</div>
             </div>
             <div style="display:flex; gap:14px; color:rgba(255,255,255,0.7);">
               <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M17 10.5V7a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h12a1 1 0 001-1v-3.5l4 4v-11l-4 4z"/></svg>
@@ -109,7 +109,7 @@
                   </div>
                 {/each}
                 <div class="up-msg" style="animation-delay:{chat.length * 1.1 + 0.5}s; display:flex; justify-content:center;">
-                  <span style="background:rgba(37,211,102,0.16); color:#6ee7b7; font-size:0.66rem; font-weight:700; padding:4px 12px; border-radius:999px;">
+                  <span style="background:rgba(37,211,102,0.16); color:#0d9488; font-size:0.66rem; font-weight:700; padding:4px 12px; border-radius:999px;">
                     {$t('wa.avoided')}
                   </span>
                 </div>

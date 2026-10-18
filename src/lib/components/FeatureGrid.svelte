@@ -1,7 +1,7 @@
 <script>
   import { onMount } from 'svelte';
   import { reveal } from '$lib/actions/motion';
-  import { REGISTER_URL } from '$lib/constants';
+  import { TRIAL_PAGE_URL } from '$lib/constants';
   import { t } from '$lib/i18n';
   import FeatureDemoModal from './FeatureDemoModal.svelte';
 
@@ -133,7 +133,7 @@
 <section
   id="funcionalidades"
   class="feat-core relative overflow-hidden"
-  style="background:#050b23; padding-top:5.5rem; padding-bottom:6rem;"
+  style="background:#f7fbfa; padding-top:5.5rem; padding-bottom:6rem;"
   role="region"
   aria-label="Funcionalidades"
   on:mousemove={onMove}
@@ -160,7 +160,7 @@
           {$t('featCore.badge')}
         </span>
       </span>
-      <h2 style="font-size:clamp(2rem,4.4vw,3.2rem); font-weight:900; color:#fff; line-height:1.08; letter-spacing:-0.02em; margin-bottom:1rem;">
+      <h2 style="font-size:clamp(2rem,4.4vw,3.2rem); font-weight:900; color:#0f1f1c; line-height:1.08; letter-spacing:-0.02em; margin-bottom:1rem;">
         {$t('featCore.titleA')}
         <span class="up-gradient-text">{$t('featCore.titleHi')}</span>
       </h2>
@@ -271,13 +271,13 @@
                 </div>
                 <span
                   class="text-[11px] font-bold px-3 py-1.5 rounded-full shrink-0"
-                  style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); color:#dbeafe;"
+                  style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); color:#3d524d;"
                 >
                   {planLabel(mod.plan)}
                 </span>
               </div>
 
-              <p class="mb-6 text-sm sm:text-base leading-relaxed" style="color:rgba(219,234,254,0.88);">
+              <p class="mb-6 text-sm sm:text-base leading-relaxed" style="color:#5b6f6a;">
                 {desc}
               </p>
 
@@ -355,7 +355,7 @@
                     {:else}
                       <div class="grid grid-cols-2 gap-2">
                         {#each [$t('featCore.preview.chip1'), $t('featCore.preview.chip2'), $t('featCore.preview.chip3'), $t('featCore.preview.chip4')] as chip}
-                          <div class="rounded-lg px-3 py-2.5 text-xs font-semibold" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:#dbeafe;">
+                          <div class="rounded-lg px-3 py-2.5 text-xs font-semibold" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:#3d524d;">
                             ✓ {chip}
                           </div>
                         {/each}
@@ -430,7 +430,7 @@
     <div class="text-center mt-12" use:reveal>
       <p class="mb-5 text-sm" style="color:rgba(191,219,254,0.7);">{$t('featCore.ctaSub')}</p>
       <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
-        <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" class="up-btn-primary">
+        <a href={TRIAL_PAGE_URL} class="up-btn-primary">
           {$t('featCore.ctaStart')}
         </a>
         <button type="button" class="up-btn-ghost" on:click={openDemo}>

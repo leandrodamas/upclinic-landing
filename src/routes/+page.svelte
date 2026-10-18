@@ -16,19 +16,17 @@
   import WellhubIntegration from '$lib/components/WellhubIntegration.svelte';
   import WhatsAppFloat from '$lib/components/WhatsAppFloat.svelte';
   import ConversionPopup from '$lib/components/ConversionPopup.svelte';
+  import PainPoints from '$lib/components/PainPoints.svelte';
   import { reveal } from '$lib/actions/motion';
   import { t } from '$lib/i18n';
-  import { LOGIN_URL, REGISTER_URL, CONTACT } from '$lib/constants';
+  import { LOGIN_URL, TRIAL_PAGE_URL, CONTACT } from '$lib/constants';
   import { trackTrialCta } from '$lib/analytics';
-  import { attributedAppUrl } from '$lib/utm';
 
   let demoModal: FeatureDemoModal;
 
   const whatsappHref = `${CONTACT.whatsappLink}?text=${encodeURIComponent('Olá! Quero testar o UpClinic')}`;
 </script>
 
-<!-- SEO: single source in app.html for homepage defaults; page only adds JSON-LD + page-specific overrides if needed.
-     Duplicate title/description/og tags removed from here to fix duplicated meta. -->
 <svelte:head>
   <script type="application/ld+json">
     {
@@ -62,6 +60,7 @@
 
 <Navbar />
 <HeroPro />
+<PainPoints />
 <WhatsAppFreeSection />
 <BentoFeatures />
 <ImpactBand />
@@ -71,38 +70,36 @@
 <ResultsShowcase />
 <FounderOffer />
 
-<!-- Pricing on homepage (nav → /#precos); full details also on /planos -->
 <section
   id="precos"
-  class="relative overflow-hidden"
-  style="background:#050b23; padding-top:5.5rem; padding-bottom:5.5rem;"
+  class="relative overflow-hidden pricing-section"
   aria-labelledby="precos-title"
 >
-  <div class="up-aurora" style="opacity:0.45;"></div>
-  <div class="up-grid-overlay" style="opacity:0.3;"></div>
+  <div class="up-aurora" style="opacity:0.55;"></div>
+  <div class="up-grid-overlay" style="opacity:0.55;"></div>
   <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative" style="z-index:2;">
     <div class="text-center max-w-2xl mx-auto mb-10" use:reveal>
       <p class="mb-4 inline-flex items-center gap-2 up-glass" style="padding:7px 16px; border-radius:999px;">
-        <span class="up-pulse-dot" style="width:8px;height:8px;background:#34d399;border-radius:50%;"></span>
-        <span style="color:#6ee7b7; font-size:0.72rem; font-weight:800; text-transform:uppercase; letter-spacing:0.14em;"
+        <span class="up-pulse-dot" style="width:8px;height:8px;background:#14b8a6;border-radius:50%;"></span>
+        <span style="color:#0d9488; font-size:0.72rem; font-weight:800; text-transform:uppercase; letter-spacing:0.14em;"
           >{$t('pricing.badge')}</span
         >
       </p>
       <h2
         id="precos-title"
-        style="font-size:clamp(1.85rem,4vw,2.75rem); font-weight:900; color:#fff; line-height:1.1; letter-spacing:-0.02em;"
+        style="font-size:clamp(1.85rem,4vw,2.75rem); font-weight:900; color:#0f1f1c; line-height:1.1; letter-spacing:-0.02em;"
       >
         {$t('pricing.title1')} <span class="up-gradient-text">{$t('pricing.title2')}</span>
       </h2>
-      <p class="mt-4" style="color:rgba(191,219,254,0.85); font-size:1.05rem; line-height:1.6;">
-        {$t('pricing.subPre')}<strong style="color:#6ee7b7;">{$t('pricing.subStrong')}</strong>{$t('pricing.subEnd')}
+      <p class="mt-4" style="color:#5b6f6a; font-size:1.05rem; line-height:1.6;">
+        {$t('pricing.subPre')}<strong style="color:#0d9488;">{$t('pricing.subStrong')}</strong>{$t('pricing.subEnd')}
       </p>
     </div>
 
     <PricingPlans whatsappFallback={whatsappHref} />
 
     <p class="text-center mt-8">
-      <a href="/planos" class="text-sm font-semibold underline underline-offset-4" style="color:#93c5fd;">
+      <a href="/planos" class="text-sm font-semibold underline underline-offset-4" style="color:#0d9488;">
         Ver detalhes dos planos →
       </a>
     </p>
@@ -111,44 +108,45 @@
 
 <FAQ />
 
+<section class="social-proof" aria-labelledby="prova-title">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8" use:reveal>
+    <p class="kicker">Prova social</p>
+    <h2 id="prova-title">Clínicas e studios já usam o UpClinic</h2>
+    <p class="note">
+      [PLACEHOLDER] Depoimentos e números reais serão publicados aqui assim que autorizados pelos clientes.
+      Não inventamos resultados.
+    </p>
+  </div>
+</section>
+
 <PartnersCarousel />
 
-<!-- CTA Section -->
-<section
-  class="relative overflow-hidden home-cta-pad"
-  style="background: linear-gradient(135deg,#050b23 0%,#0a1a44 45%,#1d4ed8 100%); padding-top:6rem; padding-bottom:6rem;"
->
-  <div class="up-aurora" style="opacity:0.6;"></div>
-  <div class="up-grid-overlay" style="opacity:0.35;"></div>
+<section class="relative overflow-hidden home-cta-pad final-cta">
+  <div class="up-aurora" style="opacity:0.45;"></div>
   <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative" style="z-index:2;">
     <div use:reveal class="inline-flex items-center gap-2 mb-6 up-glass" style="padding:7px 16px; border-radius:999px;">
-      <span class="up-pulse-dot" style="width:9px;height:9px;background:#34d399;border-radius:50%;"></span>
-      <span style="color:#e0f2fe; font-size:0.8rem; font-weight:700;">{$t('homeCta.badge')}</span>
+      <span class="up-pulse-dot" style="width:9px;height:9px;background:#14b8a6;border-radius:50%;"></span>
+      <span style="color:#0f766e; font-size:0.8rem; font-weight:700;">{$t('homeCta.badge')}</span>
     </div>
     <h2
       use:reveal={{ delay: 60 }}
-      style="font-size:clamp(2.2rem,5vw,3.5rem); font-weight:900; color:#fff; line-height:1.08; letter-spacing:-0.02em; margin-bottom:1.25rem;"
+      style="font-size:clamp(2rem,4.5vw,3.2rem); font-weight:900; color:#0f1f1c; line-height:1.08; letter-spacing:-0.02em; margin-bottom:1.25rem;"
     >
       {$t('homeCta.titleA')}<br class="hidden md:block" />
       <span class="up-gradient-text">{$t('homeCta.titleB')}</span>
     </h2>
-    <p use:reveal={{ delay: 120 }} class="text-xl mb-3 max-w-2xl mx-auto" style="color:rgba(219,234,254,0.9);">
+    <p use:reveal={{ delay: 120 }} class="text-xl mb-3 max-w-2xl mx-auto" style="color:#5b6f6a;">
       {$t('homeCta.p')}
     </p>
-    <p use:reveal={{ delay: 160 }} style="color:rgba(147,197,253,0.75); font-size:0.9rem; margin-bottom:2.5rem;">
+    <p use:reveal={{ delay: 160 }} style="color:#7a908a; font-size:0.9rem; margin-bottom:2.5rem;">
       {$t('homeCta.sub')}
     </p>
     <div use:reveal={{ delay: 200 }} class="flex flex-col sm:flex-row items-center justify-center gap-4">
       <a
-        href={REGISTER_URL}
-        target="_blank"
-        rel="noopener noreferrer"
+        href={TRIAL_PAGE_URL}
         class="up-btn-primary"
         style="min-height:2.85rem;"
-        on:click|preventDefault={() => {
-          trackTrialCta('CTA Final Teste', 'CTA Section');
-          window.open(attributedAppUrl(REGISTER_URL), '_blank');
-        }}
+        on:click={() => trackTrialCta('CTA Final Teste', 'CTA Section')}
       >
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
           ><path
@@ -158,7 +156,7 @@
             d="M13 10V3L4 14h7v7l9-11h-7z"
           /></svg
         >
-        {$t('homeCta.ctaStart')}
+        Teste grátis 7 dias
       </a>
       <a
         href={LOGIN_URL}
@@ -166,14 +164,11 @@
         rel="noopener noreferrer"
         class="up-btn-ghost"
         style="min-height:2.85rem;"
-        on:click|preventDefault={() => {
-          window.open(attributedAppUrl(LOGIN_URL), '_blank');
-        }}
       >
         {$t('homeCta.ctaLogin')}
       </a>
     </div>
-    <p use:reveal={{ delay: 240 }} style="color:rgba(147,197,253,0.7); font-size:0.82rem; margin-top:1.5rem;">
+    <p use:reveal={{ delay: 240 }} style="color:#7a908a; font-size:0.82rem; margin-top:1.5rem;">
       {$t('homeCta.footnote')}
     </p>
   </div>
@@ -185,7 +180,52 @@
 <FeatureDemoModal bind:this={demoModal} />
 
 <style>
-  /* Extra bottom space on mobile so floating WhatsApp doesn't cover the final CTA */
+  .pricing-section {
+    background: linear-gradient(180deg, #f7fbfa 0%, #eef8f6 55%, #fff 100%);
+    padding-top: 5.5rem;
+    padding-bottom: 5.5rem;
+  }
+
+  .social-proof {
+    padding: 3.5rem 0;
+    background: #fff;
+    text-align: center;
+  }
+
+  .social-proof .kicker {
+    margin: 0 0 0.5rem;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #f0796a;
+  }
+
+  .social-proof h2 {
+    margin: 0 0 0.75rem;
+    font-size: clamp(1.4rem, 3vw, 1.9rem);
+    font-weight: 800;
+    color: #0f1f1c;
+  }
+
+  .social-proof .note {
+    margin: 0 auto;
+    max-width: 36rem;
+    color: #5b6f6a;
+    font-size: 0.95rem;
+    line-height: 1.55;
+    background: #fff5f2;
+    border: 1px dashed rgba(240, 121, 106, 0.45);
+    border-radius: 1rem;
+    padding: 1rem 1.15rem;
+  }
+
+  .final-cta {
+    background: linear-gradient(145deg, #e8f7f4 0%, #f7fbfa 40%, #fff5f2 100%);
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+
   @media (max-width: 640px) {
     .home-cta-pad {
       padding-bottom: 7.5rem !important;

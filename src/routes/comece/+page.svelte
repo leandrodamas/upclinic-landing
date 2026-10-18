@@ -8,10 +8,9 @@
   import Footer from '$lib/components/Footer.svelte';
   import { reveal } from '$lib/actions/motion';
   import { t } from '$lib/i18n';
-  import { REGISTER_URL, CONTACT } from '$lib/constants';
+  import { TRIAL_PAGE_URL, CONTACT } from '$lib/constants';
   import { trackTrialCta } from '$lib/analytics';
-  import { attributedAppUrl } from '$lib/utm';
-
+  
   const waText = encodeURIComponent('Olá! Quero testar o UpClinic');
   const whatsappHref = `${CONTACT.whatsappLink}?text=${waText}`;
 
@@ -57,7 +56,7 @@
 
 <Navbar />
 
-<main class="comece-page min-h-screen overflow-x-hidden pb-28 md:pb-0" style="background:#050b23; color:#e5eefb;">
+<main class="comece-page min-h-screen overflow-x-hidden pb-28 md:pb-0" style="background:#f7fbfa; color:#0f1f1c;">
   <div class="relative z-10 px-4 py-2.5 text-center text-sm font-bold text-white"
        style="background:linear-gradient(90deg,#059669,#0d9488,#0891b2);">
     <span class="inline-flex items-center justify-center gap-2">
@@ -75,23 +74,23 @@
         <p class="mb-5 inline-flex items-center gap-2 up-glass"
            style="padding:7px 16px; border-radius:999px; font-family:'Plus Jakarta Sans',system-ui,sans-serif;">
           <span class="up-pulse-dot" style="width:8px;height:8px;background:#34d399;border-radius:50%;"></span>
-          <span style="color:#6ee7b7; font-size:0.72rem; font-weight:800; text-transform:uppercase; letter-spacing:0.18em;">
+          <span style="color:#0d9488; font-size:0.72rem; font-weight:800; text-transform:uppercase; letter-spacing:0.18em;">
             {$t('comece.badge')}
           </span>
         </p>
 
-        <h1 style="font-family:'Plus Jakarta Sans',system-ui,sans-serif; font-size:clamp(2rem,4.6vw,3.1rem); font-weight:800; line-height:1.1; letter-spacing:-0.02em; color:#fff;">
+        <h1 style="font-family:'Plus Jakarta Sans',system-ui,sans-serif; font-size:clamp(2rem,4.6vw,3.1rem); font-weight:800; line-height:1.1; letter-spacing:-0.02em; color:#0f1f1c;">
           {$t('comece.titlePre')}<span class="up-gradient-text">{$t('comece.titleHi')}</span>{$t('comece.titleMid')}<br class="hidden sm:block">
           {$t('comece.titleEnd')}
         </h1>
 
-        <p class="mx-auto mt-5 max-w-2xl" style="font-size:1.08rem; line-height:1.7; color:rgba(191,219,254,0.85);">
-          {$t('comece.subA')}<strong style="color:#fff;">{$t('comece.subUpclinic')}</strong>{$t('comece.subB')}<strong style="color:#fff;">{$t('comece.sub6')}</strong>{$t('comece.subC')}<strong style="color:#6ee7b7;">{$t('comece.subWa')}</strong>{$t('comece.subD')}
+        <p class="mx-auto mt-5 max-w-2xl" style="font-size:1.08rem; line-height:1.7; color:#5b6f6a;">
+          {$t('comece.subA')}<strong style="color:#0f1f1c;">{$t('comece.subUpclinic')}</strong>{$t('comece.subB')}<strong style="color:#0f1f1c;">{$t('comece.sub6')}</strong>{$t('comece.subC')}<strong style="color:#0d9488;">{$t('comece.subWa')}</strong>{$t('comece.subD')}
         </p>
 
         <div class="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:flex-wrap sm:justify-center">
-          <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" class="up-btn-primary"
-             on:click|preventDefault={() => { trackLead('CTA Teste grátis', '/comece hero'); window.open(attributedAppUrl(REGISTER_URL), '_blank'); }}>
+          <a href={TRIAL_PAGE_URL} class="up-btn-primary"
+             on:click|preventDefault={() => { trackLead('CTA Teste grátis', '/comece hero'); window.location.href = TRIAL_PAGE_URL; }}>
             {$t('comece.ctaStart')}
             <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
           </a>
@@ -143,14 +142,14 @@
     <section id="demo-sistema" class="scroll-mt-24" use:reveal>
       <div class="text-center">
         <span class="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider"
-              style="background:rgba(52,211,153,0.12); border:1px solid rgba(52,211,153,0.35); color:#6ee7b7;">
+              style="background:rgba(52,211,153,0.12); border:1px solid rgba(52,211,153,0.35); color:#0d9488;">
           <span class="up-pulse-dot" style="width:6px;height:6px;background:#34d399;border-radius:50%;"></span>
           {$t('comece.tourBadge')}
         </span>
         <h2 class="mt-3 text-2xl font-extrabold tracking-tight text-white sm:text-3xl" style="font-family:'Plus Jakarta Sans',system-ui,sans-serif;">
           {$t('comece.tourTitle')}
         </h2>
-        <p class="mx-auto mt-2 max-w-xl" style="color:rgba(191,219,254,0.8);">
+        <p class="mx-auto mt-2 max-w-xl" style="color:#5b6f6a;">
           {$t('comece.tourSub')}
         </p>
       </div>
@@ -163,13 +162,13 @@
           Abra o teste grátis e veja o produto real — sem cartão e sem vídeo de terceiros.
         </p>
         <div class="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" class="up-btn-primary"
-             on:click|preventDefault={() => { trackLead('CTA Teste grátis', '/comece após bloco produto'); window.open(attributedAppUrl(REGISTER_URL), '_blank'); }}>
+          <a href={TRIAL_PAGE_URL} class="up-btn-primary"
+             on:click|preventDefault={() => { trackLead('CTA Teste grátis', '/comece após bloco produto'); window.location.href = TRIAL_PAGE_URL; }}>
             {$t('comece.ctaTest')}
             <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
           </a>
           <a href="#passos-heading" on:click={(e) => scrollToId(e, 'passos-heading')}
-             class="text-sm font-bold underline decoration-white/30 underline-offset-4 hover:decoration-emerald-400" style="color:rgba(191,219,254,0.85);">
+             class="text-sm font-bold underline decoration-white/30 underline-offset-4 hover:decoration-emerald-400" style="color:#5b6f6a;">
             {$t('comece.see6')}
           </a>
         </div>
@@ -178,10 +177,10 @@
 
     <section use:reveal class="relative overflow-hidden up-glass text-center" style="border-radius:1.5rem; padding:2rem 1.5rem; border-color:rgba(251,191,36,0.3);">
       <div class="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full" style="background:rgba(251,146,60,0.25); filter:blur(60px);" aria-hidden="true"></div>
-      <p class="relative text-lg font-bold sm:text-xl" style="font-family:'Plus Jakarta Sans',system-ui,sans-serif; color:#fff;">
+      <p class="relative text-lg font-bold sm:text-xl" style="font-family:'Plus Jakarta Sans',system-ui,sans-serif; color:#0f1f1c;">
         {$t('comece.insightPre')}<span style="color:#fbbf24;">{$t('comece.insightHi')}</span>{$t('comece.insightPost')}
       </p>
-      <p class="relative mx-auto mt-2 max-w-2xl text-sm sm:text-base" style="color:rgba(191,219,254,0.8);">
+      <p class="relative mx-auto mt-2 max-w-2xl text-sm sm:text-base" style="color:#5b6f6a;">
         {$t('comece.insightSub')}
       </p>
     </section>
@@ -191,7 +190,7 @@
         <h2 id="passos-heading" class="text-2xl font-extrabold tracking-tight text-white sm:text-3xl" style="font-family:'Plus Jakarta Sans',system-ui,sans-serif;">
           {$t('comece.stepsTitlePre')}<span class="up-gradient-text">{$t('comece.stepsTitleHi')}</span>
         </h2>
-        <p class="mx-auto mt-2 text-center text-sm font-semibold" style="color:#6ee7b7;">{$t('comece.stepsSub')}</p>
+        <p class="mx-auto mt-2 text-center text-sm font-semibold" style="color:#0d9488;">{$t('comece.stepsSub')}</p>
       </div>
       <ol class="mt-10 grid gap-5 sm:grid-cols-2">
         {#each $t('comece.steps') as p, i}
@@ -205,7 +204,7 @@
             </div>
             <h3 class="mt-3 text-lg font-bold text-white" style="font-family:'Plus Jakarta Sans',system-ui,sans-serif;">{p.titulo}</h3>
             <p class="mt-2 flex-1 text-sm leading-relaxed" style="color:rgba(191,219,254,0.78);">{p.texto}</p>
-            <p class="mt-4 pt-3 text-sm font-semibold leading-snug" style="border-top:1px solid rgba(255,255,255,0.1); color:#6ee7b7;">{p.up}</p>
+            <p class="mt-4 pt-3 text-sm font-semibold leading-snug" style="border-top:1px solid rgba(255,255,255,0.1); color:#0d9488;">{p.up}</p>
           </li>
         {/each}
       </ol>
@@ -220,17 +219,17 @@
         <h2 class="mt-3 text-xl font-extrabold text-white sm:text-2xl" style="font-family:'Plus Jakarta Sans',system-ui,sans-serif;">
           {$t('comece.video2Title')}
         </h2>
-        <p class="mt-2 text-sm sm:text-base" style="color:rgba(191,219,254,0.8);">
+        <p class="mt-2 text-sm sm:text-base" style="color:#5b6f6a;">
           {$t('comece.video2Sub')}
         </p>
       </div>
       <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-6">
-        <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" class="up-btn-primary"
-           on:click|preventDefault={() => { trackLead('CTA Teste grátis', '/comece bloco fidelizacao'); window.open(attributedAppUrl(REGISTER_URL), '_blank'); }}>
+        <a href={TRIAL_PAGE_URL} class="up-btn-primary"
+           on:click|preventDefault={() => { trackLead('CTA Teste grátis', '/comece bloco fidelizacao'); window.location.href = TRIAL_PAGE_URL; }}>
           {$t('comece.ctaStart2')}
         </a>
         <a href={whatsappHref} target="_blank" rel="noopener noreferrer"
-           class="inline-flex items-center gap-2 text-sm font-bold hover:text-white" style="color:rgba(191,219,254,0.85);"
+           class="inline-flex items-center gap-2 text-sm font-bold hover:text-white" style="color:#5b6f6a;"
            on:click={() => trackLead('WhatsApp', '/comece bloco fidelizacao')}>
           {$t('comece.ctaTalk')}
         </a>
@@ -261,7 +260,7 @@
     <section class="grid gap-8 lg:grid-cols-5 lg:gap-10">
       <div use:reveal class="up-glass lg:col-span-2" style="padding:1.5rem; border-radius:1.25rem;">
         <h2 class="font-bold text-white" style="font-family:'Plus Jakarta Sans',system-ui,sans-serif;">{$t('comece.faqTitle')}</h2>
-        <dl class="mt-4 space-y-4 text-sm" style="color:rgba(191,219,254,0.8);">
+        <dl class="mt-4 space-y-4 text-sm" style="color:#5b6f6a;">
           <div>
             <dt class="font-semibold text-white">{$t('comece.faqQ1')}</dt>
             <dd class="mt-1">{$t('comece.faqA1')}</dd>
@@ -280,18 +279,18 @@
         <div class="relative flex h-full flex-col justify-center overflow-hidden text-center text-white" style="border-radius:1.5rem; background:linear-gradient(135deg,#071233,#0a1a44 55%,#064e3b); padding:2rem;">
           <div class="up-aurora" style="opacity:0.5;"></div>
           <div class="relative z-[1]">
-            <p class="text-xs font-bold uppercase tracking-[0.2em]" style="color:#6ee7b7; font-family:'Plus Jakarta Sans',system-ui,sans-serif;">{$t('comece.nextStep')}</p>
+            <p class="text-xs font-bold uppercase tracking-[0.2em]" style="color:#0d9488; font-family:'Plus Jakarta Sans',system-ui,sans-serif;">{$t('comece.nextStep')}</p>
             <p class="mt-2 text-2xl font-extrabold leading-snug sm:text-[1.65rem]" style="font-family:'Plus Jakarta Sans',system-ui,sans-serif;">
               {$t('comece.finalTitle')}
             </p>
             <div class="mt-6 flex flex-col items-center gap-4">
-              <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" class="up-btn-primary"
-                 on:click|preventDefault={() => { trackLead('CTA Teste grátis', '/comece card final'); window.open(attributedAppUrl(REGISTER_URL), '_blank'); }}>
+              <a href={TRIAL_PAGE_URL} class="up-btn-primary"
+                 on:click|preventDefault={() => { trackLead('CTA Teste grátis', '/comece card final'); window.location.href = TRIAL_PAGE_URL; }}>
                 {$t('comece.ctaFinal')}
                 <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
               </a>
               <a href={whatsappHref} target="_blank" rel="noopener noreferrer"
-                 class="text-sm font-semibold underline decoration-white/30 underline-offset-4 hover:text-white" style="color:rgba(191,219,254,0.85);"
+                 class="text-sm font-semibold underline decoration-white/30 underline-offset-4 hover:text-white" style="color:#5b6f6a;"
                  on:click={() => trackLead('WhatsApp', '/comece card final')}>
                 {$t('comece.waShort')}
               </a>
@@ -306,12 +305,12 @@
 <div class="fixed bottom-0 left-0 right-0 z-[60] p-3 md:hidden"
      style="background:rgba(5,11,35,0.92); border-top:1px solid rgba(255,255,255,0.1); backdrop-filter:blur(14px); padding-bottom:max(0.75rem, env(safe-area-inset-bottom, 0px));"
      role="region" aria-label="Ação principal">
-  <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" class="up-btn-primary" style="width:100%; justify-content:center;"
-     on:click|preventDefault={() => { trackLead('CTA Teste grátis', '/comece barra mobile'); window.open(attributedAppUrl(REGISTER_URL), '_blank'); }}>
+  <a href={TRIAL_PAGE_URL} class="up-btn-primary" style="width:100%; justify-content:center;"
+     on:click|preventDefault={() => { trackLead('CTA Teste grátis', '/comece barra mobile'); window.location.href = TRIAL_PAGE_URL; }}>
     {$t('comece.ctaStart')}
   </a>
   <a href={whatsappHref} target="_blank" rel="noopener noreferrer"
-     class="mt-2 flex w-full items-center justify-center gap-1.5 py-2 text-sm font-bold" style="color:rgba(191,219,254,0.85);"
+     class="mt-2 flex w-full items-center justify-center gap-1.5 py-2 text-sm font-bold" style="color:#5b6f6a;"
      on:click={() => trackLead('WhatsApp', '/comece barra mobile')}>
     {$t('comece.waShort')}
   </a>
