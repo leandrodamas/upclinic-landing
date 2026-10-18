@@ -15,3 +15,4 @@ vite.config.ts.timestamp
 static/desktop-installers_UpClinic-Setup-1.4.0.exe
 # Cópia com nome ruim para URL; o site usa videoplayback-fidelizacao.mp4
 static/videoplayback (1).mp4
+artifacts/

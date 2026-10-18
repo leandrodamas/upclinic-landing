@@ -1,141 +1,145 @@
-<script>
+<script lang="ts">
   import { onMount } from 'svelte';
   import { LOGIN_URL, TRIAL_PAGE_URL } from '$lib/constants';
   import { trackTrialCta } from '$lib/analytics';
-  import { t } from '$lib/i18n';
-  import { tilt } from '$lib/actions/motion';
+  import { pickHeroVariant, type HeroVariant } from '$lib/heroVariants';
+  import { playHeroIntro, prefersReducedMotion } from '$lib/actions/gsapMotion';
 
-  function trackLead(contentName = 'CTA Principal', source = 'Hero') {
-    trackTrialCta(contentName, source);
-  }
-
-  let visible = false;
-  let parallaxY = 0;
+  let variant: HeroVariant = pickHeroVariant(0);
+  let rootEl: HTMLElement;
+  let reduceMotion = false;
+  let showVideo = true;
 
   onMount(() => {
-    requestAnimationFrame(() => setTimeout(() => { visible = true; }, 60));
-
-    const prefersReduced = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReduced) return;
-
-    const onScroll = () => {
-      parallaxY = Math.min(window.scrollY * 0.18, 80);
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    variant = pickHeroVariant();
+    reduceMotion = prefersReducedMotion();
+    // Em mobile economiza dados: vídeo só se conexão razoável
+    const conn = (navigator as Navigator & { connection?: { saveData?: boolean; effectiveType?: string } })
+      .connection;
+    if (conn?.saveData || (conn?.effectiveType && /2g/.test(conn.effectiveType))) {
+      showVideo = false;
+    }
+    if (window.matchMedia('(max-width: 640px)').matches) {
+      // Mobile: poster + foto do personagem; vídeo opcional leve se não save-data
+      showVideo = showVideo && !reduceMotion;
+    }
+    requestAnimationFrame(() => {
+      if (rootEl) playHeroIntro(rootEl);
+    });
   });
 </script>
 
-<section id="inicio" class="hero relative w-full overflow-hidden">
-  <div class="up-aurora" aria-hidden="true"></div>
-  <div class="up-grid-overlay" aria-hidden="true"></div>
-
-  <div
-    class="hero-media absolute inset-0 pointer-events-none"
-    style="transform: translate3d(0, {parallaxY}px, 0);"
-    aria-hidden="true"
-  >
-    <img
-      src="/media/hero-pilates.webp"
-      alt=""
-      class="hero-bg-img"
-      width="1600"
-      height="1067"
-      fetchpriority="high"
-      decoding="async"
-    />
+<section
+  bind:this={rootEl}
+  id="inicio"
+  class="hero"
+  style="--accent:{variant.accent}; --accent-soft:{variant.accentSoft};"
+>
+  <!-- Vídeo de fundo em loop (Pexels) + poster -->
+  <div class="hero-media" aria-hidden="true">
+    {#if showVideo && !reduceMotion}
+      <video
+        class="hero-video"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        poster="/media/video/hero-poster.jpg"
+      >
+        <source src="/media/video/hero-bg.mp4" type="video/mp4" />
+      </video>
+    {:else}
+      <img class="hero-video" src="/media/video/hero-poster.jpg" alt="" width="1280" height="720" />
+    {/if}
     <div class="hero-veil"></div>
   </div>
 
-  <div
-    class="relative container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center"
-    style="z-index:3; min-height: 100vh; padding-top: 6.5rem; padding-bottom: 5rem;"
-  >
-    <div class="grid lg:grid-cols-2 gap-10 lg:gap-12 items-center">
-      <div class:up-in={visible} class="up-col">
-        <p class="hero-brand">UpClinic</p>
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <p class="brand" data-hero="brand">UpClinic</p>
+      <span class="audience" data-hero="copy" style="background:{variant.accentSoft}; color:{variant.accent};">
+        {variant.audience}
+      </span>
+      <h1 data-hero="copy">
+        {variant.headline}
+        <span class="accent-line">{variant.headlineAccent}</span>
+      </h1>
+      <p class="sub" data-hero="copy">{variant.sub}</p>
 
-        <h1 class="hero-title">
-          {$t('hero.titleA')}<br />
-          {$t('hero.titleB')}
-          <span class="up-gradient-text"><br />{$t('hero.titleC')}<br />{$t('hero.titleD')}</span>
-        </h1>
-
-        <p class="hero-sub">
-          {$t('hero.sub')}<strong>{$t('hero.subStrong')}</strong>{$t('hero.subEnd')}
-        </p>
-        <p class="hero-sub2">{$t('hero.sub2')}</p>
-
-        <div class="flex flex-wrap gap-3 mb-8">
-          <a
-            href={TRIAL_PAGE_URL}
-            class="up-btn-primary"
-            style="min-height:2.85rem;"
-            on:click={() => trackLead('CTA Testar 7 dias', 'Hero')}
-          >
-            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="flex-shrink:0;">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-            </svg>
-            Teste grátis 7 dias
-          </a>
-          <a
-            href={LOGIN_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="up-btn-ghost"
-            style="min-height:2.85rem;"
-          >
-            {$t('hero.ctaLogin')}
-          </a>
-        </div>
-
-        <div class="hero-trust">
-          {#each $t('hero.trust') as item}
-            <span>
-              <svg width="16" height="16" fill="#0d9488" viewBox="0 0 20 20" aria-hidden="true">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-              </svg>
-              {item}
-            </span>
-          {/each}
-        </div>
+      <div class="ctas" data-hero="cta">
+        <a
+          href={TRIAL_PAGE_URL}
+          class="up-btn-primary"
+          on:click={() => trackTrialCta('CTA Testar 7 dias', `Hero:${variant.id}`)}
+        >
+          Teste grátis 7 dias
+        </a>
+        <a href={LOGIN_URL} target="_blank" rel="noopener noreferrer" class="up-btn-ghost">
+          Já tenho conta
+        </a>
       </div>
 
-      <div class="relative hidden lg:block up-visual" class:up-in={visible} use:tilt={10} style="height: 540px;">
-        <div class="phone-stage">
-          <div class="phone-shell up-float">
-            <div class="phone-notch"></div>
-            <div class="phone-screen">
-              <p class="phone-label">{$t('hero.cardAgenda')}</p>
-              {#each [['08:00', 'Maria Oliveira', '#14b8a6'], ['09:30', 'João Pereira', '#f0796a'], ['10:15', 'Ana Souza', '#0d9488']] as [h, n, c]}
-                <div class="phone-row">
-                  <span class="phone-time">{h}</span>
-                  <span class="phone-name">{n}</span>
-                  <span class="phone-dot" style="background:{c};"></span>
-                </div>
-              {/each}
+      <ul class="trust" data-hero="cta">
+        <li>Sem cartão</li>
+        <li>Feito por fisioterapeuta</li>
+        <li>Configure em minutos</li>
+        <li>LGPD</li>
+      </ul>
+    </div>
+
+    <div class="hero-stage" data-hero="device">
+      <!-- Personagem / foto real do público -->
+      <div class="persona" data-hero="float">
+        <img
+          src={variant.photo}
+          alt={variant.photoAlt}
+          width="720"
+          height="900"
+          fetchpriority="high"
+          decoding="async"
+        />
+        <span class="persona-tag" style="background:{variant.accent};">Foto real · sessão</span>
+      </div>
+
+      <!-- Mockup notebook com UI UpClinic -->
+      <div class="laptop" data-hero="float">
+        <div class="laptop-lid">
+          <div class="laptop-screen">
+            <div class="ui-top">
+              <span class="ui-dot"></span>
+              <span class="ui-dot"></span>
+              <span class="ui-dot"></span>
+              <strong>UpClinic · Agenda</strong>
+            </div>
+            <div class="ui-body">
+              <aside class="ui-side">
+                <div class="ui-nav on">Agenda</div>
+                <div class="ui-nav">Prontuário</div>
+                <div class="ui-nav">Financeiro</div>
+                <div class="ui-nav">WhatsApp</div>
+              </aside>
+              <div class="ui-main">
+                {#each [['08:00', 'Maria O.', 'Pilates'], ['09:30', 'João P.', 'Fisio'], ['10:15', 'Ana S.', 'RPG'], ['14:00', 'Carla M.', 'TO']] as [h, n, t]}
+                  <div class="ui-row">
+                    <span class="ui-time">{h}</span>
+                    <span>{n}</span>
+                    <em>{t}</em>
+                  </div>
+                {/each}
+              </div>
             </div>
           </div>
+        </div>
+        <div class="laptop-base"></div>
+      </div>
 
-          <div class="float-card up-glass up-float-delayed card-wa">
-            <div class="float-card-head">
-              <div class="wa-icon">
-                <svg width="16" height="16" fill="#fff" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.683-1.448L.057 24z"/></svg>
-              </div>
-              <div>
-                <div class="float-title">{$t('hero.cardReminder')}</div>
-                <div class="float-sub">{$t('hero.cardReminderSub')}</div>
-              </div>
-            </div>
-            <p class="float-msg">{$t('hero.cardMsg')}</p>
-          </div>
-
-          <div class="float-card up-glass up-float-slow card-bill">
-            <div class="float-title">{$t('hero.cardBilling')}</div>
-            <div class="float-big">Mensalidades + sessões</div>
-            <div class="float-sub">{$t('hero.cardBillingSub')}</div>
-            <div class="progress"><span></span></div>
-          </div>
+      <!-- Phone float WhatsApp -->
+      <div class="phone" data-hero="float">
+        <div class="phone-screen">
+          <p class="ph-label">Lembrete automático</p>
+          <div class="ph-bubble">Olá Maria! Sua sessão é amanhã às 8h. Te esperamos 💚</div>
+          <p class="ph-meta">24h e 2h antes · R$ 0 / msg*</p>
         </div>
       </div>
     </div>
@@ -144,259 +148,347 @@
 
 <style>
   .hero {
+    position: relative;
     min-height: 100vh;
-    background: linear-gradient(165deg, #f7fbfa 0%, #e8f7f4 42%, #fff5f2 100%);
+    overflow: hidden;
+    color: #0f1f1c;
+    padding: 6.5rem 0 3.5rem;
   }
 
   .hero-media {
+    position: absolute;
+    inset: 0;
     z-index: 0;
-    will-change: transform;
   }
 
-  .hero-bg-img {
-    position: absolute;
-    right: -8%;
-    top: 8%;
-    width: min(58vw, 760px);
-    height: auto;
+  .hero-video {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    border-radius: 0;
-    opacity: 0.28;
-    mask-image: linear-gradient(90deg, transparent 0%, #000 28%, #000 78%, transparent 100%);
-    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 28%, #000 78%, transparent 100%);
+    transform: scale(1.05);
+    filter: saturate(0.92) brightness(1.05);
   }
 
   .hero-veil {
     position: absolute;
     inset: 0;
     background:
-      linear-gradient(105deg, rgba(247, 251, 250, 0.96) 0%, rgba(247, 251, 250, 0.78) 48%, rgba(247, 251, 250, 0.35) 100%);
+      linear-gradient(105deg, rgba(247, 251, 250, 0.94) 0%, rgba(247, 251, 250, 0.82) 42%, rgba(247, 251, 250, 0.55) 70%, rgba(13, 148, 136, 0.18) 100%),
+      radial-gradient(ellipse 50% 60% at 80% 40%, rgba(240, 121, 106, 0.12), transparent 60%);
   }
 
-  .hero-brand {
+  .hero-grid {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  @media (min-width: 1024px) {
+    .hero-grid {
+      grid-template-columns: 1.05fr 1fr;
+      gap: 2rem;
+      min-height: calc(100vh - 7rem);
+    }
+  }
+
+  .brand {
+    margin: 0 0 0.85rem;
+    font-family: 'Outfit', system-ui, sans-serif;
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    font-weight: 800;
+    letter-spacing: -0.045em;
+    line-height: 0.95;
+    color: var(--accent, #0d9488);
+  }
+
+  .audience {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.85rem;
+    border-radius: 999px;
+    margin-bottom: 0.85rem;
+  }
+
+  h1 {
     margin: 0 0 1rem;
     font-family: 'Outfit', system-ui, sans-serif;
-    font-size: clamp(2rem, 4.5vw, 3.25rem);
-    font-weight: 800;
-    letter-spacing: -0.04em;
-    line-height: 1;
-    color: #0f766e;
-  }
-
-  .hero-title {
-    font-size: clamp(1.65rem, 3.4vw, 2.55rem);
+    font-size: clamp(1.55rem, 3.2vw, 2.35rem);
     font-weight: 700;
-    line-height: 1.15;
+    line-height: 1.18;
+    letter-spacing: -0.03em;
     color: #0f1f1c;
-    letter-spacing: -0.025em;
-    margin-bottom: 1.15rem;
   }
 
-  .hero-sub {
+  .accent-line {
+    display: block;
+    background: linear-gradient(100deg, var(--accent, #0d9488), #f0796a);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .sub {
+    margin: 0 0 1.5rem;
+    max-width: 34rem;
     font-size: 1.08rem;
-    color: #3d524d;
-    max-width: 540px;
     line-height: 1.65;
-    margin-bottom: 0.65rem;
+    color: #3d524d;
   }
 
-  .hero-sub strong {
-    color: #0d9488;
-  }
-
-  .hero-sub2 {
-    font-size: 0.9rem;
-    color: #6b817b;
-    margin-bottom: 2rem;
-  }
-
-  .hero-trust {
+  .ctas {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.85rem 1.1rem;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
   }
 
-  .hero-trust span {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    color: #4a625c;
-    font-size: 0.8125rem;
+  .trust {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem 1.1rem;
+    font-size: 0.82rem;
     font-weight: 600;
+    color: #4a625c;
   }
 
-  .up-col {
-    opacity: 0;
-    transform: translateY(28px);
-    transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .up-visual {
-    opacity: 0;
-    transform: translateY(36px) scale(0.98);
-    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1) 0.12s, transform 1s cubic-bezier(0.16, 1, 0.3, 1) 0.12s;
-    transform-style: preserve-3d;
-  }
-  .up-in {
-    opacity: 1 !important;
-    transform: none !important;
+  .trust li::before {
+    content: '✓ ';
+    color: var(--accent, #0d9488);
+    font-weight: 800;
   }
 
-  .phone-stage {
+  .hero-stage {
     position: relative;
-    width: 100%;
-    height: 100%;
-    perspective: 1100px;
+    min-height: 420px;
+    perspective: 1200px;
   }
 
-  .phone-shell {
+  @media (min-width: 1024px) {
+    .hero-stage {
+      min-height: 520px;
+    }
+  }
+
+  .persona {
     position: absolute;
-    left: 18%;
-    top: 4%;
-    width: 280px;
-    border-radius: 2rem;
-    background: linear-gradient(160deg, #ffffff, #f0faf8);
-    border: 1px solid rgba(13, 148, 136, 0.15);
-    box-shadow: 0 30px 60px rgba(15, 118, 110, 0.14);
-    padding: 14px 12px 18px;
-    transform: rotateY(-8deg) rotateX(4deg);
+    right: 0;
+    top: 0;
+    width: min(48%, 280px);
+    border-radius: 1.4rem;
+    overflow: hidden;
+    box-shadow: 0 28px 60px rgba(15, 118, 110, 0.22);
+    border: 3px solid #fff;
+    z-index: 1;
+    animation: floaty 7s ease-in-out infinite;
   }
 
-  .phone-notch {
-    width: 88px;
-    height: 10px;
-    margin: 0 auto 14px;
+  .persona img {
+    display: block;
+    width: 100%;
+    height: 340px;
+    object-fit: cover;
+  }
+
+  .persona-tag {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 0.3rem 0.55rem;
     border-radius: 999px;
-    background: #0f1f1c;
-    opacity: 0.12;
+  }
+
+  .laptop {
+    position: absolute;
+    left: 0;
+    bottom: 40px;
+    width: min(78%, 420px);
+    z-index: 2;
+    transform: rotateY(-6deg) rotateX(4deg);
+    animation: floaty 8s ease-in-out infinite reverse;
+  }
+
+  .laptop-lid {
+    background: #1a2332;
+    border-radius: 12px 12px 0 0;
+    padding: 10px 10px 0;
+    box-shadow: 0 24px 50px rgba(15, 23, 42, 0.28);
+  }
+
+  .laptop-screen {
+    background: #f7fbfa;
+    border-radius: 6px 6px 0 0;
+    overflow: hidden;
+    min-height: 220px;
+  }
+
+  .laptop-base {
+    height: 12px;
+    background: linear-gradient(180deg, #cbd5e1, #94a3b8);
+    border-radius: 0 0 10px 10px;
+    margin: 0 8%;
+  }
+
+  .ui-top {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 10px;
+    background: #0f766e;
+    color: #fff;
+    font-size: 0.68rem;
+  }
+
+  .ui-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.45);
+  }
+
+  .ui-body {
+    display: grid;
+    grid-template-columns: 88px 1fr;
+    min-height: 180px;
+  }
+
+  .ui-side {
+    background: #e7f7f4;
+    padding: 8px;
+    font-size: 0.62rem;
+    font-weight: 700;
+    color: #5b6f6a;
+  }
+
+  .ui-nav {
+    padding: 6px 6px;
+    border-radius: 6px;
+    margin-bottom: 4px;
+  }
+
+  .ui-nav.on {
+    background: #0d9488;
+    color: #fff;
+  }
+
+  .ui-main {
+    padding: 8px 10px;
+  }
+
+  .ui-row {
+    display: grid;
+    grid-template-columns: 44px 1fr auto;
+    gap: 6px;
+    align-items: center;
+    font-size: 0.68rem;
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(13, 148, 136, 0.1);
+    color: #0f1f1c;
+  }
+
+  .ui-time {
+    background: var(--accent, #0d9488);
+    color: #fff;
+    font-weight: 800;
+    font-size: 0.58rem;
+    padding: 2px 4px;
+    border-radius: 4px;
+    text-align: center;
+  }
+
+  .ui-row em {
+    font-style: normal;
+    color: #5b6f6a;
+    font-size: 0.58rem;
+  }
+
+  .phone {
+    position: absolute;
+    right: 6%;
+    bottom: 0;
+    width: 150px;
+    z-index: 3;
+    animation: floaty 6.5s ease-in-out infinite;
   }
 
   .phone-screen {
     background: #fff;
     border-radius: 1.25rem;
-    padding: 14px;
-    border: 1px solid rgba(13, 148, 136, 0.08);
+    border: 3px solid #0f1f1c;
+    padding: 12px 10px;
+    box-shadow: 0 18px 40px rgba(15, 118, 110, 0.2);
   }
 
-  .phone-label {
-    color: #5b6f6a;
-    font-size: 0.72rem;
-    font-weight: 700;
-    margin: 0 0 12px;
-  }
-
-  .phone-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 10px;
-  }
-
-  .phone-time {
-    background: #0d9488;
-    color: #fff;
-    font-size: 0.68rem;
+  .ph-label {
+    margin: 0 0 6px;
+    font-size: 0.62rem;
     font-weight: 800;
-    padding: 3px 7px;
-    border-radius: 6px;
-  }
-
-  .phone-name {
-    color: #0f1f1c;
-    font-size: 0.8rem;
-    flex: 1;
-  }
-
-  .phone-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-  }
-
-  .float-card {
-    position: absolute;
-    border-radius: 1.15rem;
-    padding: 14px 16px;
-    width: 250px;
-  }
-
-  .card-wa {
-    top: 120px;
-    right: 0;
-  }
-
-  .card-bill {
-    bottom: 24px;
-    left: 8%;
-    width: 260px;
-  }
-
-  .float-card-head {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 8px;
-  }
-
-  .wa-icon {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: #25d366;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .float-title {
-    color: #0f1f1c;
-    font-size: 0.78rem;
-    font-weight: 700;
-  }
-
-  .float-sub {
     color: #0d9488;
-    font-size: 0.66rem;
-    font-weight: 600;
   }
 
-  .float-msg {
-    margin: 0;
-    background: rgba(13, 148, 136, 0.08);
-    border: 1px solid rgba(13, 148, 136, 0.16);
-    border-radius: 12px 12px 12px 4px;
-    padding: 9px 11px;
-    color: #24443e;
-    font-size: 0.72rem;
-    line-height: 1.4;
-  }
-
-  .float-big {
+  .ph-bubble {
+    background: #e7f7f4;
+    border-radius: 10px 10px 10px 3px;
+    padding: 8px;
+    font-size: 0.68rem;
+    line-height: 1.35;
     color: #0f1f1c;
-    font-size: 1.15rem;
-    font-weight: 800;
-    line-height: 1.2;
-    margin: 4px 0;
   }
 
-  .progress {
-    height: 6px;
-    background: rgba(13, 148, 136, 0.12);
-    border-radius: 999px;
-    margin-top: 10px;
-    overflow: hidden;
+  .ph-meta {
+    margin: 6px 0 0;
+    font-size: 0.58rem;
+    color: #5b6f6a;
   }
 
-  .progress span {
-    display: block;
-    height: 100%;
-    width: 78%;
-    background: linear-gradient(90deg, #0d9488, #14b8a6);
-    border-radius: 999px;
+  @keyframes floaty {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @media (max-width: 720px) {
+    .persona {
+      width: 42%;
+      top: auto;
+      bottom: 180px;
+    }
+    .persona img {
+      height: 180px;
+    }
+    .laptop {
+      width: 88%;
+      bottom: 100px;
+    }
+    .phone {
+      right: 4%;
+      width: 120px;
+    }
+    .hero-stage {
+      min-height: 480px;
+      margin-top: 0.5rem;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hero-media {
-      transform: none !important;
+    .persona,
+    .laptop,
+    .phone {
+      animation: none !important;
     }
   }
 </style>
