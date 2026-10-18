@@ -50,8 +50,16 @@ export function reveal(node: HTMLElement, options: RevealOptions = {}) {
   );
 
   io.observe(node);
+
+  // Failsafe: full-page / crawlers não deixam conteúdo invisível
+  const failsafe = window.setTimeout(() => {
+    node.style.opacity = '1';
+    node.style.transform = 'none';
+  }, 2000);
+
   return {
     destroy() {
+      clearTimeout(failsafe);
       io.disconnect();
     },
   };

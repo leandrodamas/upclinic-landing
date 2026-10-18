@@ -1,10 +1,11 @@
 <script>
   import { onMount } from 'svelte';
   import { page } from '$app/stores';
-  import { LOGIN_URL, REGISTER_URL } from '$lib/constants';
+  import { LOGIN_URL, TRIAL_PAGE_URL } from '$lib/constants';
   import { attributedAppUrl } from '$lib/utm';
   import { trackTrialCta } from '$lib/analytics';
   import { t, locale, setLocale, LANGS } from '$lib/i18n';
+  import { goto } from '$app/navigation';
 
   let scrolled = false;
   let mobileMenuOpen = false;
@@ -12,7 +13,8 @@
 
   $: currentLang = LANGS.find((l) => l.code === $locale) ?? LANGS[0];
   $: isHomePage = $page.url.pathname === '/';
-  $: onLight = scrolled || !isHomePage || mobileMenuOpen;
+  /* Tema claro: navbar sempre legível sobre fundo claro */
+  $: onLight = true;
 
   $: navLinks = [
     { href: '/#funcionalidades', label: $t('nav.features') },
@@ -68,7 +70,8 @@
 
   function openRegister(source) {
     trackTrialCta('CTA Testar 7 dias', source);
-    window.open(attributedAppUrl(REGISTER_URL), '_blank');
+    closeMobile();
+    goto(TRIAL_PAGE_URL);
   }
 </script>
 
@@ -167,15 +170,13 @@
         </a>
 
         <a
-          href={REGISTER_URL}
-          target="_blank"
-          rel="noopener noreferrer"
+          href={TRIAL_PAGE_URL}
           class="inline-flex items-center gap-1.5 h-9 px-4 text-[13px] font-bold text-white
-                 bg-emerald-500 hover:bg-emerald-600 rounded-lg shadow-sm hover:shadow
+                 bg-orange-600 hover:bg-orange-700 rounded-lg shadow-sm hover:shadow
                  transition-all whitespace-nowrap"
           on:click|preventDefault={() => openRegister('Navbar')}
         >
-          {$t('nav.trial')}
+          Teste grátis 7 dias
           <svg class="w-3.5 h-3.5 opacity-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
           </svg>
@@ -185,13 +186,11 @@
       <!-- Mobile / tablet: CTA curto + hamburger -->
       <div class="flex lg:hidden items-center gap-2 ml-auto">
         <a
-          href={REGISTER_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center h-9 px-3 text-xs font-bold text-white bg-emerald-500 hover:bg-emerald-600 rounded-lg shadow-sm"
+          href={TRIAL_PAGE_URL}
+          class="inline-flex items-center h-9 px-3 text-xs font-bold text-white bg-orange-600 hover:bg-orange-700 rounded-lg shadow-sm"
           on:click|preventDefault={() => openRegister('Navbar Mobile Compact')}
         >
-          {$t('nav.trial')}
+          Teste grátis
         </a>
         <button
           type="button"
@@ -304,16 +303,11 @@
           {$t('nav.loginFull')}
         </a>
         <a
-          href={REGISTER_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="flex items-center justify-center gap-2 w-full h-11 text-sm font-bold text-white bg-emerald-500 hover:bg-emerald-600 rounded-xl shadow-sm transition-colors"
-          on:click={() => {
-            trackTrialCta('CTA Testar 7 dias', 'Navbar Mobile');
-            closeMobile();
-          }}
+          href={TRIAL_PAGE_URL}
+          class="flex items-center justify-center gap-2 w-full h-11 text-sm font-bold text-white bg-orange-600 hover:bg-orange-700 rounded-xl shadow-sm transition-colors"
+          on:click|preventDefault={() => openRegister('Navbar Mobile')}
         >
-          {$t('nav.trial7')}
+          Teste grátis 7 dias
         </a>
       </div>
     </div>

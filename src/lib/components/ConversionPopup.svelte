@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte';
   import { browser } from '$app/environment';
-  import { REGISTER_URL, CONTACT } from '$lib/constants';
+  import { TRIAL_PAGE_URL, CONTACT } from '$lib/constants';
   import { trackTrialCta, trackWhatsAppClick } from '$lib/analytics';
   import { t } from '$lib/i18n';
 
@@ -148,9 +148,7 @@
 
       <div class="popup-actions">
         <a
-          href={REGISTER_URL}
-          target="_blank"
-          rel="noopener noreferrer"
+          href={TRIAL_PAGE_URL}
           class="up-btn-primary popup-cta"
           on:click={() => {
             trackTrialCta('Popup Teste Grátis', 'Conversion Popup');

@@ -1,0 +1,15 @@
+Imagens e vídeos de stock (licença livre — Unsplash / Pexels), otimizados:
+
+Fotos WebP (fisioterapia, pilates, reabilitação, studio):
+- bola-suica, reformer, theraband, joelho, ombro, alongamento
+- fisio-paciente, fisio2, studio-pilates, movimento, recepcao, to-rehab, equipe, hero-fisio
+- versões *-card.webp para grids
+
+Vídeos (Pexels, remixados/comprimidos para a landing):
+- video/hero-bg.mp4 — loop ~10s, 1280px, sem áudio (base: Pexels #3209298 pilates/fitness)
+- video/loop-pilates.mp4 — loop curto SD
+- video/loop-movimento.mp4 — trecho alternativo comprimido
+- video/hero-poster.jpg — frame estático
+
+Créditos aos fotógrafos/videógrafos nas plataformas Unsplash e Pexels.
+Não usamos imagens ou textos do site Seu Fisio (apenas estrutura/ritmo como referência).

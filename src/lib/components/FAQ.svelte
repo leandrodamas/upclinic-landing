@@ -1,6 +1,6 @@
 <script>
   import { reveal } from '$lib/actions/motion';
-  import { REGISTER_URL, CONTACT } from '$lib/constants';
+  import { TRIAL_PAGE_URL, CONTACT } from '$lib/constants';
   import { t } from '$lib/i18n';
 
   let openIndex = 0;
@@ -33,7 +33,7 @@
 <section
   id="duvidas-frequentes"
   class="faq-pro relative overflow-hidden"
-  style="background:#050b23; padding-top:5.5rem; padding-bottom:6rem;"
+  style="background:#fffaf5; padding-top:5.5rem; padding-bottom:6rem;"
   role="region"
   aria-label="FAQ"
 >
@@ -50,16 +50,16 @@
           style="background:rgba(96,165,250,0.12); border:1px solid rgba(96,165,250,0.35); padding:6px 14px; border-radius:999px;"
         >
           <span class="up-pulse-dot" style="width:7px;height:7px;background:#60a5fa;border-radius:50%;"></span>
-          <span style="color:#93c5fd; font-size:0.72rem; font-weight:800; text-transform:uppercase; letter-spacing:0.14em;">
+          <span style="color:#f97316; font-size:0.72rem; font-weight:800; text-transform:uppercase; letter-spacing:0.14em;">
             {$t('faq.badge')}
           </span>
         </span>
 
-        <h2 style="font-size:clamp(1.85rem,4vw,2.75rem); font-weight:900; color:#fff; line-height:1.1; letter-spacing:-0.02em; margin-bottom:0.75rem;">
+        <h2 style="font-size:clamp(1.85rem,4vw,2.75rem); font-weight:900; color:#0c1222; line-height:1.1; letter-spacing:-0.02em; margin-bottom:0.75rem;">
           {$t('faq.titleA')}
           <span class="up-gradient-text">{$t('faq.titleHi')}</span>
         </h2>
-        <p class="mb-8 max-w-xl" style="color:rgba(191,219,254,0.78); font-size:1.02rem; line-height:1.6;">
+        <p class="mb-8 max-w-xl" style="color:#5c6578; font-size:1.02rem; line-height:1.6;">
           {$t('faq.sub')}
         </p>
 
@@ -80,11 +80,11 @@
               >
                 <span
                   class="faq-num shrink-0 mt-0.5"
-                  style={isOpen ? 'background:linear-gradient(135deg,#34d399,#0d9488); color:#fff;' : ''}
+                  style={isOpen ? 'background:linear-gradient(135deg,#34d399,#f97316); color:#0c1222;' : ''}
                 >
                   {String(index + 1).padStart(2, '0')}
                 </span>
-                <span class="flex-1 font-bold text-sm sm:text-base" style="color:{isOpen ? '#fff' : 'rgba(226,232,240,0.92)'};">
+                <span class="flex-1 font-bold text-sm sm:text-base" style="color:{isOpen ? '#ea580c' : '#0c1222'};">
                   {$t(`faq.items.${key}.q`)}
                 </span>
                 <span class="faq-chevron shrink-0" class:faq-chevron-open={isOpen} aria-hidden="true">
@@ -99,7 +99,7 @@
                   class="faq-answer px-4 pb-4 sm:px-5 sm:pb-5"
                   style="padding-left:calc(1rem + 2.5rem + 0.75rem);"
                 >
-                  <p class="text-sm leading-relaxed" style="color:rgba(191,219,254,0.85);">
+                  <p class="text-sm leading-relaxed" style="color:#5c6578;">
                     {$t(`faq.items.${key}.a`)}
                   </p>
                 </div>
@@ -114,7 +114,7 @@
         <div class="up-glow-border" style="padding:0;">
           <div
             class="relative overflow-hidden"
-            style="border-radius:1.5rem; background:linear-gradient(165deg,#071233 0%,#0a1a44 50%,#064e3b 140%);"
+            style="border-radius:1.5rem; background:linear-gradient(165deg,#ea580c 0%,#f97316 55%,#fb923c 140%);"
           >
             <div class="up-aurora" style="opacity:0.35;"></div>
 
@@ -146,7 +146,7 @@
               <h3 class="text-xl sm:text-2xl font-extrabold text-white mb-2" style="letter-spacing:-0.02em; line-height:1.2;">
                 {$t('faq.panelTitle')}
               </h3>
-              <p class="text-sm mb-6" style="color:rgba(191,219,254,0.8); line-height:1.55;">
+              <p class="text-sm mb-6" style="color:rgba(255,255,255,0.88); line-height:1.55;">
                 {$t('faq.panelSub')}
               </p>
 
@@ -193,7 +193,7 @@
 
               <!-- CTAs -->
               <div class="flex flex-col gap-3">
-                <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer" class="up-btn-primary" style="width:100%; justify-content:center;">
+                <a href={TRIAL_PAGE_URL} class="up-btn-primary" style="width:100%; justify-content:center;">
                   {$t('faq.ctaTrial')}
                 </a>
                 <a

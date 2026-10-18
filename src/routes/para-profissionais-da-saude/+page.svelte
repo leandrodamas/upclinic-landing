@@ -1,7 +1,7 @@
 <script lang="ts">
   import Navbar from '$lib/components/Navbar.svelte';
   import Footer from '$lib/components/Footer.svelte';
-  import { REGISTER_URL } from '$lib/constants';
+  import { TRIAL_PAGE_URL } from '$lib/constants';
 
   const specialties = [
     { icon: '🩺', name: 'Clínica Geral', benefit: 'Agenda, prontuário e prescrição em uma tela só' },
@@ -48,22 +48,22 @@
 
 <Navbar />
 
-<section class="pt-28 pb-16 bg-gradient-to-br from-teal-50 via-white to-blue-50">
+<section class="pt-28 pb-16 bg-gradient-to-br from-orange-50 via-white to-blue-50">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
 
     <!-- Hero -->
     <div class="text-center mb-16">
-      <span class="inline-block px-4 py-2 bg-teal-100 text-teal-700 rounded-full text-sm font-semibold mb-4">
+      <span class="inline-block px-4 py-2 bg-orange-100 text-orange-700 rounded-full text-sm font-semibold mb-4">
         Para todas as especialidades da saúde
       </span>
       <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-5 leading-tight">
-        O sistema que <span class="bg-gradient-to-r from-teal-600 to-blue-600 bg-clip-text text-transparent">se adapta</span><br class="hidden md:block">
+        O sistema que <span class="bg-gradient-to-r from-orange-600 to-blue-600 bg-clip-text text-transparent">se adapta</span><br class="hidden md:block">
         ao seu jeito de trabalhar
       </h1>
       <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
         Do consultório solo à rede de clínicas, o UpClinic tem o perfil certo para você. Sem configuração complexa, sem treinamento longo — comece a usar no mesmo dia.
       </p>
-      <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer"
+      <a href={TRIAL_PAGE_URL}
         class="inline-flex items-center justify-center gap-2 px-8 py-4 text-lg font-bold text-white bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl shadow-lg hover:scale-105 transition-all">
         Criar conta grátis — 7 dias, sem cartão
       </a>
@@ -90,14 +90,14 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         {#each profiles as p}
           <div class="bg-white rounded-2xl p-7 shadow-sm border border-gray-100 hover:shadow-lg transition-all flex flex-col">
-            <div class="w-12 h-12 bg-teal-100 text-teal-600 rounded-xl flex items-center justify-center mb-4">
+            <div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center mb-4">
               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={p.icon}/>
               </svg>
             </div>
             <h3 class="text-xl font-bold text-gray-900 mb-2">{p.title}</h3>
             <p class="text-gray-600 text-sm mb-4 leading-relaxed">{p.desc}</p>
-            <div class="text-xs font-semibold text-teal-700 bg-teal-50 px-3 py-1.5 rounded-full inline-block mb-4">{p.highlight}</div>
+            <div class="text-xs font-semibold text-orange-700 bg-orange-50 px-3 py-1.5 rounded-full inline-block mb-4">{p.highlight}</div>
             <ul class="space-y-2 mt-auto">
               {#each p.features as f}
                 <li class="flex items-center gap-2 text-sm text-gray-700">
@@ -112,14 +112,14 @@
     </div>
 
     <!-- CTA final -->
-    <div class="bg-gradient-to-r from-teal-600 to-blue-700 rounded-3xl p-10 text-center text-white">
+    <div class="bg-gradient-to-r from-orange-600 to-blue-700 rounded-3xl p-10 text-center text-white">
       <h2 class="text-3xl font-bold mb-4">Feito para profissionais de saúde brasileiros</h2>
-      <p class="text-teal-100 text-lg mb-8 max-w-2xl mx-auto">
+      <p class="text-orange-100 text-lg mb-8 max-w-2xl mx-auto">
         Interface em português, suporte local, conformidade com CFM e LGPD, e preço justo. Experimente 7 dias grátis.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href={REGISTER_URL} target="_blank" rel="noopener noreferrer"
-          class="inline-flex items-center justify-center gap-2 px-8 py-4 text-lg font-bold text-teal-700 bg-white rounded-xl hover:bg-teal-50 hover:scale-105 transition-all shadow-lg">
+        <a href={TRIAL_PAGE_URL}
+          class="inline-flex items-center justify-center gap-2 px-8 py-4 text-lg font-bold text-orange-700 bg-white rounded-xl hover:bg-orange-50 hover:scale-105 transition-all shadow-lg">
           Iniciar Teste Grátis
         </a>
         <a href="/planos"
@@ -127,7 +127,7 @@
           Ver planos e preços
         </a>
       </div>
-      <p class="text-teal-200 text-sm mt-6">Sem cartão · Sem taxa de setup · Suporte em português</p>
+      <p class="text-orange-200 text-sm mt-6">Sem cartão · Sem taxa de setup · Suporte em português</p>
     </div>
   </div>
 </section>

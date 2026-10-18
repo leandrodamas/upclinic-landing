@@ -1,5 +1,5 @@
 <script>
-  import { SOCIAL, CONTACT, LOGIN_URL, REGISTER_URL } from '$lib/constants';
+  import { SOCIAL, CONTACT, LOGIN_URL, TRIAL_PAGE_URL } from '$lib/constants';
   import { t } from '$lib/i18n';
   import { attributedAppUrl } from '$lib/utm';
 
@@ -87,7 +87,7 @@
             <li><a href="/#funcionalidades" class="text-xs text-gray-400 hover:text-white">{$t('footer.features')}</a></li>
             <li><a href="/#precos" class="text-xs text-gray-400 hover:text-white">{$t('footer.plans')}</a></li>
             <li><a href={attributedAppUrl(LOGIN_URL)} class="text-xs text-gray-400 hover:text-white">{$t('footer.login')}</a></li>
-            <li><a href={attributedAppUrl(REGISTER_URL)} class="text-xs text-gray-400 hover:text-white">{$t('footer.register')}</a></li>
+            <li><a href={TRIAL_PAGE_URL} class="text-xs text-gray-400 hover:text-white">{$t('footer.register')}</a></li>
           </ul>
         {/if}
       </div>
@@ -166,7 +166,7 @@
           <li><a href="/#funcionalidades" class="hover:text-white transition-colors text-sm">{$t('footer.features')}</a></li>
           <li><a href="/#precos" class="hover:text-white transition-colors text-sm">{$t('footer.plans')}</a></li>
           <li><a href={attributedAppUrl(LOGIN_URL)} class="hover:text-white transition-colors text-sm">{$t('footer.login')}</a></li>
-          <li><a href={attributedAppUrl(REGISTER_URL)} class="hover:text-white transition-colors text-sm">{$t('footer.register')}</a></li>
+          <li><a href={TRIAL_PAGE_URL} class="hover:text-white transition-colors text-sm">{$t('footer.register')}</a></li>
         </ul>
       </div>
       <div>

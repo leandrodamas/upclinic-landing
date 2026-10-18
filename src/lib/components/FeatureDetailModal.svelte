@@ -99,11 +99,11 @@
         iconBg: 'bg-yellow-100'
       },
       teal: {
-        accent: 'text-teal-600',
-        bg: 'bg-teal-50',
-        border: 'border-teal-200',
-        button: 'bg-teal-600 hover:bg-teal-700',
-        iconBg: 'bg-teal-100'
+        accent: 'text-orange-600',
+        bg: 'bg-orange-50',
+        border: 'border-orange-200',
+        button: 'bg-orange-600 hover:bg-orange-700',
+        iconBg: 'bg-orange-100'
       }
     };
     return classes[color] || classes.blue;
